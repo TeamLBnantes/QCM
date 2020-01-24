@@ -22,5 +22,10 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+    <groupId>fr.dawan.formation</groupId>
+<artifactId>QCMapp-model</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+     </dependency>
   </dependencies>
 </project>

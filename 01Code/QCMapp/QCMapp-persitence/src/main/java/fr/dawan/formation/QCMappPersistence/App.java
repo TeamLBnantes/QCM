@@ -16,10 +16,10 @@ public class App
         try {
         	String sql = "INSERT INTO answer (body, expectedAnswer, commentPostAnswer,idQuestion) VALUES(?,?,?,?)";
         	PreparedStatement ps=cn.prepareStatement(sql);
-			ps.setString(1, "deuxieme reponse de la base");
+			ps.setString(1, "troisieme reponse de la base");
 			ps.setBoolean(2, true);
 			ps.setString(3, "et bien oui, .....");
-			ps.setInt(4, 1177);
+			ps.setInt(4, 888877);
 			
 			
 			ps.executeUpdate();

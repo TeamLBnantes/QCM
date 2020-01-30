@@ -17,15 +17,15 @@ public class DAOAnswer implements DAOAnswerInterface{
 		Connection cn = SingletonConnection.getConnection();
 		
 		try {
-			String sql = "INSERT INTO answer (body, expectedAnswer, commentPostAnswer,idQuestion) VALUES(?,?,?,?)";
+			String sql = "INSERT INTO answer (id, body, expectedAnswer, commentPostAnswer, idQuestion) VALUES(?,?,?,?,?)";
 			
 			PreparedStatement ps = cn.prepareStatement(sql);
 			
-			
-			ps.setString(1, a.getBody());
-			ps.setBoolean(2, a.isExpectedAnswer());
-			ps.setString(3, a.getCommentPostAnswer());
-			ps.setInt(4, a.getIdQuestion());
+			ps.setInt(1,a.getId());
+			ps.setString(2, a.getBody());
+			ps.setBoolean(3, a.isExpectedAnswer());
+			ps.setString(4, a.getCommentPostAnswer());
+			ps.setInt(5, a.getIdQuestion());
 			
 			
 			ps.executeUpdate();

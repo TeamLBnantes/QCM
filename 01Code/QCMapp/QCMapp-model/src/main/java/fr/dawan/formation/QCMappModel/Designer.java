@@ -7,7 +7,7 @@ private int id;
 private String presentation;
 private Date dateStatus;
 private String expertiseField;
-private boolean Certifier;
+private boolean certifier;
 public int getId() {
 	return id;
 }
@@ -33,10 +33,10 @@ public void setExpertiseField(String expertiseField) {
 	this.expertiseField = expertiseField;
 }
 public boolean isCertifier() {
-	return Certifier;
+	return certifier;
 }
 public void setCertifier(boolean certifier) {
-	Certifier = certifier;
+	this.certifier = certifier;
 }
 public Designer(int id, String presentation, Date dateStatus, String expertiseField, boolean certifier) {
 	super();
@@ -44,7 +44,7 @@ public Designer(int id, String presentation, Date dateStatus, String expertiseFi
 	this.presentation = presentation;
 	this.dateStatus = dateStatus;
 	this.expertiseField = expertiseField;
-	Certifier = certifier;
+	this.certifier = certifier;
 }
 public Designer() {
 	super();

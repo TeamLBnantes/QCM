@@ -21,6 +21,7 @@ public class Question {
 	private int idMultimedia;
 	private int idForum;
 	private int idDesigner;
+	
 	public int getId() {
 		return id;
 	}

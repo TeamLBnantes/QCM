@@ -10,7 +10,7 @@ import fr.dawan.formation.QCMappModelEnum.Theme;
 public class MCQ {
 
 	private int id;
-	private String summary;
+	private String body;
 	private Theme theme;
 	private Status status;
 	private Date createDate;
@@ -24,10 +24,10 @@ public class MCQ {
 		this.id = id;
 	}
 	public String getSummary() {
-		return summary;
+		return body;
 	}
 	public void setSummary(String summary) {
-		this.summary = summary;
+		this.body = summary;
 	}
 	public Theme getTheme() {
 		return theme;
@@ -67,14 +67,14 @@ public class MCQ {
 	}
 	@Override
 	public String toString() {
-		return "MCQ [id=" + id + ", summary=" + summary + ", theme=" + theme + ", status=" + status + ", createDate="
+		return "MCQ [id=" + id + ", summary=" + body + ", theme=" + theme + ", status=" + status + ", createDate="
 				+ createDate + ", editDate=" + editDate + ", idDesigner=" + idDesigner + ", idForum=" + idForum + "]";
 	}
 	public MCQ(int id, String summary, Theme theme, Status status, Date createDate, Date editDate, int idDesigner,
 			int idForum) {
 		super();
 		this.id = id;
-		this.summary = summary;
+		this.body = summary;
 		this.theme = theme;
 		this.status = status;
 		this.createDate = createDate;

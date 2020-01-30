@@ -9,7 +9,10 @@ public class User {
 	private String email;
 	private String pseudo;
 	private Date signInDate;
+	private Date lastConnectionDate;
 	private boolean designer;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -47,14 +50,19 @@ public class User {
 		this.signInDate = signInDate;
 	}
 	
-	
+	public Date getLastConnectionDate() {
+		return lastConnectionDate;
+	}
+	public void setLastConnectionDate(Date lastConnectionDate) {
+		this.lastConnectionDate = lastConnectionDate;
+	}
 	public boolean isDesigner() {
 		return designer;
 	}
 	public void setDesigner(boolean designer) {
 		this.designer = designer;
 	}
-	public User(int id, String lastName, String firstName, String email, String pseudo, Date signInDate, boolean designer) {
+	public User(int id, String lastName, String firstName, String email, String pseudo, Date signInDate, Date lastConnectionDate,boolean designer) {
 		super();
 		this.id = id;
 		this.lastName = lastName;
@@ -62,6 +70,7 @@ public class User {
 		this.email = email;
 		this.pseudo = pseudo;
 		this.signInDate = signInDate;
+		this.lastConnectionDate = lastConnectionDate;
 		this.designer = designer;
 	
 	}

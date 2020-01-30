@@ -7,6 +7,7 @@ public class Answer {
 	private boolean expectedAnswer;
 	private String commentPostAnswer;
 	private int idQuestion;
+	
 	public int getId() {
 		return id;
 	}

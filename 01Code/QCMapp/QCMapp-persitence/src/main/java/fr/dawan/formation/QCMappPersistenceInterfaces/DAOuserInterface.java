@@ -17,5 +17,5 @@ public interface DAOuserInterface {
 	public ArrayList<User> searchByKW (String kw);
 	public ArrayList<User> searchAll ();
 	public ArrayList<User> searchByDate (Date date1, Date date2);
-	public ArrayList<User> searchById (int id);
+	public User searchById (int id);
 }

@@ -1,0 +1,9 @@
+			
+
+
+			SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy", Locale.FRENCH);
+			sdf.setLenient(false);
+			java.util.Date d1=sdf.parse("24-12-2019");
+			
+			java.util.Date d = new java.util.Date();
+			java.sql.Date sd = new java.sql.Date(d1.getTime());

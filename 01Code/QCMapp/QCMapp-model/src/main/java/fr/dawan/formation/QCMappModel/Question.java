@@ -14,7 +14,7 @@ public class Question {
 	private String body;
 	private Date createDate;
 	private Date editDate;
-	private Theme theme;
+	private String theme;
 	private Status status;
 	private String commentPostAnswer;
 	private String help;
@@ -46,10 +46,10 @@ public class Question {
 	public void setEditDate(Date editDate) {
 		this.editDate = editDate;
 	}
-	public Theme getTheme() {
+	public String getTheme() {
 		return theme;
 	}
-	public void setTheme(Theme theme) {
+	public void setTheme(String theme) {
 		this.theme = theme;
 	}
 	public Status getStatus() {
@@ -94,7 +94,7 @@ public class Question {
 				+ ", theme=" + theme + ", status=" + status + ", commentPostAnswer=" + commentPostAnswer + ", help="
 				+ help + ", idMultimedia=" + idMultimedia + ", idForum=" + idForum + ", idDesigner=" + idDesigner + "]";
 	}
-	public Question(int id, String body, Date createDate, Date editDate, Theme theme, Status status,
+	public Question(int id, String body, Date createDate, Date editDate, String theme, Status status,
 			String commentPostAnswer, String help, int idMultimedia, int idForum, int idDesigner) {
 		super();
 		this.id = id;

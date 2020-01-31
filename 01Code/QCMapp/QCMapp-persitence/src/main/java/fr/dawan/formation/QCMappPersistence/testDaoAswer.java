@@ -16,7 +16,11 @@ public class testDaoAswer {
 		
 		
 		// test methode create
+<<<<<<< HEAD
 		Answer rep1=new Answer(0,"tesxte du body de la reponse de vendredi matin", true, "commentaire post rep", 1);
+=======
+		Answer rep1=new Answer(0,"tesxteegssrgswgs du body de la reponse", true, "commentaire post rep", 1);
+>>>>>>> 1694007e0f23a4d70ab984c1fb6cb0a301cdd50d
 		daoAnswer.create(rep1);
 		daoAnswer.delete(3);
 		

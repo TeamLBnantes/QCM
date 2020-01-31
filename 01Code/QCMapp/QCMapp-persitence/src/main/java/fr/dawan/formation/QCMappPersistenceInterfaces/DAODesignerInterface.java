@@ -7,7 +7,7 @@ import fr.dawan.formation.QCMappModel.Designer;
 
 
 
-public interface DAOdesignerInterface {
+public interface DAODesignerInterface {
 
 
 	public void create(Designer designer);
@@ -17,5 +17,5 @@ public interface DAOdesignerInterface {
 	public ArrayList<Designer> searchByKW (String kw);
 	public ArrayList<Designer> searchAll ();
 	public ArrayList<Designer> searchByDate (Date date1, Date date2);
-	public ArrayList<Designer> searchById (int id);
+	public Designer searchById (int id);
 }

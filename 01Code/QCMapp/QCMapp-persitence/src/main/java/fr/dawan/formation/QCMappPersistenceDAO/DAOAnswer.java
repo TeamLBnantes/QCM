@@ -17,7 +17,7 @@ public class DAOAnswer implements DAOAnswerInterface{
 	public void create(Answer answer) {
 		Connection cn = SingletonConnection.getConnection();
 		try {
-			String sql = "INSERT INTO Answer(body, expectedAnswer, commentPostAnswer, idQuestion) VALUES(?,?,?,?)";
+			String sql = "INSERT INTO answer(body, expectedAnswer, commentPostAnswer, idQuestion) VALUES(?,?,?,?)";
 			PreparedStatement ps = cn.prepareStatement(sql);
 			ps.setString(1, answer.getBody());
 			ps.setBoolean(2, answer.isExpectedAnswer());
@@ -36,7 +36,7 @@ public class DAOAnswer implements DAOAnswerInterface{
 		// update de la reponse, pointage depuis answer.id
 		Connection cn = SingletonConnection.getConnection();
 		try {
-			String sql = "UPDATE Answer SET body=?,expectedAnswer=?, commentPostAnswer=?, idQuestion=? WHERE id=?";
+			String sql = "UPDATE answer SET body=?,expectedAnswer=?, commentPostAnswer=?, idQuestion=? WHERE id=?";
 			PreparedStatement ps = cn.prepareStatement(sql);
 			ps.setString(1, answer.getBody());
 			ps.setBoolean(2, answer.isExpectedAnswer());
@@ -48,17 +48,18 @@ public class DAOAnswer implements DAOAnswerInterface{
 		} catch (Exception e) {
 			e.printStackTrace();}
 		}
+	}
 
 
 	@Override
 	public void delete(int idAnswer) {
 
 		Connection cn = SingletonConnection.getConnection();
-		Answer retourAswer=null;
+		Answer retourAnswer=null;
 		try {
-			retourAswer=searchById(idAnswer);
-			if (retourAswer!=null) {
-				String sql = "DELETE FROM Answer  WHERE id=?";
+			retourAnswer=searchById(idAnswer);
+			if (retourAnswer!=null) {
+				String sql = "DELETE FROM answer  WHERE id=?";
 				PreparedStatement ps = cn.prepareStatement(sql);
 				ps.setInt(1, idAnswer);
 				ps.executeUpdate();
@@ -76,7 +77,7 @@ public class DAOAnswer implements DAOAnswerInterface{
 	public Answer searchById(int idAnswer) {
 		// recherche d'une reponse par son id
 		Connection cn = SingletonConnection.getConnection();
-		Answer retourAswer=null;
+		Answer retourAnswer=null;
 		try {
 			String sql = "SELECT * FROM answer WHERE id = ?";
 			PreparedStatement ps = cn.prepareStatement(sql);
@@ -84,7 +85,7 @@ public class DAOAnswer implements DAOAnswerInterface{
 			
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				retourAswer = new Answer(rs.getInt("id"), rs.getString("body"), 
+				retourAnswer = new Answer(rs.getInt("id"), rs.getString("body"), 
 						rs.getBoolean("expectedAnswer"), rs.getString("commentPostAnswer"), rs.getInt("idQuestion"));
 			}
 			rs.close();
@@ -92,7 +93,7 @@ public class DAOAnswer implements DAOAnswerInterface{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return retourAswer;
+		return retourAnswer;
 
 	}
 

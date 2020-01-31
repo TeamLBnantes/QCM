@@ -8,6 +8,7 @@ private String presentation;
 private Date dateStatus;
 private String expertiseField;
 private boolean certifier;
+
 public int getId() {
 	return id;
 }
@@ -48,6 +49,11 @@ public Designer(int id, String presentation, Date dateStatus, String expertiseFi
 }
 public Designer() {
 	super();
+}
+@Override
+public String toString() {
+	return "Designer [id=" + id + ", presentation=" + presentation + ", dateStatus=" + dateStatus + ", expertiseField="
+			+ expertiseField + ", certifier=" + certifier + "]";
 }
 
 

@@ -16,7 +16,7 @@ public class testDaoAswer {
 		
 		
 		// test methode create
-		Answer rep1=new Answer(0,"tesxte du body de la reponse", true, "commentaire post rep", 1);
+		Answer rep1=new Answer(0,"tesxteegssrgswgs du body de la reponse", true, "commentaire post rep", 1);
 		daoAnswer.create(rep1);
 		daoAnswer.delete(3);
 		

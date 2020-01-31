@@ -28,5 +28,6 @@
   	<module>QCMapp-service</module>
   	<module>QCMapp-persitence</module>
   	<module>QCMapp-view</module>
+  	<module>testJS</module>
   </modules>
 </project>

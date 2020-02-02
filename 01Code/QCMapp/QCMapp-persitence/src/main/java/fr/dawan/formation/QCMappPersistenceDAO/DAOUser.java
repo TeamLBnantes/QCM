@@ -83,7 +83,7 @@ public class DAOUser implements DAOuserInterface {
 
 	@Override
 	public ArrayList<User> searchByDesigner(boolean designer) {
-		//recherche les indiv qui sont designer
+		//recherche les indiv qui sont designer ou non designer suivant la valeur du parametre boolean passé en argument
 		Connection cn = SingletonConnection.getConnection();
 		ArrayList<User> users = new ArrayList<User>();
 		
@@ -113,16 +113,24 @@ public class DAOUser implements DAOuserInterface {
 
 	@Override
 	public ArrayList<User> searchByKW(String kw) {
-		
+		//recherche de la chaine passee en parametre, dans l'ensembles des 
+		//champs String de User (nom, prenom, pseudo et email
 		Connection cn = SingletonConnection.getConnection();
 		ArrayList<User> users = new ArrayList<User>();
 		
 		try {
 			String sql = "SELECT * FROM user WHERE (lastName like ?) OR (firstName like ?) OR (email like ?) OR (pseudo like ?)";
 			PreparedStatement ps = cn.prepareStatement(sql);
+
+			/* je modifie cette partie du code 
+			 * sans le sup pour echange avec Guillaume
 			String kw2 = new String();
-			
 			ps.setString(1, kw2);
+			*/
+			ps.setString(1, '%'+kw+'%');
+			ps.setString(2, '%'+kw+'%');
+			ps.setString(3, '%'+kw+'%');
+			ps.setString(4, '%'+kw+'%');
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -171,14 +179,17 @@ public class DAOUser implements DAOuserInterface {
 
 	@Override
 	public ArrayList<User> searchByDate(Date date1, Date date2) {
-		/*
+		//cette methode fait une recherche par rapport à la date de derniere connection
+		
 		Connection cn = SingletonConnection.getConnection();
 		ArrayList<User> users = new ArrayList<User>();
 		
 		try {
-			String sql = "SELECT * FROM user WHERE designer = ?";
+			String sql = "SELECT * FROM user WHERE  (lastConnectionDate >= ? &&  lastConnectionDate <= ?)";
 			PreparedStatement ps = cn.prepareStatement(sql);
-			ps.setBoolean(1, designer);
+			ps.setDouble(1, date1.getTime());
+			ps.setDouble(2, date2.getTime());	
+			
 			ResultSet rs = ps.executeQuery();
 			
 			
@@ -195,8 +206,8 @@ public class DAOUser implements DAOuserInterface {
 			e.printStackTrace();
 		}
 		
-		*/
-		return null;
+
+		return users;
 		
 	}
 

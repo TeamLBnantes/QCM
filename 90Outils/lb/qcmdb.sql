@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3308
--- Généré le :  ven. 31 jan. 2020 à 11:11
+-- Généré le :  ven. 31 jan. 2020 à 16:30
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -57,9 +57,9 @@ INSERT INTO `answer` (`id`, `body`, `expectedAnswer`, `commentPostAnswer`, `idQu
 
 DROP TABLE IF EXISTS `designer`;
 CREATE TABLE IF NOT EXISTS `designer` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `presentation` varchar(500) NOT NULL,
-  `dateStatus` date NOT NULL,
+  `dateStatus` bigint(20) NOT NULL,
   `expertiseField` varchar(500) NOT NULL,
   `certifier` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
@@ -75,9 +75,9 @@ DROP TABLE IF EXISTS `question`;
 CREATE TABLE IF NOT EXISTS `question` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `body` varchar(500) NOT NULL,
-  `createDate` date NOT NULL,
-  `editDate` date NOT NULL,
-  `idTheme` int(11) NOT NULL,
+  `createDate` bigint(20) NOT NULL,
+  `editDate` bigint(20) NOT NULL,
+  `theme` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `status` varchar(100) NOT NULL,
   `commentPostAnswer` varchar(500) NOT NULL,
   `help` varchar(500) NOT NULL,
@@ -113,11 +113,25 @@ CREATE TABLE IF NOT EXISTS `user` (
   `firstName` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `pseudo` varchar(100) NOT NULL,
-  `signInDate` date NOT NULL,
-  `lastConnectionDate` date NOT NULL,
+  `signInDate` bigint(20) NOT NULL,
+  `lastConnectionDate` bigint(20) NOT NULL,
   `designer` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id`, `lastName`, `firstName`, `email`, `pseudo`, `signInDate`, `lastConnectionDate`, `designer`) VALUES
+(9, 'Tabagnole xxxxxxxxxxxxxxxxx', 'Alphonse', 'at@nantes.fr', 'Kamikaze', 1577142000000, 1579820400000, 0),
+(10, 'Tabagnole xxxxxxxxxxxxxxxxx', 'Alphonse', 'at@nantes.fr', 'Kamikaze', 1577142000000, 1579820400000, 0),
+(6, 'Tabagnole xxxxxxxxxxxxxxxxx', 'Alphonse', 'at@nantes.fr', 'Kamikaze', 1577142000000, 1579820400000, 0),
+(5, 'Tabagnole', 'elleSpide', 'at@nantes.fr', 'Kamikaze', 1577142000000, 1579820400000, 1),
+(8, 'Tabagnole xxxxxxxxxxxxxxxxx', 'Alphonse', 'at@nantes.fr', 'Kamikaze', 1577142000000, 1579820400000, 1),
+(11, 'Tabagnole xxxxxxxxxxxxxxxxx', 'Alphonse', 'at@nantes.fr', 'Kamikaze', 1577142000000, 1579820400000, 0),
+(12, 'Tabagnole xxxxxxxxxxxxxxxxx', 'Alphonse', 'at@nantes.fr', 'Kamikaze', 1577142000000, 1579820400000, 0),
+(13, 'Toto', 'taba', 'at@nantes.fr', 'Kamikaze', 1577142000000, 1579820400000, 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

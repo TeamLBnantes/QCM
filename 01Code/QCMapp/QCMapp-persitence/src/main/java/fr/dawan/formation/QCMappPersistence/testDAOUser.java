@@ -15,14 +15,14 @@ public class testDAOUser {
 		DAOUser daoUser = new DAOUser();
 		
 //===test de la DAOcreate
-		User rantamplan=new User(0, "Toto", "taba","at@nantes.fr", "Kamikaze", false);
+		User rantamplan=new User(0, "Laurent- connection 44", "taba","at@nantes.fr", "Kamikaze", false);
 		//rantamplan.setSignInDate(date);
 		//rantamplan.setLastConnectionDate(date1);
 		SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy", Locale.FRENCH);
 		sdf.setLenient(false);
 		try {
 			java.util.Date inscription=sdf.parse("24-12-2019");
-			java.util.Date dernierteConnction=sdf.parse("24-01-2020");
+			java.util.Date dernierteConnction=sdf.parse("24-01-2044");
 			rantamplan.setSignInDate(inscription);
 			rantamplan.setLastConnectionDate(dernierteConnction);
 		} catch (Exception e) {
@@ -67,6 +67,26 @@ public class testDAOUser {
 		}
 		
 //====================testByKw
+		System.out.println("recherche chaine cal");
+		users=daoUser.searchByKW("cal");
+		for (User element : users) {
+			System.out.println(element);
+			}	
+		
+		
+// ================test searchByDate sur derniere connection
+		try {
+			java.util.Date dateInf=sdf.parse("24-12-2025");
+			java.util.Date dateSup=sdf.parse("24-12-2026");
+			System.out.println("recherche par date");
+			users=daoUser.searchByDate(dateInf, dateSup);
+			for (User element : users) {
+				System.out.println(element);
+				}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 		
 	}
 }

@@ -127,9 +127,6 @@ public class DAODesigner implements DAODesignerInterface{
 
 	@Override
 	// Recherche de KW sur PRESENTATION uniquement !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	
-	
-	
 	public ArrayList<Designer> searchByKW(String kw) {
 		ArrayList<Designer> designers = new ArrayList<Designer>();
 		Connection cn = SingletonConnection.getConnection();

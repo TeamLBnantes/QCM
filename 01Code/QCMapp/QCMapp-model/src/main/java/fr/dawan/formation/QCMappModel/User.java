@@ -1,24 +1,18 @@
 package fr.dawan.formation.QCMappModel;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
-public class User {
-	private int id;
+public class User extends Entity{
+	
 	private String lastName;
 	private String firstName;
 	private String email;
 	private String pseudo;
-	private Date signInDate;
-	private Date lastConnectionDate;
+	private LocalDateTime signInDate;
+	private LocalDateTime lastConnectionDate;
 	private boolean designer;
 	
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getLastName() {
 		return lastName;
 	}
@@ -43,17 +37,16 @@ public class User {
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
-	public Date getSignInDate() {
+	public LocalDateTime getSignInDate() {
 		return signInDate;
 	}
-	public void setSignInDate(Date signInDate) {
+	public void setSignInDate(LocalDateTime signInDate) {
 		this.signInDate = signInDate;
 	}
-	
-	public Date getLastConnectionDate() {
+	public LocalDateTime getLastConnectionDate() {
 		return lastConnectionDate;
 	}
-	public void setLastConnectionDate(Date lastConnectionDate) {
+	public void setLastConnectionDate(LocalDateTime lastConnectionDate) {
 		this.lastConnectionDate = lastConnectionDate;
 	}
 	public boolean isDesigner() {
@@ -62,9 +55,15 @@ public class User {
 	public void setDesigner(boolean designer) {
 		this.designer = designer;
 	}
-	public User(int id, String lastName, String firstName, String email, String pseudo, Date signInDate, Date lastConnectionDate,boolean designer) {
+	@Override
+	public String toString() {
+		return "User [lastName=" + lastName + ", firstName=" + firstName + ", email=" + email + ", pseudo=" + pseudo
+				+ ", signInDate=" + signInDate + ", lastConnectionDate=" + lastConnectionDate + ", designer=" + designer
+				+ "]";
+	}
+	public User(String lastName, String firstName, String email, String pseudo, LocalDateTime signInDate,
+			LocalDateTime lastConnectionDate, boolean designer) {
 		super();
-		this.id = id;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.email = email;
@@ -72,25 +71,13 @@ public class User {
 		this.signInDate = signInDate;
 		this.lastConnectionDate = lastConnectionDate;
 		this.designer = designer;
-	
 	}
-	public User(int id, String lastName, String firstName, String email, String pseudo,  boolean designer) {
+	public User() {
 		super();
-		this.id = id;
-		this.lastName = lastName;
-		this.firstName = firstName;
-		this.email = email;
-		this.pseudo = pseudo;
-		
-		this.designer = designer;
+	}
 	
-	}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", lastName=" + lastName + ", firstName=" + firstName + ", email=" + email
-				+ ", pseudo=" + pseudo + ", signInDate=" + signInDate + ", lastConnectionDate=" + lastConnectionDate
-				+ ", designer=" + designer + "]";
-	}
+	
+
 
 
 	

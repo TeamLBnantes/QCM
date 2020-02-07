@@ -2,5 +2,16 @@ package fr.dawan.formation.QCMappModel;
 
 public class Theme extends Entity{
 
-	private String value; 
+	private String value;
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
+	
+	
 }

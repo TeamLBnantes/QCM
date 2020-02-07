@@ -1,33 +1,26 @@
 package fr.dawan.formation.QCMappModel;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import fr.dawan.formation.QCMappModelEnum.Status;
-import fr.dawan.formation.QCMappModelEnum.Theme;
 
 
 
-public class MCQ {
+public class MCQ extends Entity {
 
-	private int id;
 	private String body;
 	private Theme theme;
 	private Status status;
-	private Date createDate;
-	private Date editDate;
-	private int idDesigner;
-	private int idForum;
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getSummary() {
+	private LocalDateTime createDate;
+	private LocalDateTime editDate;
+	private Designer designer;
+	private Forum forum;
+	
+	public String getBody() {
 		return body;
 	}
-	public void setSummary(String summary) {
-		this.body = summary;
+	public void setBody(String body) {
+		this.body = body;
 	}
 	public Theme getTheme() {
 		return theme;
@@ -41,30 +34,58 @@ public class MCQ {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-	public Date getCreateDate() {
+	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
 	}
-	public Date getEditDate() {
+	public LocalDateTime getEditDate() {
 		return editDate;
 	}
-	public void setEditDate(Date editDate) {
+	public void setEditDate(LocalDateTime editDate) {
 		this.editDate = editDate;
 	}
-	public int getIdDesigner() {
-		return idDesigner;
+	public Designer getDesigner() {
+		return designer;
 	}
-	public void setIdDesigner(int idDesigner) {
-		this.idDesigner = idDesigner;
+	public void setDesigner(Designer designer) {
+		this.designer = designer;
 	}
-	public int getIdForum() {
-		return idForum;
+	public Forum getForum() {
+		return forum;
 	}
-	public void setIdForum(int idForum) {
-		this.idForum = idForum;
+	public void setForum(Forum forum) {
+		this.forum = forum;
 	}
+
+	@Override
+	public String toString() {
+		return "MCQ [body=" + body + ", theme=" + theme + ", status=" + status + ", createDate=" + createDate
+				+ ", editDate=" + editDate + ", designer=" + designer + "]";
+	}
+	
+	public MCQ(String body, Theme theme, Status status, LocalDateTime createDate, LocalDateTime editDate,
+			Designer designer, Forum forum) {
+		super();
+		this.body = body;
+		this.theme = theme;
+		this.status = status;
+		this.createDate = createDate;
+		this.editDate = editDate;
+		this.designer = designer;
+		this.forum = forum;
+	}
+	
+	public MCQ() {
+		super();
+	}
+	
+
+	
+	
+	
+	
 	
 	
 	}

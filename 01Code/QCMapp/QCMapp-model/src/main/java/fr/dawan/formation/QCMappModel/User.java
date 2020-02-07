@@ -2,8 +2,8 @@ package fr.dawan.formation.QCMappModel;
 
 import java.util.Date;
 
-public class User {
-	private int id;
+public class User extends Entity{
+
 	private String lastName;
 	private String firstName;
 	private String email;
@@ -13,12 +13,7 @@ public class User {
 	private boolean designer;
 	
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	public String getLastName() {
 		return lastName;
 	}
@@ -62,37 +57,4 @@ public class User {
 	public void setDesigner(boolean designer) {
 		this.designer = designer;
 	}
-	public User(int id, String lastName, String firstName, String email, String pseudo, Date signInDate, Date lastConnectionDate,boolean designer) {
-		super();
-		this.id = id;
-		this.lastName = lastName;
-		this.firstName = firstName;
-		this.email = email;
-		this.pseudo = pseudo;
-		this.signInDate = signInDate;
-		this.lastConnectionDate = lastConnectionDate;
-		this.designer = designer;
-	
-	}
-	public User(int id, String lastName, String firstName, String email, String pseudo,  boolean designer) {
-		super();
-		this.id = id;
-		this.lastName = lastName;
-		this.firstName = firstName;
-		this.email = email;
-		this.pseudo = pseudo;
-		
-		this.designer = designer;
-	
-	}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", lastName=" + lastName + ", firstName=" + firstName + ", email=" + email
-				+ ", pseudo=" + pseudo + ", signInDate=" + signInDate + ", lastConnectionDate=" + lastConnectionDate
-				+ ", designer=" + designer + "]";
-	}
-
-
-	
-	
 }

@@ -1,4 +1,4 @@
-package fr.dawan.formation.QCMappModel;
+Package fr.dawan.formation.QCMappModel;
 
 /**
  * Hello world!

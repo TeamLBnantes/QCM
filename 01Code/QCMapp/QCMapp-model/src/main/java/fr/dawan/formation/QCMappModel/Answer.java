@@ -1,12 +1,15 @@
 package fr.dawan.formation.QCMappModel;
 
-public class Answer extends Entity{
+import javax.persistence.ManyToOne;
 
+public class Answer extends Entity{
 	
 	private String body;
 	private boolean expectedAnswer;
 	private String commentPostAnswer;
-	private int idQuestion;
+	
+	@ManyToOne
+	private Question question;
 	
 	
 	public String getBody() {
@@ -27,29 +30,15 @@ public class Answer extends Entity{
 	public void setCommentPostAnswer(String commentPostAnswer) {
 		this.commentPostAnswer = commentPostAnswer;
 	}
-	public int getIdQuestion() {
-		return idQuestion;
+	public Question getQuestion() {
+		return question;
 	}
-	public void setIdQuestion(int idQuestion) {
-		this.idQuestion = idQuestion;
+	public void setQuestion(Question question) {
+		this.question = question;
 	}
-	@Override
-	public String toString() {
-		return "Answer [id=" + id + ", body=" + body + ", expectedAnswer=" + expectedAnswer + ", commentPostAnswer="
-				+ commentPostAnswer + ", idQuestion=" + idQuestion + "]";
-	}
-	public Answer(int id, String body, boolean expectedAnswer, String commentPostAnswer, int idQuestion) {
-		super();
-		this.id = id;
-		this.body = body;
-		this.expectedAnswer = expectedAnswer;
-		this.commentPostAnswer = commentPostAnswer;
-		this.idQuestion = idQuestion;
-	}
-	public Answer() {
-		super();
-	}
-
+	
+	
+	
 	
 	
 }

@@ -65,27 +65,6 @@ public class MCQ {
 	public void setIdForum(int idForum) {
 		this.idForum = idForum;
 	}
-	@Override
-	public String toString() {
-		return "MCQ [id=" + id + ", summary=" + body + ", theme=" + theme + ", status=" + status + ", createDate="
-				+ createDate + ", editDate=" + editDate + ", idDesigner=" + idDesigner + ", idForum=" + idForum + "]";
-	}
-	public MCQ(int id, String summary, Theme theme, Status status, Date createDate, Date editDate, int idDesigner,
-			int idForum) {
-		super();
-		this.id = id;
-		this.body = summary;
-		this.theme = theme;
-		this.status = status;
-		this.createDate = createDate;
-		this.editDate = editDate;
-		this.idDesigner = idDesigner;
-		this.idForum = idForum;
-	}
-	public MCQ() {
-		super();
-	}
-	
 	
 	
 	}

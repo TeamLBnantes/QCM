@@ -1,19 +1,32 @@
 package fr.dawan.formation.QCMappModel;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Set;
 
-public class Designer{
-	private int id;
+import javax.persistence.OneToMany;
+
+public class Designer extends Entity{
+	
 	private String presentation;
-	private Date dateStatus;
+	private LocalDateTime dateStatus;
 	private String expertiseField;
 	private boolean certifier;
 	
-	public int getId() {
-		return id;
+	@OneToMany(mappedBy = "designer")
+	private Set<Question> questions;
+	
+	
+	public Set<Question> getQuestions() {
+		return questions;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setQuestions(Set<Question> questions) {
+		this.questions = questions;
+	}
+	public LocalDateTime getDateStatus() {
+		return dateStatus;
+	}
+	public void setDateStatus(LocalDateTime dateStatus) {
+		this.dateStatus = dateStatus;
 	}
 	public String getPresentation() {
 		return presentation;
@@ -21,12 +34,7 @@ public class Designer{
 	public void setPresentation(String presentation) {
 		this.presentation = presentation;
 	}
-	public Date getDateStatus() {
-		return dateStatus;
-	}
-	public void setDateStatus(Date dateStatus) {
-		this.dateStatus = dateStatus;
-	}
+	
 	public String getExpertiseField() {
 		return expertiseField;
 	}
@@ -40,24 +48,7 @@ public class Designer{
 		this.certifier = certifier;
 	}
 	
-	//attention, l'id du designer est reclui du user.
-	public Designer(int id, String presentation, Date dateStatus, String expertiseField, boolean certifier) {
-		super();
-		this.id = id;
-		this.presentation = presentation;
-		this.dateStatus = dateStatus;
-		this.expertiseField = expertiseField;
-		this.certifier = certifier;
-	}
-	public Designer() {
-		super();
-	}
-	@Override
-	public String toString() {
-		return "Designer [id=" + id + ", presentation=" + presentation + ", dateStatus=" + dateStatus + ", expertiseField="
-				+ expertiseField + ", certifier=" + certifier + "]";
-	}
-
+	
 
 
 }

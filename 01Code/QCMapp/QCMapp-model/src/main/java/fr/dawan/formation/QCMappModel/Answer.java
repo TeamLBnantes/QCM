@@ -1,19 +1,14 @@
 package fr.dawan.formation.QCMappModel;
 
-public class Answer {
+public class Answer extends Entity{
 
-	private int id;
+	
 	private String body;
 	private boolean expectedAnswer;
 	private String commentPostAnswer;
 	private int idQuestion;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	public String getBody() {
 		return body;
 	}

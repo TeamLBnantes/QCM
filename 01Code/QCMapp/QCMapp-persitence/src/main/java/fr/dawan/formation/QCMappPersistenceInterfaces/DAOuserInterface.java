@@ -3,8 +3,8 @@ package fr.dawan.formation.QCMappPersistenceInterfaces;
 import java.util.ArrayList;
 import java.util.Date;
 
-import fr.dawan.formation.QCMappModel.Question;
-import fr.dawan.formation.QCMappModel.User;
+import fr.dawan.formation.AppQCMMono.Models.Question;
+import fr.dawan.formation.AppQCMMono.Models.User;
 
 
 public interface DAOuserInterface {

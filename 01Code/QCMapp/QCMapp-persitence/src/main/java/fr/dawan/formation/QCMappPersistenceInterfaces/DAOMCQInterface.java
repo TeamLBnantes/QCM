@@ -2,7 +2,7 @@ package fr.dawan.formation.QCMappPersistenceInterfaces;
 
 import java.util.ArrayList;
 
-import fr.dawan.formation.QCMappModel.MCQ;
+import fr.dawan.formation.AppQCMMono.Models.MCQ;
 import fr.dawan.formation.QCMappModelEnum.Status;
 import fr.dawan.formation.QCMappModelEnum.Theme;
 

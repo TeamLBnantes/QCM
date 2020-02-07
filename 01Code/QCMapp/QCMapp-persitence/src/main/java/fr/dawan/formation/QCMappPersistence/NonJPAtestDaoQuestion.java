@@ -5,7 +5,7 @@ import java.awt.List;
 import java.util.ArrayList;
 import java.util.Date;
 
-import fr.dawan.formation.QCMappModel.Question;
+import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.QCMappModelEnum.Status;
 import fr.dawan.formation.QCMappPersistenceDAO.NonJPADAOQuestion;
 

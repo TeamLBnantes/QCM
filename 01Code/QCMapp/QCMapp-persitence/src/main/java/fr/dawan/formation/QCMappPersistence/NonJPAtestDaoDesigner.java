@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
-import fr.dawan.formation.QCMappModel.Designer;
+import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.QCMappModelEnum.Status;
 import fr.dawan.formation.QCMappPersistenceDAO.NonJPADAODesigner;
 

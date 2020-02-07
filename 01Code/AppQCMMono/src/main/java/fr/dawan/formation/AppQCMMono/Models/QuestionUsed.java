@@ -1,11 +1,12 @@
-package fr.dawan.formation.QCMappModel;
+package fr.dawan.formation.AppQCMMono.Models;
 
 import java.time.LocalTime;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-public class QuestionUsed extends Entity{
+//@Entity
+public class QuestionUsed extends Entitie{
 
 	private int nbAnswered;
 	private int nbCorrect;

@@ -2,7 +2,7 @@ package fr.dawan.formation.QCMappPersistenceInterfaces;
 
 import java.util.ArrayList;
 
-import fr.dawan.formation.QCMappModel.Answer;
+import fr.dawan.formation.AppQCMMono.Models.Answer;
 
 public interface DAOAnswerInterface {
 

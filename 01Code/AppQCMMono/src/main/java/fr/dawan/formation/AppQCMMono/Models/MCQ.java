@@ -1,19 +1,28 @@
-package fr.dawan.formation.QCMappModel;
+package fr.dawan.formation.AppQCMMono.Models;
 
 import java.time.LocalDateTime;
 
-import fr.dawan.formation.QCMappModelEnum.Status;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
+
+import fr.dawan.formation.AppQCMMono.Enum.Status;
 
 
 
-public class MCQ extends Entity {
+
+@Entity
+public class MCQ extends Entitie {
 
 	private String body;
+	@Transient
 	private Theme theme;
+	@Transient
 	private Status status;
 	private LocalDateTime createDate;
 	private LocalDateTime editDate;
+	@Transient
 	private Designer designer;
+	@Transient
 	private Forum forum;
 	
 	public String getBody() {

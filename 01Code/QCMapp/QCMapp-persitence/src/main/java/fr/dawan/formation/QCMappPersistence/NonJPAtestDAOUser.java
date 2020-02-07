@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import fr.dawan.formation.QCMappModel.User;
+import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.QCMappPersistenceDAO.NonJPADAOUser;
 
 public class NonJPAtestDAOUser {

@@ -3,7 +3,7 @@ package fr.dawan.formation.QCMappPersistence;
 
 import java.util.ArrayList;
 
-import fr.dawan.formation.QCMappModel.Answer;
+import fr.dawan.formation.AppQCMMono.Models.Answer;
 import fr.dawan.formation.QCMappPersistenceDAO.NonJPADAOAnswer;
 
 

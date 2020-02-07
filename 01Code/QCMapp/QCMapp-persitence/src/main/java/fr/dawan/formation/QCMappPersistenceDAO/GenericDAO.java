@@ -10,9 +10,9 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-import fr.dawan.formation.QCMappModel.Entity;
+import fr.dawan.formation.AppQCMMono.Models.Entitie;
 
-public class GenericDAO<T extends Entity> {
+public class GenericDAO<T extends Entitie> {
 
 	protected EntityManager entityManager;
 	private EntityManagerFactory entityManagerFactory;

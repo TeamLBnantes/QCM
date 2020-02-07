@@ -1,19 +1,21 @@
-package fr.dawan.formation.QCMappModel;
+package fr.dawan.formation.AppQCMMono.Models;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import fr.dawan.formation.QCMappModelEnum.Status;
+import fr.dawan.formation.AppQCMMono.Enum.Status;
 
 
 
 
-public class Question extends Entity{
+@Entity
+public class Question extends Entitie{
 
 	private String body;
 	private LocalDateTime createDate;
@@ -42,12 +44,10 @@ public class Question extends Entity{
 	
 	
 	
-	public Set<Answer> getAnswers() {
-		return answers;
-	}
-	public void setAnswers(Set<Answer> answers) {
-		this.answers = answers;
-	}
+	/*
+	 * public Set<Answer> getAnswers() { return answers; } public void
+	 * setAnswers(Set<Answer> answers) { this.answers = answers; }
+	 */
 	public LocalDateTime getCreateDate() {
 		return createDate;
 	}
@@ -79,31 +79,15 @@ public class Question extends Entity{
 	public void setHelp(String help) {
 		this.help = help;
 	}
-	public Theme getTheme() {
-		return theme;
-	}
-	public void setTheme(Theme theme) {
-		this.theme = theme;
-	}
-	public Multimedia getMultimedia() {
-		return multimedia;
-	}
-	public void setMultimedia(Multimedia multimedia) {
-		this.multimedia = multimedia;
-	}
-	public Forum getForum() {
-		return forum;
-	}
-	public void setForum(Forum forum) {
-		this.forum = forum;
-	}
-	public Designer getDesigner() {
-		return designer;
-	}
-	public void setDesigner(Designer designer) {
-		this.designer = designer;
-	}
-	
+	/*
+	 * public Theme getTheme() { return theme; } public void setTheme(Theme theme) {
+	 * this.theme = theme; } public Multimedia getMultimedia() { return multimedia;
+	 * } public void setMultimedia(Multimedia multimedia) { this.multimedia =
+	 * multimedia; } public Forum getForum() { return forum; } public void
+	 * setForum(Forum forum) { this.forum = forum; } public Designer getDesigner() {
+	 * return designer; } public void setDesigner(Designer designer) { this.designer
+	 * = designer; }
+	 */
 	
 	
 	

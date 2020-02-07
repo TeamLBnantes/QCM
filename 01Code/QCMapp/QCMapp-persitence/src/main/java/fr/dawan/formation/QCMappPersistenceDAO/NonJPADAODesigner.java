@@ -7,8 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 
-import fr.dawan.formation.QCMappModel.Designer;
-
+import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.QCMappPersistence.NonJPASingletonConnection;
 import fr.dawan.formation.QCMappPersistenceInterfaces.DAODesignerInterface;
 

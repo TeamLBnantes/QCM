@@ -1,8 +1,10 @@
-package fr.dawan.formation.QCMappModel;
+package fr.dawan.formation.AppQCMMono.Models;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
-public class Answer extends Entity{
+@Entity
+public class Answer extends Entitie{
 	
 	private String body;
 	private boolean expectedAnswer;

@@ -1,9 +1,11 @@
-package fr.dawan.formation.QCMappModel;
+package fr.dawan.formation.AppQCMMono.Models;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
-public class User extends Entity{
+import javax.persistence.Entity;
+@Entity
+public class User extends Entitie{
 
 	private String lastName;
 	private String firstName;

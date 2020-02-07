@@ -1,17 +1,22 @@
-package fr.dawan.formation.QCMappModel;
+package fr.dawan.formation.AppQCMMono.Models;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-public class Designer extends Entity{
+
+@Entity
+public class Designer extends Entitie{
+	
 	
 	private String presentation;
 	private LocalDateTime dateStatus;
 	private String expertiseField;
 	private boolean certifier;
 	
+
 	@OneToMany(mappedBy = "designer")
 	private Set<Question> questions;
 	

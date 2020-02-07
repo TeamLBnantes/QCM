@@ -2,7 +2,7 @@ package QCMappServiceInterface;
 
 import java.util.ArrayList;
 
-import fr.dawan.formation.QCMappModel.Question;
+import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.QCMappModelEnum.Status;
 
 public interface QuestionInterface {

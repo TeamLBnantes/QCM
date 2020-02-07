@@ -3,7 +3,7 @@ package fr.dawan.formation.QCMappPersistenceInterfaces;
 import java.util.ArrayList;
 import java.util.Date;
 
-import fr.dawan.formation.QCMappModel.Designer;
+import fr.dawan.formation.AppQCMMono.Models.Designer;
 
 
 

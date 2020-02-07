@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import fr.dawan.formation.QCMappModel.Answer;
+import fr.dawan.formation.AppQCMMono.Models.Answer;
 import fr.dawan.formation.QCMappPersistence.NonJPASingletonConnection;
 import fr.dawan.formation.QCMappPersistenceInterfaces.DAOAnswerInterface;
 import sun.reflect.generics.tree.ReturnType;

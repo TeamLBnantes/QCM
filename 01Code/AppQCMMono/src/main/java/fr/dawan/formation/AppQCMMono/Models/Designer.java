@@ -3,6 +3,7 @@ package fr.dawan.formation.AppQCMMono.Models;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -17,7 +18,7 @@ public class Designer extends Entitie{
 	private boolean certifier;
 	
 
-	@OneToMany(mappedBy = "designer")
+	@OneToMany(mappedBy = "designer",cascade= {CascadeType.PERSIST, CascadeType.MERGE})
 	private Set<Question> questions;
 	
 	
@@ -51,6 +52,11 @@ public class Designer extends Entitie{
 	}
 	public void setCertifier(boolean certifier) {
 		this.certifier = certifier;
+	}
+	@Override
+	public String toString() {
+		return "Designer [presentation=" + presentation + ", dateStatus=" + dateStatus + ", expertiseField="
+				+ expertiseField + ", certifier=" + certifier + ", questions=" + questions + "]";
 	}
 	
 	

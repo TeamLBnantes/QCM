@@ -1,9 +1,11 @@
-package fr.dawan.formation.AppQCMMono.Models;
+package fr.dawan.formation.AppQCMMono.Launchers;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+
+import fr.dawan.formation.AppQCMMono.Models.Question;
 
 /**
  * Hello world!

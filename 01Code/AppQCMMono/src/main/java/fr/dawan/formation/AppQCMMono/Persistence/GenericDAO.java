@@ -34,7 +34,7 @@ public class GenericDAO<T extends Entitie> {
 		entityManagerFactory.close();
 	}
 
-	public void saveOrUpdate(T entite) {
+	public T saveOrUpdate(T entite) {
 
 		// récupération de la transaction
 		EntityTransaction transaction = entityManager.getTransaction();
@@ -60,6 +60,7 @@ public class GenericDAO<T extends Entitie> {
 			ex.printStackTrace();
 			transaction.rollback();
 		}
+		return entite;
 	}
 	
 	public void saveOrUpdate(Collection<T> entites) {

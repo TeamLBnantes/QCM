@@ -4,15 +4,16 @@ import java.util.List;
 
 import fr.dawan.formation.AppQCMMono.Models.Answer;
 import fr.dawan.formation.AppQCMMono.Models.Question;
+import fr.dawan.formation.AppQCMMono.Persistence.Interfaces.DAOAnswerInterface;
 
-public class AnswerDAO extends GenericDAO<Answer> {
+public class AnswerDAO extends GenericDAO<Answer> implements DAOAnswerInterface {
 
 	public AnswerDAO(String persistenceUnitName) {
 		super(persistenceUnitName);
 	}
 
-	
-	  public List<Answer> findByQuestion(Question question){
+	//public List<Answer> searchByIdQuestion (int idQuestion);
+	  public List<Answer> searchByIdQuestion(Question question){
 	  
 	  String requete = "select f from " 
 			  		+ Answer.class.getName() 

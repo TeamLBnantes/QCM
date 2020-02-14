@@ -26,7 +26,7 @@ public class affiches_question {
 				
 				
 		for (Question question : questions) {
-			List<Answer> answers = answerDAO.findByQuestion(question);
+			List<Answer> answers = answerDAO.searchByIdQuestion(question);
 			Set<Answer> set = new HashSet<>(answers);
 			question.setAnswers(set);
 			System.out.println(question);
@@ -40,7 +40,7 @@ public class affiches_question {
 		System.out.println("affichage uniquement de la question 7");
 		Question question;
 		question=daoQuestion.findById(Question.class, 7);
-		List<Answer> answers = answerDAO.findByQuestion(question);
+		List<Answer> answers = answerDAO.searchByIdQuestion(question);
 		Set<Answer> set = new HashSet<>(answers);
 		question.setAnswers(set);
 			System.out.println(question);

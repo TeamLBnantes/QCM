@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -21,6 +23,7 @@ public class Question extends Entitie{
 	private String body;
 	private LocalDateTime createDate;
 	private LocalDateTime editDate;
+	@Enumerated(EnumType.STRING)
 	private Status status;
 	private String commentPostAnswer;
 	private String help;
@@ -34,6 +37,9 @@ public class Question extends Entitie{
 	@OneToOne
 	private Forum forum;
 	
+
+
+
 	@ManyToOne 
 	private Designer designer;
 	
@@ -43,6 +49,15 @@ public class Question extends Entitie{
 	@OneToMany (mappedBy = "question")
 	private Set<QuestionUsed> questionUseds;
 	
+	
+	public Theme getTheme() {
+		return theme;
+	}
+
+
+	public void setTheme(Theme theme) {
+		this.theme = theme;
+	}
 	
 	
 	public void setAnswers(Set<Answer> answers) {

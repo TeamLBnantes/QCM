@@ -1,4 +1,4 @@
-package fr.dawan.formation.AppQCMMono;
+package fr.dawan.formation.AppQCMMono.Persistence;
 
 import java.util.ArrayList;
 import java.util.List;

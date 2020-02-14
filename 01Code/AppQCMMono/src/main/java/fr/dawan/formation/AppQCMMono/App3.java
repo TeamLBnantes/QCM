@@ -1,4 +1,4 @@
-package fr.dawan.formation.AppQCMMono.Launchers;
+package fr.dawan.formation.AppQCMMono;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,7 +11,7 @@ import fr.dawan.formation.AppQCMMono.Models.Question;
  * Hello world!
  *
  */
-public class App 
+public class App3 
 {
     public static void main( String[] args )
     {

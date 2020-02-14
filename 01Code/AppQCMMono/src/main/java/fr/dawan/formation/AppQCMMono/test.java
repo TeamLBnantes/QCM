@@ -1,4 +1,4 @@
-package fr.dawan.formation.AppQCMMono.Launchers;
+package fr.dawan.formation.AppQCMMono;
 
 import fr.dawan.formation.AppQCMMono.Models.Answer;
 import fr.dawan.formation.AppQCMMono.Models.Designer;

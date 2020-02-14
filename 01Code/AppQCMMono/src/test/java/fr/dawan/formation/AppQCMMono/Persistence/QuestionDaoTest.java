@@ -8,7 +8,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import fr.dawan.formation.AppQCMMono.Enum.Status;
 import fr.dawan.formation.AppQCMMono.Models.Question;
+import fr.dawan.formation.AppQCMMono.Models.Theme;
 import fr.dawan.formation.AppQCMMono.Persistence.Constantes;
 import fr.dawan.formation.AppQCMMono.Persistence.QuestionDAO;
 
@@ -25,6 +27,7 @@ public class QuestionDaoTest {
 		//ajout question 1
 		question.setBody("taratata 1");
 		question.setAnswers(null);
+		question.setStatus(Status.free);
 		Assert.assertEquals(0L, question.getId());
 		daoQuestion.saveOrUpdate(question);	
 		Assert.assertNotEquals(0L, question.getId());
@@ -61,12 +64,41 @@ public class QuestionDaoTest {
 		daoQuestion = new  QuestionDAO(Constantes.PERSISTENCE_UNIT_NAME);
 		List<Question> questions = new ArrayList<>();
 		Assert.assertEquals(0,questions.size());
-		questions=daoQuestion.FindByKwBody("taratata");
+		questions=daoQuestion.searchByKWBody("taratata");
 		Assert.assertEquals(1,questions.size());
-		
-		
-		
-		
+
 		daoQuestion.close();
 	}
+	
+	@Test
+	public void TestsearchByTheme() {
+		daoQuestion = new  QuestionDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		List<Question> questions = new ArrayList<>();
+		ThemeDAO daoTheme = new  ThemeDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		Theme theme=new Theme();
+		theme.setValue("uml");
+		theme=daoTheme.saveOrUpdate(theme);
+		daoTheme.close();
+		
+		question.setTheme(theme);
+		daoQuestion.saveOrUpdate(question);
+		
+		Assert.assertEquals(0,questions.size());
+		questions=daoQuestion.searchByTheme("uml");
+		Assert.assertEquals(1,questions.size());
+		daoQuestion.close();
+	}
+	
+	
+	  @Test public void TestSearchByStatus() {
+	  
+	  daoQuestion = new QuestionDAO(Constantes.PERSISTENCE_UNIT_NAME);
+	  List<Question> questions = new ArrayList<>();
+	  Assert.assertEquals(0,questions.size());
+	  questions=daoQuestion.searchByStatus(Status.free);
+	  Assert.assertEquals(1,questions.size()); daoQuestion.close(); }
+	 
+	  
+	
+	
 }

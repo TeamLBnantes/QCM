@@ -13,5 +13,6 @@ public interface DAOQuestionInterface {
 	public List<Question> searchByTheme (String theme);
 	public List<Question> searchByStatus (Status status);
 	public List<Question> searchByKWBody (String kw);
+
 	public List<Question> searchByDesigner (int idDesigner);
 }

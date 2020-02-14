@@ -4,16 +4,15 @@ import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-//@Entity
+@Entity
 public class QuestionUsed extends Entitie{
 
 	private int nbAnswered;
 	private int nbCorrect;
 	private LocalTime AnswerAverageTime;
-	@ManyToOne
+	@ManyToOne  
 	private MCQ mcq;
-	@ManyToOne
+	@ManyToOne    //line de type eager
 	private Question question;
 	
 	

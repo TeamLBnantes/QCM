@@ -1,6 +1,7 @@
 package fr.dawan.formation.AppQCMMono.Models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -10,7 +11,7 @@ public class Answer extends Entitie{
 	private boolean expectedAnswer;
 	private String commentPostAnswer;
 	
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.EAGER)
 	private Question question;
 	
 	
@@ -37,6 +38,11 @@ public class Answer extends Entitie{
 	}
 	public void setQuestion(Question question) {
 		this.question = question;
+	}
+	@Override
+	public String toString() {
+		return "Answer [body=" + body + ", expectedAnswer=" + expectedAnswer + ", commentPostAnswer="
+				+ commentPostAnswer + ", question=" + "  ( pas de ref à la question, rien pour eviter ref circulaire), getId()=" + getId() + "]";
 	}
 	
 	

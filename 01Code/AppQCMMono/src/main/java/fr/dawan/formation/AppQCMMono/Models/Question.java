@@ -1,10 +1,11 @@
 package fr.dawan.formation.AppQCMMono.Models;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -23,18 +24,37 @@ public class Question extends Entitie{
 	private Status status;
 	private String commentPostAnswer;
 	private String help;
+	
 	@ManyToOne
 	private Theme theme;
+	
 	@OneToOne
 	private Multimedia multimedia;
+	
 	@OneToOne
 	private Forum forum;
+	
 	@ManyToOne 
 	private Designer designer;
-	@OneToMany(mappedBy = "question")
+	
+	@OneToMany(mappedBy = "question", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.ALL}, fetch = FetchType.EAGER)  //ajouter un lien de type eager
 	private Set<Answer> answers;
 	
+	@OneToMany (mappedBy = "question")
+	private Set<QuestionUsed> questionUseds;
 	
+	
+	
+	public void setAnswers(Set<Answer> answers) {
+		this.answers = answers;
+	}
+	
+	
+	public Set<Answer> getAnswers() {
+		return answers;
+	}
+
+
 	public String getBody() {
 		return body;
 	}
@@ -88,6 +108,12 @@ public class Question extends Entitie{
 	 * return designer; } public void setDesigner(Designer designer) { this.designer
 	 * = designer; }
 	 */
+
+
+	@Override
+	public String toString() {
+		return "Question [body=" + body + ", commentPostAnswer=" + commentPostAnswer + ",  getId()=" + getId() + "]";
+	}
 	
 	
 	

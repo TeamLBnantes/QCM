@@ -1,9 +1,11 @@
 package fr.dawan.formation.AppQCMMono.Models;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 @Entity
 public class User extends Entitie{
 
@@ -11,11 +13,25 @@ public class User extends Entitie{
 	private String firstName;
 	private String email;
 	private String pseudo;
+	private String password;
 	private LocalDateTime signInDate;
 	private LocalDateTime lastConnectionDate;
-	private boolean designer;
 	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
+
+	@OneToOne (mappedBy = "user")  //car O ou 1 designer
+	private Designer designer;
+	
+	@OneToMany (mappedBy = "user") 
+	private Set<MCQpassed> MCQpasseds;
+
+	
 	public String getLastName() {
 		return lastName;
 	}
@@ -52,12 +68,7 @@ public class User extends Entitie{
 	public void setLastConnectionDate(LocalDateTime lastConnectionDate) {
 		this.lastConnectionDate = lastConnectionDate;
 	}
-	public boolean isDesigner() {
-		return designer;
-	}
-	public void setDesigner(boolean designer) {
-		this.designer = designer;
-	}
+
 
 	@Override
 	public String toString() {
@@ -65,20 +76,7 @@ public class User extends Entitie{
 				+ ", signInDate=" + signInDate + ", lastConnectionDate=" + lastConnectionDate + ", designer=" + designer
 				+ "]";
 	}
-	public User(String lastName, String firstName, String email, String pseudo, LocalDateTime signInDate,
-			LocalDateTime lastConnectionDate, boolean designer) {
-		super();
-		this.lastName = lastName;
-		this.firstName = firstName;
-		this.email = email;
-		this.pseudo = pseudo;
-		this.signInDate = signInDate;
-		this.lastConnectionDate = lastConnectionDate;
-		this.designer = designer;
-	}
-	public User() {
-		super();
-	}
+
 	
 	
 

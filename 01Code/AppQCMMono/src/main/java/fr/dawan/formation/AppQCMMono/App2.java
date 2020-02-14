@@ -1,6 +1,5 @@
 package fr.dawan.formation.AppQCMMono;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -12,7 +11,7 @@ import fr.dawan.formation.AppQCMMono.Models.Question;
  * Hello world!
  *
  */
-public class App 
+public class App2 
 {
     public static void main( String[] args )
     {
@@ -24,7 +23,6 @@ public class App
 		// création d'un objet formation
 		Question question = new Question();
 		question.setBody("ifjsdivfsjmfjsjflsjvs");
-		question.setCommentPostAnswer("jkbzfklbfklbzeklfbkzef");
 
 		EntityTransaction transaction = entityManager.getTransaction();
 		try {

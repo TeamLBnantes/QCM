@@ -90,15 +90,20 @@ public class QuestionDaoTest {
 	}
 	
 	
-	  @Test public void TestSearchByStatus() {
+	  @Test 
+	  public void TestSearchByStatus() {
 	  
 	  daoQuestion = new QuestionDAO(Constantes.PERSISTENCE_UNIT_NAME);
 	  List<Question> questions = new ArrayList<>();
 	  Assert.assertEquals(0,questions.size());
 	  questions=daoQuestion.searchByStatus(Status.free);
-	  Assert.assertEquals(1,questions.size()); daoQuestion.close(); }
+	  Assert.assertEquals(1,questions.size()); daoQuestion.close(); 
+	  }
 	 
-	  
+	  @Test
+	  public void TestsearchByDesigner() {
+		  //non implementé pour le moment
+	  }
 	
 	
 }

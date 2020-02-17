@@ -35,7 +35,8 @@ public class servletLogin extends HttpServlet {
 		if(userService.controlLogin(email, password)) {
 			request.setAttribute("email", email);
 
-			request.getRequestDispatcher("WEB-INF/view/welcome.jsp").forward(request, response);
+			request.getRequestDispatcher("//AppQCMMono//WebContent//WEB-INF//view//welcome.jsp").forward(request, response);
+			///AppQCMMono/WebContent/WEB-INF/view/welcome.jsp
 		}else {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}

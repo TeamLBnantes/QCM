@@ -21,12 +21,7 @@ public class User extends Entitie{
 	private LocalDateTime signInDate;
 	private LocalDateTime lastConnectionDate;
 	
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+
 
 
 	@OneToOne (mappedBy = "user")  //car O ou 1 designer
@@ -73,15 +68,12 @@ public class User extends Entitie{
 		this.lastConnectionDate = lastConnectionDate;
 	}
 
-	public boolean isDesigner() {
+	public Designer getDesigner() {
 		return designer;
 	}
-	public void setDesigner(boolean designer) {
+	public void setDesigner(Designer designer) {
 		this.designer = designer;
 	}
-	
-	
-
 	public String getPassword() {
 		return password;
 	}
@@ -96,7 +88,7 @@ public class User extends Entitie{
 	}
 
 	public User(String lastName, String firstName, String email, String pseudo, String password, LocalDateTime signInDate,
-			LocalDateTime lastConnectionDate, boolean designer) {
+			LocalDateTime lastConnectionDate, Designer designer) {
 		super();
 		this.lastName = lastName;
 		this.firstName = firstName;

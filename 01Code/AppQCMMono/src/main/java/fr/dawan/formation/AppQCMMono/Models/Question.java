@@ -43,6 +43,7 @@ public class Question extends Entitie{
 	@ManyToOne 
 	private Designer designer;
 	
+	
 	@OneToMany(mappedBy = "question", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.ALL}, fetch = FetchType.EAGER)  //ajouter un lien de type eager
 	private Set<Answer> answers;
 	
@@ -128,6 +129,16 @@ public class Question extends Entitie{
 	@Override
 	public String toString() {
 		return "Question [body=" + body + ", commentPostAnswer=" + commentPostAnswer + ",  getId()=" + getId() + "]";
+	}
+
+
+	public Designer getDesigner() {
+		return designer;
+	}
+
+
+	public void setDesigner(Designer designer) {
+		this.designer = designer;
 	}
 	
 	

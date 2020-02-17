@@ -10,7 +10,7 @@ public interface DAOuserInterface {
 
 
 	
-	public List<User> searchByDesigner (boolean designer);
+	public List<User> searchByDesigner ();
 	public List<User> searchByKW (String kw);
 	public List<User> searchByDate (LocalDate date1, LocalDate date2);
 

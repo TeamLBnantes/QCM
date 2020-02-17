@@ -107,7 +107,8 @@ public class testService {
 		
 		DesignerService dsnSvc6 = new DesignerService();
 		Designer designerFound3 = new Designer();
-		designerFound3 = dsnSvc6.findById(id2);
+		//designerFound3 = dsnSvc6.findById(id2);
+		designerFound3 = dsnSvc6.findById(2);
 		System.out.println("FindById"+designerFound3);
 
 		assertNotEquals(0, designerFound3.getId());

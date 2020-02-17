@@ -7,7 +7,7 @@ import fr.dawan.formation.AppQCMMono.Models.User;
 public interface DAOInterfaceUser {	
 	
 	public User searchByEmail(String email);
-	public List<User> searchByDesigner (boolean designer);
+	public List<User> searchByDesigner ();
 	public List<User> searchByPseudo (String pseudo);
 	public List<User> searchByDate (LocalDate dateInf, LocalDate dateSup);
 }

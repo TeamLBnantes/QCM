@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.dawan.formation.AppQCMMono.Enum.Status;
+import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Persistence.Interfaces.DAOQuestionInterface;
 
@@ -71,9 +72,23 @@ public class QuestionDAO extends GenericDAO<Question> implements DAOQuestionInte
 	}
 
 	@Override
-	public List<Question> searchByDesigner(int idDesigner) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Question> searchByDesigner(Designer designer) {
+		
+		List<Question> questions = new ArrayList<>();
+		String requete = "select f from "  
+				+ Question.class.getName() 
+				+ " f where f.designer = :designer";
+		
+		// JPQL (ou HQL)
+		questions=super.entityManager
+				.createQuery(requete, Question.class)
+				.setParameter("designer", designer)
+				.getResultList();
+		
+		System.out.println(questions);
+		
+		return questions;
+
 	}
 
 	

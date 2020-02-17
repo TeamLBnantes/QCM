@@ -1,0 +1,21 @@
+body;commentPostAnswer;expectedAnswer;question_id
+answer body 1;;true;1
+answer body 2;;true;1
+answer body 3;;flase;1
+answer body 4;;flase;1
+answer body 5;;flase;1
+answer body 6;;true;2
+answer body 7;;flase;2
+answer body 8;;flase;2
+answer body 9;;flase;2
+answer body 10;;flase;2
+answer body 11;;true;3
+answer body 12;;true;4
+answer body 13;;true;5
+answer body 14;;true;6
+answer body 15;;true;7
+answer body 16;;true;8
+answer body 17;;true;9
+answer body 18;;true;10
+answer body 19;;false;10
+answer body 20;;flase;10

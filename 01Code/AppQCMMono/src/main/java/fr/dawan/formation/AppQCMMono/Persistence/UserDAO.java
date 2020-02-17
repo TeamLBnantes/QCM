@@ -13,13 +13,15 @@ public class UserDAO extends GenericDAO<User> implements DAOInterfaceUser {
 	}
 
 	@Override
-	public List<User> searchByDesigner(boolean isDesigner) {
-		 String requete = "SELECT u FROM " + User.class.getName()
-		 +" u WHERE u.designer= :isdesigner";
+	public List<User> searchByDesigner() {
+		 String requete = "SELECT u FROM " 
+				 + User.class.getName()
+				 +" u join fetch u.designer d"	
+				 +" WHERE d.user!= :user";
 		 
 		return super.entityManager
 				.createQuery(requete, User.class)
-				.setParameter("isdesigner", isDesigner)
+				.setParameter("user", null)
 				.getResultList();	
 	}
 

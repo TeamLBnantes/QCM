@@ -17,7 +17,7 @@ import fr.dawan.formation.AppQCMMono.Enum.Status;
 public class MCQ extends Entitie {
 
 	private String body;
-	@Transient
+	@ManyToOne
 	private Theme theme;
 	@Enumerated(EnumType.STRING)
 	private Status status;

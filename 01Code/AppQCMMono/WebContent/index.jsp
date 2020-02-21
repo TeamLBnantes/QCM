@@ -7,7 +7,7 @@
 <title>Bienvenu</title>
 </head>
 <body>
-<a href="">Inscription</a>
-<a href="login.jsp">login</a>
+<a href="inscription">Inscription</a><br>
+<a href="login">login</a>
 </body>
 </html>

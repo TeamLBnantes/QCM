@@ -27,7 +27,22 @@
 	
 	<!-- donner acces à des fichiers de ressources, css, javascript, html ....par defaut, la racine est dans web-inf  -->
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>		
+	
+	
 		
-		
+<!-- 	*************************************** -->
+<!-- 	Internationalisation (i18n) -->
+<!-- 	*************************************** -->
+		<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:traductions"></property>
+	</bean>
+	
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+	<!-- le cookie de langue sera géré autyomatiquement par spring -->
+	<!-- de manniere generale, tout ce qui est resolver est fournit par spring, et donc attention à l'orthographe et à la cast -->
+	<property name="defaultLocale" value="fr"></property>
+	</bean>
+	
+			
 		
 </beans>

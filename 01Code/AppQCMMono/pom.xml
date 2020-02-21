@@ -52,5 +52,12 @@
 			<artifactId>spring-data-jpa</artifactId>
 			<version>2.0.8.RELEASE</version>
 		</dependency>
+		<!-- dependance pour le cryptage du mot de passe -->
+		<dependency>
+			<groupId>org.mindrot</groupId>
+			<artifactId>jbcrypt</artifactId>
+			<version>0.3m</version>
+		</dependency>
+
 	</dependencies>
 </project>

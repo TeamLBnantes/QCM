@@ -15,7 +15,12 @@
 	<h1>Home, sweet home !</h1>
 
 	${ message }<br/>
+<br/>
+<br/>
+	<a href="inscription/designer">inscription Designer</a>
+<br/>
+<br/>
 
-	<a href="home.jsp">I'll be back</a>
+	<a href="index.jsp">I'll be back</a>
 </body>
 </html>

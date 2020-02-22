@@ -52,13 +52,18 @@ public class UserDAO extends GenericDAO<User> implements DAOInterfaceUser {
 
 	@Override
 	public User searchByEmail(String email) {
-		 String requete = "SELECT u FROM " + User.class.getName()
-				 +" u WHERE u.email= :email";
-				 
-				return super.entityManager
-						.createQuery(requete, User.class)
-						.setParameter("email", email)
-						.getSingleResult();	
+		try {
+			 String requete = "SELECT u FROM " + User.class.getName()
+					 +" u WHERE u.email= :email";
+					 
+					return super.entityManager
+							.createQuery(requete, User.class)
+							.setParameter("email", email)
+							.getSingleResult();	
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 
 

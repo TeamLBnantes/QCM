@@ -7,6 +7,7 @@ import javax.persistence.NoResultException;
 import org.mindrot.jbcrypt.BCrypt;
 
 import fr.dawan.formation.AppQCMMono.Models.User;
+import fr.dawan.formation.AppQCMMono.Models.objectBooleanString;
 import fr.dawan.formation.AppQCMMono.Persistence.Constantes;
 import fr.dawan.formation.AppQCMMono.Persistence.UserDAO;
 
@@ -42,15 +43,33 @@ public class UserService {
 	
 	public User searchByEmail(String email) {
 		UserDAO userDao = new UserDAO(Constantes.PERSISTENCE_UNIT_NAME);
-		return userDao.searchByEmail(email);
+		User user=userDao.searchByEmail(email);
+		userDao.close();
+		return user;
 	}
 
-	public void createUser(User user) {
+	public objectBooleanString createUser(User user) {
 		UserDAO userDao = new UserDAO(Constantes.PERSISTENCE_UNIT_NAME);
-		String pwd=BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-		user.setPassword(pwd);
-		user.setSignInDate(LocalDateTime.now());
+		objectBooleanString objReturn=new objectBooleanString();
+		objReturn.setAnswer(false);
+		if (userDao.searchByEmail(user.getEmail())==null) {
+			String pwd=BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+			user.setPassword(pwd);
+			user.setSignInDate(LocalDateTime.now());
+			userDao.saveOrUpdate(user);
+			objReturn.setAnswer(true);
+		
+		}else {
+			objReturn.setComment("l'utilisateur existe déjà");
+		}
+		userDao.close();
+		return objReturn;
+	}
+
+	public void saveOrUpdate(User user) {
+		UserDAO userDao = new UserDAO(Constantes.PERSISTENCE_UNIT_NAME);
 		userDao.saveOrUpdate(user);
+		userDao.close();
 	}
 	
 }

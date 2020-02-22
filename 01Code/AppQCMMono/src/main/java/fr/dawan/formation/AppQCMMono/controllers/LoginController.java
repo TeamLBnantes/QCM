@@ -39,11 +39,8 @@ public class LoginController {
 		if (userService.controlLogin(user.getEmail(), user.getPassword())){
 			user=userService.searchByEmail(user.getEmail());	
 			
-			String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-			System.out.println("ID " + user.getId());
-			System.out.println("LOGIN " + user.getEmail());
-			System.out.println("PASSWORD " + user.getPassword());
-			System.out.println("Password Crypté : " + hashed);
+
+			
 			
 			session.setAttribute("user", user);
 			if(returnUrl != null && !"".equals(returnUrl)) {

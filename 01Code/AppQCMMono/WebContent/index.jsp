@@ -8,6 +8,7 @@
 </head>
 <body>
 <a href="inscription">Inscription</a><br>
-<a href="login">login</a>
+<a href="login">login</a><br>
+<a href="home">home</a><br>
 </body>
 </html>

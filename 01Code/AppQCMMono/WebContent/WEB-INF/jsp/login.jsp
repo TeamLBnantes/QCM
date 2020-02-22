@@ -69,13 +69,15 @@
     <form class="form-signin" action="login" method="post">
   <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg"
 			alt="" width="72" height="72">
-  <h1 class="h3 mb-3 font-weight-normal"> ${message} - Authentification</h1>
+  <h1 class="h3 mb-3 font-weight-normal"> ${message}  Authentification</h1>
   <label for="inputEmail" class="sr-only">Email address</label>
-  <input type="email" name="email" id="inputEmail" class="form-control"
-			placeholder="Utilisateur" required autofocus>
+  <input type="email" name="email" id="inputEmail" value="${email}" class="form-control"
+			placeholder="Utilisateur"  required autofocus>
+	
   <label for="inputPassword" class="sr-only">Password</label>
   <input type="password" name="password" id="inputPassword"
-			class="form-control" placeholder="Mot de passe" required>
+			class="form-control" placeholder="Mot de passe" >
+			
   <div class="checkbox mb-3">
     <label>
       <input type="checkbox" value="remember-me"> Se souvenir de moi?

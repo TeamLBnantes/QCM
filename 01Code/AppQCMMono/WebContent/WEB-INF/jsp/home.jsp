@@ -19,6 +19,7 @@
 <br/>
 	<a href="inscription/designer">inscription Designer</a>
 <br/>
+	<a href="ManagementQuestionsDesigner">Gestion Questions</a>
 <br/>
 
 	<a href="index.jsp">I'll be back</a>

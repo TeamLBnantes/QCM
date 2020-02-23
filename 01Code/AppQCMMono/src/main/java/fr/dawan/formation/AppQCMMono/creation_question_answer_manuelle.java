@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import fr.dawan.formation.AppQCMMono.Models.Answer;
+import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Persistence.Constantes;
 import fr.dawan.formation.AppQCMMono.Persistence.GenericDAO;
@@ -20,16 +21,22 @@ public class creation_question_answer_manuelle {
 		Set<Answer> answers=new HashSet<>();
 		
 
+		GenericDAO<Designer> daoDesigner = new  GenericDAO<>(Constantes.PERSISTENCE_UNIT_NAME);
+		Designer designer=daoDesigner.findById(Designer.class, 1);
+		daoDesigner.close();
+		
 		//ajout question 1
 		Question question1=new Question();
 		question1.setBody("question 1");
 		question1.setAnswers(null);
+		question1.setDesigner(designer);
 		questions.add(question1);
 		
 		//ajout question 2
 		Question question2=new Question();
 		question2.setBody("question 2");
 		question2.setAnswers(null);
+		question2.setDesigner(designer);
 		questions.add(question2);
 		
 		

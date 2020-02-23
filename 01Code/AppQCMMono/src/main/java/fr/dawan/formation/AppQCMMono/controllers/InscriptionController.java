@@ -53,17 +53,15 @@ public class InscriptionController {
 			HttpSession session,
 			Designer designer) {
 		
-		//unicité géré via jpa, joincolum dans la classe designer
-		//unique = true
+
 		
 		UserService userService = new UserService();
 
 
 		User user=(User) session.getAttribute("user");
-		user.setDesigner(designer);
-		designer.setUser(user);
-		userService.saveOrUpdate(user);
-		// je n'écrit pas le designer car j'ai mis une cascade sur le mappedBy de User
+		
+		userService.createUserDesigner(user, designer);
+
 		return "home";
 	}
 	

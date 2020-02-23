@@ -6,6 +6,7 @@ import javax.persistence.NoResultException;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Models.objectBooleanString;
 import fr.dawan.formation.AppQCMMono.Persistence.Constantes;
@@ -70,6 +71,20 @@ public class UserService {
 		UserDAO userDao = new UserDAO(Constantes.PERSISTENCE_UNIT_NAME);
 		userDao.saveOrUpdate(user);
 		userDao.close();
+	}
+
+	public void createUserDesigner(User user, Designer designer) {
+		// TODO empecher le lien vers la creation de designer pour un user qui en est deja un !
+		//unicité du designer est géré via jpa, joincolum dans la classe designer
+		//unique = true
+		
+		user.setDesigner(designer);
+		designer.setUser(user);
+		designer.setDateStatus(LocalDateTime.now());
+		saveOrUpdate(user);
+		// je n'écrit pas le designer car j'ai mis une cascade sur le mappedBy de User
+		
+		
 	}
 	
 }

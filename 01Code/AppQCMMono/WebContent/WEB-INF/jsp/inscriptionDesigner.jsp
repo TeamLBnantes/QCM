@@ -24,7 +24,6 @@
 		</tr>
 		<tr>
 			<td><label for="firstName">Prenom : ${user.firstName}</label></td>
-			<td><input type="text" name="firstName" value=""/></td>		</tr>
 		<tr>
 			<td><label for="presentation">Presentation</label></td>
 			<td><input type="text" name="presentation" /></td>

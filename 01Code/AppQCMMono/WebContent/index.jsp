@@ -10,5 +10,6 @@
 <a href="inscription">Inscription</a><br>
 <a href="login">login</a><br>
 <a href="home">home</a><br>
+<a href="login/out">logout</a><br>
 </body>
 </html>

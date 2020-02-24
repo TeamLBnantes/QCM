@@ -72,11 +72,18 @@ listes des reonses proposées
 	<tr>
 	<th scope="col">ok</th>
 	<th scope="col">body</th>
+	<th scope="col">commentPostAnswer</th>
 	<th scope="col">opérations</th>
 	</tr>
 <c:forEach var="answer" items="${question.answers}">
 <!-- parcours des reponses liées à cette questions pour les afficher-->
-
+<tr>
+<td>${answer.expectedAnswer}</td>
+<td>${answer.body}</td>
+<td>${answer.commentPostAnswer}</td>
+<td align="center"><a href="produits?action=moins&ref=${produit.reference}"> < </a>${produit.quantite}<a href="produits?action=plus&ref=${produit.reference}"> > </a></td>
+<td><a href="produits?action=modifier&ref=${produit.reference}"><button type="button" class="btn btn-success">Modifier</button></a>  <a href="produits?action=supprimer&ref=${produit.reference}"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
+</tr>
 
 </c:forEach>
 
@@ -98,18 +105,18 @@ listes des reonses proposées
 <table class="table">
  <thead class="thead-dark">
 <tr>
-<th scope="col">Reference</th>
-<th scope="col">Désignation</th>
-<th scope="col">Prix</th>
-<th scope="col">Quantité</th>
-<th scope="col">Options</th>
+<th scope="col">body</th>
+<th scope="col">status</th>
+<th scope="col">theme</th>
+<th scope="col">commentPostAnswer</th>
+<th scope="col">help</th>
 </tr>
 </thead>
-<c:forEach var="produit" items="${produits}">
+<c:forEach var="question" items="${questions}">
 <tr>
-<td>${produit.reference}</td>
-<td>${produit.designation}</td>
-<td>${produit.prix}</td>
+<td>${question.body}</td>
+<td>${question.Status}</td>
+<td>${question.theme}</td>
 <td align="center"><a href="produits?action=moins&ref=${produit.reference}"> < </a>${produit.quantite}<a href="produits?action=plus&ref=${produit.reference}"> > </a></td>
 <td><a href="produits?action=modifier&ref=${produit.reference}"><button type="button" class="btn btn-success">Modifier</button></a>  <a href="produits?action=supprimer&ref=${produit.reference}"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
 </tr>

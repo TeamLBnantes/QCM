@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Persistence.AnswerDAO;
@@ -50,13 +51,12 @@ public class QuestionService {
 	return questionDao.findAll(Question.class);
 }
 
-	public List<Question> searchByUser(User user) {
-		QuestionDAO questionDao = new QuestionDAO(Constantes.PERSISTENCE_UNIT_NAME);
-		UserDAO userDao = new UserDAO(Constantes.PERSISTENCE_UNIT_NAME);
-		AnswerDAO answerDao = new AnswerDAO(Constantes.PERSISTENCE_UNIT_NAME);
 
-		//TODO recup la liste des questions de cette utilisateur
-		
-		return null;
+
+	public List<Question> searchByDesigner(Designer designer) {
+		QuestionDAO questionDao = new QuestionDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		List<Question> questions=questionDao.searchByDesigner(designer);	
+		questionDao.close();
+		return questions;
 	}
 }

@@ -128,7 +128,7 @@ public class Question extends Entitie{
 
 	@Override
 	public String toString() {
-		return "Question [body=" + body + ", commentPostAnswer=" + commentPostAnswer + ",  getId()=" + getId() + "]";
+		return "Question [body=" + body + ", commentPostAnswer=" + commentPostAnswer + ",  getId()=" + getId() +",  nqAnswers=" + answers.size() + "]";
 	}
 
 

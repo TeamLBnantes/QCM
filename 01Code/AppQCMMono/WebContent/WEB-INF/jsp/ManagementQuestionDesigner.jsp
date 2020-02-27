@@ -28,8 +28,11 @@
 <!-- Formulaire d'ajout --> <!-- Ajouter required pour la validation des champs -->
 
 <div class="container">
-<form action="ManagementQuestionsDesigner/new" method="post">
+<form action="ManagementQuestionsDesigner/updateQuestion" method="post">
 <table class="table table-sm">
+<c:if test="${question.id!=null}">
+	<input type="hidden" name="id" value="${ question.id }" />
+</c:if>
 <tr><td><b>body:</b></td><td><input type="text" name="body" placeholder="Text de la question" value="${question.body}" required/></td></tr>
 <tr>
 	<td>
@@ -47,25 +50,50 @@
 
 <tr><td><b>commentPostAnswer:</b></td><td><input type="text" name="commentPostAnswer" placeholder="commentPostAnswer" value="${question.commentPostAnswer }" width="300px"/></td></tr>
 
-<c:if test="${newResponse==true}">
-<tr><td><b>body response:</b></td><td><input type="text" name="body" placeholder="Text de la question" value="${reponse.body}" required/></td></tr>
 
-</c:if>
 
 
 </table>
 
 <!-- </div> -->
+<tr><td>
+			<button type="submit" class="btn btn-primary" name="action" value="valider">
+			Valider</button></td><td></td></tr>
+</table>
+
+</form>
+</div>
+
+<div class="container">
+<br>
+<c:if test="${Response==true}">
+<form action="ManagementQuestionsDesigner/updateAnswer/${ question.id }" method="post">
+<%-- <input type="hidden" name="idQuestion" value="${ question.id }" /> --%>
+<c:if test="${answer.id!=null}">
+<input type="hidden" name="id" value="${ answer.id }" />
+</c:if>
+<table class="table table-sm">
+<tr><td><b>body response:</b></td><td><input type="text" name="body" placeholder="Text de la reponse" value="${answer.body}" required/></td></tr>
+<tr><td><b>expectedAnswer response:</b></td><td><input type="text" name="expectedAnswer" placeholder="status de la reponse" value="${answer.expectedAnswer}" required/></td></tr>
+<tr><td><b>commentPostAnswer response:</b></td><td><input type="text" name="commentPostAnswer" placeholder="comment post answer" value="${answer.commentPostAnswer}" required/></td></tr>
+<tr></tr>
 <tr><td><button type="submit" class="btn btn-primary" name="action" value="valider">Valider</button></td><td></td></tr>
 </table>
-</div>
 </form>
-<br>
+
+</c:if>
+<c:if test="${(Response==false) && (question.id!=null)}">
+
+<td><a href="ManagementQuestionsDesigner/newResponse/${question.id}">
+<button type="button" class="btn btn-success" name="action" value="chercher">Ajouter une reponse</button></td>
+
+</c:if>
+<br><br><br>
+
+</div>
+<div class="container">
 .................. listes des reponses proposées
 <td>     --------------------------  </td>
-<td><a href="ManagementQuestionsDesigner/newResponse">
-<button type="button" class="btn btn-success" name="action" value="chercher">Ajouter une reponse</button></td>
-<div class="container">
 <table class="table">
  <thead class="thead-yellow">
 	<tr>
@@ -80,8 +108,8 @@
 <td>${answer.expectedAnswer}</td>
 <td>${answer.body}</td>
 <td>${answer.commentPostAnswer}</td>
-<td align="center"><a href="produits?action=moins&ref=${produit.reference}"> < </a>${produit.quantite}<a href="produits?action=plus&ref=${produit.reference}"> > </a></td>
-<td><a href="produits?action=modifier&ref=${produit.reference}"><button type="button" class="btn btn-success">Modifier</button></a>  <a href="produits?action=supprimer&ref=${produit.reference}"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
+<td><td align="center"><a href="ManagementQuestionsDesigner/updateResponse/${question.id}/${answer.id}"><button type="button" class="btn btn-success">Modifier</button></a>  
+<a href="ManagementQuestionsDesigner/deleteResponse/${answer.id}"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
 </tr>
 
 </c:forEach>
@@ -93,12 +121,14 @@
 </form> -->
 
 </div>
-
+</table>
 
 <br>
 <br>
 
-
+<br/>
+	<a href="ManagementQuestionsDesigner">Retour à la liste</a>
+<br/>
 
 
 </body>

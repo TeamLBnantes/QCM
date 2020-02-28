@@ -19,6 +19,8 @@
 <br/>
 	<a href="inscription/designer">inscription Designer</a>
 <br/>
+	<a href="modificationUserInformations/update">Modifications des informations personnelles</a>
+<br/>
 	<a href="ManagementQuestionsDesigner">Gestion Questions</a>
 <br/>
 

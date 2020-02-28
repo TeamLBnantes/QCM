@@ -59,18 +59,27 @@ public class InscriptionController {
 	@PostMapping("/designer")
 	public String EnregistrementDesigner(			
 			HttpSession session,
-			Designer designer) {
+			Designer designer,
+			Model model) {
 		
 
 		
 		UserService userService = new UserService();
 
 
-		User user=(User) session.getAttribute("user");
-		
-		userService.createUserDesigner(user, designer);
+		User userSession=(User) session.getAttribute("user");
 
-		return "home";
+		
+		userSession = userService.createUserDesigner(userSession, designer);
+		
+		//userSession.setDesigner(designer);
+		
+		session.setAttribute("user", userSession);
+		
+		//model.addAttribute("isDesigner", true);
+		
+
+		return "redirect:/home";
 	}
 	
 }

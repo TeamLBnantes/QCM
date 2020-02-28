@@ -67,11 +67,11 @@
 <div class="container">
 <br>
 <c:if test="${Response==true}">
-<form action="ManagementQuestionsDesigner/updateAnswer/${ question.id }" method="post">
+<form action="ManagementQuestionsDesigner/updateAnswer/${question.id}" method="post">
 <%-- <input type="hidden" name="idQuestion" value="${ question.id }" /> --%>
-<c:if test="${answer.id!=null}">
-<input type="hidden" name="id" value="${ answer.id }" />
-</c:if>
+
+<input type="hidden" name="id" value="${answer.id}" />
+
 <table class="table table-sm">
 <tr><td><b>body response:</b></td><td><input type="text" name="body" placeholder="Text de la reponse" value="${answer.body}" required/></td></tr>
 <tr><td><b>expectedAnswer response:</b></td><td><input type="text" name="expectedAnswer" placeholder="status de la reponse" value="${answer.expectedAnswer}" required/></td></tr>
@@ -109,7 +109,7 @@
 <td>${answer.body}</td>
 <td>${answer.commentPostAnswer}</td>
 <td><td align="center"><a href="ManagementQuestionsDesigner/updateResponse/${question.id}/${answer.id}"><button type="button" class="btn btn-success">Modifier</button></a>  
-<a href="ManagementQuestionsDesigner/deleteResponse/${answer.id}"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
+<a href="ManagementQuestionsDesigner/deleteResponse/${question.id}/${answer.id}"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
 </tr>
 
 </c:forEach>

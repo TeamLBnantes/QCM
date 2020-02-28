@@ -56,17 +56,17 @@
 </tr>
 </thead>
 <c:forEach var="question" items="${questions}">
-<tr>
+<tr style = "background-color:gainsboro">
 <td>${question.body}</td>
 <td>${question.status}</td>
 <td>${question.theme}</td>
 <td><a href="ManagementQuestionsDesigner/${question.id}"><button type="button" class="btn btn-success">Modifier</button></a>  <a href="ManagementQuestionsDesigner/delete/${question.id}"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
 </tr>
 <c:forEach var="answer" items="${question.answers}">
-<tr>
+<tr style = "background-color:yellow"><th style = "background-color:yellow" >
 <td>${answer.body}</td>
 <td>${answer.expectedAnswer}</td>
-</tr>
+</th></tr>
 
 </c:forEach>
 </c:forEach>

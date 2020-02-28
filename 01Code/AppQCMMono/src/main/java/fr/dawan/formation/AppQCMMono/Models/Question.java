@@ -44,7 +44,7 @@ public class Question extends Entitie{
 	private Designer designer;
 	
 	
-	@OneToMany(mappedBy = "question", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.ALL}, fetch = FetchType.EAGER)  //ajouter un lien de type eager
+	@OneToMany(mappedBy = "question",orphanRemoval = true, cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.ALL}, fetch = FetchType.EAGER)  //ajouter un lien de type eager
 	private Set<Answer> answers;
 	
 	@OneToMany (mappedBy = "question")

@@ -25,22 +25,30 @@ public class InscriptionController {
 	}
 	
 	
-	@PostMapping("")
-	public String EnregistrerUser(User user, Model model) {
+	@PostMapping(value="", params= {"confirmPassword", "confirmEmail"})
+	public String EnregistrerUser(User user, Model model,
+			@RequestParam("confirmPassword") String confirmPassword,
+			@RequestParam("confirmEmail") String confirmEmail ) {
+		
 		objectBooleanString createResult;
 		UserService userService = new UserService();
 		
-		createResult=userService.createUser(user);
-		//possible de tester la valeur de retour de createUser
-		// en fonction, si l'utilisateur n'a pas été cérer, possible de renvoyer sur eecran de création en disant pourquoi
-		if (createResult.isAnswer()) {
-			model.addAttribute("email", user.getEmail());
-			return "login";
-		}else {
-			model.addAttribute("message", createResult.getComment());
-			model.addAttribute(user);
-			return "inscription";
-		}
+			
+			createResult=userService.createUser(user, confirmPassword, confirmEmail);
+			
+			
+			
+			//possible de tester la valeur de retour de createUser
+			// en fonction, si l'utilisateur n'a pas été cérer, possible de renvoyer sur eecran de création en disant pourquoi
+			if (createResult.isAnswer()) {
+				model.addAttribute("email", user.getEmail());
+				return "login";
+			}else {
+				model.addAttribute("message", createResult.getComment());
+				model.addAttribute(user);
+				return "inscription";
+			}
+		
 	}
 
 	@GetMapping("/designer")

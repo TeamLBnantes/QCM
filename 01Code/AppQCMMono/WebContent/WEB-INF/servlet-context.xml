@@ -27,20 +27,36 @@
 	
 	<!-- donner acces à des fichiers de ressources, css, javascript, html ....par defaut, la racine est dans web-inf  -->
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>		
-	
+	<mvc:interceptors>
+		
+
+		<!-- I18N -->
+
+		<bean id="localeChangeIntercptor"
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="lang"></property>
+		</bean>
+
+		<!-- Theme -->
+		<bean id="themeChangeInterceptor"
+			class="org.springframework.web.servlet.theme.ThemeChangeInterceptor">
+			<property name="paramName" value="theme"></property>
+		</bean>
+	</mvc:interceptors>
 	
 		
 <!-- 	*************************************** -->
 <!-- 	Internationalisation (i18n) -->
 <!-- 	*************************************** -->
-		<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="classpath:traductions"></property>
 	</bean>
-	
-	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
-	<!-- le cookie de langue sera géré autyomatiquement par spring -->
-	<!-- de manniere generale, tout ce qui est resolver est fournit par spring, et donc attention à l'orthographe et à la cast -->
-	<property name="defaultLocale" value="fr"></property>
+	<!-- localeResolver fourni par Spring. syntaxe fixe !!!! -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="fr"></property>
+		<property name="cookieMaxAge" value="864 000"></property>
 	</bean>
 	
 			

@@ -1,3 +1,4 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,10 +17,14 @@
 
 	${ message }<br/>
 <br/>
+<c:if test="${!isDesigner}">
 <br/>
 	<a href="inscription/designer">inscription Designer</a>
+</c:if>
+<c:if test="${isDesigner}">
 <br/>
 	<a href="ManagementQuestionsDesigner">Gestion Questions</a>
+</c:if>
 <br/>
 
 	<a href="index.jsp">I'll be back</a>

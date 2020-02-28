@@ -138,19 +138,40 @@ public class ManagementQuestionsDesignerController {
 	
 	@PostMapping("updateQuestion")
 	public String updateQuestion(Question question, HttpSession session, Model model) {
-		User user = (User) session.getAttribute("user");
+		
+		
 		QuestionService questionService=new QuestionService();
-		question.setDesigner(user.getDesigner());
+		UserService userService=new UserService();
 		
-		//System.out.println("avant le save : "+question.getId());
-		question=questionService.saveOrUpdate(question);
-		//System.out.println("apres le save : "+question.getId());
+		System.out.println("l'id de la question est : " +question.getId());
+		System.out.println("le body (avant saveor update)est  : " +question.getBody());
 		
+		Question questionMaj=new Question();
+		if (question.getId()==0) {
+			
+			User user = (User) session.getAttribute("user");
+			user=userService.findById(user.getId());
+			//question.setDesigner(user.getDesigner());
+			//questionMaj.setDesigner(question.getDesigner());
+			questionMaj.setDesigner(user.getDesigner());
+			
+		}else {
+			questionMaj=questionService.findById(question.getId());
+		}
+		
+		
+		
+		questionMaj.setBody(question.getBody());
+		questionMaj.setCommentPostAnswer(question.getCommentPostAnswer());
+		questionMaj.setStatus(question.getStatus());
+		
+		
+		
+		question=questionService.saveOrUpdate(questionMaj);
+
 		question=questionService.findById(question.getId());
-		
-			//System.out.println("apres le save : "+question.getAnswers());
-		//List<Question> questions=questionService.searchByDesigner(user.getDesigner());
-		//Question question=questionService.findById(id);
+		System.out.println("le body (apres le find est  )est  : " +question.getBody());
+
 		
 		model.addAttribute("Response", false);
 		model.addAttribute("question", question);

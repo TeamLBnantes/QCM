@@ -57,8 +57,11 @@
 
 <!-- </div> -->
 <tr><td>
+<c:if test="${(Response==false)}">
 			<button type="submit" class="btn btn-primary" name="action" value="valider">
-			Valider</button></td><td></td></tr>
+			Valider</button>
+</c:if>			
+			</td><td></td></tr>
 </table>
 
 </form>

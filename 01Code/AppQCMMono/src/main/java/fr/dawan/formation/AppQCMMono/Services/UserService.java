@@ -73,7 +73,7 @@ public class UserService {
 		userDao.close();
 	}
 
-	public void createUserDesigner(User user, Designer designer) {
+	public User createUserDesigner(User user, Designer designer) {
 		// TODO empecher le lien vers la creation de designer pour un user qui en est deja un !
 		//unicité du designer est géré via jpa, joincolum dans la classe designer
 		//unique = true
@@ -82,9 +82,18 @@ public class UserService {
 		designer.setUser(user);
 		designer.setDateStatus(LocalDateTime.now());
 		saveOrUpdate(user);
+		
+		user = findById(user.getId());		
 		// je n'écrit pas le designer car j'ai mis une cascade sur le mappedBy de User
+		return user;
 		
-		
+	}
+
+	public User findById(int id) {
+		UserDAO userDao = new UserDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		User u=userDao.findById(User.class, id);
+		userDao.close();
+		return u;
 	}
 	
 }

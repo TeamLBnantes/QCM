@@ -25,6 +25,13 @@ public class HomeController {
 				+ user.getFirstName());
 		}
 		
+		boolean isDesigner=false;
+		if (user.getDesigner()!=null) {
+			isDesigner=true;
+		}
+		model.addAttribute("isDesigner", isDesigner);
+		
+		
 		// on renvoie le nom de la jsp
 		return "home";
 	}

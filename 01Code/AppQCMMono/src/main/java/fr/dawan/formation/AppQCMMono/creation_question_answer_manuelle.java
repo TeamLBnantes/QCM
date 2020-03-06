@@ -98,12 +98,6 @@ est enregistré dans la table answer
 		
 		
 
-
-		
-		
-		
-		
-
 		daoQuestion.close();	
 	//	daoAnswer.close();
 		

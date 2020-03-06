@@ -5,6 +5,7 @@
 *.class
 *MANIFEST.MF
 
+persistence.xml
 
 *.metadata/
 *.settings
@@ -17,6 +18,10 @@ tmp/
 *.swp
 *~.nib
 *.properties
+!traductions.properties
+!traductions_fr.properties
+!traductions_en.properties
+
 .settings/
 .loadpath
 .recommenders

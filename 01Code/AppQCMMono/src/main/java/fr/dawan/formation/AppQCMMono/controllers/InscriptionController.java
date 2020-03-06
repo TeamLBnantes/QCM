@@ -25,22 +25,30 @@ public class InscriptionController {
 	}
 	
 	
-	@PostMapping("")
-	public String EnregistrerUser(User user, Model model) {
+	@PostMapping(value="", params= {"confirmPassword", "confirmEmail"})
+	public String EnregistrerUser(User user, Model model,
+			@RequestParam("confirmPassword") String confirmPassword,
+			@RequestParam("confirmEmail") String confirmEmail ) {
+		
 		objectBooleanString createResult;
 		UserService userService = new UserService();
 		
-		createResult=userService.createUser(user);
-		//possible de tester la valeur de retour de createUser
-		// en fonction, si l'utilisateur n'a pas été cérer, possible de renvoyer sur eecran de création en disant pourquoi
-		if (createResult.isAnswer()) {
-			model.addAttribute("email", user.getEmail());
-			return "login";
-		}else {
-			model.addAttribute("message", createResult.getComment());
-			model.addAttribute(user);
-			return "inscription";
-		}
+			
+			createResult=userService.createUser(user, confirmPassword, confirmEmail);
+			
+			
+			
+			//possible de tester la valeur de retour de createUser
+			// en fonction, si l'utilisateur n'a pas été cérer, possible de renvoyer sur eecran de création en disant pourquoi
+			if (createResult.isAnswer()) {
+				model.addAttribute("email", user.getEmail());
+				return "login";
+			}else {
+				model.addAttribute("message", createResult.getComment());
+				model.addAttribute(user);
+				return "inscription";
+			}
+		
 	}
 
 	@GetMapping("/designer")
@@ -51,18 +59,27 @@ public class InscriptionController {
 	@PostMapping("/designer")
 	public String EnregistrementDesigner(			
 			HttpSession session,
-			Designer designer) {
+			Designer designer,
+			Model model) {
 		
 
 		
 		UserService userService = new UserService();
 
 
-		User user=(User) session.getAttribute("user");
-		
-		userService.createUserDesigner(user, designer);
+		User userSession=(User) session.getAttribute("user");
 
-		return "home";
+		
+		userSession = userService.createUserDesigner(userSession, designer);
+		
+		//userSession.setDesigner(designer);
+		
+		session.setAttribute("user", userSession);
+		
+		//model.addAttribute("isDesigner", true);
+		
+
+		return "redirect:/home";
 	}
 	
 }

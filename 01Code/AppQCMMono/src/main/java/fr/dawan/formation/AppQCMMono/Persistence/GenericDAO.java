@@ -121,12 +121,13 @@ public class GenericDAO<T extends Entitie> {
 
 				// suppression
 				entityManager.remove(entite);
-
+				//System.out.println("entité "+ entite + "en attente de commit remove");
 				// validation de la transaction
 				transaction.commit();
 
 				// fermeture de la transaction
 			} catch (Exception ex) {
+				//System.out.println("on est dans le catch de la transaction commit du remove !!!!!");
 				transaction.rollback();
 			}
 		}

@@ -52,19 +52,31 @@ public class UserService {
 		return user;
 	}
 
-	public objectBooleanString createUser(User user) {
+	public objectBooleanString createUser(User user, String confirmPassword, String confirmEmail) {
 		UserDAO userDao = new UserDAO(Constantes.PERSISTENCE_UNIT_NAME);
 		objectBooleanString objReturn=new objectBooleanString();
 		objReturn.setAnswer(false);
-		if (userDao.searchByEmail(user.getEmail())==null) {
+		
+		
+		if (userDao.searchByEmail(user.getEmail())!=null) {
+			objReturn.setComment("l'utilisateur existe déjà");
+		} else if (user.getFirstName()==""||user.getFirstName().length()<=1) {
+				objReturn.setComment("Prénom invalide");
+		}else if(user.getLastName()==""||user.getLastName().length()<=1) {
+				objReturn.setComment("Nom invalide");			
+		}else if(!(user.getPassword().equals(confirmPassword))) {
+			objReturn.setComment("Confirmation du mot de passe non conforme");
+		}else if(!(user.getEmail().equals(confirmEmail))){
+			objReturn.setComment("Confirmation de l'Email non conforme");	
+			
+		
+		}else {
 			String pwd=BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+			user.setLastName(user.getLastName().toUpperCase());
 			user.setPassword(pwd);
 			user.setSignInDate(LocalDateTime.now());
 			userDao.saveOrUpdate(user);
 			objReturn.setAnswer(true);
-		
-		}else {
-			objReturn.setComment("l'utilisateur existe déjà");
 		}
 		userDao.close();
 		return objReturn;
@@ -76,7 +88,7 @@ public class UserService {
 		userDao.close();
 	}
 
-	public void createUserDesigner(User user, Designer designer) {
+	public User createUserDesigner(User user, Designer designer) {
 		// TODO empecher le lien vers la creation de designer pour un user qui en est deja un !
 		//unicité du designer est géré via jpa, joincolum dans la classe designer
 		//unique = true
@@ -85,9 +97,20 @@ public class UserService {
 		designer.setUser(user);
 		designer.setDateStatus(LocalDateTime.now());
 		saveOrUpdate(user);
+
+		
+		user = findById(user.getId());		
 		// je n'écrit pas le designer car j'ai mis une cascade sur le mappedBy de User
+		return user;
 		
-		
+
+	}
+
+	public User findById(int id) {
+		UserDAO userDao = new UserDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		User u=userDao.findById(User.class, id);
+		userDao.close();
+		return u;
 	}
 	
 	public User findById(int id) {

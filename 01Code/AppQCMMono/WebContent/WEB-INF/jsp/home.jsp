@@ -24,6 +24,8 @@
 <c:if test="${isDesigner}">
 <br/>
 	<a href="ManagementQuestionsDesigner">Gestion Questions</a>
+<br/>
+	<a href="ManagementMCQDesigner">Gestion QCM</a>
 </c:if>
 <br/>
 

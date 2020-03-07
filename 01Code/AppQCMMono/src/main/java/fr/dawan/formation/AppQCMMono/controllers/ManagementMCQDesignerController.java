@@ -48,21 +48,17 @@ public class ManagementMCQDesignerController {
 		return "MCQDesignerListe";
 	}
 	
-/*	//     /delete/${question.id}
+	//     /delete/${mcq.id}
+	//TODO : attention, je ne met pas de secours, un clique et pas de retour arrière. Il faudra demander une confirmation
 	@GetMapping("/delete/{id}")
 	public String deleteQuestion(@PathVariable("id") int id, HttpSession session, Model model) {
-		User user = (User) session.getAttribute("user");
-		QuestionService questionService=new QuestionService();
-		questionService.deleteById(id);
+		
+		MCQService mcqService=new MCQService();
+		mcqService.deleteById(id);
 			
-
-		List<Question> questions=questionService.searchByDesigner(user.getDesigner());
-		//Question question=questionService.findById(id);
-		model.addAttribute("questions", questions);
-		model.addAttribute("enumStatus", Status.values());
 		// on renvoie le nom de la jsp
-		return "QuestionsDesignerListe";
-	}*/
+		return "redirect:/ManagementMCQDesigner";
+	}
 	
 	
 //	@GetMapping(value = { "/{id}" })    //id de la question à cibler
@@ -87,10 +83,18 @@ public class ManagementMCQDesignerController {
 	public String renseignerNouvelleQuestion(HttpSession session, Model model) {
 
 		User user = (User) session.getAttribute("user");
+
+		MCQService mcqService=new MCQService();
+		List<MCQ> mcqs=mcqService.searchByDesigner(user.getDesigner());
+		
+		//for (Question question : questions) {
+		//	System.out.println(question);
+		//}
 		model.addAttribute("newMcq", true);
+		model.addAttribute("mcqs", mcqs);
 		//model.addAttribute("enumStatus", Status.values());
 		// on renvoie le nom de la jsp
-		return "ManagementMCQDesigner";
+		return "MCQDesignerListe";
 	}
 	
 //	@GetMapping(value = { "/newResponse/{id}" })    //id de la question à cibler
@@ -137,6 +141,22 @@ public class ManagementMCQDesignerController {
 //		// on renvoie le nom de la jsp
 //		return "ManagementQuestionDesigner";
 //	}
+	
+	//////enregistrement du nouveau qcm
+	//     createMCQ
+	@PostMapping("createMCQ")
+	public String createMcq(MCQ mcq, HttpSession session, Model model) {
+		
+		User user = (User) session.getAttribute("user");
+		MCQService mcqService=new MCQService();
+		mcq.setDesigner(user.getDesigner());
+		mcqService.create(mcq);
+		
+		return "redirect:/ManagementMCQDesigner";
+	}
+	
+	
+	
 	
 //	@PostMapping("updateQuestion")
 //	public String updateQuestion(Question question, HttpSession session, Model model) {

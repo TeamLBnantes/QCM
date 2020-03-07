@@ -26,14 +26,47 @@ Bienvenu dans la gestion des vos QCM
 
 
 <c:if test="${newMcq}">
-formulaire de création du nouveau qcm
-qui renvoi ssur cette même page mais sans le new
+<!-- formulaire de création d'un nouveau qcm, afficher uniquemlent si on a cliquer sur le bouton ajouter formulaire -->
+<!-- Formulaire d'ajout --> <!-- Ajouter required pour la validation des champs -->
+
+<div class="container">
+<br>
+<h2>creation d'un nouveau QCM</h2>
+<br>
+
+<form action="ManagementMCQDesigner/createMCQ" method="post">
+<table class="table table-sm">
+
+<tr><td><b>body:</b></td><td><textarea name="body" placeholder="presentation QCM" value="${mcq.body}" required width="900px"/></textarea> </td></tr>
+<tr><td><b>theme:</b></td><td><input type="text" name="commentPostAnswer" placeholder="theme" value="${mcq.theme}" width="300px"/></td></tr>
+<tr><td><b>status:</b></td><td><input type="text" name="commentPostAnswer" placeholder="status" value="${mcq.status}" width="300px"/></td></tr>
+ 
+
+
+</table>
+
+<!-- </div> -->
+<tr><td>
+
+			<button type="submit" class="btn btn-primary" name="action" value="valider">
+			Valider</button>
+		
+			</td><td></td></tr>
+</table>
+<br><br><br>
+<h5>vos Qcm existant</h5><br><br>
+</form>
+
+</div>
+<!-- fin formulaire de création du qcm -->
 </c:if>
-<%-- <c:if test="${newMcq}=false"> --%>
+<c:if test="${!newMcq}">
 <a href="ManagementMCQDesigner/new">
 <button type="button" class="btn btn-success" name="action" value="chercher">Creer QCM</button>
-<%-- </c:if>
- --%>
+
+
+ </c:if>
+ 
 	
 </div>
 
@@ -49,16 +82,15 @@ qui renvoi ssur cette même page mais sans le new
 <th scope="col">body</th>
 <th scope="col">status</th>
 <th scope="col">theme</th>
-<th scope="col">commentPostAnswer</th>
-<th scope="col">help</th>
-</tr>
 </thead>
 <c:forEach var="qcm" items="${mcqs}">
 <tr style = "background-color:gainsboro">
 <td>${qcm.body}</td>
 <td>${qcm.theme}</td>
 <td>${qcm.status}</td>
+<c:if test="${!newMcq}">
 <td><a href="ManagementMCQDesigner/${qcm.id}"><button type="button" class="btn btn-success">Modifier</button></a>  <a href="ManagementMCQDesigner/delete/${qcm.id}"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
+</c:if>
 </tr>
 
 </c:forEach>

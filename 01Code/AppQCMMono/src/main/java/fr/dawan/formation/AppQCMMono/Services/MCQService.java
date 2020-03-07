@@ -17,6 +17,20 @@ public class MCQService {
 		mcqDao.close();
 		return mcqs;
 	}
+
+	public void create(MCQ mcq) {
+		// TODO attention pour le moment, je ne vérifie pas si présence de doublon dans les mcq
+		MCQDAO mcqDao = new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		mcqDao.saveOrUpdate(mcq);
+		mcqDao.close();
+	}
+
+	public void deleteById(int id) {
+		
+		MCQDAO mcqDao = new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		mcqDao.deleteById(MCQ.class, id);
+		mcqDao.close();
+	}
 	
 
 

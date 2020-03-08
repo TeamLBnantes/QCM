@@ -41,19 +41,19 @@
     <div class="templatemo-flex-row">
       <div class="templatemo-sidebar">    <!--div barre de navigation de gauche -->
        
-       		<%@ include file='sources/navigateur.jsp' %>
+       		<%@ include file='navigateur.jsp' %>
        
       </div> <!--div de fin barre de navigation du haut -->
       <!-- Main content --> 
       <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container"> <!--div barre de navigation du haut -->
 
-			<%@ include file='sources/barreNavigation.jsp' %>
+			<%@ include file='barreNavigation.jsp' %>
 
         </div>   <!-- fin de la div barre navigation du haut -->
         <div class="templatemo-content-container"> <!--div zonne de travail principale  -->
                 
-            <%@ include file='sources/MCQDesignerListe.jsp' %>
+            <%@ include file='sousPageTest.jsp' %>
        
         </div>  <!-- fin de la div zone de travail principale -->
       </div>  <!-- fin de la div partie gauche de la page -->

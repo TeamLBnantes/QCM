@@ -37,6 +37,10 @@
 
   </head>
   <body>  
+  
+  
+   
+  <h2>Je suis bien sur la page ManagementMCQDesigner</h2>
     <!-- Left column -->
     <div class="templatemo-flex-row">
       <div class="templatemo-sidebar">    <!--div barre de navigation de gauche -->
@@ -53,7 +57,7 @@
         </div>   <!-- fin de la div barre navigation du haut -->
         <div class="templatemo-content-container"> <!--div zonne de travail principale  -->
                 
-            <%@ include file='sources/MCQDesignerListe.jsp' %>
+            <%@ include file='sources/ManagementMCQDesigner.jsp' %>
        
         </div>  <!-- fin de la div zone de travail principale -->
       </div>  <!-- fin de la div partie gauche de la page -->

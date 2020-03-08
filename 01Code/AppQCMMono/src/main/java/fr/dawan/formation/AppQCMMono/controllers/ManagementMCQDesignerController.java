@@ -37,7 +37,7 @@ public class ManagementMCQDesignerController {
 
 		MCQService mcqService=new MCQService();
 		List<MCQ> mcqs=mcqService.searchByDesigner(user.getDesigner());
-		
+
 		//for (Question question : questions) {
 		//	System.out.println(question);
 		//}
@@ -55,32 +55,50 @@ public class ManagementMCQDesignerController {
 		
 		MCQService mcqService=new MCQService();
 		mcqService.deleteById(id);
-			
+
 		// on renvoie le nom de la jsp
 		return "redirect:/ManagementMCQDesigner";
 	}
 	
 	
-//	@GetMapping(value = { "/{id}" })    //id de la question à cibler
-//	public String afficherQuestion(@PathVariable("id") int id, HttpSession session, Model model) {
-//
-//		User user = (User) session.getAttribute("user");
-//
-//		QuestionService questionService=new QuestionService();
-//		List<Question> questions=questionService.searchByDesigner(user.getDesigner());
-//		Question question=questionService.findById(id);
-//
-//		
-//		model.addAttribute("Response", false);
-//		model.addAttribute("question", question);
-//		model.addAttribute("questions", questions);
-//		model.addAttribute("enumStatus", Status.values());
-//		// on renvoie le nom de la jsp
-//		return "ManagementQuestionDesigner";
-//	}
+	@GetMapping(value = { "/{id}" })    //id du qcm sur lequel le designer souhaite travailler. on va l'afficher
+	public String afficherMcq(@PathVariable("id") int id, HttpSession session, Model model) {
+		
+		//TODO : il faudra securiser le fait que seul le proprétaire du QCM peu le modifier
+		// donc vérifier qu'il est bien le propriétaire (et que c'est pas un petit malin qui a ecrit l'adresse dans la barre de nav 
+		User user = (User) session.getAttribute("user");
+
+		
+		MCQService mcqService=new MCQService();
+		MCQ mcq=mcqService.searchById(id);
+		QuestionService questionService=new QuestionService();
+		List<Question> questions=questionService.searchByMcq(mcq);
+
+		model.addAttribute("mcq", mcq);
+		model.addAttribute("questions", questions);
+
+		// on renvoie le nom de la jsp
+		return "ManagementMCQDesigner";
+	}
+	
+	@PostMapping(value = { "/{id}" })    //id du qcm à sauvegarder
+	public String enregistrerMcq(MCQ mcq,@PathVariable("id") int id, Model model) {
+		
+		MCQService mcqService=new MCQService();
+		MCQ mcqUpdate=mcqService.searchById(id);
+		mcqUpdate.setBody(mcq.getBody());
+		//mcqUpdate.setTheme(mcq.getTheme());
+		mcqService.saveOrUpdate(mcqUpdate);
+	
+
+		// on renvoie le nom de la jsp
+		return "redirect:/ManagementMCQDesigner/"+id;
+	}
+	
+	
 	
 	@GetMapping(value = { "/new" })    
-	public String renseignerNouvelleQuestion(HttpSession session, Model model) {
+	public String renseignerNouveauMcq(HttpSession session, Model model) {
 
 		User user = (User) session.getAttribute("user");
 

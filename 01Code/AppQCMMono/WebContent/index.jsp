@@ -12,5 +12,6 @@
 <a href="home">home</a><br>
 <a href="login/out">logout</a><br>
 <a href="test">test</a><br>
+<a href="test/2">test/2</a><br>
 </body>
 </html>

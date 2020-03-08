@@ -31,6 +31,23 @@ public class MCQService {
 		mcqDao.deleteById(MCQ.class, id);
 		mcqDao.close();
 	}
+
+	public MCQ searchById(int id) {
+		MCQDAO mcqDao = new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		MCQ mcq=mcqDao.findById(MCQ.class, id);
+		mcqDao.close();
+
+		return mcq;
+	}
+
+	public void saveOrUpdate(MCQ mcqUpdate) {
+		MCQDAO mcqDao = new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		mcqDao.saveOrUpdate(mcqUpdate);
+		mcqDao.close();
+		
+	}
+
+
 	
 
 

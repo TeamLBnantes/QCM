@@ -67,6 +67,8 @@ public class UserDAO extends GenericDAO<User> implements DAOInterfaceUser {
 	}
 
 
+
+
 	
 	
 }

@@ -32,17 +32,22 @@
 <td>Mot clé: </td>
 <td><input type="text" name="motCle" /></td>
 <td><button type="submit" class="btn btn-dark" name="action" value="chercher">Chercher</button></td>
-<td>     --------------------------  </td>
-<td><a href="ManagementQuestionsDesigner/new">
-<button type="button" class="btn btn-success" name="action" value="chercher">Creer Question</button></td>
-</tr>
+
 </table>
 </form>
+<table>
+<td>     --------------------------  </td>
+
+<td><a href="ManagementQuestionsDesigner/new">
+<button type="button" class="btn btn-success" name="action" value="chercher">Creer Question</button></td>
+
+</tr>
+</table>
 </div><br /><br />
 
 
 
-<!-- Formulaire d'affichage des produits -->
+<!-- Formulaire d'affichage des Questions -->
 
 <div class="container">
 <table class="table">

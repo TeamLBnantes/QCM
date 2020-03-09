@@ -26,6 +26,8 @@
 	<a href="modificationUserInformations/update">Modifications des informations personnelles</a>
 <br/>
 	<a href="ManagementQuestionsDesigner">Gestion Questions</a>
+<br/>
+	<a href="ManagementMCQDesigner">Gestion QCM</a>
 </c:if>
 <br/>
 

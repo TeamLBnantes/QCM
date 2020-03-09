@@ -6,6 +6,7 @@ import java.util.Set;
 
 import fr.dawan.formation.AppQCMMono.Models.Answer;
 import fr.dawan.formation.AppQCMMono.Models.Designer;
+import fr.dawan.formation.AppQCMMono.Models.MCQ;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Persistence.AnswerDAO;
@@ -72,6 +73,18 @@ public class QuestionService {
 		
 		
 		
+	}
+
+
+
+
+
+	public List<Question> searchByMcq(MCQ mcq) {
+		
+		QuestionDAO questionDao = new QuestionDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		List<Question> questions=questionDao.searchByMcq(mcq);
+		questionDao.close();
+		return questions;
 	}
 
 

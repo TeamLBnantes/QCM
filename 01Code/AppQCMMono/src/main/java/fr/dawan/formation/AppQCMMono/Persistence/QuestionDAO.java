@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.dawan.formation.AppQCMMono.Enum.Status;
 import fr.dawan.formation.AppQCMMono.Models.Designer;
+import fr.dawan.formation.AppQCMMono.Models.MCQ;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Persistence.Interfaces.DAOQuestionInterface;
 
@@ -90,6 +91,24 @@ public class QuestionDAO extends GenericDAO<Question> implements DAOQuestionInte
 		return questions;
 
 	}
+
+	public List<Question> searchByMcq(MCQ mcq) {
+		List<Question> questions=new ArrayList<Question>();
+		String requete = "select f from "  
+				+ Question.class.getName() 
+				+ " f join fetch f.questionUseds t"
+				+ " where t.mcq = :mcq";
+				//+ " f where f.value = theme";
+		
+		// JPQL (ou HQL)
+		questions = super.entityManager
+				.createQuery(requete, Question.class)
+				.setParameter("mcq", mcq)
+				.getResultList();
+		System.out.println("question trouvees : "+questions);
+		return questions;
+	}
+
 
 	
 	

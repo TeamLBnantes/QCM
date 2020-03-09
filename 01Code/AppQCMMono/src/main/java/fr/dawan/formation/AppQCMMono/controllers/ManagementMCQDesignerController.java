@@ -1,6 +1,7 @@
 package fr.dawan.formation.AppQCMMono.controllers;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -20,6 +21,7 @@ import fr.dawan.formation.AppQCMMono.Enum.Status;
 import fr.dawan.formation.AppQCMMono.Models.Answer;
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
 import fr.dawan.formation.AppQCMMono.Models.Question;
+import fr.dawan.formation.AppQCMMono.Models.QuestionDTO;
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Services.AnswerService;
 import fr.dawan.formation.AppQCMMono.Services.MCQService;
@@ -38,13 +40,9 @@ public class ManagementMCQDesignerController {
 		MCQService mcqService=new MCQService();
 		List<MCQ> mcqs=mcqService.searchByDesigner(user.getDesigner());
 
-		//for (Question question : questions) {
-		//	System.out.println(question);
-		//}
 		model.addAttribute("newMcq", false);
 		model.addAttribute("mcqs", mcqs);
-		//model.addAttribute("enumStatus", Status.values());
-		// on renvoie le nom de la jsp
+
 		return "MCQDesignerListe";
 	}
 	
@@ -80,6 +78,82 @@ public class ManagementMCQDesignerController {
 		// on renvoie le nom de la jsp
 		return "ManagementMCQDesigner";
 	}
+	
+	
+	@GetMapping(value = { "/{id}/questions" })    //id du qcm pour lequel nous allons chercher d'autres questions
+	public String listerQuestionsMcq(@PathVariable("id") int id, HttpSession session, Model model) {
+		
+		User user = (User) session.getAttribute("user");
+
+		
+		MCQService mcqService=new MCQService();
+		MCQ mcq=mcqService.searchById(id);
+		QuestionService questionService=new QuestionService();
+		List<Question> questions=questionService.searchByMcq(mcq);
+		
+		//TODO : module de recherche des questions à dispo
+		// pour le moment, je donne tout
+		Set<Question> questionsTrouvees=questionService.findAll();
+		Set<QuestionDTO> questionsTrouveesDTO=new HashSet<>();
+		
+		List<Integer> listeIdQuestionSelect=new ArrayList<>();
+		for (Question question : questions) {
+			listeIdQuestionSelect.add(question.getId());
+		}
+		
+		for (Question q : questionsTrouvees) {
+		  if(!(listeIdQuestionSelect.contains(q.getId()))) {
+			questionsTrouveesDTO.add(new QuestionDTO(q));
+		  }
+		}
+		
+		
+		model.addAttribute("questionsTrouveesDTO", questionsTrouveesDTO);
+		model.addAttribute("BodyMCQ", mcq.getBody());
+		model.addAttribute("idMCQ", id);
+		model.addAttribute("questions", questions);
+
+		// on renvoie le nom de la jsp
+		return "ManagementMCQQuestionsDesigner";
+	}
+	
+	
+	@PostMapping(value = { "/{id}/addQuestion" })    //id du qcm pour lequel nous allons ajouter des questions
+	public String gererQuestionsMcq(@PathVariable("id") int id, Question question, HttpSession session, Model model) {
+//		Set<QuestionDTO> questionsTrouveesDTO=new HashSet<>();
+		User user = (User) session.getAttribute("user");
+
+
+		MCQService mcqService=new MCQService();
+		MCQ mcq=mcqService.searchById(id);
+		
+		mcqService.addQuestion(mcq, question.getId());
+
+		
+
+		// on renvoie le nom de la jsp
+		return "redirect:/ManagementMCQDesigner/"+id+"/questions";
+	}
+	
+	//desinscrire question    /${mcq.id}/sup/${question.id}
+	@GetMapping(value = { "/{id}/sup/{questionId}" })    //id du qcm pour lequel nous allons ajouter des questions
+	public String supQuestionsMcq(@PathVariable("id") int id,@PathVariable("questionId") int questionId, HttpSession session, Model model) {
+//		Set<QuestionDTO> questionsTrouveesDTO=new HashSet<>();
+		User user = (User) session.getAttribute("user");
+
+
+		MCQService mcqService=new MCQService();
+		//id correspond à l'ID du qcm
+		mcqService.deleteQuestion(id, questionId);
+
+		
+
+		// on renvoie le nom de la jsp
+		return "redirect:/ManagementMCQDesigner/"+id+"/questions";
+	
+	}
+	
+	
 	
 	@PostMapping(value = { "/{id}" })    //id du qcm à sauvegarder
 	public String enregistrerMcq(MCQ mcq,@PathVariable("id") int id, Model model) {

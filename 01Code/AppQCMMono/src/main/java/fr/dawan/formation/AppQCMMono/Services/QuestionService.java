@@ -45,11 +45,11 @@ public class QuestionService {
 		
 	}
 
-	public Set<Question> findAll(Question d) {
+	public Set<Question> findAll() {
 		QuestionDAO questionDao = new QuestionDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		Set<Question> questions=questionDao.findAll(Question.class);
 
-
-	return questionDao.findAll(Question.class);
+	return questions;
 }
 
 

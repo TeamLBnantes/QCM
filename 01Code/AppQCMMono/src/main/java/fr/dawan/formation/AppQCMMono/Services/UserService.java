@@ -113,14 +113,7 @@ public class UserService {
 		return u;
 	}
 	
-	public User findById(int id) {
-		UserDAO userDao = new UserDAO(Constantes.PERSISTENCE_UNIT_NAME);
-		User userFound =new User();
-		userFound =userDao.findById(User.class, id);
-		userDao.close();
 
-		return userFound;
-	}
 	
 	
 	

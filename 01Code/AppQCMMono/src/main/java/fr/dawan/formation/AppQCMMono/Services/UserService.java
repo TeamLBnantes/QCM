@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import javax.persistence.NoResultException;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.User;
@@ -12,6 +14,7 @@ import fr.dawan.formation.AppQCMMono.Models.objectBooleanString;
 import fr.dawan.formation.AppQCMMono.Persistence.Constantes;
 import fr.dawan.formation.AppQCMMono.Persistence.UserDAO;
 
+@Service
 public class UserService {
 
 	
@@ -109,5 +112,19 @@ public class UserService {
 		userDao.close();
 		return u;
 	}
+	
+	public User findById(int id) {
+		UserDAO userDao = new UserDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		User userFound =new User();
+		userFound =userDao.findById(User.class, id);
+		userDao.close();
+
+		return userFound;
+	}
+	
+	
+	
+	
+
 	
 }

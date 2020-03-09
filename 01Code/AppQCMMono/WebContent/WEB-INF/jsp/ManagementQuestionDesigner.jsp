@@ -250,6 +250,7 @@
 
 						</div>
 
+
 					</div>
 				</div>
 			</div>
@@ -259,5 +260,11 @@
 
 		<br> <br> <br /> <a href="ManagementQuestionsDesigner">Retour
 			à la liste</a> <br />
+
+<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
+    <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="js/templatemo-script.js"></script>
+
 </body>
 </html>

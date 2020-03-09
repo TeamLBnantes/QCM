@@ -159,8 +159,7 @@ public class ManagementQuestionsDesignerController {
 			questionMaj=questionService.findById(question.getId());
 		}
 		
-		
-		
+
 		questionMaj.setBody(question.getBody());
 		questionMaj.setCommentPostAnswer(question.getCommentPostAnswer());
 		questionMaj.setStatus(question.getStatus());

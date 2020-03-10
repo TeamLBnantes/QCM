@@ -30,7 +30,10 @@
 	<a href="ManagementMCQDesigner">Gestion QCM</a>
 </c:if>
 <br/>
+	<a href="passerQCM">Passer QCM</a>
+<br/>
 
+<br/>
 	<a href="index.jsp">Déconnexion</a>
 </body>
 </html>

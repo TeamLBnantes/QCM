@@ -1,11 +1,14 @@
 package fr.dawan.formation.AppQCMMono.Services;
 
 import java.util.List;
+import java.util.Set;
 
 import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
+import fr.dawan.formation.AppQCMMono.Models.ObjectFiltresMCQ;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.QuestionUsed;
+import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Persistence.Constantes;
 import fr.dawan.formation.AppQCMMono.Persistence.GenericDAO;
 import fr.dawan.formation.AppQCMMono.Persistence.MCQDAO;
@@ -79,6 +82,20 @@ public class MCQService {
 		mcqDao.close();
 		questionDao.close();
 		
+	}
+
+	public Set<MCQ> findAll() {
+		MCQDAO mcqDao=new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		Set<MCQ> mcqs= mcqDao.findAll(MCQ.class);
+		mcqDao.close();
+		return mcqs;
+	}
+
+	public List<MCQ> searchWithFiltre(ObjectFiltresMCQ filtresMCQ, User user) {
+		MCQDAO mcqDao=new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		List<MCQ> mcqs= mcqDao.searchWithFiltre(filtresMCQ, user);
+		mcqDao.close();
+		return mcqs;
 	}
 
 

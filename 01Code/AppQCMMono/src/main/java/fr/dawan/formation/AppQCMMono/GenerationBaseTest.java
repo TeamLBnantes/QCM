@@ -62,7 +62,7 @@ private static final String FOLDER = "C:\\generateurBaseQcm\\";
 			Designer designer=daoDesigner.findById(Designer.class, designerId);
 			daoDesigner.close();
 			
-			question.setTheme(theme);
+			question.setTheme("uml");
 			question.setDesigner(designer);
 
 			questions.add( question);

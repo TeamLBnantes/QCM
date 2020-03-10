@@ -17,8 +17,7 @@ import fr.dawan.formation.AppQCMMono.Enum.Status;
 public class MCQ extends Entitie {
 
 	private String body;
-	@ManyToOne
-	private Theme theme;
+	private String theme;
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	private LocalDateTime createDate;
@@ -43,11 +42,11 @@ public class MCQ extends Entitie {
 		this.body = body;
 	}
 
-	public Theme getTheme() {
+	public String getTheme() {
 		return theme;
 	}
 
-	public void setTheme(Theme theme) {
+	public void setTheme(String theme) {
 		this.theme = theme;
 	}
 
@@ -97,7 +96,7 @@ public class MCQ extends Entitie {
 				+ ", editDate=" + editDate + ", designer=" + designer + "]";
 	}
 
-	public MCQ(String body, Theme theme, Status status, LocalDateTime createDate, LocalDateTime editDate,
+	public MCQ(String body, String theme, Status status, LocalDateTime createDate, LocalDateTime editDate,
 			Designer designer, Forum forum) {
 		super();
 		this.body = body;

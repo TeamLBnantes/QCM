@@ -18,6 +18,18 @@ public class MCQpassed extends Entitie{
 	public void setResult(int result) {
 		this.result = result;
 	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public MCQ getMcq() {
+		return mcq;
+	}
+	public void setMcq(MCQ mcq) {
+		this.mcq = mcq;
+	}
 	
 	
 }

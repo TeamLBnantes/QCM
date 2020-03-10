@@ -48,34 +48,40 @@
                    <div class="templatemo-content-widget white-bg">
             <h2 class="margin-bottom-10">Rechercher des questions</h2>
             <p>ce formulaire va servir à filtre les questions dispo dans le systeme, et qui peuvent donc être ajoutées au QCM</p>
-            <form action="ManagementMCQDesigner/${mcq.id}" class="templatemo-login-form" method="post" >                        <!-- enctype="multipart/form-data" -->
-               <input type="hidden" name="id" value="${mcq.id}" />
+            <form action="ManagementMCQDesigner/${idMCQ}/filtres" class="templatemo-login-form" method="post" >                        <!-- enctype="multipart/form-data" -->
+<%--                <input type="hidden" name="id" value="${mcq.id}" /> --%>
               <div class="row form-group">
                 <div class="col-lg-6 col-md-6 form-group">                  
                     <label for="inputBody">Body</label>
-                    <input type="text" class="form-control" name="body" placeholder="presentation QCM" value="${mcq.body}">      
+                    <input type="text" class="form-control" name="bodyFiltre" placeholder="presentation QCM contient" value="${filtresQuestion.bodyFiltre}">      
                               
                 </div>
                 <div class="col-lg-6 col-md-6 form-group">                  
-                    <label for="inputTheme">Themexxxx</label>
-                    <input type="text" class="form-control" name="themexxxxx" id="inputTheme" placeholder="Theme du QCM" value="${mcq.theme}">                  
-                </div> 
-              </div>
+                    <label for="inputTheme">Theme</label>
+                    <input type="text" class="form-control" name="themeFiltre" placeholder="Theme du QCM contient" value="${filtresQuestion.themeFiltre}">                  
+                </div>  
+<!--               </div>
               <div class="row form-group">
                 <div class="col-lg-6 col-md-6 form-group">                  
                     <label for="inputUsername">xxxxxxxxxxx</label>
                     <input type="text" class="form-control" id="inputUsername" placeholder="Admin">                  
-                </div>
-                <div class="col-lg-6 col-md-6 form-group">                  
-                    <label for="inputEmail">xxxxxxxxxxxxxx</label>
-                    <input type="text" class="form-control" id="inputEmail" placeholder="admin@company.com">                  
-                </div> 
-             </div>       
+                </div> -->
+                    <div class="templatemo-block margin-bottom-5 text-center">
+                    <c:if test="${filtresQuestion.yoursFiltre}">
+                    <input type="checkbox" name="yoursFiltre" id="c1" value="true" checked> 
+                    </c:if> 
+                    <c:if test="${!filtresQuestion.yoursFiltre}">
+                      <input type="checkbox" name="yoursFiltre" id="c1" value="true" > 
+                      </c:if> 
+                      <label for="c1" class="font-weight-400"><span></span> Uniquement Vos Questions</label> 
+                    </div> 
+            </div>      
  
               <div class="form-group text-right">
                 <button type="submit" class="templatemo-blue-button">Rechercher</button>
                 <button type="reset" class="templatemo-white-button">Reset</button>
-              </div>                           
+              </div>  
+               
            </form>
            
       

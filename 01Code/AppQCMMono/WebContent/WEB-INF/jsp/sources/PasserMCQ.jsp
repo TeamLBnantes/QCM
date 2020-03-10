@@ -19,7 +19,22 @@
         
          <!-- debut de la zone du tableau -->
  
+        <div>
+        <p>   mcq id :      ${mcq.id }         </p>
+        <p>   mcq body :      ${mcq.body }          </p>
+        <p>   mcq theme :     ${mcq.theme }           </p>
+        <p>   mcq designer :     ${mcq.designer }           </p>
+        <p>############################### </p>
+        <p>   tarckMcq liste de question used :     ${tarckMcq.listQuestionsUsed }           </p>
+        <p>   tarckMcq nbQuestionsTotal :     ${tarckMcq.nbQuestionsTotal }           </p>
+        <p>   tarckMcq nbQuestionsPassed:     ${tarckMcq.nbQuestionsPassed }           </p>
+        <p>   tarckMcq nbBonnesReponses:    ${tarckMcq.nbBonnesReponses }            </p>
+        <p>   tarckMcq mcqPassed:     ${tarckMcq.mcqPassed }           </p>
         
+        <br/>
+	<a href="passerQCM/${id}/next">question suivante</a>
+<br/>
+        </div>
         
 <!--           <div class="templatemo-flex-row flex-content-row">
 

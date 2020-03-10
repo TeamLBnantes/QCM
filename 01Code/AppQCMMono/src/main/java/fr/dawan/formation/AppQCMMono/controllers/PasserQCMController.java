@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
 import fr.dawan.formation.AppQCMMono.Models.ObjectFiltresMCQ;
+import fr.dawan.formation.AppQCMMono.Models.ObjectPasserMcq;
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Services.MCQService;
 
@@ -66,15 +67,42 @@ public class PasserQCMController {
 	return "PasserMCQListe";
 }
 	
+	//controleur pour lancer le QCM d'ID id
 	@GetMapping(value= {"/{id}/init"})
 	public String lancer(@PathVariable("id") int id, HttpSession session, Model model) {
 		
 		User user = (User)session.getAttribute("user");
+		MCQService mcqService=new MCQService();
+		MCQ mcq=mcqService.searchById(id);
 		
-		
+		ObjectPasserMcq tarckMcq=mcqService.initTrackMcq(mcq, user);
+		session.setAttribute("tarckMcq", tarckMcq);
+		//juste pour vérifier que je le recupère bien dans la session
+		//il faudra penser à la sup à la fin
+		ObjectPasserMcq tarckMcq2=(ObjectPasserMcq)session.getAttribute("tarckMcq");
+		System.out.println(tarckMcq2);
+		model.addAttribute("tarckMcq", tarckMcq2);
+		model.addAttribute("mcq", mcq);
 		// on renvoie le nom de la jsp
 		return "PasserMCQ";
 	}
 	
+	
+	@GetMapping(value= {"/{id}/next"})
+	public String suivante(@PathVariable("id") int id, HttpSession session, Model model) {
+		
+		User user = (User)session.getAttribute("user");
+		MCQService mcqService=new MCQService();
+		MCQ mcq=mcqService.searchById(id);
+		
+
+
+		ObjectPasserMcq tarckMcq2=(ObjectPasserMcq)session.getAttribute("tarckMcq");
+		System.out.println(tarckMcq2);
+		model.addAttribute("tarckMcq", tarckMcq2);
+		//model.addAttribute("mcq", mcq);
+		// on renvoie le nom de la jsp
+		return "PasserMCQ";
+	}
 	
 }

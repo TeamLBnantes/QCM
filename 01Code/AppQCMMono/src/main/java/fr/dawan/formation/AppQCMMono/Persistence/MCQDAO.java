@@ -153,4 +153,18 @@ public class MCQDAO extends GenericDAO<MCQ> implements DAOMCQInterface {
 		}
 		return mcqs;
 	}
+
+
+	public List<QuestionUsed> findQuestionUsedbyMcq(MCQ mcq) {
+		// TODO Auto-generated method stub
+		String requete = "select q from "  
+				+ QuestionUsed.class.getName() 
+				+ " q where ( q.mcq= :mcq )";
+		
+		// JPQL (ou HQL)
+		return super.entityManager
+				.createQuery(requete, QuestionUsed.class)
+				.setParameter("mcq", mcq)
+				.getResultList();
+	}
 }

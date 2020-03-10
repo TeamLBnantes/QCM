@@ -1,11 +1,14 @@
 package fr.dawan.formation.AppQCMMono.Services;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
+import fr.dawan.formation.AppQCMMono.Models.MCQpassed;
 import fr.dawan.formation.AppQCMMono.Models.ObjectFiltresMCQ;
+import fr.dawan.formation.AppQCMMono.Models.ObjectPasserMcq;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.QuestionUsed;
 import fr.dawan.formation.AppQCMMono.Models.User;
@@ -96,6 +99,26 @@ public class MCQService {
 		List<MCQ> mcqs= mcqDao.searchWithFiltre(filtresMCQ, user);
 		mcqDao.close();
 		return mcqs;
+	}
+
+	public ObjectPasserMcq initTrackMcq(MCQ mcq, User user) {
+		MCQDAO mcqDao=new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		ObjectPasserMcq trackMcq=new ObjectPasserMcq();
+		trackMcq.setListQuestionsUsed(mcqDao.findQuestionUsedbyMcq(mcq));
+		mcqDao.close();
+		trackMcq.setNbQuestionsTotal(trackMcq.getListQuestionsUsed().size());
+		//mélange de la liste des question
+		Collections.shuffle(trackMcq.getListQuestionsUsed());
+		//fin du mélange
+		trackMcq.setNbQuestionsPassed(0);
+		trackMcq.setNbBonnesReponses(0);
+		GenericDAO<MCQpassed> mcqPassedDao=new GenericDAO<>(Constantes.PERSISTENCE_UNIT_NAME);
+		MCQpassed mcqPassed=new MCQpassed(user, mcq);
+		mcqPassed=mcqPassedDao.saveOrUpdate(mcqPassed);
+		mcqPassedDao.close();
+		trackMcq.setMcqPassed(mcqPassed);
+		
+		return trackMcq;
 	}
 
 

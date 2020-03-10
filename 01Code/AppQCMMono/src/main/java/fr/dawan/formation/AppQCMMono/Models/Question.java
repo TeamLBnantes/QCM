@@ -28,8 +28,8 @@ public class Question extends Entitie{
 	private String commentPostAnswer;
 	private String help;
 	
-	@ManyToOne
-	private Theme theme;
+	
+	private String theme;
 	
 	@OneToOne
 	private Multimedia multimedia;
@@ -51,16 +51,19 @@ public class Question extends Entitie{
 	private Set<QuestionUsed> questionUseds;
 	
 	
-	public Theme getTheme() {
+	
+	
+	
+	public String getTheme() {
 		return theme;
 	}
 
 
-	public void setTheme(Theme theme) {
+	public void setTheme(String theme) {
 		this.theme = theme;
 	}
-	
-	
+
+
 	public void setAnswers(Set<Answer> answers) {
 		this.answers = answers;
 	}

@@ -10,9 +10,6 @@ public class Theme extends Entitie{
 
 	
 	private String value;
-	
-	@OneToMany (mappedBy = "theme")
-	private Set<Question> question;
 
 	public String getValue() {
 		return value;
@@ -21,15 +18,4 @@ public class Theme extends Entitie{
 	public void setValue(String value) {
 		this.value = value;
 	}
-
-	public Set<Question> getQuestion() {
-		return question;
-	}
-
-	public void setQuestion(Set<Question> question) {
-		this.question = question;
-	}
-	
-	
-	
 }

@@ -42,14 +42,12 @@ public class QuestionDAO extends GenericDAO<Question> implements DAOQuestionInte
 		List<Question> questions=new ArrayList<Question>();
 		String requete = "select f from "  
 				+ Question.class.getName() 
-				+ " f join fetch f.theme t"
-				+ " where t.value = :theme";
-				//+ " f where f.value = theme";
+				+ " f where f.theme like :theme";
 		
 		// JPQL (ou HQL)
 		questions = super.entityManager
 				.createQuery(requete, Question.class)
-				.setParameter("theme", theme)
+				.setParameter("theme", "%"+theme+"%")
 				.getResultList();
 		System.out.println("question trouvees : "+questions);
 		return questions;

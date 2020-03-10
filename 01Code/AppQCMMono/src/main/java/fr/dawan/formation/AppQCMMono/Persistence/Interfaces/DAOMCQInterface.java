@@ -12,7 +12,7 @@ public interface DAOMCQInterface {
 
 
 
-	public List<MCQ> searchByTheme (Theme theme);
+	public List<MCQ> searchByTheme (String theme);
 	public List<MCQ> searchByStatus (Status status);
 	public List<MCQ> searchByKWBody (String kw);
 	public List<MCQ> searchByDesigner (Designer designer);

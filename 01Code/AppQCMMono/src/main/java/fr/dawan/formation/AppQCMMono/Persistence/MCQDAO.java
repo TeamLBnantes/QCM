@@ -17,17 +17,17 @@ public class MCQDAO extends GenericDAO<MCQ> implements DAOMCQInterface {
 	
 	
 	@Override
-	public List<MCQ> searchByTheme(Theme theme) {
+	public List<MCQ> searchByTheme(String theme) {
 		
 		String requete = "select f from "  
 				+ MCQ.class.getName() 
-				+ " where f.theme = :theme";
+				+ " f where f.theme like :theme";
 
 		
 		// JPQL (ou HQL)
 		return super.entityManager
 				.createQuery(requete, MCQ.class)
-				.setParameter("theme", theme)
+				.setParameter("theme", "%"+theme+"%")
 				.getResultList();
 		
 	}

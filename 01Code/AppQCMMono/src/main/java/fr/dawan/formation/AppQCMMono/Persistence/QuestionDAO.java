@@ -2,10 +2,12 @@ package fr.dawan.formation.AppQCMMono.Persistence;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import fr.dawan.formation.AppQCMMono.Enum.Status;
 import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
+import fr.dawan.formation.AppQCMMono.Models.ObjectFiltresQuestion;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Persistence.Interfaces.DAOQuestionInterface;
 
@@ -107,8 +109,117 @@ public class QuestionDAO extends GenericDAO<Question> implements DAOQuestionInte
 		return questions;
 	}
 
+	public List<Question> findWithFiltre(ObjectFiltresQuestion filtresQuestion, Designer designer) {
+		List<Question> questions=new ArrayList<Question>();
+		int filtre=0;
+		String requete="";
 
-	
+		if(filtresQuestion.isYoursFiltre()) filtre+=100;      //on filtre par ce designer
+		if(filtresQuestion.getBodyFiltre().length()>0) 	filtre+=10;	  // on filtre par body contient
+		if(filtresQuestion.getThemeFiltre().length()>0)	filtre+=1;  //on filtre par theme contient
+		
+		switch (filtre) {
+		case 0: // aucun filtre, on renvois tout
+			requete = "select f from "  
+					+ Question.class.getName()+" f";
+			questions = super.entityManager
+					.createQuery(requete, Question.class)
+//					.setParameter("designer", designer)
+//					.setParameter("body", "%"+filtresQuestion.getBodyFiltre()+"%")
+//					.setParameter("theme","%"+ filtresQuestion.getThemeFiltre()+"%")
+					.getResultList();
+			break;
+		case 1: // on ne filtre que sur le theme
+			requete = "select f from "  
+					+ Question.class.getName() 
+					+ " f where f.theme LIKE :theme";
+			questions = super.entityManager
+					.createQuery(requete, Question.class)
+//					.setParameter("designer", designer)
+//					.setParameter("body", "%"+filtresQuestion.getBodyFiltre()+"%")
+					.setParameter("theme","%"+ filtresQuestion.getThemeFiltre()+"%")
+					.getResultList();
+			break;
+		case 10: // on ne filtre que sur le body
+			requete = "select f from "  
+					+ Question.class.getName() 
+					+ " f where f.body LIKE :body";
+			questions = super.entityManager
+					.createQuery(requete, Question.class)
+//					.setParameter("designer", designer)
+					.setParameter("body", "%"+filtresQuestion.getBodyFiltre()+"%")
+//					.setParameter("theme","%"+ filtresQuestion.getThemeFiltre()+"%")
+					.getResultList();
+			break;	
+		case 11: // on ne filtre que sur le body
+			requete = "select f from "  
+					+ Question.class.getName() 
+					+ " f where f.body LIKE :body and f.theme LIKE :theme";
+			questions = super.entityManager
+					.createQuery(requete, Question.class)
+//					.setParameter("designer", designer)
+					.setParameter("body", "%"+filtresQuestion.getBodyFiltre()+"%")
+					.setParameter("theme","%"+ filtresQuestion.getThemeFiltre()+"%")
+					.getResultList();
+			break;	
+		case 100: // on ne filtre que sur le designer
+			requete = "select f from "  
+					+ Question.class.getName() 
+					+ " f where f.designer = :designer";
+			questions = super.entityManager
+					.createQuery(requete, Question.class)
+					.setParameter("designer", designer)
+//					.setParameter("body", "%"+filtresQuestion.getBodyFiltre()+"%")
+//					.setParameter("theme","%"+ filtresQuestion.getThemeFiltre()+"%")
+					.getResultList();
+			break;	
+		case 101: // on ne filtre que sur le designer
+			requete = "select f from "  
+					+ Question.class.getName() 
+					+ " f where f.designer = :designer and f.theme LIKE :theme";
+			questions = super.entityManager
+					.createQuery(requete, Question.class)
+					.setParameter("designer", designer)
+//					.setParameter("body", "%"+filtresQuestion.getBodyFiltre()+"%")
+					.setParameter("theme","%"+ filtresQuestion.getThemeFiltre()+"%")
+					.getResultList();
+			break;	
+		case 110: // on ne filtre que sur le designer
+			requete = "select f from "  
+					+ Question.class.getName() 
+					+ " f where f.designer = :designer and f.body LIKE :body";
+			questions = super.entityManager
+					.createQuery(requete, Question.class)
+					.setParameter("designer", designer)
+					.setParameter("body", "%"+filtresQuestion.getBodyFiltre()+"%")
+//					.setParameter("theme","%"+ filtresQuestion.getThemeFiltre()+"%")
+					.getResultList();
+			break;	
+		case 111: // on ne filtre que sur le designer
+			requete = "select f from "  
+					+ Question.class.getName() 
+					+ " f where f.designer = :designer and f.body LIKE :body and f.theme LIKE :theme";
+			questions = super.entityManager
+					.createQuery(requete, Question.class)
+					.setParameter("designer", designer)
+					.setParameter("body", "%"+filtresQuestion.getBodyFiltre()+"%")
+					.setParameter("theme","%"+ filtresQuestion.getThemeFiltre()+"%")
+					.getResultList();
+			break;			
+		default:
+			break;
+		}
+		
+
+		
+		return questions;
+		
+		
+
+	}
+			
+
+
 	
 	
 }

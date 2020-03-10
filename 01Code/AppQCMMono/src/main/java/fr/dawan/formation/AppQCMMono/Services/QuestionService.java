@@ -7,6 +7,7 @@ import java.util.Set;
 import fr.dawan.formation.AppQCMMono.Models.Answer;
 import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
+import fr.dawan.formation.AppQCMMono.Models.ObjectFiltresQuestion;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Persistence.AnswerDAO;
@@ -45,11 +46,11 @@ public class QuestionService {
 		
 	}
 
-	public Set<Question> findAll(Question d) {
+	public Set<Question> findAll() {
 		QuestionDAO questionDao = new QuestionDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		Set<Question> questions=questionDao.findAll(Question.class);
 
-
-	return questionDao.findAll(Question.class);
+	return questions;
 }
 
 
@@ -84,6 +85,17 @@ public class QuestionService {
 		QuestionDAO questionDao = new QuestionDAO(Constantes.PERSISTENCE_UNIT_NAME);
 		List<Question> questions=questionDao.searchByMcq(mcq);
 		questionDao.close();
+		return questions;
+	}
+
+
+
+
+
+	public List<Question> searchWithFiltre(ObjectFiltresQuestion filtresQuestion, Designer designer) {
+		QuestionDAO questionDao = new QuestionDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		List<Question> questions=questionDao.findWithFiltre(filtresQuestion,designer);
+		
 		return questions;
 	}
 

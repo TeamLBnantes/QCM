@@ -6,6 +6,7 @@ import fr.dawan.formation.AppQCMMono.Enum.Status;
 import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
 import fr.dawan.formation.AppQCMMono.Models.Question;
+import fr.dawan.formation.AppQCMMono.Models.QuestionUsed;
 import fr.dawan.formation.AppQCMMono.Models.Theme;
 import fr.dawan.formation.AppQCMMono.Persistence.Interfaces.DAOMCQInterface;
 
@@ -73,4 +74,20 @@ public class MCQDAO extends GenericDAO<MCQ> implements DAOMCQInterface {
 				.getResultList();
 	}
 //extends GenericDAO<Question> implements DAOQuestionInterface
+
+
+	public QuestionUsed findQuestionUsedbyMcqAndQuestion(MCQ mcq, Question question) {
+		// TODO Auto-generated method stub
+		String requete = "select q from "  
+				+ QuestionUsed.class.getName() 
+				+ " q where ( q.question = :question and q.mcq= :mcq )";
+		
+		// JPQL (ou HQL)
+		return super.entityManager
+				.createQuery(requete, QuestionUsed.class)
+				.setParameter("question", question)
+				.setParameter("mcq", mcq)
+				.getSingleResult();
+
+	}
 }

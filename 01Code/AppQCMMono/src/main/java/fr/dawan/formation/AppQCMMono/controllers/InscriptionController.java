@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.User;
-import fr.dawan.formation.AppQCMMono.Models.objectBooleanString;
+import fr.dawan.formation.AppQCMMono.Models.SubscribeValidator;
 import fr.dawan.formation.AppQCMMono.Services.DesignerService;
 import fr.dawan.formation.AppQCMMono.Services.UserService;
 
@@ -30,21 +30,21 @@ public class InscriptionController {
 			@RequestParam("confirmPassword") String confirmPassword,
 			@RequestParam("confirmEmail") String confirmEmail ) {
 		
-		objectBooleanString createResult;
+		SubscribeValidator subsVal;
 		UserService userService = new UserService();
 		
 			
-			createResult=userService.createUser(user, confirmPassword, confirmEmail);
+			subsVal=userService.createUser(user, confirmPassword, confirmEmail);
 			
 			
 			
 			//possible de tester la valeur de retour de createUser
 			// en fonction, si l'utilisateur n'a pas été cérer, possible de renvoyer sur eecran de création en disant pourquoi
-			if (createResult.isAnswer()) {
+			if (subsVal.isValidation()) {
 				model.addAttribute("email", user.getEmail());
 				return "login";
 			}else {
-				model.addAttribute("message", createResult.getComment());
+				model.addAttribute("message", subsVal.getComment());
 				model.addAttribute(user);
 				return "inscription";
 			}

@@ -67,8 +67,8 @@
   <body class="text-center">
 	<input type="hidden" name="returnUrl" value="${param.returnUrl}">
     <form class="form-signin" action="login" method="post">
-  <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg"
-			alt="" width="72" height="72">
+  <img class="mb-4" src="resources/images/QuizizSkillz.png"
+			alt=""  height="100">
   <h1 class="h3 mb-3 font-weight-normal"> ${message}  Authentification</h1>
   <label for="inputEmail" class="sr-only">Email address</label>
   <input type="email" name="email" id="inputEmail" value="${email}" class="form-control"

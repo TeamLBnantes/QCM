@@ -27,6 +27,8 @@
     <link href="resources/css/font-awesome.min.css" rel="stylesheet">
     <link href="resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="resources/css/templatemo-style.css" rel="stylesheet">
+     
+    
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -65,7 +67,8 @@
     
     <!-- JS -->
     <script type="text/javascript" src="resources/js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
-    <script type="text/javascript" src="resources/js/templatemo-script.js"></script>      <!-- Templatemo Script -->
+    <script type="text/javascript" src="resources/js/templatemo-script.js"></script> 
+    <script src="https://kit.fontawesome.com/ee94e8f5a2.js" crossorigin="anonymous"></script>     <!-- Templatemo Script -->
     <script>
       $(document).ready(function(){
         // Content widget with background image

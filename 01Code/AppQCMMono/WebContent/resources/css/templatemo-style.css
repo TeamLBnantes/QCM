@@ -302,6 +302,9 @@ footer { padding: 15px; }
 	border-color: #E9E8E8;
 }
 .table { margin-bottom: 0; }
+table-answer {
+	background-color: #3275BB;
+}
 .table>tbody>tr>td { padding: 10px 15px; }
 .table>thead>tr>td { padding: 15px; }
 .media { margin-top: 0; }
@@ -372,6 +375,11 @@ footer { padding: 15px; }
 }
 .templatemo-blue-button {
 	background-color: #39ADB4;
+	border: none;	
+	color: white;	
+}
+.templatemo-red-button {
+	background-color: #ff4a4a;
 	border: none;	
 	color: white;	
 }

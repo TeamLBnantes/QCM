@@ -1,6 +1,5 @@
 package fr.dawan.formation.AppQCMMono.controllers;
 
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -35,44 +34,61 @@ public class ManagementMCQDesignerController {
 
 		User user = (User) session.getAttribute("user");
 
-		MCQService mcqService=new MCQService();
-		List<MCQ> mcqs=mcqService.searchByDesigner(user.getDesigner());
+		MCQService mcqService = new MCQService();
+		List<MCQ> mcqs = mcqService.searchByDesigner(user.getDesigner());
 
-		//for (Question question : questions) {
-		//	System.out.println(question);
-		//}
+		// on récupère l'attribut "user" dans la session
+		// s'il existe, on lui dit bonjour, en le passant dans le modèle
+		
+		/*
+		if (user != null) {
+			model.addAttribute("message", "Bonjour " + user.getFirstName());
+		}
+
+		boolean isDesigner = false;
+		if (user.getDesigner() != null) {
+			isDesigner = true;
+		}
+		model.addAttribute("isNotDesigner", isDesigner);
+		
+		*/
+
+		// for (Question question : questions) {
+		// System.out.println(question);
+		// }
 		model.addAttribute("newMcq", false);
 		model.addAttribute("mcqs", mcqs);
-		//model.addAttribute("enumStatus", Status.values());
+		// model.addAttribute("enumStatus", Status.values());
 		// on renvoie le nom de la jsp
 		return "MCQDesignerListe";
 	}
-	
-	//     /delete/${mcq.id}
-	//TODO : attention, je ne met pas de secours, un clique et pas de retour arrière. Il faudra demander une confirmation
+
+	// /delete/${mcq.id}
+	// TODO : attention, je ne met pas de secours, un clique et pas de retour
+	// arrière. Il faudra demander une confirmation
 	@GetMapping("/delete/{id}")
 	public String deleteQuestion(@PathVariable("id") int id, HttpSession session, Model model) {
-		
-		MCQService mcqService=new MCQService();
+
+		MCQService mcqService = new MCQService();
 		mcqService.deleteById(id);
 
 		// on renvoie le nom de la jsp
 		return "redirect:/ManagementMCQDesigner";
 	}
-	
-	
-	@GetMapping(value = { "/{id}" })    //id du qcm sur lequel le designer souhaite travailler. on va l'afficher
+
+	@GetMapping(value = { "/{id}" }) // id du qcm sur lequel le designer souhaite travailler. on va l'afficher
 	public String afficherMcq(@PathVariable("id") int id, HttpSession session, Model model) {
-		
-		//TODO : il faudra securiser le fait que seul le proprétaire du QCM peu le modifier
-		// donc vérifier qu'il est bien le propriétaire (et que c'est pas un petit malin qui a ecrit l'adresse dans la barre de nav 
+
+		// TODO : il faudra securiser le fait que seul le proprétaire du QCM peu le
+		// modifier
+		// donc vérifier qu'il est bien le propriétaire (et que c'est pas un petit malin
+		// qui a ecrit l'adresse dans la barre de nav
 		User user = (User) session.getAttribute("user");
 
-		
-		MCQService mcqService=new MCQService();
-		MCQ mcq=mcqService.searchById(id);
-		QuestionService questionService=new QuestionService();
-		List<Question> questions=questionService.searchByMcq(mcq);
+		MCQService mcqService = new MCQService();
+		MCQ mcq = mcqService.searchById(id);
+		QuestionService questionService = new QuestionService();
+		List<Question> questions = questionService.searchByMcq(mcq);
 
 		model.addAttribute("mcq", mcq);
 		model.addAttribute("questions", questions);
@@ -80,41 +96,38 @@ public class ManagementMCQDesignerController {
 		// on renvoie le nom de la jsp
 		return "ManagementMCQDesigner";
 	}
-	
-	@PostMapping(value = { "/{id}" })    //id du qcm à sauvegarder
-	public String enregistrerMcq(MCQ mcq,@PathVariable("id") int id, Model model) {
-		
-		MCQService mcqService=new MCQService();
-		MCQ mcqUpdate=mcqService.searchById(id);
+
+	@PostMapping(value = { "/{id}" }) // id du qcm à sauvegarder
+	public String enregistrerMcq(MCQ mcq, @PathVariable("id") int id, Model model) {
+
+		MCQService mcqService = new MCQService();
+		MCQ mcqUpdate = mcqService.searchById(id);
 		mcqUpdate.setBody(mcq.getBody());
-		//mcqUpdate.setTheme(mcq.getTheme());
+		// mcqUpdate.setTheme(mcq.getTheme());
 		mcqService.saveOrUpdate(mcqUpdate);
-	
 
 		// on renvoie le nom de la jsp
-		return "redirect:/ManagementMCQDesigner/"+id;
+		return "redirect:/ManagementMCQDesigner/" + id;
 	}
-	
-	
-	
-	@GetMapping(value = { "/new" })    
+
+	@GetMapping(value = { "/new" })
 	public String renseignerNouveauMcq(HttpSession session, Model model) {
 
 		User user = (User) session.getAttribute("user");
 
-		MCQService mcqService=new MCQService();
-		List<MCQ> mcqs=mcqService.searchByDesigner(user.getDesigner());
-		
-		//for (Question question : questions) {
-		//	System.out.println(question);
-		//}
+		MCQService mcqService = new MCQService();
+		List<MCQ> mcqs = mcqService.searchByDesigner(user.getDesigner());
+
+		// for (Question question : questions) {
+		// System.out.println(question);
+		// }
 		model.addAttribute("newMcq", true);
 		model.addAttribute("mcqs", mcqs);
-		//model.addAttribute("enumStatus", Status.values());
+		// model.addAttribute("enumStatus", Status.values());
 		// on renvoie le nom de la jsp
 		return "MCQDesignerListe";
 	}
-	
+
 //	@GetMapping(value = { "/newResponse/{id}" })    //id de la question à cibler
 //	public String renseignerNouvelleReponse(@PathVariable("id") int id, HttpSession session, Model model) {
 //
@@ -134,7 +147,7 @@ public class ManagementMCQDesignerController {
 //		// on renvoie le nom de la jsp
 //		return "ManagementQuestionDesigner";
 //	}
-	
+
 //	@GetMapping(value = { "/updateResponse/{idQuestion}/{idAnswer}" })    //id de la reponse à cibler
 //	public String majAffichageReponse(
 //				@PathVariable("idQuestion") int idQuestion, 
@@ -159,23 +172,20 @@ public class ManagementMCQDesignerController {
 //		// on renvoie le nom de la jsp
 //		return "ManagementQuestionDesigner";
 //	}
-	
-	//////enregistrement du nouveau qcm
-	//     createMCQ
+
+	////// enregistrement du nouveau qcm
+	// createMCQ
 	@PostMapping("createMCQ")
 	public String createMcq(MCQ mcq, HttpSession session, Model model) {
-		
+
 		User user = (User) session.getAttribute("user");
-		MCQService mcqService=new MCQService();
+		MCQService mcqService = new MCQService();
 		mcq.setDesigner(user.getDesigner());
 		mcqService.create(mcq);
-		
+
 		return "redirect:/ManagementMCQDesigner";
 	}
-	
-	
-	
-	
+
 //	@PostMapping("updateQuestion")
 //	public String updateQuestion(Question question, HttpSession session, Model model) {
 //		
@@ -220,9 +230,7 @@ public class ManagementMCQDesignerController {
 //		// on renvoie le nom de la jsp
 //		return "ManagementQuestionDesigner";
 //	}
-	
 
-	
 //	@PostMapping("updateAnswer/{idQuestion}")      //c'est ici l'id de la question liée
 //	public String updateAnswer(
 //				Answer answer, 
@@ -260,7 +268,7 @@ public class ManagementMCQDesignerController {
 //	}
 //	
 //	//    deleteResponse/${question.id}/${answer.id}
-	
+
 //	@GetMapping(value = { "deleteResponse/{idQuestion}/{idAnswer}" })    //id de la reponse à cibler
 //	public String deleteReponse(
 //				@PathVariable("idQuestion") int idQuestion, 
@@ -307,7 +315,5 @@ public class ManagementMCQDesignerController {
 //		// on renvoie le nom de la jsp
 //		return "ManagementQuestionDesigner";
 //	}
-	
-	
-	
+
 }

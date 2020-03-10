@@ -14,71 +14,47 @@
 			%>" />
 			
 <!-- mise en forme via bootstrap -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700' rel='stylesheet' type='text/css'>
+    <link href="resources/css/font-awesome.min.css" rel="stylesheet">
+    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/css/templatemo-style.css" rel="stylesheet">
+    
+    
 <title>Management Question by Designer</title>
 </head>
 <body>
-<div class="container">
-<h3>Gestion des Questions</h3> <b><p align="right">${sessionScope.user.getFirstName()} (<a href="login/out">Déconnexion</a>)</p></b><br /><br />
-</div>
+<div class="templatemo-flex-row">
+      <div class="templatemo-sidebar">    <!--div barre de navigation de gauche -->
+       
+       		<%@ include file='sources/navigateur.jsp' %>
+       
+      </div> <!--div de fin barre de navigation du haut -->
+      <!-- Main content --> 
+      <div class="templatemo-content col-1 light-gray-bg">
+        <div class="templatemo-top-nav-container"> <!--div barre de navigation du haut -->
 
-<!-- Formulaire de recherche -->
+			<%@ include file='sources/barreNavigation.jsp' %>
 
-<div class="container">
-<form action="ManagementQuestionsDesigner/search" method="post">
-<table>
-<tr>
-<td>Mot clé: </td>
-<td><input type="text" name="motCle" /></td>
-<td><button type="submit" class="btn btn-dark" name="action" value="chercher">Chercher</button></td>
-
-</table>
-</form>
-<table>
-<td>     --------------------------  </td>
-
-<td><a href="ManagementQuestionsDesigner/new">
-<button type="button" class="btn btn-success" name="action" value="chercher">Creer Question</button></td>
-
-</tr>
-</table>
-</div><br /><br />
-
-
-
-<!-- Formulaire d'affichage des Questions -->
-
-<div class="container">
-<table class="table">
- <thead class="thead-dark">
-<tr>
-<th scope="col">body</th>
-<th scope="col">status</th>
-<th scope="col">theme</th>
-<th scope="col">commentPostAnswer</th>
-<th scope="col">help</th>
-</tr>
-</thead>
-<c:forEach var="question" items="${questions}">
-<tr style = "background-color:gainsboro">
-<td>${question.body}</td>
-<td>${question.status}</td>
-<td>${question.theme}</td>
-<td><a href="ManagementQuestionsDesigner/${question.id}"><button type="button" class="btn btn-success">Modifier</button></a>  <a href="ManagementQuestionsDesigner/delete/${question.id}"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
-</tr>
-<c:forEach var="answer" items="${question.answers}">
-<tr style = "background-color:yellow"><th style = "background-color:yellow" >
-<td>${answer.body}</td>
-<td>${answer.expectedAnswer}</td>
-</th></tr>
-
-</c:forEach>
-</c:forEach>
-</table>
-
-</div>
-
-<a href="home">home</a><br>
-</body>
+        </div>   <!-- fin de la div barre navigation du haut -->
+        <div class="templatemo-content-container"> <!--div zonne de travail principale  -->
+                
+            <%@ include file='sources/QuestionsDesignerListe.jsp' %>
+       
+        </div>  <!-- fin de la div zone de travail principale -->
+      </div>  <!-- fin de la div partie gauche de la page -->
+   </div> 
+    
+    <!-- JS -->
+    <script type="text/javascript" src="resources/js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
+    <script type="text/javascript" src="resources/js/templatemo-script.js"></script> 
+    <script src="https://kit.fontawesome.com/ee94e8f5a2.js" crossorigin="anonymous"></script>     <!-- Templatemo Script -->
+    <script>
+      $(document).ready(function(){
+        // Content widget with background image
+        var imageUrl = $('img.content-bg-img').attr('src');
+        $('.templatemo-content-img-bg').css('background-image', 'url(' + imageUrl + ')');
+        $('img.content-bg-img').hide();        
+      });
+    </script>
+  </body>
 </html>

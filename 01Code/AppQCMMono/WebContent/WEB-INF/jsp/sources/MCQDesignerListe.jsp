@@ -62,7 +62,7 @@ Bienvenu dans la gestion des vos QCM
 </c:if>
 <c:if test="${!newMcq}">
 <a href="ManagementMCQDesigner/new">
-<button type="button" class="btn btn-success" name="action" value="chercher">Creer QCM</button>
+<button type="button" class="templatemo-blue-button" name="action" value="chercher">Creer QCM</button>
 
 
  </c:if>
@@ -84,12 +84,13 @@ Bienvenu dans la gestion des vos QCM
 <th scope="col">theme</th>
 </thead>
 <c:forEach var="qcm" items="${mcqs}">
-<tr style = "background-color:gainsboro">
+<tr>
 <td>${qcm.body}</td>
 <td>${qcm.theme}</td>
 <td>${qcm.status}</td>
 <c:if test="${!newMcq}">
-<td><a href="ManagementMCQDesigner/${qcm.id}"><button type="button" class="btn btn-success">Modifier</button></a>  <a href="ManagementMCQDesigner/delete/${qcm.id}"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
+<td><a href="ManagementMCQDesigner/${qcm.id}"><button type="button" class="templatemo-blue-button"><i class="far fa-edit"></i></button></a> 
+<a href="ManagementMCQDesigner/delete/${qcm.id}"><button type="button" class="templatemo-white-button"><i class="far fa-trash-alt" style="color:#ff4a4a"></i></button></a></td>
 </c:if>
 </tr>
 

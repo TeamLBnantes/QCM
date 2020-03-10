@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.User;
-import fr.dawan.formation.AppQCMMono.Models.objectBooleanString;
+import fr.dawan.formation.AppQCMMono.Models.SubscribeValidator;
 import fr.dawan.formation.AppQCMMono.Persistence.Constantes;
 import fr.dawan.formation.AppQCMMono.Persistence.UserDAO;
 
@@ -52,22 +52,22 @@ public class UserService {
 		return user;
 	}
 
-	public objectBooleanString createUser(User user, String confirmPassword, String confirmEmail) {
+	public SubscribeValidator createUser(User user, String confirmPassword, String confirmEmail) {
 		UserDAO userDao = new UserDAO(Constantes.PERSISTENCE_UNIT_NAME);
-		objectBooleanString objReturn=new objectBooleanString();
-		objReturn.setAnswer(false);
+		SubscribeValidator subsVal=new SubscribeValidator();
+		subsVal.setValidation(false);
 		
 		
 		if (userDao.searchByEmail(user.getEmail())!=null) {
-			objReturn.setComment("l'utilisateur existe déjà");
+			subsVal.setComment("l'utilisateur existe déjà");
 		} else if (user.getFirstName()==""||user.getFirstName().length()<=1) {
-				objReturn.setComment("Prénom invalide");
+				subsVal.setComment("Prénom invalide");
 		}else if(user.getLastName()==""||user.getLastName().length()<=1) {
-				objReturn.setComment("Nom invalide");			
+				subsVal.setComment("Nom invalide");			
 		}else if(!(user.getPassword().equals(confirmPassword))) {
-			objReturn.setComment("Confirmation du mot de passe non conforme");
+			subsVal.setComment("Confirmation du mot de passe non conforme");
 		}else if(!(user.getEmail().equals(confirmEmail))){
-			objReturn.setComment("Confirmation de l'Email non conforme");	
+			subsVal.setComment("Confirmation de l'Email non conforme");	
 			
 		
 		}else {
@@ -76,10 +76,10 @@ public class UserService {
 			user.setPassword(pwd);
 			user.setSignInDate(LocalDateTime.now());
 			userDao.saveOrUpdate(user);
-			objReturn.setAnswer(true);
+			subsVal.setValidation(true);
 		}
 		userDao.close();
-		return objReturn;
+		return subsVal;
 	}
 
 	public void saveOrUpdate(User user) {
@@ -113,14 +113,7 @@ public class UserService {
 		return u;
 	}
 	
-	public User findById(int id) {
-		UserDAO userDao = new UserDAO(Constantes.PERSISTENCE_UNIT_NAME);
-		User userFound =new User();
-		userFound =userDao.findById(User.class, id);
-		userDao.close();
 
-		return userFound;
-	}
 	
 	
 	

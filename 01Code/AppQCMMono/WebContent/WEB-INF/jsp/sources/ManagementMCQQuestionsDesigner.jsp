@@ -80,9 +80,19 @@
               <div class="form-group text-right">
                 <button type="submit" class="templatemo-blue-button">Rechercher</button>
                 <button type="reset" class="templatemo-white-button">Reset</button>
+         </form>
+         <!-- un petit form, juste pour le bouton re-init recherche -->
+         <form action="ManagementMCQDesigner/${idMCQ}/filtres" class="templatemo-login-form" method="post" >
+          <input type="hidden" class="form-control" name="bodyFiltre" value="">
+          <input type="hidden" class="form-control" name="themeFiltre" value="">
+          <input type="hidden" class="form-control" name="yoursFiltre" value="false">
+                        <div class="form-group text-left"> 
+                <button type="submit" class="templatemo-edit-btn">re-Initialiser la liste</button>
+                		</div> 
+         </form>
               </div>  
                
-           </form>
+<!--            </form> -->
            
       
 <!-- tableau affichage des questions dispo-->     
@@ -109,6 +119,17 @@
                 <c:forEach var="qDTO" items="${questionsTrouveesDTO}">
                   <tr>
                   <form action="ManagementMCQDesigner/${idMCQ}/addQuestion" class="templatemo-login-form" method="post" >
+                  			<!-- je fournis les info du filtre pour le retour de la selection d'une question -->
+                            <input type="hidden" class="form-control" name="bodyFiltre" value="${filtresQuestion.bodyFiltre}">
+         					 <input type="hidden" class="form-control" name="themeFiltre" value="${filtresQuestion.themeFiltre}">
+         					 <c:if test="${filtresQuestion.yoursFiltre}">
+                    			<input type="hidden" name="yoursFiltre"  value="true" > 
+                    		</c:if> 
+                    		<c:if test="${!filtresQuestion.yoursFiltre}">
+                     			 <input type="hidden" name="yoursFiltre"  value="false" > 
+                      		</c:if> 
+                  			<!-- info recup par le controleur -->
+                  
                     <td>${qDTO.question.id}</td>
                      <td width="30px"><!-- <div class="margin-right-15 templatemo-inline-block">	 -->
                       		<input type="hidden" name="id"  value="${qDTO.question.id}" >
@@ -141,7 +162,7 @@
 <!--           <div class="templatemo-flex-row flex-content-row">
 
           <div class="pagination-wrap"> -->
-            <ul class="pagination">
+<!--             <ul class="pagination">
               <li><a href="#">1</a></li>
               <li><a href="#">2</a></li>
               <li class="active"><a href="#">3 <span class="sr-only">(current)</span></a></li>
@@ -152,7 +173,7 @@
                   <span aria-hidden="true"><i class="fa fa-play"></i></span>
                 </a>
               </li>
-            </ul>
+            </ul> -->
          <!--  </div>       -->    
           <footer class="text-right">
                       <p>Copyright &copy; 2084 Company Name 

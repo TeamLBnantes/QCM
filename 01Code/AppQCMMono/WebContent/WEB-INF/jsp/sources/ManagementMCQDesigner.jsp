@@ -89,7 +89,7 @@
 <!--           <div class="templatemo-flex-row flex-content-row">
 
           <div class="pagination-wrap"> -->
-            <ul class="pagination">
+<!--             <ul class="pagination">
               <li><a href="#">1</a></li>
               <li><a href="#">2</a></li>
               <li class="active"><a href="#">3 <span class="sr-only">(current)</span></a></li>
@@ -100,7 +100,7 @@
                   <span aria-hidden="true"><i class="fa fa-play"></i></span>
                 </a>
               </li>
-            </ul>
+            </ul> -->
          <!--  </div>       -->    
           <footer class="text-right">
                       <p>Copyright &copy; 2084 Company Name 

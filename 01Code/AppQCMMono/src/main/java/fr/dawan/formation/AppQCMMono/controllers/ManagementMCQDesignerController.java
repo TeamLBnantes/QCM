@@ -190,7 +190,7 @@ public class ManagementMCQDesignerController {
 	
 	//inscription d'une question sur le qcm d'id "id"
 	@PostMapping(value = { "/{id}/addQuestion" })    //id du qcm pour lequel nous allons ajouter une question
-	public String gererQuestionsMcq(@PathVariable("id") int id, Question question, HttpSession session, Model model) {
+	public String gererQuestionsMcq(@PathVariable("id") int id, Question question, ObjectFiltresQuestion filtresQuestion, HttpSession session, Model model) {
 //		Set<QuestionDTO> questionsTrouveesDTO=new HashSet<>();
 		User user = (User) session.getAttribute("user");
 
@@ -200,10 +200,44 @@ public class ManagementMCQDesignerController {
 		
 		mcqService.addQuestion(mcq, question.getId());
 
-		
+
 
 		// on renvoie le nom de la jsp
-		return "redirect:/ManagementMCQDesigner/"+id+"/questions";
+		//return "redirect:/ManagementMCQDesigner/"+id+"/questions";
+		// TODO: je ne parviens pas pour le moment à renvoyer des info en direct au controleur 
+		// ..../id/filtre
+		//Du coup, je fait le traitement et je retourne le tout sans repasser par lui
+		Designer designer=user.getDesigner();
+		QuestionService questionService=new QuestionService();
+		List<Question> questions=questionService.searchByMcq(mcq);
+		
+		//la methode de la ligne suivante retourne les question qui correspondent aux critere parmis (body contient, theme contient, restrient au designer ou non)
+		List<Question> questionsTrouvees=questionService.searchWithFiltre(filtresQuestion, designer);
+		Set<QuestionDTO> questionsTrouveesDTO=new HashSet<>();
+		
+		List<Integer> listeIdQuestionSelect=new ArrayList<>();    //j'utilise un tableau des id des questions déjà inscritent pour  filtrer l'affichage des propositions de qusetion a y ajouter
+		for (Question questionTmp : questions) {
+			listeIdQuestionSelect.add(questionTmp.getId());
+		}
+
+		for (Question q : questionsTrouvees) {
+			if(q.getAnswers().size()>0) {									//je vérifie que la question a au moins une reponse
+				//TODO : surveiller qu'une question utilisée ne peu pas se retrouver sans aucune réponse (à faire dans la gestion des question)
+				if(!(listeIdQuestionSelect.contains(q.getId()))) {			//je vérifie que la question n'est pas déjà select dans ce qcm
+					questionsTrouveesDTO.add(new QuestionDTO(q));
+				}
+			}
+		}
+			
+		model.addAttribute("questionsTrouveesDTO", questionsTrouveesDTO);
+		model.addAttribute("BodyMCQ", mcq.getBody());
+		model.addAttribute("idMCQ", id);
+		model.addAttribute("questions", questions);
+		model.addAttribute("filtresQuestion", filtresQuestion);
+
+		// on renvoie le nom de la jsp
+		return "ManagementMCQQuestionsDesigner";
+		
 	}
 	
 

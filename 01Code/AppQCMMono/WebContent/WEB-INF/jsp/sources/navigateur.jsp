@@ -21,7 +21,7 @@
 		<li><a href="home"><i class="fa fa-home fa-fw"></i>Accueil</a></li>
 		<c:if test="${isNotDesigner}">
 			<br />
-			<li><a href="inscription/designer">Inscription Designer</a></li>
+			<li><a href="inscription/designer"><i class="fa fa-user-cog"></i>Inscription Designer</a></li>
 		</c:if>
 		<c:if test="${!isNotDesigner}">
 

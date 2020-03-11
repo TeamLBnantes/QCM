@@ -28,7 +28,7 @@ public class Question extends Entitie{
 	private String commentPostAnswer;
 	private String help;
 	
-	
+	private String topic;
 	private String theme;
 	
 	@OneToOne
@@ -142,6 +142,16 @@ public class Question extends Entitie{
 
 	public void setDesigner(Designer designer) {
 		this.designer = designer;
+	}
+
+
+	public String getTopic() {
+		return topic;
+	}
+
+
+	public void setTopic(String topic) {
+		this.topic = topic;
 	}
 	
 	

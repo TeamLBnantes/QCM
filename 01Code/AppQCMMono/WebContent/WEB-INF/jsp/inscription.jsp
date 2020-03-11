@@ -21,7 +21,7 @@
 <body>
 	<div class="templatemo-content-container">
 		<div class="templatemo-content-widget white-bg">
-			<form action="ManagementQuestionsDesigner/updateQuestion"
+			<form action="inscription"
 				method="post">
 				<!-- <div class="templatemo-content col-1 light-gray-bg"> -->
 
@@ -37,7 +37,7 @@
 					<br>
 					<div class="templatemo-content-container">
 						<div class="table-responsive">
-							<table class="table table-striped table-bordered">
+							<table class="table ">
 								<tr>
 									<td><label for="lastName"><tag:message
 												code="LASTNAME" text="traduction manquante!"></tag:message></label>

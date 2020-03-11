@@ -13,6 +13,7 @@ import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Models.SubscribeValidator;
 import fr.dawan.formation.AppQCMMono.Services.DesignerService;
+import fr.dawan.formation.AppQCMMono.Services.SessionServiceDTO;
 import fr.dawan.formation.AppQCMMono.Services.UserService;
 
 @Controller
@@ -52,7 +53,10 @@ public class InscriptionController {
 	}
 
 	@GetMapping("/designer")
-	public String inscriptionDesigner() {
+	public String inscriptionDesigner(HttpSession session, Model model) {
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		User user = ssdto.sessionUserService(session);
+		ssdto.isDesignerService(user, model);
 		return "inscriptionDesigner";
 	}
 	
@@ -71,6 +75,10 @@ public class InscriptionController {
 
 		
 		userSession = userService.createUserDesigner(userSession, designer);
+		
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		User user = ssdto.sessionUserService(session);
+		ssdto.isDesignerService(user, model);
 		
 		//userSession.setDesigner(designer);
 		

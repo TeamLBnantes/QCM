@@ -38,17 +38,22 @@ nav li {
 	list-style: none;	
 	text-transform: uppercase;
 }
+.fixe{
+	 position: fixed;
+}
 .templatemo-inline-block {
 	display: inline-block;
 	vertical-align: middle;
 }
 .templatemo-block {	display: block; }
 .templatemo-position-relative {	position: relative; }
+.strongblue-text{ color: #2C639C}
 .blue-text { color: #39ADB4; }
 .white-text { color: white; }
 .green-bg {	background-color: #39ADB4; }
 .yellow-bg { background-color: #D8D138; }
 .white-bg {	background-color: white; }
+.grey-bg {	background-color: #a2a2a2; }
 .white-bg .fa-times { background-color: #d7d7d7; }
 .white-bg .fa-times:hover {	background: #83ccd1; }
 .orange-bg {
@@ -302,7 +307,7 @@ footer { padding: 15px; }
 	border-color: #E9E8E8;
 }
 .table { margin-bottom: 0; }
-table-answer {
+.table-answer {
 	background-color: #3275BB;
 }
 .table>tbody>tr>td { padding: 10px 15px; }
@@ -310,7 +315,8 @@ table-answer {
 .media { margin-top: 0; }
 .media-body { vertical-align: middle; }
 .badge {
-	background-color: #d6973d;
+	background-color: #E9E8E8;
+	color: black;
 	border-radius: 5px;
 	margin-left: 5px;
 	padding: 5px 10px;

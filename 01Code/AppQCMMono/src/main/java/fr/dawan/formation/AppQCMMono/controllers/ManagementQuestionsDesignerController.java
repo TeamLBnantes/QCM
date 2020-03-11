@@ -1,6 +1,6 @@
 package fr.dawan.formation.AppQCMMono.controllers;
 
-
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -22,6 +22,7 @@ import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Services.AnswerService;
 import fr.dawan.formation.AppQCMMono.Services.QuestionService;
+import fr.dawan.formation.AppQCMMono.Services.SessionServiceDTO;
 import fr.dawan.formation.AppQCMMono.Services.UserService;
 
 @Controller
@@ -33,46 +34,50 @@ public class ManagementQuestionsDesignerController {
 
 		User user = (User) session.getAttribute("user");
 
-		QuestionService questionService=new QuestionService();
-		List<Question> questions=questionService.searchByDesigner(user.getDesigner());
-		
+		QuestionService questionService = new QuestionService();
+		List<Question> questions = questionService.searchByDesigner(user.getDesigner());
+
 		for (Question question : questions) {
 			System.out.println(question);
 		}
-		
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		ssdto.isDesignerService(user, model);
 		model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
 		// on renvoie le nom de la jsp
 		return "QuestionsDesignerListe";
 	}
-	
-	//     /delete/${question.id}
+
+	// /delete/${question.id}
 	@GetMapping("/delete/{id}")
 	public String deleteQuestion(@PathVariable("id") int id, HttpSession session, Model model) {
 		User user = (User) session.getAttribute("user");
-		QuestionService questionService=new QuestionService();
+		QuestionService questionService = new QuestionService();
 		questionService.deleteById(id);
-			
 
-		List<Question> questions=questionService.searchByDesigner(user.getDesigner());
-		//Question question=questionService.findById(id);
+		List<Question> questions = questionService.searchByDesigner(user.getDesigner());
+		// Question question=questionService.findById(id);
+		
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		ssdto.isDesignerService(user, model);
 		model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
 		// on renvoie le nom de la jsp
 		return "QuestionsDesignerListe";
 	}
-	
-	
-	@GetMapping(value = { "/{id}" })    //id de la question à cibler
+
+	@GetMapping(value = { "/{id}" }) // id de la question à cibler
 	public String afficherQuestion(@PathVariable("id") int id, HttpSession session, Model model) {
 
 		User user = (User) session.getAttribute("user");
 
-		QuestionService questionService=new QuestionService();
-		List<Question> questions=questionService.searchByDesigner(user.getDesigner());
-		Question question=questionService.findById(id);
-
+		QuestionService questionService = new QuestionService();
+		List<Question> questions = questionService.searchByDesigner(user.getDesigner());
+		Question question = questionService.findById(id);
 		
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		ssdto.isDesignerService(user, model);
+
 		model.addAttribute("Response", false);
 		model.addAttribute("question", question);
 		model.addAttribute("questions", questions);
@@ -80,28 +85,33 @@ public class ManagementQuestionsDesignerController {
 		// on renvoie le nom de la jsp
 		return "ManagementQuestionDesigner";
 	}
-	
-	@GetMapping(value = { "/new" })    
+
+	@GetMapping(value = { "/new" })
 	public String renseignerNouvelleQuestion(HttpSession session, Model model) {
 
 		User user = (User) session.getAttribute("user");
+		
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		ssdto.isDesignerService(user, model);
 		model.addAttribute("Response", false);
 		model.addAttribute("enumStatus", Status.values());
 		// on renvoie le nom de la jsp
 		return "ManagementQuestionDesigner";
 	}
-	
-	@GetMapping(value = { "/newResponse/{id}" })    //id de la question à cibler
+
+	@GetMapping(value = { "/newResponse/{id}" }) // id de la question à cibler
 	public String renseignerNouvelleReponse(@PathVariable("id") int id, HttpSession session, Model model) {
 
 		User user = (User) session.getAttribute("user");
 
-		QuestionService questionService=new QuestionService();
-		List<Question> questions=questionService.searchByDesigner(user.getDesigner());
-		Question question=questionService.findById(id);
-		Answer answer=new Answer();
+		QuestionService questionService = new QuestionService();
+		List<Question> questions = questionService.searchByDesigner(user.getDesigner());
+		Question question = questionService.findById(id);
+		Answer answer = new Answer();
 		answer.setId(0);
-		
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		ssdto.isDesignerService(user, model);
+
 		model.addAttribute("Response", true);
 		model.addAttribute("answer", answer);
 		model.addAttribute("question", question);
@@ -110,168 +120,163 @@ public class ManagementQuestionsDesignerController {
 		// on renvoie le nom de la jsp
 		return "ManagementQuestionDesigner";
 	}
-	
-	@GetMapping(value = { "/updateResponse/{idQuestion}/{idAnswer}" })    //id de la reponse à cibler
-	public String majAffichageReponse(
-				@PathVariable("idQuestion") int idQuestion, 
-				@PathVariable("idAnswer") int idAnswer, 
-				HttpSession session, 
-				Model model) {
 
-		
-		QuestionService questionService=new QuestionService();
-		
-		Question question=questionService.findById(idQuestion);
-		Answer answer=null;
+	@GetMapping(value = { "/updateResponse/{idQuestion}/{idAnswer}" }) // id de la reponse à cibler
+	public String majAffichageReponse(@PathVariable("idQuestion") int idQuestion,
+			@PathVariable("idAnswer") int idAnswer, HttpSession session, Model model) {
+
+		QuestionService questionService = new QuestionService();
+
+		Question question = questionService.findById(idQuestion);
+		Answer answer = null;
 		for (Answer q : question.getAnswers()) {
-			if (q.getId()==idAnswer) answer=q;
+			if (q.getId() == idAnswer)
+				answer = q;
 		}
-		
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		User user = ssdto.sessionUserService(session);
+		ssdto.isDesignerService(user, model);
 		model.addAttribute("Response", true);
 		model.addAttribute("answer", answer);
 		model.addAttribute("question", question);
-		//model.addAttribute("questions", questions);
+		// model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
 		// on renvoie le nom de la jsp
 		return "ManagementQuestionDesigner";
 	}
-	
+
 	@PostMapping("updateQuestion")
 	public String updateQuestion(Question question, HttpSession session, Model model) {
+
+
+		QuestionService questionService = new QuestionService();
+		UserService userService = new UserService();
+
+		System.out.println("l'id de la question est : " + question.getId());
+		System.out.println("le body (avant save or update)est  : " + question.getBody());
+
+		Question questionMaj = new Question();
+
 		
-		
-		QuestionService questionService=new QuestionService();
-		UserService userService=new UserService();
-		
-		System.out.println("l'id de la question est : " +question.getId());
-		System.out.println("le body (avant saveor update)est  : " +question.getBody());
-		
-		Question questionMaj=new Question();
-		if (question.getId()==0) {
+
+			if (question.getId() == 0) {
+
+				User user = (User) session.getAttribute("user");
+				user = userService.findById(user.getId());
+				// question.setDesigner(user.getDesigner());
+				// questionMaj.setDesigner(question.getDesigner());
+				questionMaj.setDesigner(user.getDesigner());
+				questionMaj.setCreateDate(LocalDateTime.now());
+				questionMaj.setEditDate(LocalDateTime.now());
+
+			} else {
+				questionMaj = questionService.findById(question.getId());
+			}
+
+			questionMaj.setEditDate(LocalDateTime.now());
+			questionMaj.setTopic(question.getTopic());
+			questionMaj.setBody(question.getBody());
+			questionMaj.setCommentPostAnswer(question.getCommentPostAnswer());
+			questionMaj.setStatus(question.getStatus());
+
+			question = questionService.saveOrUpdate(questionMaj);
+
+			question = questionService.findById(question.getId());
 			
-			User user = (User) session.getAttribute("user");
-			user=userService.findById(user.getId());
-			//question.setDesigner(user.getDesigner());
-			//questionMaj.setDesigner(question.getDesigner());
-			questionMaj.setDesigner(user.getDesigner());
-			
-		}else {
-			questionMaj=questionService.findById(question.getId());
-		}
 		
-
-		questionMaj.setBody(question.getBody());
-		questionMaj.setCommentPostAnswer(question.getCommentPostAnswer());
-		questionMaj.setStatus(question.getStatus());
-		
-		
-		
-		question=questionService.saveOrUpdate(questionMaj);
-
-		question=questionService.findById(question.getId());
-		System.out.println("le body (apres le find est  )est  : " +question.getBody());
-
-		
+		System.out.println("le body (apres le find est  )est  : " + question.getBody());
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		User user = ssdto.sessionUserService(session);
+		ssdto.isDesignerService(user, model);
 		model.addAttribute("Response", false);
 		model.addAttribute("question", question);
-		//model.addAttribute("questions", questions);
+		// model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
 		// on renvoie le nom de la jsp
 		return "ManagementQuestionDesigner";
 	}
-	
 
-	
-	@PostMapping("updateAnswer/{idQuestion}")      //c'est ici l'id de la question liée
-	public String updateAnswer(
-				Answer answer, 
-				@PathVariable("idQuestion") int idQuestion,  
-				HttpSession session, 
-				Model model) {
+	@PostMapping("updateAnswer/{idQuestion}") // c'est ici l'id de la question liée
+	public String updateAnswer(Answer answer, @PathVariable("idQuestion") int idQuestion, HttpSession session,
+			Model model) {
 		User user = (User) session.getAttribute("user");
-		QuestionService questionService=new QuestionService();
-		
-		Question question=questionService.findById(idQuestion);
-		
-		if (answer.getId()==0) {
-				question.getAnswers().add(answer);
-				answer.setQuestion(question);
-				question=questionService.saveOrUpdate(question);
-		}else {
-			answer.setQuestion(question);
-			AnswerService answerService=new AnswerService();
-			answer=answerService.saveOrUpdate(answer);
-		
-		}
-		
-		//
-			
+		QuestionService questionService = new QuestionService();
 
-		//List<Question> questions=questionService.searchByDesigner(user.getDesigner());
-		question=questionService.findById(idQuestion);
-		
+		Question question = questionService.findById(idQuestion);
+
+		if (answer.getId() == 0) {
+			question.getAnswers().add(answer);
+			answer.setQuestion(question);
+			question = questionService.saveOrUpdate(question);
+		} else {
+			answer.setQuestion(question);
+			AnswerService answerService = new AnswerService();
+			answer = answerService.saveOrUpdate(answer);
+
+		}
+
+		//
+
+		// List<Question>
+		// questions=questionService.searchByDesigner(user.getDesigner());
+		question = questionService.findById(idQuestion);
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+
+		ssdto.isDesignerService(user, model);
 		model.addAttribute("Response", false);
 		model.addAttribute("question", question);
-		//model.addAttribute("questions", questions);
+		// model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
 		// on renvoie le nom de la jsp
 		return "ManagementQuestionDesigner";
 	}
-	
-	//    deleteResponse/${question.id}/${answer.id}
-	
-	@GetMapping(value = { "deleteResponse/{idQuestion}/{idAnswer}" })    //id de la reponse à cibler
-	public String deleteReponse(
-				@PathVariable("idQuestion") int idQuestion, 
-				@PathVariable("idAnswer") int idAnswer, 
-				HttpSession session, 
-				Model model) {
 
-		QuestionService questionService=new QuestionService();
-		Question question=questionService.findById(idQuestion);
-		AnswerService answerService=new AnswerService();
-		//todo : enlever la ref vers la reponse d'id idAnswer
-		//Answer a=answerService.findById(idAnswer);
-		
+	// deleteResponse/${question.id}/${answer.id}
 
-		Set<Answer> newAnswers=new HashSet<Answer>();
+	@GetMapping(value = { "deleteResponse/{idQuestion}/{idAnswer}" }) // id de la reponse à cibler
+	public String deleteReponse(@PathVariable("idQuestion") int idQuestion, @PathVariable("idAnswer") int idAnswer,
+			HttpSession session, Model model) {
+
+		QuestionService questionService = new QuestionService();
+		Question question = questionService.findById(idQuestion);
+		AnswerService answerService = new AnswerService();
+		// todo : enlever la ref vers la reponse d'id idAnswer
+		// Answer a=answerService.findById(idAnswer);
+
+		Set<Answer> newAnswers = new HashSet<Answer>();
 		for (Answer answer : question.getAnswers()) {
-			if (answer.getId()!=idAnswer) newAnswers.add(answer);
+			if (answer.getId() != idAnswer)
+				newAnswers.add(answer);
 		}
 		System.out.println(newAnswers);
 		System.out.println(question.getAnswers());
 		question.setAnswers(newAnswers);
-		
+
 //		Iterator<Answer> iterator = question.getAnswers().iterator();
 //	      while (iterator.hasNext()) {
 //	           Answer ans=iterator.next();
 //	           if (ans.getId()==idAnswer) iterator.remove();
 //	      }
-	      System.out.println(question.getAnswers());
+		System.out.println(question.getAnswers());
 
-		
-		question=questionService.saveOrUpdate(question);
-		//.remove();
-		//question.setAnswers(question.getAnswers().remove(a));
-		question=questionService.findById(idQuestion);
-		
+		question = questionService.saveOrUpdate(question);
+		// .remove();
+		// question.setAnswers(question.getAnswers().remove(a));
+		question = questionService.findById(idQuestion);
+
 		answerService.deleteById(idAnswer);
-		
-		
 
-		
-		
-		
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		User user = ssdto.sessionUserService(session);
+		ssdto.isDesignerService(user, model);
 		
 		model.addAttribute("Response", false);
 
 		model.addAttribute("question", question);
-		//model.addAttribute("questions", questions);
+		// model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
 		// on renvoie le nom de la jsp
 		return "ManagementQuestionDesigner";
 	}
-	
-	
-	
+
 }

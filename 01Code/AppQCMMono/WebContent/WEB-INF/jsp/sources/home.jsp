@@ -17,11 +17,11 @@
 
 	${ message }<br/>
 <br/>
-<c:if test="${!isDesigner}">
+<c:if test="${!isNotDesigner}">
 <br/>
 	<a href="inscription/designer">inscription Designer</a>
 </c:if>
-<c:if test="${isDesigner}">
+<c:if test="${isNotDesigner}">
 <br/>
 	<a href="modificationUserInformations/update">Modifications des informations personnelles</a>
 <br/>

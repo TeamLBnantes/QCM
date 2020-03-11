@@ -17,6 +17,7 @@ import fr.dawan.formation.AppQCMMono.Enum.Status;
 public class MCQ extends Entitie {
 
 	private String body;
+	private String topic;
 	private String theme;
 	@Enumerated(EnumType.STRING)
 	private Status status;
@@ -110,6 +111,14 @@ public class MCQ extends Entitie {
 
 	public MCQ() {
 		super();
+	}
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
 	}
 
 }

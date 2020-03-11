@@ -13,6 +13,8 @@ public class ObjectPasserMcq {
 	private int nbQuestionsPassed;
 	private int nbBonnesReponses;
 	private MCQpassed mcqPassed;
+	private String etape;  // à valeur dans {beforeMCQ, question, correction, endMCQ}
+							//TODO: faire une ennum pour cet attribut.
 	
 	
 
@@ -49,12 +51,19 @@ public class ObjectPasserMcq {
 	public void setNbQuestionsTotal(int nbQuestionsTotal) {
 		this.nbQuestionsTotal = nbQuestionsTotal;
 	}
+	public String getEtape() {
+		return etape;
+	}
+	public void setEtape(String etape) {
+		this.etape = etape;
+	}
 	@Override
 	public String toString() {
 		return "ObjectPasserMcq [listQuestionsUsed=" + listQuestionsUsed + ", nbQuestionsTotal=" + nbQuestionsTotal
 				+ ", nbQuestionsPassed=" + nbQuestionsPassed + ", nbBonnesReponses=" + nbBonnesReponses + ", mcqPassed="
-				+ mcqPassed + "]";
+				+ mcqPassed + ", etape=" + etape + "]";
 	}
+
 	
 	
 	

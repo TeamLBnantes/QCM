@@ -117,6 +117,7 @@ public class MCQService {
 		mcqPassed=mcqPassedDao.saveOrUpdate(mcqPassed);
 		mcqPassedDao.close();
 		trackMcq.setMcqPassed(mcqPassed);
+		trackMcq.setEtape("beforeMCQ");
 		
 		return trackMcq;
 	}

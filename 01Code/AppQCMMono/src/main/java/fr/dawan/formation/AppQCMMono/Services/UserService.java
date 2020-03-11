@@ -3,6 +3,7 @@ package fr.dawan.formation.AppQCMMono.Services;
 import java.time.LocalDateTime;
 
 import javax.persistence.NoResultException;
+import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -113,7 +114,38 @@ public class UserService {
 		return u;
 	}
 	
+	public void deleteById(User user, int id) {
+		UserDAO userDao = new UserDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		//User u = userDao.findById(User.class, id);
+		userDao.deleteById(User.class, user.getId());
+		userDao.close();
+	}
 
+	public User UpdateUserInformations(User userSession, User userEcran) {
+		
+		UserDAO userDao = new UserDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		User updatedUser = new User();
+		
+		updatedUser = userDao.findById(User.class, userSession.getId());
+		updatedUser.setLastName(userEcran.getLastName());
+		updatedUser.setFirstName(userEcran.getFirstName());
+		updatedUser.setPseudo(userEcran.getPseudo());
+		
+		if(!updatedUser.getEmail().equals(userEcran.getEmail())) {
+			if(userDao.searchByEmail(userEcran.getEmail())==null) {
+				updatedUser.setEmail(userEcran.getEmail());
+			}else {
+				System.out.println("refus de modifier l'email car déja présent en BDD");
+			}
+		}
+		//Hashage d'un mot de passe
+		String pwd=BCrypt.hashpw(userEcran.getPassword(), BCrypt.gensalt());
+		updatedUser.setPassword(pwd);
+		
+		userDao.saveOrUpdate(updatedUser);
+		userDao.close();
+		return updatedUser;
+	}
 	
 	
 	

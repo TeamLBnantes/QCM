@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Services.UserService;
@@ -36,11 +37,10 @@ public class UserController {
 	//Maj des données de l'utilisateur après modification en base de données
 	// user = information en provenance du formulaire - session = valeur de la session active
 	@PostMapping("/update")
-	public String update(User user, HttpSession session) {
-		
+	public String updateUserInformations(User userEcran, HttpSession session) {
 		
 		User userSession = (User) session.getAttribute("user");
-		userSession.setLastName(user.getLastName());
+		/*userSession.setLastName(user.getLastName());
 		userSession.setFirstName(user.getFirstName());
 		
 		if(!userSession.getEmail().equals(user.getEmail())){
@@ -50,18 +50,13 @@ public class UserController {
 				System.out.println("refus de modifier l'email car déja présent en BDD");
 			}
 		}
-		
-		//TODO gérer l'information utilisateur selon l'état de l'info d'authentification
-		//TODO case à cocher modif pwd (modification du mdp)
-	
 		// Hashage d'un mot de passe
 		String pwd=BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-		userSession.setPassword(pwd);
+		userSession.setPassword(pwd);*/
+		/*userService.saveOrUpdate(userSession);*/
 		
-		session.setAttribute("user", userSession);
-		
-		userService.saveOrUpdate(userSession);
-		
+		User userMaj = userService.UpdateUserInformations(userSession, userEcran);
+		session.setAttribute("user", userMaj);
 		return "redirect:/home";
 	}
 	

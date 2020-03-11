@@ -401,7 +401,7 @@ table-answer {
 
 /* Style checkboxes and radio buttons
 http://webdesign.tutsplus.com/tutorials/quick-tip-easy-css3-checkboxes-and-radio-buttons--webdesign-8953 */
-input[type="checkbox"] {  display:none; }
+/* input[type="checkbox"] {  display:none; } */
 input[type="checkbox"] + label span {
     display:inline-block;
     width:26px;

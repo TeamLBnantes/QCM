@@ -1,13 +1,16 @@
 package fr.dawan.formation.AppQCMMono.Persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.dawan.formation.AppQCMMono.Enum.Status;
 import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
+import fr.dawan.formation.AppQCMMono.Models.ObjectFiltresMCQ;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.QuestionUsed;
 import fr.dawan.formation.AppQCMMono.Models.Theme;
+import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Persistence.Interfaces.DAOMCQInterface;
 
 public class MCQDAO extends GenericDAO<MCQ> implements DAOMCQInterface {
@@ -89,5 +92,79 @@ public class MCQDAO extends GenericDAO<MCQ> implements DAOMCQInterface {
 				.setParameter("mcq", mcq)
 				.getSingleResult();
 
+	}
+
+
+	public List<MCQ> searchWithFiltre(ObjectFiltresMCQ filtresMCQ, User user) {
+		// TODO pour le moment, je ne gère pas le filtyre sur deja passé par user
+		List<MCQ> mcqs=new ArrayList<MCQ>();
+		int filtre=0;
+		String requete="";
+		
+		if(filtresMCQ.getBodyFiltre().length()>0) 	filtre+=10;	  // on filtre par body contient
+		if(filtresMCQ.getThemeFiltre().length()>0)	filtre+=1;  //on filtre par theme contient
+		
+		switch (filtre) {
+		case 0: // aucun filtre, on renvois tout
+			requete = "select f from "  
+					+ MCQ.class.getName()+" f";
+			mcqs = super.entityManager
+					.createQuery(requete, MCQ.class)
+//					.setParameter("designer", designer)
+//					.setParameter("body", "%"+filtresQuestion.getBodyFiltre()+"%")
+//					.setParameter("theme","%"+ filtresQuestion.getThemeFiltre()+"%")
+					.getResultList();
+			break;
+		case 1: // on ne filtre que sur le theme
+			requete = "select f from "  
+					+ MCQ.class.getName() 
+					+ " f where f.theme LIKE :theme";
+			mcqs = super.entityManager
+					.createQuery(requete, MCQ.class)
+//					.setParameter("designer", designer)
+//					.setParameter("body", "%"+filtresQuestion.getBodyFiltre()+"%")
+					.setParameter("theme","%"+ filtresMCQ.getThemeFiltre()+"%")
+					.getResultList();
+			break;
+		case 10: // on ne filtre que sur le body
+			requete = "select f from "  
+					+ MCQ.class.getName() 
+					+ " f where f.body LIKE :body";
+			mcqs = super.entityManager
+					.createQuery(requete, MCQ.class)
+//					.setParameter("designer", designer)
+					.setParameter("body", "%"+filtresMCQ.getBodyFiltre()+"%")
+//					.setParameter("theme","%"+ filtresQuestion.getThemeFiltre()+"%")
+					.getResultList();
+			break;
+		case 11: // on ne filtre que sur le body
+			requete = "select f from "  
+					+ MCQ.class.getName() 
+					+ " f where f.body LIKE :body and f.theme LIKE :theme";
+			mcqs = super.entityManager
+					.createQuery(requete, MCQ.class)
+//					.setParameter("designer", designer)
+					.setParameter("body", "%"+filtresMCQ.getBodyFiltre()+"%")
+					.setParameter("theme","%"+ filtresMCQ.getThemeFiltre()+"%")
+					.getResultList();
+			break;	
+		default:
+			break;
+		}
+		return mcqs;
+	}
+
+
+	public List<QuestionUsed> findQuestionUsedbyMcq(MCQ mcq) {
+		// TODO Auto-generated method stub
+		String requete = "select q from "  
+				+ QuestionUsed.class.getName() 
+				+ " q where ( q.mcq= :mcq )";
+		
+		// JPQL (ou HQL)
+		return super.entityManager
+				.createQuery(requete, QuestionUsed.class)
+				.setParameter("mcq", mcq)
+				.getResultList();
 	}
 }

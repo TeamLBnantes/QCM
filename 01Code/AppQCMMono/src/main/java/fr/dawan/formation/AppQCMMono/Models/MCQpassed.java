@@ -10,7 +10,8 @@ public class MCQpassed extends Entitie{
 	private User user;
 	@ManyToOne
 	private MCQ mcq;
-	private int result;
+	private int result;    //entier entre 0 et 100, representant le score en % de bonnes reponses.
+	private boolean finalise;
 	
 	public int getResult() {
 		return result;
@@ -29,6 +30,20 @@ public class MCQpassed extends Entitie{
 	}
 	public void setMcq(MCQ mcq) {
 		this.mcq = mcq;
+	}
+	
+	public boolean isFinalise() {
+		return finalise;
+	}
+	public void setFinalise(boolean finalise) {
+		this.finalise = finalise;
+	}
+	public MCQpassed(User user, MCQ mcq) {
+		super();
+		this.user = user;
+		this.mcq = mcq;
+		this.result=0;
+		this.finalise=false;
 	}
 	
 	

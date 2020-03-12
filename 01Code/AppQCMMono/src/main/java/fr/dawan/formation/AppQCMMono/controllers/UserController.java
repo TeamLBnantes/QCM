@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.dawan.formation.AppQCMMono.Models.User;
+import fr.dawan.formation.AppQCMMono.Services.SessionServiceDTO;
 import fr.dawan.formation.AppQCMMono.Services.UserService;
 import sun.print.resources.serviceui;
 import sun.print.resources.serviceui_sv;
@@ -29,7 +30,10 @@ public class UserController {
 	
 	//Afficher informations de l'utilisateur
 	@GetMapping("/update")
-	public String update() {
+	public String update(HttpSession session, Model model) {
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		User user = ssdto.sessionUserService(session);
+		ssdto.isDesignerService(user, model);
 		
 		return "modificationUserInformations";
 	}
@@ -37,8 +41,10 @@ public class UserController {
 	//Maj des données de l'utilisateur après modification en base de données
 	// user = information en provenance du formulaire - session = valeur de la session active
 	@PostMapping("/update")
-	public String updateUserInformations(User userEcran, HttpSession session) {
-		
+	public String updateUserInformations(User userEcran, HttpSession session, Model model) {
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		User user = ssdto.sessionUserService(session);
+		ssdto.isDesignerService(user, model);
 		User userSession = (User) session.getAttribute("user");
 		/*userSession.setLastName(user.getLastName());
 		userSession.setFirstName(user.getFirstName());

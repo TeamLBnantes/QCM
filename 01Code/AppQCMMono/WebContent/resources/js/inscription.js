@@ -51,7 +51,7 @@ window.addEventListener("load", () => {
         }
     })
 
-       
+       /*
         inputEmail.addEventListener("blur", (event)  => {
 
             if (regexMail.test(inputEmail)) {
@@ -65,7 +65,7 @@ window.addEventListener("load", () => {
                 validationEmail="false";
             }
         })
-        
+        */
         inputConfirmEmail.addEventListener("blur", (event)  => {
         if (inputConfirmEmail.value === inputEmail.value){
             displayConfirmEmail.innerHTML = "";

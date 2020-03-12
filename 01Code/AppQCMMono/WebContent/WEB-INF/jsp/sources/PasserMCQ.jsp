@@ -40,7 +40,7 @@
            		 	<form action="passerQCM/next" class="templatemo-login-form" method="post" >
            				           				<button type="submit" class="templatemo-blue-button" name="action" value="chercher">
            				
-           				Question Suivante
+           				Lancer le QCM
 
            				</button>
            			</form>

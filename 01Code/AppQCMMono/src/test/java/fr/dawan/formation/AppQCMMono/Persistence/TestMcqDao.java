@@ -73,6 +73,7 @@ public class TestMcqDao {
 		  mcqDao.saveOrUpdate(mcq);
 		  mcqs=mcqDao.searchByStatus(Status.free);
 		  Assert.assertEquals(size+1,mcqs.size());
+		  mcqDao.deleteById(MCQ.class, mcq.getId());
 		  mcqDao.close(); 
 		}
 
@@ -81,12 +82,14 @@ public class TestMcqDao {
 		mcqDao = new  MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
 		List<MCQ> mcqs = new ArrayList<>();
 		int size = mcqs.size();
+		mcqs = mcqDao.searchByKWBody("tot");
 		Assert.assertEquals(size,mcqs.size());
 		mcq=new MCQ();
 		mcq.setBody("toto");
 		mcqDao.saveOrUpdate(mcq);
 		mcqs = mcqDao.searchByKWBody("tot");
 		Assert.assertEquals(size+1,mcqs.size());
+		mcqDao.deleteById(MCQ.class, mcq.getId());
 		mcqDao.close();
 	}
 	

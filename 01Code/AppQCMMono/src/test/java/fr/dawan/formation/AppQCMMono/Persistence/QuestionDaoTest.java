@@ -97,6 +97,7 @@ public class QuestionDaoTest {
 	  daoQuestion.saveOrUpdate(question);
 	  questions=daoQuestion.searchByStatus(Status.free);
 	  Assert.assertEquals(size+1,questions.size());
+	  daoQuestion.deleteById(Question.class, question.getId());
 	  daoQuestion.close(); 
 	  }
 	 

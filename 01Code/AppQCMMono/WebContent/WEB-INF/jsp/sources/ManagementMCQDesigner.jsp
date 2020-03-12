@@ -1,92 +1,100 @@
 
-        <!-- debut de la zone du tableau -->
-        
-       <h3>je suis sur la page test MCQ Designer: ${idTest} </h3> 
-        
-     <!-- debut zone formmulaire -->   
+<!-- debut de la zone du tableau -->
+
+<h3>je suis sur la page test MCQ Designer: ${idTest}</h3>
+
+<!-- debut zone formmulaire -->
 
 
-                   <div class="templatemo-content-widget white-bg">
-            <h2 class="margin-bottom-10">Info sur le QCM</h2>
-            <p>Here goes another form and form controls.</p>
-            <form action="ManagementMCQDesigner/${mcq.id}" class="templatemo-login-form" method="post" >                        <!-- enctype="multipart/form-data" -->
-               <input type="hidden" name="id" value="${mcq.id}" />
-              <div class="row form-group">
-                <div class="col-lg-6 col-md-6 form-group">                  
-                    <label for="inputBody">Body</label>
-                    <input type="text" class="form-control" name="body" placeholder="presentation QCM" value="${mcq.body}">      
-                              
-                </div>
-                <div class="col-lg-6 col-md-6 form-group">                  
-                    <label for="inputTheme">Themexxxx</label>
-                    <input type="text" class="form-control" name="themexxxxx" id="inputTheme" placeholder="Theme du QCM" value="${mcq.theme}">                  
-                </div> 
-              </div>
-              <div class="row form-group">
-                <div class="col-lg-6 col-md-6 form-group">                  
-                    <label for="inputUsername">xxxxxxxxxxx</label>
-                    <input type="text" class="form-control" id="inputUsername" placeholder="Admin">                  
-                </div>
-                <div class="col-lg-6 col-md-6 form-group">                  
-                    <label for="inputEmail">xxxxxxxxxxxxxx</label>
-                    <input type="text" class="form-control" id="inputEmail" placeholder="admin@company.com">                  
-                </div> 
-             </div>       
- 
-              <div class="form-group text-right">
-                <button type="submit" class="templatemo-blue-button">Update</button>
-                <button type="reset" class="templatemo-white-button">Reset</button>
-              </div>                           
-           </form>
-          </div> 
-        <!-- fin de la zone formulaire --> 
-        
-        
-         <!-- debut de la zone du tableau -->
- <div class="templatemo-content-widget white-bg">
-       	<form action="ManagementMCQDesigner/${mcq.id}/questions" class="templatemo-login-form" method="get" >
-               <input type="hidden" name="id" value="${mcq.id}" />
-             <div class="form-group text-center">
-                <button type="submit" class="templatemo-blue-button">Ajouter/supprimer des Questions</button>
-              </div>
-              </form>
-         
-          <div class="templatemo-content-widget no-padding">
-            <div class="panel panel-default table-responsive">
-              <table class="table table-striped table-bordered templatemo-user-table">
-                <thead>
-                  <tr>
-                    <td width="30px"><a href="" class="white-text templatemo-sort-by"># <span class="caret"></span></a></td>
-                    <td><a href="" class="white-text templatemo-sort-by">body <span class="caret"></span></a></td>
-                    <td width="100px"><a href="" class="white-text templatemo-sort-by">theme <span class="caret"></span></a></td>
-                    
-                    <td width="30px">Edit</td>
+<div class="templatemo-content-widget white-bg">
+	<h2 class="margin-bottom-10">Info sur le QCM</h2>
+	<form action="ManagementMCQDesigner/${mcq.id}"
+		class="templatemo-login-form" method="post">
+		<!-- enctype="multipart/form-data" -->
+		<input type="hidden" name="id" value="${mcq.id}" />
+		<div class="row form-group">
+			<div class="col-lg-6 col-md-6 form-group">
+				<label for="inputBody">Intitulé</label>
+				<textarea class="form-control" name="body"
+					placeholder="presentation QCM">${mcq.body}"</textarea>
+			</div>
+			<div class="col-lg-6 col-md-6 form-group">
+				<label for="inputTheme">Theme(s)</label> <input type="text"
+					class="form-control" name="topic" id="inputTheme"
+					placeholder="Theme du QCM" value="${mcq.theme}">
+			</div>
+		</div>
+		<div class="row form-group">
+			<div class="col-lg-6 col-md-6 form-group">
+				<label for="inputUsername">Statut</label> <select
+					class="form-control" name="status" id="status">
+					<c:forEach items="${ enumStatus }" var="status">
+						<option value="${ status }"
+							${ question.status == status ? 'selected' : '' }>
+							<tag:message code="${ status.libelle }" text="${status.libelle }" />
+						</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="col-lg-6 col-md-6 form-group">
+				<label for="inputEmail">Créé le </label> ${ mcq.createDate} <br/> <label for="inputEmail">Derniere modification </label> ${ mcq.editDate}
+			</div>
+		</div>
+
+		<div class="form-group text-right">
+			<button type="submit" class="templatemo-blue-button">Mise à
+				jour</button>
+			<button type="reset" class="templatemo-white-button">Retour
+				à l'état précédent</button>
+		</div>
+	</form>
+</div>
+<!-- fin de la zone formulaire -->
 
 
-                  </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="question" items="${questions}">
-                  <tr>
-                    <td>${question.id}</td>
-                    <td>${question.body}</td>
-                    <td>${question.theme}</td>
+<!-- debut de la zone du tableau -->
+<div class="templatemo-content-widget white-bg">
+	<form action="ManagementMCQDesigner/${mcq.id}/questions"
+		class="templatemo-login-form" method="get">
+		<input type="hidden" name="id" value="${mcq.id}" />
+		<div class="form-group text-center">
+			<button type="submit" class="templatemo-blue-button">Ajouter/supprimer
+				des Questions</button>
+		</div>
+	</form>
+	<div class="templatemo-content-widget no-padding">
+		<div class="panel panel-default table-responsive">
+			<table
+				class="table table-striped table-bordered templatemo-user-table">
+				<thead>
+					<tr>
+						<td width="3%"
+							class="white-text templatemo-sort-by">#</td>
+						<td width="80%" class="white-text templatemo-sort-by">body
+						</td>
+						<td width="10%"
+							class="white-text templatemo-sort-by">theme</td>
+						<td width="7%">Edit</td>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="question" items="${questions}">
+						<tr>
+							<td>${question.id}</td>
+							<td>${question.body}</td>
+							<td>${question.theme}</td>
+							<td><a href="" class="templatemo-blue-button"><i class="fa fa-edit"></i></a></td>
+							<!--                     <td><a href="" class="templatemo-link">Action</a></td> -->
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- fin de la zone du tableau -->
 
-                    <td><a href="" class="templatemo-edit-btn">Edit</a></td>
-<!--                     <td><a href="" class="templatemo-link">Action</a></td> -->
+</div>
 
-                  </tr>
-                 </c:forEach>           
-                </tbody>
-              </table>    
-            </div>                          
-          </div>       
-        <!-- fin de la zone du tableau -->        
-        
- </div>      
-        
-        
->>>>>>> devLaurent
 <!--           <div class="templatemo-flex-row flex-content-row">
 
           <div class="pagination-wrap"> -->
@@ -103,12 +111,11 @@
                 </a>
               </li>
             </ul> -->
-         <!--  </div>       -->    
-          <footer class="text-right">
-                      <p>Copyright &copy; 2084 Company Name 
-            | Design: Template Mo</p>
-          </footer>  
-          
-          
-          
+<!--  </div>       -->
+<footer class="text-right">
+	<p>Copyright &copy; 2020 QuizizSkillz | Design: Template Mo</p>
+</footer>
+
+
+
 

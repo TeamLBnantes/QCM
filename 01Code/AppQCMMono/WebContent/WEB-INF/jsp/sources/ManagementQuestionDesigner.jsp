@@ -1,18 +1,12 @@
 
 <body>
 	<div class="container">
-		<h3>Gestion des Questions</h3>
-
-
-
-
 		<!-- Formulaire d'ajout -->
 		<!-- Ajouter required pour la validation des champs -->
-
-<a href="ManagementQuestionsDesigner">
-<button class="btn btn-primary" value="retour">Retour à la liste</button></a>
-	<br />
-
+		<a href="ManagementQuestionsDesigner">
+			<button class="btn btn-primary" value="retour">Retour à la
+				liste</button>
+		</a> <br />
 		<div class="templatemo-content-widget white-bg">
 			<form action="ManagementQuestionsDesigner/updateQuestion"
 				method="post">
@@ -49,14 +43,14 @@
 							<tr>
 								<td><b>Commentaire</b></td>
 								<td><textarea class="form-control" name="commentPostAnswer"
-										placeholder="Expliquez pourquoi chaque réponse est vrai ou fausse. Affiché après avoir répondu.">${question.commentPostAnswer }</textarea></td>
+										placeholder="Expliquez pourquoi chaque réponse est vraie ou fausse. Affiché après avoir répondu.">${question.commentPostAnswer }</textarea></td>
 							</tr>
-
 							<!-- </div> -->
 						</table>
 						<br />
 					</div>
 				</div>
+				<br/>
 				<c:if test="${Response!=true}">
 					<button type="submit" class="btn btn-primary" name="action"
 						value="valider">Valider</button>
@@ -65,64 +59,75 @@
 		</div>
 	</div>
 	<c:if test="${Response==true}">
-		<div class="templatemo-content-widget white-bg">
+		<div class=container>
+			<div class="templatemo-content-widget white-bg">
 
-			<form
-				action="ManagementQuestionsDesigner/updateAnswer/${question.id}"
-				method="post">
-				<input type="hidden" name="id" value="${answer.id}" />
-				<h2 class="text-uppercase">User Table</h2>
-				<div class="table-responsive">
-					<table class="table table-striped table-bordered">
-						<%-- <input type="hidden" name="idQuestion" value="${ question.id }" /> --%>
+				<form
+					action="ManagementQuestionsDesigner/updateAnswer/${question.id}"
+					method="post">
+					<input type="hidden" name="id" value="${answer.id}" />
+					<h2 class="text-uppercase">Ajout d'une réponse</h2>
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered">
+							<%-- <input type="hidden" name="idQuestion" value="${ question.id }" /> --%>
 
-						<tr>
-							<td><b>Réponse:</b></td>
-							<td><textarea name="body" class="form-control"
-									placeholder="Text de la reponse" required>${answer.body}</textarea></td>
-						</tr>
-						<tr>
-							<td><b>est -elle vrai?</b></td>
-							<td>
-								<!-- 
+							<tr>
+								<td><b>Réponse:</b></td>
+								<td><textarea name="body" class="form-control"
+										placeholder="Text de la reponse" required>${answer.body}</textarea></td>
+							</tr>
+							<tr>
+								<td><b>Est -elle vrai?</b></td>
+								<td>
+									<!-- 
 							<input type="checkbox" value="${answer.expectedAnswer}"
 								name="expectedAnswer"><label><span></span></label>
  -->
-								<div class="templatemo-block margin-bottom-5 text-center">
-									<c:if test="${answer.expectedAnswer}">
-										<input type="checkbox" name="expectedAnswer" id="c1"
-											value="true" checked>
-									</c:if>
-									<c:if test="${!answer.expectedAnswer}">
-										<input type="checkbox" name="expectedAnswer" id="c1"
-											value="true">
-									</c:if>
-									<label for="c1" class="font-weight-400"><span></span> </label>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td><b>commentPostAnswer response:</b></td>
-							<td><textarea name="commentPostAnswer" class="form-control"
-									placeholder="comment post answer" required>${answer.commentPostAnswer}</textarea></td>
-						</tr>
-						<tr>
-							<td><button type="submit" class="btn btn-primary"
-									name="action" value="valider">Valider</button></td>
-						</tr>
-					</table>
-				</div>
-			</form>
+									<div class="templatemo-block margin-bottom-5 text-center">
+										<c:if test="${answer.expectedAnswer}">
+											<input type="checkbox" name="expectedAnswer" id="c1"
+												value="true" checked>
+										</c:if>
+										<c:if test="${!answer.expectedAnswer}">
+											<input type="checkbox" name="expectedAnswer" id="c1"
+												value="true">
+										</c:if>
+										<label for="c1" class="font-weight-400"><span></span>
+										</label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td><b>Commentaire response:</b></td>
+								<td><textarea name="commentPostAnswer" class="form-control"
+										placeholder="Expliquez pourquoi cette réponse en particulier est vraie ou fausse. Affiché après avoir répondu.">${answer.commentPostAnswer}</textarea></td>
+							</tr>
+							<tr>
+								<td><button type="submit" class="btn btn-primary"
+										name="action" value="valider">Valider</button></td>
+							</tr>
+						</table>
+					</div>
+				</form>
+			</div>
 		</div>
 	</c:if>
-
-	<div>${message}</div>
-	<c:if test="${(Response==false) && (question.id!=null)}">
-		<td><a
-			href="ManagementQuestionsDesigner/newResponse/${question.id}">
-				<button type="button" class="btn btn-primary" name="action"
-					value="chercher">Ajouter une reponse</button>
-		</a></td>
+	<div class="container">
+		<c:if test="${maxQ}">
+			<h3>
+				<div class="blue-text">
+					<i class="fas fa-exclamation-circle"></i> ${message}
+				</div>
+			</h3>
+		</c:if>
+		<c:if test="${(Response==false) && (question.id!=null)}">
+			<c:if test="${!maxQ}">
+				<td><a
+					href="ManagementQuestionsDesigner/newResponse/${question.id}">
+						<button type="button" class="btn btn-primary" name="action"
+							value="chercher">Ajouter une reponse</button>
+				</a></td>
+			</c:if>
 	</div>
 
 	<div class="container">
@@ -140,10 +145,13 @@
 						<c:forEach var="answer" items="${question.answers}">
 							<!-- parcours des reponses liées à cette questions pour les afficher-->
 							<tr>
-								<td>${answer.expectedAnswer}</td>
+								<td><c:if test="${answer.expectedAnswer}">
+										<i class="fa fa-check"></i>
+									</c:if> <c:if test="${!answer.expectedAnswer}">
+										<i class="fa fa-times-circle" style="color: #ff4a4a"></i>
+									</c:if></td>
 								<td>${answer.body}</td>
 								<td>${answer.commentPostAnswer}</td>
-								<td>
 								<td align="center"><a
 									href="ManagementQuestionsDesigner/updateResponse/${question.id}/${answer.id}">
 										<button type="button" class="templatemo-blue-button">
@@ -166,13 +174,14 @@
 			</div>
 		</div>
 	</div>
-	</div>
+
 	</c:if>
+
 
 	<br>
 	<br>
 	<br />
-	
+
 
 	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 	<!-- jQuery -->
@@ -180,6 +189,8 @@
 	<!--  jQuery Migrate Plugin -->
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="js/templatemo-script.js"></script>
-
 </body>
+<footer class="text-right">
+	<p>Copyright &copy; 2020 QuizizSkillz | Design: Template Mo</p>
+</footer>
 </html>

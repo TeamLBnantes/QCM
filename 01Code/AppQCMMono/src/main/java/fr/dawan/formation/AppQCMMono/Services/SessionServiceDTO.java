@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 
+import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.User;
 
 public class SessionServiceDTO {
@@ -27,5 +28,15 @@ public class SessionServiceDTO {
 		return user;
 
 	}
+	
+	public void nbMaxAnswers(Model model, Question question) {
+		if(question.getAnswers().size()>=6) {
+			model.addAttribute("maxQ", true);
+			model.addAttribute("message", "nombre maximum de réponses atteint");
+		}else {
+			model.addAttribute("maxQ", false);
+		}
+	}
+
 	 
 }

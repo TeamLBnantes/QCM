@@ -1,6 +1,6 @@
 
 
-          <div class="row fixe" >
+          <div class="row" >
             <nav class="templatemo-top-nav col-lg-12 col-md-12">
               <ul class="text-uppercase">
                 <li><a href="home" class="active">Création</a></li>

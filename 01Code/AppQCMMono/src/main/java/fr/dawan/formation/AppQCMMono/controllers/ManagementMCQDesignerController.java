@@ -1,6 +1,8 @@
 package fr.dawan.formation.AppQCMMono.controllers;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import fr.dawan.formation.AppQCMMono.Enum.Status;
 import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
 import fr.dawan.formation.AppQCMMono.Models.ObjectFiltresQuestion;
@@ -55,6 +58,7 @@ public class ManagementMCQDesignerController {
 		//for (Question question : questions) {
 		//	System.out.println(question);
 		//}
+		model.addAttribute("enumStatus", Status.values());
 		model.addAttribute("newMcq", true);
 		model.addAttribute("mcqs", mcqs);
 		//model.addAttribute("enumStatus", Status.values());
@@ -70,6 +74,8 @@ public class ManagementMCQDesignerController {
 		User user = (User) session.getAttribute("user");
 		MCQService mcqService=new MCQService();
 		mcq.setDesigner(user.getDesigner());
+		mcq.setCreateDate(LocalDateTime.now());
+		mcq.setEditDate(LocalDateTime.now());
 		mcqService.create(mcq);
 		
 		return "redirect:/ManagementMCQDesigner";
@@ -117,6 +123,7 @@ public class ManagementMCQDesignerController {
 		MCQService mcqService=new MCQService();
 		MCQ mcqUpdate=mcqService.searchById(id);
 		mcqUpdate.setBody(mcq.getBody());
+		mcqUpdate.setEditDate(LocalDateTime.now());
 		//mcqUpdate.setTheme(mcq.getTheme());
 		mcqService.saveOrUpdate(mcqUpdate);
 	

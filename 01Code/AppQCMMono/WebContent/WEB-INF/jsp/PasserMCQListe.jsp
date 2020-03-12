@@ -37,9 +37,6 @@
 
   </head>
   <body>  
-  
-  
-   
   <h2>Je suis bien sur la page ManagementMCQDesigner</h2>
     <!-- Left column -->
     <div class="templatemo-flex-row">
@@ -51,9 +48,7 @@
       <!-- Main content --> 
       <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container"> <!--div barre de navigation du haut -->
-
 			<%@ include file='sources/barreNavigation.jsp' %>
-
         </div>   <!-- fin de la div barre navigation du haut -->
         <div class="templatemo-content-container"> <!--div zonne de travail principale  -->
                 

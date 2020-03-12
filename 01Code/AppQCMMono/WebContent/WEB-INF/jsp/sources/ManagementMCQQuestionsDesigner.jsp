@@ -1,19 +1,15 @@
 
         <!-- debut de la zone du tableau -->
-        
-       <h3>je suis sur la page test ManagementMCQQuestionsDesigner.jsp: ${idTest} </h3> 
-        <h3>Body du MCQ: ${BodyMCQ} </h3> 
+        > 
     <div class="templatemo-content-widget white-bg">
-
-         
           <div class="templatemo-content-widget no-padding">
             <div class="panel panel-default table-responsive">
               <table class="table table-striped table-bordered templatemo-user-table">
                 <thead>
                   <tr>
-                    <td width="30px"><a href="" class="white-text templatemo-sort-by"># <span class="caret"></span></a></td>
-                    <td><a href="" class="white-text templatemo-sort-by">body <span class="caret"></span></a></td>
-                    <td width="100px"><a href="" class="white-text templatemo-sort-by">theme <span class="caret"></span></a></td>
+                    <td width="30px" class="white-text templatemo-sort-by"># </td>
+                    <td class="white-text templatemo-sort-by">body </td>
+                    <td width="100px" class="white-text templatemo-sort-by">theme</td>
                     
                     <td width="30px">Edit</td>
                     <td width="30px">Action</td>
@@ -37,11 +33,8 @@
             </div>                          
           </div>       
         <!-- fin de la zone du tableau -->        
-        
  </div>      
-    
-    
-    
+
      <!-- debut zone formmulaire -->   
 
 
@@ -79,7 +72,7 @@
  
               <div class="form-group text-right">
                 <button type="submit" class="templatemo-blue-button">Rechercher</button>
-                <button type="reset" class="templatemo-white-button">Reset</button>
+                <button type="reset" class="templatemo-white-button">Vider les champs</button>
          </form>
          <!-- un petit form, juste pour le bouton re-init recherche -->
          <form action="ManagementMCQDesigner/${idMCQ}/filtres" class="templatemo-login-form" method="post" >
@@ -87,7 +80,7 @@
           <input type="hidden" class="form-control" name="themeFiltre" value="">
           <input type="hidden" class="form-control" name="yoursFiltre" value="false">
                         <div class="form-group text-left"> 
-                <button type="submit" class="templatemo-edit-btn">re-Initialiser la liste</button>
+                <button type="submit" class="templatemo-blue-button">Re-initialiser la liste</button>
                 		</div> 
          </form>
               </div>  
@@ -105,10 +98,10 @@
               <table class="table table-striped table-bordered templatemo-user-table">
                 <thead>
                   <tr>
-                    <td width="30px"><a href="" class="white-text templatemo-sort-by"># <span class="caret"></span></a></td>
+                    <td width="30px" class="white-text templatemo-sort-by"># </td>
                     <td width="30px">Select</td>
-                    <td><a href="" class="white-text templatemo-sort-by">body <span class="caret"></span></a></td>
-                    <td width="100px"><a href="" class="white-text templatemo-sort-by">theme <span class="caret"></span></a></td>
+                    <td class="white-text templatemo-sort-by">body </td>
+                    <td width="100px" class="white-text templatemo-sort-by">theme</td>
                     
                     <td width="30px">Edit</td>
                     
@@ -176,9 +169,8 @@
             </ul> -->
          <!--  </div>       -->    
           <footer class="text-right">
-                      <p>Copyright &copy; 2084 Company Name 
-            | Design: Template Mo</p>
-          </footer>  
+	<p>Copyright &copy; 2020 QuizizSkillz | Design: Template Mo</p>
+</footer>
           
           
           

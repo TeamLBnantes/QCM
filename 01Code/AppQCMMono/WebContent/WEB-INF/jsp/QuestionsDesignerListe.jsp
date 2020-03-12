@@ -20,7 +20,7 @@
     <link href="resources/css/templatemo-style.css" rel="stylesheet">
     
     
-<title>Management Question by Designer</title>
+<title>QuizizSkillz Management Question by Designer</title>
 </head>
 <body>
 <div class="templatemo-flex-row">

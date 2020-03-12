@@ -11,7 +11,7 @@
 			%>" />
 
 <meta charset="UTF-8">
-<title>Bienvenu</title>
+<title>QuizizSkillz Bienvenue</title>
 
 <link href="resources/css/signin.css" rel="stylesheet">
 <link rel="canonical"

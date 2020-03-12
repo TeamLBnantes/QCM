@@ -1,113 +1,101 @@
-<%-- <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://www.springframework.org/tags" prefix="tag" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<base
-	href="<%=request.getScheme() + "://"
-			+ request.getServerName() + ":"
-			+ request.getServerPort()
-			+ request.getContextPath() + "/"
-			%>" />
-			
-<!-- mise en forme via bootstrap -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<title>Management QCM by Designer</title>
-</head> --%>
 <body>
-Bienvenu dans la gestion des vos QCM
 
-<div>
+	<div class="container">
+		<c:if test="${newMcq}">
+			<!-- formulaire de création d'un nouveau qcm, afficher uniquemlent si on a cliquer sur le bouton ajouter formulaire -->
+			<!-- Formulaire d'ajout -->
+			<!-- Ajouter required pour la validation des champs -->
+			<form action="ManagementMCQDesigner/createMCQ" method="post">
+				<div class="templatemo-content-widget white-bg">
+					<h2 class="text-uppercase">creation d'un nouveau QCM</h2>
+					<div class="table-responsive">
+						<table
+							class="table table-striped table-bordered templatemo-user-table">
 
+							<tr>
+								<td><b>Sujet du QCM</b></td>
+								<td><textarea name="body" class="form-control"
+										placeholder="presentation QCM" required> ${mcq.body} </textarea></td>
+							</tr>
+							<tr>
+								<td><b>Theme(s)</b></td>
+								<td><input type="text" class="form-control"
+									name="commentPostAnswer" placeholder="theme"
+									value="${mcq.theme}" /></td>
+							</tr>
+							<tr>
+								<td><b>Status:</b></td>
+								<td><select class="form-control" name="status" id="status">
+										<c:forEach items="${ enumStatus }" var="status">
+											<option value="${ status }"
+												${ question.status == status ? 'selected' : '' }>
+												<tag:message code="${ status.libelle }"
+													text="${status.libelle }" />
+											</option>
+										</c:forEach>
+								</select></td>
+							</tr>
+						</table>
+					</div>
+					<!-- </div> -->
+					</table>
+					<br />
+					<button type="submit" class="btn btn-primary " name="action"
+						value="valider">Valider</button>
+				</div>
+			</form>
 
+			<!-- fin formulaire de création du qcm -->
+		</c:if>
+	</div>
+	<div class="container">
+		<c:if test="${!newMcq}">
+			<a href="ManagementMCQDesigner/new">
+				<button type="button" class="templatemo-blue-button" name="action"
+					value="chercher">Creer QCM</button>
+		</c:if>
+	</div>
 
-<c:if test="${newMcq}">
-<!-- formulaire de crÃ©ation d'un nouveau qcm, afficher uniquemlent si on a cliquer sur le bouton ajouter formulaire -->
-<!-- Formulaire d'ajout --> <!-- Ajouter required pour la validation des champs -->
+	<!-- Formulaire d'affichage des QCM -->
 
-<div class="container">
-<br>
-<h2>creation d'un nouveau QCM</h2>
-<br>
+	<div class="container">
+		<div class="templatemo-content-widget white-bg">
+			<h2 class="text-uppercase">Vos Qcm existants</h2>
+			<div class="table-responsive">
+				<table
+					class="table table-striped table-bordered templatemo-user-table">
+					<thead>
+						<tr>
+							<th class="white-text templatemo-sort-by" width=60%>Intitulé</th>
+							<th class="white-text templatemo-sort-by" width=10%>Statut</th>
+							<th class="white-text templatemo-sort-by" width=10%>Theme</th>
+							<c:if test="${!newMcq}">
+								<th class="white-text templatemo-sort-by" width=20%>Action</th>
+							</c:if>
+					</thead>
+					<c:forEach var="qcm" items="${mcqs}">
+						<tr>
+							<td>${qcm.body}</td>
+							<td>${qcm.status}</td>
+							<td>${qcm.theme}</td>
+							<c:if test="${!newMcq}">
+								<td><a href="ManagementMCQDesigner/${qcm.id}"><button
+											type="button" class="templatemo-blue-button">
+											<i class="far fa-edit"></i>
+										</button></a> <a href="ManagementMCQDesigner/delete/${qcm.id}"><button
+											type="button" class="templatemo-white-button">
+											<i class="far fa-trash-alt" style="color: #ff4a4a"></i>
+										</button></a></td>
+							</c:if>
+						</tr>
 
-<form action="ManagementMCQDesigner/createMCQ" method="post">
-<table class="table table-sm">
-
-<tr><td><b>body:</b></td><td><textarea name="body" placeholder="presentation QCM" value="${mcq.body}" required width="900px"/></textarea> </td></tr>
-<tr><td><b>theme:</b></td><td><input type="text" name="commentPostAnswer" placeholder="theme" value="${mcq.theme}" width="300px"/></td></tr>
-<tr><td><b>status:</b></td><td><input type="text" name="commentPostAnswer" placeholder="status" value="${mcq.status}" width="300px"/></td></tr>
- 
-
-
-</table>
-
-<!-- </div> -->
-<tr><td>
-
-			<button type="submit" class="btn btn-primary" name="action" value="valider">
-			Valider</button>
-		
-			</td><td></td></tr>
-</table>
-<br><br><br>
-<h5>vos Qcm existant</h5><br><br>
-</form>
-
-</div>
-<!-- fin formulaire de crÃ©ation du qcm -->
-</c:if>
-<c:if test="${!newMcq}">
-<a href="ManagementMCQDesigner/new">
-<button type="button" class="templatemo-blue-button" name="action" value="chercher">Creer QCM</button>
-
-
- </c:if>
- 
-	
-</div>
-
-
-
-
-<!-- Formulaire d'affichage des QCM -->
-
-<div class="container">
-<table class="table">
- <thead class="thead-dark">
-<tr>
-<th scope="col">body</th>
-<th scope="col">status</th>
-<th scope="col">theme</th>
-</thead>
-<c:forEach var="qcm" items="${mcqs}">
-<tr>
-<td>${qcm.body}</td>
-<td>${qcm.theme}</td>
-<td>${qcm.status}</td>
-<c:if test="${!newMcq}">
-<td><a href="ManagementMCQDesigner/${qcm.id}"><button type="button" class="templatemo-blue-button"><i class="far fa-edit"></i></button></a> 
-<a href="ManagementMCQDesigner/delete/${qcm.id}"><button type="button" class="templatemo-white-button"><i class="far fa-trash-alt" style="color:#ff4a4a"></i></button></a></td>
-</c:if>
-</tr>
-
-</c:forEach>
-</table>
-
-</div>
-
-
-
-
-
-
-
-
-<br>
-<a href="home">home</a><br>
-
+					</c:forEach>
+				</table>
+			</div>
+		</div>
 </body>
+<footer class="text-right">
+	<p>Copyright &copy; 2020 QuizizSkillz | Design: Template Mo</p>
+</footer>
 <!-- </html> -->

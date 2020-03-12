@@ -70,14 +70,17 @@ public class ManagementQuestionsDesignerController {
 	public String afficherQuestion(@PathVariable("id") int id, HttpSession session, Model model) {
 
 		User user = (User) session.getAttribute("user");
-
 		QuestionService questionService = new QuestionService();
 		List<Question> questions = questionService.searchByDesigner(user.getDesigner());
 		Question question = questionService.findById(id);
 		
 		SessionServiceDTO ssdto = new SessionServiceDTO();
+		//l'User est designer?
 		ssdto.isDesignerService(user, model);
+		// avons nous déjà 6 réponses ?
+		ssdto.nbMaxAnswers(model, question);
 
+		
 		model.addAttribute("Response", false);
 		model.addAttribute("question", question);
 		model.addAttribute("questions", questions);
@@ -85,6 +88,8 @@ public class ManagementQuestionsDesignerController {
 		// on renvoie le nom de la jsp
 		return "ManagementQuestionDesigner";
 	}
+
+	
 
 	@GetMapping(value = { "/new" })
 	public String renseignerNouvelleQuestion(HttpSession session, Model model) {
@@ -111,6 +116,7 @@ public class ManagementQuestionsDesignerController {
 		answer.setId(0);
 		SessionServiceDTO ssdto = new SessionServiceDTO();
 		ssdto.isDesignerService(user, model);
+		ssdto.nbMaxAnswers(model, question);
 
 		model.addAttribute("Response", true);
 		model.addAttribute("answer", answer);
@@ -136,6 +142,7 @@ public class ManagementQuestionsDesignerController {
 		SessionServiceDTO ssdto = new SessionServiceDTO();
 		User user = ssdto.sessionUserService(session);
 		ssdto.isDesignerService(user, model);
+		ssdto.nbMaxAnswers(model, question);
 		model.addAttribute("Response", true);
 		model.addAttribute("answer", answer);
 		model.addAttribute("question", question);
@@ -188,6 +195,7 @@ public class ManagementQuestionsDesignerController {
 		SessionServiceDTO ssdto = new SessionServiceDTO();
 		User user = ssdto.sessionUserService(session);
 		ssdto.isDesignerService(user, model);
+		ssdto.nbMaxAnswers(model, question);
 		model.addAttribute("Response", false);
 		model.addAttribute("question", question);
 		// model.addAttribute("questions", questions);
@@ -223,6 +231,7 @@ public class ManagementQuestionsDesignerController {
 		SessionServiceDTO ssdto = new SessionServiceDTO();
 
 		ssdto.isDesignerService(user, model);
+		ssdto.nbMaxAnswers(model, question);
 		model.addAttribute("Response", false);
 		model.addAttribute("question", question);
 		// model.addAttribute("questions", questions);
@@ -269,7 +278,7 @@ public class ManagementQuestionsDesignerController {
 		SessionServiceDTO ssdto = new SessionServiceDTO();
 		User user = ssdto.sessionUserService(session);
 		ssdto.isDesignerService(user, model);
-		
+		ssdto.nbMaxAnswers(model, question);
 		model.addAttribute("Response", false);
 
 		model.addAttribute("question", question);

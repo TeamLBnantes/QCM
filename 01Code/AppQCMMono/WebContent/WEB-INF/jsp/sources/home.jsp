@@ -36,4 +36,7 @@
 <br/>
 	<a href="index.jsp">Déconnexion</a>
 </body>
+<footer class="text-right">
+	<p>Copyright &copy; 2020 QuizizSkillz | Design: Template Mo</p>
+</footer>
 </html>

@@ -2,17 +2,19 @@ package fr.dawan.formation.AppQCMMono.Models;
 
 import java.util.List;
 
-public class ObjectQuestionCorrection implements Map<k,V>{
+public class ObjectQuestionCorrection {
 
-	private Map<Integer, Boolean> ;
+	private List<ObjectReponseCorrection> reponsesUser;
 
-	public List<ObjectReponseCorrection> getRepUser() {
-		return repUser;
+	public List<ObjectReponseCorrection> getReponsesUser() {
+		return reponsesUser;
 	}
 
-	public void setRepUser(List<ObjectReponseCorrection> repUser) {
-		this.repUser = repUser;
+	public void setReponsesUser(List<ObjectReponseCorrection> reponsesUser) {
+		this.reponsesUser = reponsesUser;
 	}
+
 	
+
 	
 }

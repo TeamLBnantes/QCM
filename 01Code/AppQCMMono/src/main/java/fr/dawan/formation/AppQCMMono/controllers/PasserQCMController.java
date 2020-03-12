@@ -1,5 +1,6 @@
 package fr.dawan.formation.AppQCMMono.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import fr.dawan.formation.AppQCMMono.Models.Answer;
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
 import fr.dawan.formation.AppQCMMono.Models.ObjectFiltresMCQ;
 import fr.dawan.formation.AppQCMMono.Models.ObjectPasserMcq;
+import fr.dawan.formation.AppQCMMono.Models.ObjectQuestionCorrection;
 import fr.dawan.formation.AppQCMMono.Models.ObjectReponseCorrection;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.User;
@@ -92,7 +95,7 @@ public class PasserQCMController {
 	
 	
 	@PostMapping(value= {"/next"})
-	public String suivante(Map<Integer, Boolean> reponsesUser, HttpSession session, Model model) {
+	public String suivante(ObjectQuestionCorrection reponsesUser, HttpSession session, Model model) {
 		Question question=null;
 		int pointeurQuestionAfficher;
 		User user = (User)session.getAttribute("user");
@@ -100,6 +103,7 @@ public class PasserQCMController {
 		MCQService mcqService=new MCQService();
 	//	MCQ mcq=mcqService.searchById(tarckMcq.getMcqPassed().getMcq().getId());
 		MCQ mcq=tarckMcq.getMcqPassed().getMcq();
+		boolean bonnesReponses=true;
 		//calcul de la valeur de étape
 		switch (tarckMcq.getEtape()) {
 		//################################envoyer la premiere question (question suivante)##################################################################################
@@ -120,9 +124,35 @@ public class PasserQCMController {
 			pointeurQuestionAfficher=tarckMcq.getNbQuestionsPassed();
 			question=tarckMcq.getListQuestionsUsed().get(pointeurQuestionAfficher).getQuestion();
 			//on corrige la question
+
+			//ObjectQuestionCorrection reponsesDesigner=new ObjectQuestionCorrection();
+			List<ObjectReponseCorrection> reponsesDesigner=new ArrayList<>();
+			Set<Answer> listeReponseDesigner=question.getAnswers();
+			for (Answer answer : listeReponseDesigner) {
+				ObjectReponseCorrection repDesigner=new ObjectReponseCorrection();
+				repDesigner.setIdRepCor(answer.getId());
+				repDesigner.setRepUser(answer.isExpectedAnswer());
+				//reponsesDesigner.getReponsesUser().add(repDesigner);
+				reponsesDesigner.add(repDesigner);
+			}
 			
+
+			for (ObjectReponseCorrection rep : reponsesUser.getReponsesUser()) {
+				//for (ObjectReponseCorrection repDesigner :  reponsesDesigner.getReponsesUser()) {
+				for (ObjectReponseCorrection repDesigner :  reponsesDesigner) {	
+				if (rep.getIdRepCor()==repDesigner.getIdRepCor()) {
+						if (rep.isRepUser()==repDesigner.isRepUser()) {
+							rep.setAsDesigner(true);
+						}else {
+							bonnesReponses = false;
+							rep.setAsDesigner(false);
+						}
+					}
+				}	
+			}
 			
 			//on met à jour le trackMcq
+			if (bonnesReponses) tarckMcq.setNbBonnesReponses(tarckMcq.getNbBonnesReponses()+1);	
 			tarckMcq.setNbQuestionsPassed(pointeurQuestionAfficher+1);
 			
 			break;
@@ -139,6 +169,9 @@ public class PasserQCMController {
 				//########################passage  à l'ecran de cloture ##########################################################################################
 			}else {
 				tarckMcq.setEtape("endMCQ");	//je viens d'une correction, il reste plus de question, donc passage  à l'ecran de cloture 
+				//TODO: afficher la page resultat et enregistrer en bdd
+				
+				
 			}
 			break;	
 		//##################################################################################################################
@@ -147,8 +180,8 @@ public class PasserQCMController {
 		}
 
 
-		
-		
+		model.addAttribute("repsUserCOrrigees", reponsesUser.getReponsesUser());
+		model.addAttribute("bonnesReponses", bonnesReponses);
 		
 		session.setAttribute("tarckMcq", tarckMcq);
 		System.out.println(tarckMcq);

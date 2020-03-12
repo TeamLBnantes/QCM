@@ -4,12 +4,13 @@ public class ObjectReponseCorrection {
 
 	private int idRepCor;
 	private boolean repUser;
-	
-	public int getId() {
-		return id;
+	private boolean asDesigner;
+
+	public int getIdRepCor() {
+		return idRepCor;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setIdRepCor(int idRepCor) {
+		this.idRepCor = idRepCor;
 	}
 	public boolean isRepUser() {
 		return repUser;
@@ -17,9 +18,16 @@ public class ObjectReponseCorrection {
 	public void setRepUser(boolean repUser) {
 		this.repUser = repUser;
 	}
+	
+	public boolean isAsDesigner() {
+		return asDesigner;
+	}
+	public void setAsDesigner(boolean asDesigner) {
+		this.asDesigner = asDesigner;
+	}
 	public ObjectReponseCorrection(int id, boolean repUser) {
 		super();
-		this.id = id;
+		this.idRepCor = id;
 		this.repUser = repUser;
 	}
 	public ObjectReponseCorrection() {

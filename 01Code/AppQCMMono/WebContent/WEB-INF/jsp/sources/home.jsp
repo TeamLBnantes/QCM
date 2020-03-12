@@ -12,10 +12,10 @@
 			+ request.getContextPath() + "/"
 			%>" />
 </head>
-<body class="text-center">
+<body >
 <br/>
 <br/>
-<div class="templatemo-content-widget white-bg">
+<div class="templatemo-content-widget white-bg text-center" >
 	<h1>Bienvenue sur</h1>
 	<img class="mb-4" src="resources/images/QuizizSkillz.png"
 			alt=""  height="125">
@@ -68,6 +68,7 @@
 
 	<!-- <a href="index.jsp">Déconnexion</a> -->
 	</div>
+
 </body>
 <footer class="text-right">
 	<p>Copyright &copy; 2020 QuizizSkillz | Design: Template Mo</p>

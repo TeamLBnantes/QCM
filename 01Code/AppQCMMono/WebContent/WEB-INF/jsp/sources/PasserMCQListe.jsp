@@ -73,7 +73,7 @@
                     <td><a href="" class="white-text templatemo-sort-by">body <span class="caret"></span></a></td>
                     <td width="100px"><a href="" class="white-text templatemo-sort-by">theme <span class="caret"></span></a></td>
                     
-                    <td width="30px">Edit</td>
+                    
                     
 
                   </tr>
@@ -93,7 +93,7 @@
                     <td>${mcq.body}</td>
                     <td>${mcq.theme}</td>
              		   
-                    <td><a href="" class="templatemo-edit-btn">Edit</a></td>
+                    
 
 					</form>
                   </tr>

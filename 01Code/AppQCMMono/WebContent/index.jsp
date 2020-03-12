@@ -33,10 +33,10 @@
 			<br/>
 <a href="inscription"><button class="btn btn-lg btn-primary btn-block" type="submit">Inscription</button></a><br>
 <a href="login"><button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button></a><br>
-<a href="home">home</a><br>
+<!-- <a href="home">home</a><br>
 <a href="login/out">logout</a><br>
 <a href="test">test</a><br>
-<a href="test/2">test/2</a><br>
+<a href="test/2">test/2</a><br> -->
 </div>
 </body>
 </html>

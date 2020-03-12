@@ -132,10 +132,17 @@
 					<div id="displayError" class="erreurChamp"></div>
 					<br /> <input type="submit" value="valider" id="valider"
 						class="btn-lg btn-primary" />
-						</div>
-			</form>
-		</div>
+						<!-- </div> -->
+						
 
+			</form>
+			</form>
+				<!-- </div> -->
+				<a href="index.jsp">						</div>
+						
+						 <input type="submit" value="annuler" id="valider"
+						class="btn-lg btn-primary" />
+						</div></a>
 
 	</div>
 

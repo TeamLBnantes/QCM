@@ -23,6 +23,7 @@ import fr.dawan.formation.AppQCMMono.Models.ObjectReponseCorrection;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Services.MCQService;
+import fr.dawan.formation.AppQCMMono.Services.SessionServiceDTO;
 
 @Controller
 @RequestMapping("/passerQCM")
@@ -47,6 +48,9 @@ public class PasserQCMController {
 		MCQService mcqService=new MCQService();
 		Set<MCQ> mcqs=mcqService.findAll();
 
+		
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		ssdto.isDesignerService(user, model);
 		model.addAttribute("mcqs", mcqs);
 		
 		model.addAttribute("isDesigner", isDesigner);
@@ -66,7 +70,8 @@ public class PasserQCMController {
 		List<MCQ> mcqs=mcqService.searchWithFiltre(filtresMCQ, user);
 		
 		
-		
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		ssdto.isDesignerService(user, model);
 		model.addAttribute("mcqs", mcqs);
 		model.addAttribute("filtresMCQ", filtresMCQ);
 	
@@ -87,6 +92,8 @@ public class PasserQCMController {
 		//il faudra penser à la sup à la fin
 //		ObjectPasserMcq tarckMcq2=(ObjectPasserMcq)session.getAttribute("tarckMcq");
 //		System.out.println(tarckMcq2);
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		ssdto.isDesignerService(user, model);
 		model.addAttribute("tarckMcq", tarckMcq);
 		model.addAttribute("mcq", mcq);
 		// on renvoie le nom de la jsp
@@ -179,7 +186,8 @@ public class PasserQCMController {
 			break;
 		}
 
-
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		ssdto.isDesignerService(user, model);
 		model.addAttribute("repsUserCOrrigees", reponsesUser.getReponsesUser());
 		model.addAttribute("bonnesReponses", bonnesReponses);
 		

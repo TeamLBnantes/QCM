@@ -91,14 +91,17 @@ public class MCQ extends Entitie {
 		this.forum = forum;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "MCQ [body=" + body + ", theme=" + theme + ", status=" + status + ", createDate=" + createDate
-				+ ", editDate=" + editDate + ", designer=" + designer + "]";
+		return "MCQ [body=" + body + ", topic=" + topic + ", theme=" + theme + ", status=" + status + ", createDate="
+				+ createDate + ", editDate=" + editDate + ", designer=" + designer + ", forum=" + forum
+				 + "]";
 	}
 
 	public MCQ(String body, String theme, Status status, LocalDateTime createDate, LocalDateTime editDate,
-			Designer designer, Forum forum) {
+			Designer designer, Forum forum, String topic) {
 		super();
 		this.body = body;
 		this.theme = theme;
@@ -107,6 +110,7 @@ public class MCQ extends Entitie {
 		this.editDate = editDate;
 		this.designer = designer;
 		this.forum = forum;
+		this.topic=topic;
 	}
 
 	public MCQ() {

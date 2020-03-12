@@ -26,6 +26,7 @@ import fr.dawan.formation.AppQCMMono.Models.QuestionDTO;
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Services.MCQService;
 import fr.dawan.formation.AppQCMMono.Services.QuestionService;
+import fr.dawan.formation.AppQCMMono.Services.SessionServiceDTO;
 
 @Controller
 @RequestMapping("/ManagementMCQDesigner")
@@ -39,6 +40,8 @@ public class ManagementMCQDesignerController {
 		MCQService mcqService=new MCQService();
 		List<MCQ> mcqs=mcqService.searchByDesigner(user.getDesigner());
 
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		ssdto.isDesignerService(user, model);
 		model.addAttribute("newMcq", false);
 		model.addAttribute("mcqs", mcqs);
 
@@ -58,6 +61,8 @@ public class ManagementMCQDesignerController {
 		//for (Question question : questions) {
 		//	System.out.println(question);
 		//}
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		ssdto.isDesignerService(user, model);
 		model.addAttribute("enumStatus", Status.values());
 		model.addAttribute("newMcq", true);
 		model.addAttribute("mcqs", mcqs);
@@ -109,9 +114,11 @@ public class ManagementMCQDesignerController {
 		QuestionService questionService=new QuestionService();
 		List<Question> questions=questionService.searchByMcq(mcq);
 
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		ssdto.isDesignerService(user, model);
 		model.addAttribute("mcq", mcq);
 		model.addAttribute("questions", questions);
-
+		model.addAttribute("enumStatus", Status.values());
 		// on renvoie le nom de la jsp
 		return "ManagementMCQDesigner";
 	}
@@ -124,9 +131,9 @@ public class ManagementMCQDesignerController {
 		MCQ mcqUpdate=mcqService.searchById(id);
 		mcqUpdate.setBody(mcq.getBody());
 		mcqUpdate.setEditDate(LocalDateTime.now());
-		//mcqUpdate.setTheme(mcq.getTheme());
+		mcqUpdate.setTopic(mcq.getTopic());
 		mcqService.saveOrUpdate(mcqUpdate);
-	
+	//***********************************************************************************************
 
 		// on renvoie le nom de la jsp
 		return "redirect:/ManagementMCQDesigner/"+id;
@@ -166,7 +173,9 @@ public class ManagementMCQDesignerController {
 				}
 			}
 		}
-			
+		
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		ssdto.isDesignerService(user, model);
 		model.addAttribute("questionsTrouveesDTO", questionsTrouveesDTO);
 		model.addAttribute("BodyMCQ", mcq.getBody());
 		model.addAttribute("idMCQ", id);
@@ -229,7 +238,9 @@ public class ManagementMCQDesignerController {
 				}
 			}
 		}
-			
+		
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		ssdto.isDesignerService(user, model);
 		model.addAttribute("questionsTrouveesDTO", questionsTrouveesDTO);
 		model.addAttribute("BodyMCQ", mcq.getBody());
 		model.addAttribute("idMCQ", id);
@@ -274,7 +285,9 @@ public class ManagementMCQDesignerController {
 				}
 			}
 		}
-			
+		
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		ssdto.isDesignerService(user, model);
 		model.addAttribute("questionsTrouveesDTO", questionsTrouveesDTO);
 		model.addAttribute("BodyMCQ", mcq.getBody());
 		model.addAttribute("idMCQ", id);

@@ -1,8 +1,8 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
         <!-- debut de la zone du tableau -->
         
-       <h3>je suis sur la page est on passe le QCM : ${mcq.body }</h3> 
-       <h3>nombre de Question restantes : ${tarckMcq.nbQuestionsTotal-tarckMcq.nbQuestionsPassed} </h3> 
+<%--        <h3>je suis sur la page est on passe le QCM : ${mcq.body }</h3> 
+       <h3>nombre de Question restantes : ${tarckMcq.nbQuestionsTotal-tarckMcq.nbQuestionsPassed} </h3>  --%>
 
     
     
@@ -11,7 +11,7 @@
 
                    <div class="templatemo-content-widget white-bg">
             
-           <h3>Zone de Travail </h3> 
+           <h3>${mcq.body } </h3>
 <!-- fin tableau affichage des questions dispo-->           
            <br>
            		<br>
@@ -48,20 +48,24 @@
            </c:if>
 <!-- ############################################################### affichage de la question #######################################################################################  -->  
            <c:if test="${tarckMcq.etape=='question'}">
+           
+              <br/> <br/>
+   <p>Question : </p><h1> ${question.body}</h1>
+    <br/> <br/>
           <!-- affichage de la question, avec ces réponses il faudra donc mettre ici un formulair epour recupèrer le resultat-->
     <form action="passerQCM/next" class="templatemo-login-form" method="post" >   
-        <p>   question id :      ${question.id }         </p>
+<%--         <p>   question id :      ${question.id }         </p>
         <p>   question body :      ${question.body }          </p>
         <p>   question theme :     ${question.theme }           </p>
-        <p>   question commentPostAnswer :     ${question.commentPostAnswer }           </p>
+        <p>   question commentPostAnswer :     ${question.commentPostAnswer }           </p> --%>
            <div class="templatemo-content-widget no-padding">
             <div class="panel panel-default table-responsive">
               <table class="table table-striped table-bordered templatemo-user-table">
                 <thead>
                   <tr>
-                   <td width="30px"><a href="" class="white-text templatemo-sort-by">tmp<span class="caret"></span></a></td>
-                    <td width="30px"><a href="" class="white-text templatemo-sort-by">True <span class="caret"></span></a></td>
-                    <td><a href="" class="white-text templatemo-sort-by">body <span class="caret"></span></a></td>
+                   
+                    <td width="30px">True </td>
+                    <td>body </td>
 
 
                   </tr>
@@ -70,9 +74,7 @@
                 <c:set var="count" value="0" scope="page" />
                 <c:forEach var="answer" items="${question.answers}">
                   <tr>
-                  <td>
-                  ${answer.expectedAnswer}
-                  </td>
+
                     <td><!-- td de la case à cocher -->
                    	    
                     	
@@ -141,26 +143,26 @@
            <h3>C'est une bonne réponse</h3>
       </c:if>
            <c:if test="${!bonnesReponses}">      
-           <h3>oups, une erreur</h3>
+           <h3>oups,il y a erreur</h3>
       </c:if> 
-        <p>   tarckMcq nbQuestionsTotal :     ${tarckMcq.nbQuestionsTotal }           </p>
-        <p>   tarckMcq nbQuestionsPassed:     ${tarckMcq.nbQuestionsPassed }           </p>
-        <p>   tarckMcq nbBonnesReponses:    ${tarckMcq.nbBonnesReponses }            </p>  
-        <p>   il reste     ${tarckMcq.nbQuestionsTotal -  tarckMcq.nbQuestionsPassed  } Questions dans ce QCM       </p>     
+   
+   <br/> <br/>
+ <p>Question : </p><h1> ${question.body}</h1>
+    <br/> <br/>
     <form action="passerQCM/next" class="templatemo-login-form" method="post" >   
-        <p>   question id :      ${question.id }         </p>
+       <%--  <p>   question id :      ${question.id }         </p>
         <p>   question body :      ${question.body }          </p>
         <p>   question theme :     ${question.theme }           </p>
-        <p>   question commentPostAnswer :     ${question.commentPostAnswer }           </p>
+        <p>   question commentPostAnswer :     ${question.commentPostAnswer }           </p> --%>
            <div class="templatemo-content-widget no-padding">
             <div class="panel panel-default table-responsive">
               <table class="table table-striped table-bordered templatemo-user-table">
                 <thead>
                   <tr>
-                   <td width="30px"><a href="" class="white-text templatemo-sort-by">erreur<span class="caret"></span></a></td>
-                    <td width="30px"><a href="" class="white-text templatemo-sort-by">True <span class="caret"></span></a></td>
-                    <td><a href="" class="white-text templatemo-sort-by">body <span class="caret"></span></a></td>
-					<td><a href="" class="white-text templatemo-sort-by">comment post answer <span class="caret"></span></a></td>
+                   <td width="30px">erreur</td>
+                    <td width="30px">True </td>
+                    <td>body </td>
+					<td>comment post answer </td>
 
                   </tr>
                 </thead>
@@ -194,8 +196,12 @@
               </table>    
             </div>                          
           </div>                  
-           
-           
+                 <br/><br/>
+        <p>   nbQuestionsTotal :     ${tarckMcq.nbQuestionsTotal }           </p>
+        <p>   nbQuestionsPassed:     ${tarckMcq.nbQuestionsPassed }           </p>
+        <p>   nbBonnesReponses:    ${tarckMcq.nbBonnesReponses }            </p>  
+        <p>   il reste     ${tarckMcq.nbQuestionsTotal -  tarckMcq.nbQuestionsPassed  } Questions dans ce QCM       </p>  
+           <br/><br/>
            		<div class="form-group text-center">
            		 	<form action="passerQCM/next" class="templatemo-login-form" method="post" >
            				<button type="submit" class="templatemo-blue-button" name="action" value="chercher">
@@ -216,10 +222,14 @@
            <c:if test="${tarckMcq.etape=='endMCQ'}">
            <!-- affichage de page de cloture de ce QCM, avec les résultats, un lien pour envoyer un message au concepteur du QCM-->
            
-           
-          
-           
-           
+                   <p>   nbQuestionsTotal :     ${tarckMcq.nbQuestionsTotal }           </p>
+        <p>   nbQuestionsPassed:     ${tarckMcq.nbQuestionsPassed }           </p>
+        <p>   nbBonnesReponses:    ${tarckMcq.nbBonnesReponses }            </p>  
+        
+          <p>   Commentaire du QCM :    ${question.commentPostAnswer }              </p> 
+          <br/>
+            <br/>
+            <br/>
            		<a href="passerQCM">Retour vers la lste des QCM</a>	
            </c:if>
            
@@ -231,18 +241,9 @@
          <!-- debut de la zone du tableau -->
  
         <div>
-        <p>   mcq id :      ${mcq.id }         </p>
-        <p>   mcq body :      ${mcq.body }          </p>
-        <p>   mcq theme :     ${mcq.theme }           </p>
-        <p>   mcq designer :     ${mcq.designer }           </p>
-        <p>############################### </p>
-        <p>   tarckMcq liste de question used :     ${tarckMcq.listQuestionsUsed }           </p>
-        <p>   tarckMcq nbQuestionsTotal :     ${tarckMcq.nbQuestionsTotal }           </p>
-        <p>   tarckMcq nbQuestionsPassed:     ${tarckMcq.nbQuestionsPassed }           </p>
-        <p>   tarckMcq nbBonnesReponses:    ${tarckMcq.nbBonnesReponses }            </p>
-        <p>   tarckMcq mcqPassed:     ${tarckMcq.mcqPassed }           </p>
-        <p>   tarckMcq etape:     ${tarckMcq.etape }           </p>
         
+
+
         <br/>
 
         </div>

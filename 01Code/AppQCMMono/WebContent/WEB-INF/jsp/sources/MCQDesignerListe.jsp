@@ -21,8 +21,8 @@
 							<tr>
 								<td><b>Theme(s)</b></td>
 								<td><input type="text" class="form-control"
-									name="commentPostAnswer" placeholder="theme"
-									value="${mcq.theme}" /></td>
+									name="topic" placeholder="theme"
+									value="${mcq.topic}" /></td>
 							</tr>
 							<tr>
 								<td><b>Status:</b></td>
@@ -53,7 +53,7 @@
 		<c:if test="${!newMcq}">
 			<a href="ManagementMCQDesigner/new">
 				<button type="button" class="templatemo-blue-button" name="action"
-					value="chercher">Creer QCM</button>
+					value="chercher">Creer QCM</button></a>
 		</c:if>
 	</div>
 
@@ -78,7 +78,7 @@
 						<tr>
 							<td>${qcm.body}</td>
 							<td>${qcm.status}</td>
-							<td>${qcm.theme}</td>
+							<td>${qcm.topic}</td>
 							<c:if test="${!newMcq}">
 								<td><a href="ManagementMCQDesigner/${qcm.id}"><button
 											type="button" class="templatemo-blue-button">

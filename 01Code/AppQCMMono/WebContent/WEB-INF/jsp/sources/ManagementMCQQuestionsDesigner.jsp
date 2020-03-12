@@ -143,7 +143,12 @@
           </div>       
            
 <!-- fin tableau affichage des questions dispo-->           
-           
+           	<form action="ManagementMCQDesigner/${idMCQ}"
+		class="templatemo-login-form" method="get">
+		<div class="form-group text-right">
+			<button type="submit" class="templatemo-blue-button">Retour au QCM</button>
+		</div>
+		</form>
           </div> 
         <!-- fin de la zone formulaire --> 
         

@@ -1,7 +1,7 @@
-
+<!-- dossier source : PasserMCQListe.jsp-->
         <!-- debut de la zone du tableau -->
         
-       <h3>je suis sur la page de liste des MCQ, pour les passer: ${idTest} </h3> 
+       <!-- <h3>je suis sur la page de liste des MCQ, pour les passer: ${idTest} </h3> --> 
 
     
     
@@ -10,12 +10,12 @@
 
                    <div class="templatemo-content-widget white-bg">
             <h2 class="margin-bottom-10">Rechercher des QCM</h2>
-            <p>ce formulaire va servir à filtre les QCMs dispo dans le systeme, et que vous pouvez passer</p>
+            <p>Ce formulaire va servir à filtrer les QCMs disponibles dans le systeme et que vous pouvez passer</p>
             <form action="passerQCM/filtres" class="templatemo-login-form" method="post" >                        <!-- enctype="multipart/form-data" -->
 <%--                <input type="hidden" name="id" value="${mcq.id}" /> --%>
               <div class="row form-group">
                 <div class="col-lg-6 col-md-6 form-group">                  
-                    <label for="inputBody">Body</label>
+                    <label for="inputBody">Corps</label>
                     <input type="text" class="form-control" name="bodyFiltre" placeholder="presentation QCM contient" value="${filtresMCQ.bodyFiltre}">      
                               
                 </div>
@@ -69,8 +69,8 @@
                 <thead>
                   <tr>
                     <td width="30px"><a href="" class="white-text templatemo-sort-by"># <span class="caret"></span></a></td>
-                    <td width="30px">Select</td>
-                    <td><a href="" class="white-text templatemo-sort-by">body <span class="caret"></span></a></td>
+                    <td width="30px">Selection</td>
+                    <td><a href="" class="white-text templatemo-sort-by">Corps <span class="caret"></span></a></td>
                     <td width="100px"><a href="" class="white-text templatemo-sort-by">theme <span class="caret"></span></a></td>
                     
                     
@@ -130,8 +130,7 @@
             </ul> -->
          <!--  </div>       -->    
           <footer class="text-right">
-                      <p>Copyright &copy; 2084 Company Name 
-            | Design: Template Mo</p>
+                      <p>Copyright &copy; 2020 QuizizSkillz | Design: Template Mo</p>
           </footer>  
           
           

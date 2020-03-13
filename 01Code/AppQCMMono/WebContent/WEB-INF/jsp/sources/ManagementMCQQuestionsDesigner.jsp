@@ -1,17 +1,18 @@
-
+<!--dossier source : ManagementMCQQuestionDesigner.jsp  -->
         <!-- debut de la zone du tableau -->
-        > 
+        
     <div class="templatemo-content-widget white-bg">
+    <h2 class="margin-bottom-10">Editer des questions</h2>
           <div class="templatemo-content-widget no-padding">
             <div class="panel panel-default table-responsive">
               <table class="table table-striped table-bordered templatemo-user-table">
                 <thead>
                   <tr>
                     <td width="30px" class="white-text templatemo-sort-by"># </td>
-                    <td class="white-text templatemo-sort-by">body </td>
-                    <td width="100px" class="white-text templatemo-sort-by">theme</td>
+                    <td class="white-text templatemo-sort-by">Question </td>
+                    <td width="100px" class="white-text templatemo-sort-by">Theme</td>
                     
-                    <td width="30px">Edit</td>
+                    <td width="30px">Editer</td>
                     <td width="30px">Action</td>
 
                   </tr>
@@ -23,7 +24,7 @@
                     <td>${question.body}</td>
                     <td>${question.theme}</td>
 
-                    <td><a href="" class="templatemo-edit-btn">Edit</a></td>
+                    <td><a href="" class="templatemo-edit-btn">Editer</a></td>
                     <td><a href="ManagementMCQDesigner/${idMCQ}/sup/${question.id}" class="templatemo-link">sup</a></td>
 
                   </tr>
@@ -40,12 +41,12 @@
 
                    <div class="templatemo-content-widget white-bg">
             <h2 class="margin-bottom-10">Rechercher des questions</h2>
-            <p>ce formulaire va servir à filtre les questions dispo dans le systeme, et qui peuvent donc être ajoutées au QCM</p>
+            <p>Ce formulaire va servir à filtrer les questions disponibles dans le systeme et qui peuvent donc être ajoutées au QCM</p>
             <form action="ManagementMCQDesigner/${idMCQ}/filtres" class="templatemo-login-form" method="post" >                        <!-- enctype="multipart/form-data" -->
 <%--                <input type="hidden" name="id" value="${mcq.id}" /> --%>
               <div class="row form-group">
                 <div class="col-lg-6 col-md-6 form-group">                  
-                    <label for="inputBody">Body</label>
+                    <label for="inputBody">Corps</label>
                     <input type="text" class="form-control" name="bodyFiltre" placeholder="presentation QCM contient" value="${filtresQuestion.bodyFiltre}">      
                               
                 </div>
@@ -99,11 +100,11 @@
                 <thead>
                   <tr>
                     <td width="30px" class="white-text templatemo-sort-by"># </td>
-                    <td width="30px">Select</td>
-                    <td class="white-text templatemo-sort-by">body </td>
-                    <td width="100px" class="white-text templatemo-sort-by">theme</td>
+                    <td width="30px">Selection</td>
+                    <td class="white-text templatemo-sort-by">Question </td>
+                    <td width="100px" class="white-text templatemo-sort-by">Theme</td>
                     
-                    <td width="30px">Edit</td>
+                    <td width="30px">Editer</td>
                     
 
                   </tr>
@@ -126,13 +127,13 @@
                     <td>${qDTO.question.id}</td>
                      <td width="30px"><!-- <div class="margin-right-15 templatemo-inline-block">	 -->
                       		<input type="hidden" name="id"  value="${qDTO.question.id}" >
-                      		<button type="submit" class="templatemo-edit-btn">select.</button>	
+                      		<button type="submit" class="templatemo-edit-btn">selectionner</button>	
                     <!-- </div> -->
                     </td>
                     <td>${qDTO.question.body}</td>
                     <td>${qDTO.question.theme}</td>
              		   
-                    <td><a href="" class="templatemo-edit-btn">Edit</a></td>
+                    <td><a href="" class="templatemo-edit-btn">Editer</a></td>
 
 					</form>
                   </tr>

@@ -1,13 +1,14 @@
+<!-- dossier source : ManagementMCQDesigner.jsp  -->
 
 <!-- debut de la zone du tableau -->
 
-<h3>je suis sur la page test MCQ Designer</h3>
+<!-- <h3>je suis sur la page test MCQ Designer</h3> -->
 
 <!-- debut zone formmulaire -->
 
 
 <div class="templatemo-content-widget white-bg">
-	<h2 class="margin-bottom-10">Info sur le QCM</h2>
+	<h2 class="margin-bottom-10">Informations sur le QCM</h2>
 	<form action="ManagementMCQDesigner/${mcq.id}"
 		class="templatemo-login-form" method="post">
 		<!-- enctype="multipart/form-data" -->
@@ -65,7 +66,7 @@
 		class="templatemo-login-form" method="get">
 		<input type="hidden" name="id" value="${mcq.id}" />
 		<div class="form-group text-center">
-			<button type="submit" class="templatemo-blue-button">Ajouter/supprimer
+			<button type="submit" class="templatemo-blue-button">Ajouter / Supprimer
 				des Questions</button>
 		</div>
 	</form>
@@ -77,11 +78,11 @@
 					<tr>
 						<td width="3%"
 							class="white-text templatemo-sort-by">#</td>
-						<td width="80%" class="white-text templatemo-sort-by">body
+						<td width="80%" class="white-text templatemo-sort-by">Question
 						</td>
 						<td width="10%"
-							class="white-text templatemo-sort-by">theme</td>
-						<td width="7%">Edit</td>
+							class="white-text templatemo-sort-by">Theme</td>
+						<td width="7%">Editer</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -103,7 +104,7 @@
 		class="templatemo-login-form" method="get">
 		<input type="hidden" name="id" value="${mcq.id}" />
 		<div class="form-group text-right">
-			<button type="submit" class="templatemo-blue-button">Retourà la liste des QCM</button>
+			<button type="submit" class="templatemo-blue-button">Retour à la liste des QCM</button>
 		</div>
 		</form>
 </div>

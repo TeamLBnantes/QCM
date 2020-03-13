@@ -1,3 +1,5 @@
+<!-- Dossier source : PasserMCQ.jsp -->
+
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
         <!-- debut de la zone du tableau -->
         
@@ -11,7 +13,7 @@
 
                    <div class="templatemo-content-widget white-bg">
             
-           <h3>${mcq.body } </h3>
+           <h3> Intitulé du formulaire : ${mcq.body } </h3>
 <!-- fin tableau affichage des questions dispo-->           
            <br>
            		<br>
@@ -28,10 +30,10 @@
            		<c:if test="${fn:length(mcq.theme) !=0}">
            		qui porte donc sur les themes { ${mcq.theme } }
            		</c:if>
-           		 comporte ${tarckMcq.nbQuestionsTotal } Question. 
-           		 <p>Attention, si vous quiter la page en cours, 
+           		 comporte ${tarckMcq.nbQuestionsTotal } questions. 
+           		 <p>Attention, si vous quittez la page en cours, 
            		vous ne pourrez pas revenir en arriere, il faudra reprendre du début.</p>
-           		 C'est partie Quand vous voulez .... ;-)  </h2>
+           		 C'est parti quand vous voulez .... ;-)  </h2>
            
            		<br>
            		<br>
@@ -64,8 +66,8 @@
                 <thead>
                   <tr>
                    
-                    <td width="30px">True </td>
-                    <td>body </td>
+                    <td width="30px">Vrai</td>
+                    <td>Réponse </td>
 
 
                   </tr>
@@ -159,10 +161,10 @@
               <table class="table table-striped table-bordered templatemo-user-table">
                 <thead>
                   <tr>
-                   <td width="30px">erreur</td>
-                    <td width="30px">True </td>
-                    <td>body </td>
-					<td>comment post answer </td>
+                   <td width="30px">Erreur</td>
+                    <td width="30px">Vrai</td>
+                    <td>Reponse </td>
+					<td>Commentaire de la réponse </td>
 
                   </tr>
                 </thead>
@@ -197,10 +199,10 @@
             </div>                          
           </div>                  
                  <br/><br/>
-        <p>   nbQuestionsTotal :     ${tarckMcq.nbQuestionsTotal }           </p>
-        <p>   nbQuestionsPassed:     ${tarckMcq.nbQuestionsPassed }           </p>
-        <p>   nbBonnesReponses:    ${tarckMcq.nbBonnesReponses }            </p>  
-        <p>   il reste     ${tarckMcq.nbQuestionsTotal -  tarckMcq.nbQuestionsPassed  } Questions dans ce QCM       </p>  
+        <p>   Nombre de questions dans le QCM :     ${tarckMcq.nbQuestionsTotal }           </p>
+        <p>   Nombre de question(s) passée(s) :     ${tarckMcq.nbQuestionsPassed }           </p>
+        <p>   Nombre de bonne(s) réponse(s) :    ${tarckMcq.nbBonnesReponses }            </p>  
+        <p>   Il reste     ${tarckMcq.nbQuestionsTotal -  tarckMcq.nbQuestionsPassed  } question(s) dans ce QCM       </p>  
            <br/><br/>
            		<div class="form-group text-center">
            		 	<form action="passerQCM/next" class="templatemo-login-form" method="post" >
@@ -222,15 +224,15 @@
            <c:if test="${tarckMcq.etape=='endMCQ'}">
            <!-- affichage de page de cloture de ce QCM, avec les résultats, un lien pour envoyer un message au concepteur du QCM-->
            
-                   <p>   nbQuestionsTotal :     ${tarckMcq.nbQuestionsTotal }           </p>
-        <p>   nbQuestionsPassed:     ${tarckMcq.nbQuestionsPassed }           </p>
-        <p>   nbBonnesReponses:    ${tarckMcq.nbBonnesReponses }            </p>  
+                   <p>   Nombre de questions dans le QCM :     ${tarckMcq.nbQuestionsTotal }           </p>
+        <p>   Nombre de question(s) passée(s) :     ${tarckMcq.nbQuestionsPassed }           </p>
+        <p>   Nombre de bonne(s) réponse(s) :    ${tarckMcq.nbBonnesReponses }            </p>  
         
           <p>   Commentaire du QCM :    ${question.commentPostAnswer }              </p> 
           <br/>
             <br/>
             <br/>
-           		<a href="passerQCM">Retour vers la lste des QCM</a>	
+           		<a href="passerQCM">Retour à la liste des QCM</a>	
            </c:if>
            
            
@@ -265,8 +267,7 @@
             </ul> -->
          <!--  </div>       -->    
           <footer class="text-right">
-                      <p>Copyright &copy; 2084 Company Name 
-            | Design: Template Mo</p>
+                      <p>Copyright &copy; 2020 QuizizSkillz | Design: Template Mo</p>
           </footer>  
           
           

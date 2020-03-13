@@ -1,3 +1,5 @@
+<!-- dossier source : home.jsp  -->
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -32,7 +34,7 @@
                   
                   <h2>Lors du passage d’un QCM, celui qui montre le plus ses compétences, ce n’est pas celui qui passe le questionnaire, mais le créateur de ce QCM.
                   </h2>
-                  <h3>Venez montrer vos talents dans des Quizz!</h3><br/>
+                  <h3>Venez montrer vos talents dans des Quiz!</h3><br/>
                   <p >
                     
                     QuizizSkillz est une application Web orientée "création"<br/> <br/>

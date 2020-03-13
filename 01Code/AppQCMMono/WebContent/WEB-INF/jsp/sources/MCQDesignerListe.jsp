@@ -1,4 +1,4 @@
-
+<!-- dossier source : MCQDesignerList.jsp  -->
 <body>
 
 	<div class="container">
@@ -25,7 +25,7 @@
 									value="${mcq.topic}" /></td>
 							</tr>
 							<tr>
-								<td><b>Status:</b></td>
+								<td><b>Statut:</b></td>
 								<td><select class="form-control" name="status" id="status">
 										<c:forEach items="${ enumStatus }" var="status">
 											<option value="${ status }"

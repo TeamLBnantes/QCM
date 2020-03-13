@@ -1,3 +1,4 @@
+<!-- dossier source : ManagementQuestionDesigner.jsp  -->
 
 <body>
 	<div class="container">
@@ -36,7 +37,7 @@
 								</select></td>
 							</tr>
 							<tr>
-								<td><b>Thème(s)</b></td>
+								<td><b>Theme(s)</b></td>
 								<td><textarea class="form-control" name="topic"
 										placeholder="theme(s)" rows="1">${question.topic }</textarea></td>
 							</tr>

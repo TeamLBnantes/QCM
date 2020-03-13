@@ -1,3 +1,4 @@
+<!-- jsp : ManagementMCQDesigner -->
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="tag" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -42,7 +43,7 @@
   
   
    
-  <h2>Je suis bien sur la page ManagementMCQDesigner</h2>
+  <!-- <h2>Je suis bien sur la page ManagementMCQDesigner</h2> -->
     <!-- Left column -->
     <div class="templatemo-flex-row">
       <div class="templatemo-sidebar">    <!--div barre de navigation de gauche -->

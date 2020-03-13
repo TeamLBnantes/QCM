@@ -3,9 +3,11 @@ package fr.dawan.formation.AppQCMMono.Models;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -28,6 +30,9 @@ public class MCQ extends Entitie {
 
 	@OneToOne
 	private Forum forum;
+	
+	@OneToOne (mappedBy = "mcq", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.ALL}, fetch = FetchType.EAGER)
+	private Multimedia multimedia;
 
 	@OneToMany(mappedBy = "mcq")
 	private Set<QuestionUsed> questionUseds;
@@ -92,6 +97,30 @@ public class MCQ extends Entitie {
 	}
 
 
+
+	public Multimedia getMultimedia() {
+		return multimedia;
+	}
+
+	public void setMultimedia(Multimedia multimedia) {
+		this.multimedia = multimedia;
+	}
+
+	public Set<QuestionUsed> getQuestionUseds() {
+		return questionUseds;
+	}
+
+	public void setQuestionUseds(Set<QuestionUsed> questionUseds) {
+		this.questionUseds = questionUseds;
+	}
+
+	public Set<MCQpassed> getMcQpasseds() {
+		return mcQpasseds;
+	}
+
+	public void setMcQpasseds(Set<MCQpassed> mcQpasseds) {
+		this.mcQpasseds = mcQpasseds;
+	}
 
 	@Override
 	public String toString() {

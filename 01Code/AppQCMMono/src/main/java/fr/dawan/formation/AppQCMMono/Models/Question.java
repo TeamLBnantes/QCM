@@ -31,7 +31,7 @@ public class Question extends Entitie{
 	private String topic;
 	private String theme;
 	
-	@OneToOne
+	@OneToOne (mappedBy = "question", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.ALL}, fetch = FetchType.EAGER)
 	private Multimedia multimedia;
 	
 	@OneToOne
@@ -54,6 +54,36 @@ public class Question extends Entitie{
 	
 	
 	
+	public Multimedia getMultimedia() {
+		return multimedia;
+	}
+
+
+	public void setMultimedia(Multimedia multimedia) {
+		this.multimedia = multimedia;
+	}
+
+
+	public Forum getForum() {
+		return forum;
+	}
+
+
+	public void setForum(Forum forum) {
+		this.forum = forum;
+	}
+
+
+	public Set<QuestionUsed> getQuestionUseds() {
+		return questionUseds;
+	}
+
+
+	public void setQuestionUseds(Set<QuestionUsed> questionUseds) {
+		this.questionUseds = questionUseds;
+	}
+
+
 	public String getTheme() {
 		return theme;
 	}

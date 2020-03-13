@@ -7,6 +7,7 @@ import java.util.Set;
 import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
 import fr.dawan.formation.AppQCMMono.Models.MCQpassed;
+import fr.dawan.formation.AppQCMMono.Models.Multimedia;
 import fr.dawan.formation.AppQCMMono.Models.ObjectFiltresMCQ;
 import fr.dawan.formation.AppQCMMono.Models.ObjectPasserMcq;
 import fr.dawan.formation.AppQCMMono.Models.Question;
@@ -29,6 +30,9 @@ public class MCQService {
 	public void create(MCQ mcq) {
 		// TODO attention pour le moment, je ne vérifie pas si présence de doublon dans les mcq
 		MCQDAO mcqDao = new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		GenericDAO<Multimedia> multimediaDao=new GenericDAO<>(Constantes.PERSISTENCE_UNIT_NAME);
+		mcq.setMultimedia(multimediaDao.saveOrUpdate(mcq.getMultimedia()));
+		
 		mcqDao.saveOrUpdate(mcq);
 		mcqDao.close();
 	}

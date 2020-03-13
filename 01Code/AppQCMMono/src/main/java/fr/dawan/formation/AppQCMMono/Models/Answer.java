@@ -1,8 +1,10 @@
 package fr.dawan.formation.AppQCMMono.Models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Answer extends Entitie{
@@ -14,6 +16,8 @@ public class Answer extends Entitie{
 	@ManyToOne (fetch = FetchType.EAGER)
 	private Question question;
 	
+	@OneToOne (mappedBy = "answer", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.ALL}, fetch = FetchType.EAGER)
+	private Multimedia multimedia;
 	
 	public String getBody() {
 		return body;
@@ -38,6 +42,15 @@ public class Answer extends Entitie{
 	}
 	public void setQuestion(Question question) {
 		this.question = question;
+	}
+	
+	
+	
+	public Multimedia getMultimedia() {
+		return multimedia;
+	}
+	public void setMultimedia(Multimedia multimedia) {
+		this.multimedia = multimedia;
 	}
 	@Override
 	public String toString() {

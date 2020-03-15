@@ -1,3 +1,30 @@
+
+<!DOCTYPE html>
+<html dir="ltr" lang="fr-FR">
+<head>
+<meta name="description" content="une série de témoignages relatant l'histoire de la poche de Saint-Nazaire en 1944-45" />
+<meta name="keywords" content="mots, clefs" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link  href="resources/media/lib/fancybox/dist/jquery.fancybox.min.css" rel="stylesheet">
+<!-- <link href="resources/media/lib/bootstrap-4.4.1-dist/css/bootstrap.min.css" rel="stylesheet"> -->
+<style type="text/css">
+	.thumb { width: 100%; }
+</style>
+
+<script src="resources/media/lib/jquery-3.3.1.min.js"></script>
+<script src="resources/media/lib/fancybox/dist/jquery.fancybox.min.js"></script>
+</head>
+
+<!-- j'ai ajoute les lignes ci-dessus pour integration des video -->
+
+
+
+
+
+
 <!-- Dossier source : PasserMCQ.jsp -->
 
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
@@ -36,6 +63,47 @@
            		 C'est parti quand vous voulez .... ;-)  </h2>
            
            		<br>
+           		<!-- test positionnement contenu multimedia -->
+           						<c:if test="${mcq.multimedia.typeMultimedia=='video'}">
+
+<%-- video trouvé, lien ${mcq.multimedia.adresseCible}
+<div>
+<iframe width="560" height="315" src="${mcq.multimedia.adresseCible}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!-- https://www.youtube.com/embed/CwpWl9WnO0Y -->
+</div>
+<p>autre essai d'integration des video
+</p> --%>
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+
+
+ <div class="col-md-4">
+      <div class="card mb-4 shadow-sm"> 
+    
+		<a data-fancybox data-width="640" data-height="360" href="${mcq.multimedia.adresseCible}">
+            	<img  src="resources/media/kayak.jpg" alt="" width="320px" height="180px"/>
+            	<!-- <img class="thumb" src="resources/media/kayak.jpg" alt="" /> -->
+		</a>
+            <%-- <%-- <div class="card-body">
+	      <h5 class="card-title">test laurent</h5>
+              <p class="card-text">Elle avait 16<sup>1/2</sup> ans le 26 août 1944 et raconte la prise d'ôtages à Pornic.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+		  <a type="button" class="btn btn-sm btn-outline-secondary" data-fancybox data-width="640" data-height="360" href="${mcq.multimedia.adresseCible}">Voir</a>
+                </div>
+                <small class="text-muted">XY mins</small>
+              </div>
+            </div> --%> 
+          </div>
+        </div>
+                  </div>
+        </div>
+                  </div>
+
+</c:if>	
+           		<!-- fin du test contenu multimedia -->
            		<br>
            
            		<div class="form-group text-center">

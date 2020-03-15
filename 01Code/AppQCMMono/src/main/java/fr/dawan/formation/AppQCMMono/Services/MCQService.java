@@ -30,9 +30,12 @@ public class MCQService {
 	public void create(MCQ mcq) {
 		// TODO attention pour le moment, je ne vérifie pas si présence de doublon dans les mcq
 		MCQDAO mcqDao = new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
-		GenericDAO<Multimedia> multimediaDao=new GenericDAO<>(Constantes.PERSISTENCE_UNIT_NAME);
-		mcq.setMultimedia(multimediaDao.saveOrUpdate(mcq.getMultimedia()));
-		
+		//GenericDAO<Multimedia> multimediaDao=new GenericDAO<>(Constantes.PERSISTENCE_UNIT_NAME);
+		Multimedia multimedia = mcq.getMultimedia();
+		mcq=mcqDao.saveOrUpdate(mcq);
+		//mcq.setMultimedia(multimediaDao.saveOrUpdate(mcq.getMultimedia()));
+		//mcq.setMultimedia(multimedia);
+		multimedia.setMcq(mcq);
 		mcqDao.saveOrUpdate(mcq);
 		mcqDao.close();
 	}

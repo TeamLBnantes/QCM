@@ -16,15 +16,16 @@ public class Multimedia extends Entitie{
 	String adresseCible;
 	
 	@OneToOne   
-	@JoinColumn(name="mcq_id", unique=true)
+//	@JoinColumn(name="mcq_id", unique=true)
+	@JoinColumn(name="mcq_id")
 	MCQ mcq;
 	
 	@OneToOne   
-	@JoinColumn(name="question_id", unique=true)
+	@JoinColumn(name="question_id")
 	Question question;
 	
 	@OneToOne   
-	@JoinColumn(name="answer_id", unique=true)
+	@JoinColumn(name="answer_id")
 	Answer answer;
 	
 	

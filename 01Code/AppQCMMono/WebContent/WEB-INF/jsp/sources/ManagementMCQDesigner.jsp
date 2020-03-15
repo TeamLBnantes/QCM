@@ -48,6 +48,25 @@
 				<label for="inputEmail">Créé le </label> ${ mcq.createDate} <br/> <label for="inputEmail">Derniere modification </label> ${ mcq.editDate}
 			</div>
 		</div>
+<br/>
+<c:if test="${mcq.multimedia.typeMultimedia}=='image'">
+
+<img src="${mcq.multimedia.adresseCible}"/>
+</c:if>
+<c:if test="${mcq.multimedia.typeMultimedia}=='audio'">
+
+
+
+</c:if>
+<c:if test="${mcq.multimedia.typeMultimedia}=='video'">
+
+
+
+</c:if>
+
+<br/>
+
+
 
 		<div class="form-group text-right">
 			<button type="submit" class="templatemo-blue-button">Mise à

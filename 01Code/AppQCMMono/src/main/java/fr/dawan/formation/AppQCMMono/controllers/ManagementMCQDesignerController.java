@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import fr.dawan.formation.AppQCMMono.Enum.Status;
+import fr.dawan.formation.AppQCMMono.Enum.TypeMultimedia;
 import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
 import fr.dawan.formation.AppQCMMono.Models.ObjectFiltresQuestion;
@@ -42,6 +43,8 @@ public class ManagementMCQDesignerController {
 
 		SessionServiceDTO ssdto = new SessionServiceDTO();
 		ssdto.isDesignerService(user, model);
+		model.addAttribute("enumStatus", Status.values());
+		model.addAttribute("enumTypeMultimedia", TypeMultimedia.values());
 		model.addAttribute("newMcq", false);
 		model.addAttribute("mcqs", mcqs);
 
@@ -64,6 +67,7 @@ public class ManagementMCQDesignerController {
 		SessionServiceDTO ssdto = new SessionServiceDTO();
 		ssdto.isDesignerService(user, model);
 		model.addAttribute("enumStatus", Status.values());
+		model.addAttribute("enumTypeMultimedia", TypeMultimedia.values());
 		model.addAttribute("newMcq", true);
 		model.addAttribute("mcqs", mcqs);
 		//model.addAttribute("enumStatus", Status.values());

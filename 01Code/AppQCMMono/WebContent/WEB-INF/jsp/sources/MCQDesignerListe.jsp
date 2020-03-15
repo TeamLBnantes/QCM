@@ -20,21 +20,38 @@
 							</tr>
 							<tr>
 								<td><b>Theme(s)</b></td>
-								<td><input type="text" class="form-control"
-									name="topic" placeholder="theme"
-									value="${mcq.topic}" /></td>
+								<td><input type="text" class="form-control" name="topic"
+									placeholder="theme" value="${mcq.topic}" /></td>
 							</tr>
 							<tr>
 								<td><b>Statut:</b></td>
 								<td><select class="form-control" name="status" id="status">
 										<c:forEach items="${ enumStatus }" var="status">
 											<option value="${ status }"
-												${ question.status == status ? 'selected' : '' }>
+												${ mcq.status == status ? 'selected' : '' }>
 												<tag:message code="${ status.libelle }"
 													text="${status.libelle }" />
 											</option>
 										</c:forEach>
 								</select></td>
+							</tr>
+							<!-- enum du typ emultimedia -->
+							<tr>
+								<td><b>Type Multimedia:</b></td>
+								<td><select class="form-control" name="multimedia.typeMultimedia" id="typeMultimedia">
+										<c:forEach items="${ enumTypeMultimedia }" var="typeMultimedia">
+											<option value="${ typeMultimedia }"
+												${ mcq.multimedia.typeMultimedia == typeMultimedia ? 'selected' : '' }>
+												<tag:message code="${ typeMultimedia.libelle }"
+													text="${typeMultimedia.libelle }" />
+											</option>
+										</c:forEach>
+								</select></td>
+							</tr>
+														<tr>
+								<td><b>cible du contenu multimedia</b></td>
+								<td><input type="text" class="form-control" name="multimedia.adresseCible"
+									placeholder="theme" value="${mcq.multimedia.adresseCible}" /></td>
 							</tr>
 						</table>
 					</div>
@@ -53,7 +70,8 @@
 		<c:if test="${!newMcq}">
 			<a href="ManagementMCQDesigner/new">
 				<button type="button" class="templatemo-blue-button" name="action"
-					value="chercher">Creer QCM</button></a>
+					value="chercher">Creer QCM</button>
+			</a>
 		</c:if>
 	</div>
 

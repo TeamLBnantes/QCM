@@ -30,7 +30,7 @@
 <div class="templatemo-content-widget white-bg">
 	<h2 class="margin-bottom-10">Informations sur le QCM</h2>
 	<form action="ManagementMCQDesigner/${mcq.id}"
-		class="templatemo-login-form" method="post">
+		class="templatemo-login-form" method="post" accept-charset="UTF-8">
 		<!-- enctype="multipart/form-data" -->
 		<input type="hidden" name="id" value="${mcq.id}" />
 		<div class="row form-group">

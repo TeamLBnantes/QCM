@@ -130,7 +130,7 @@ public class ManagementMCQDesignerController {
 	//save or Update des attribut du QCM (sans les questions)
 	@PostMapping(value = { "/{id}" })    //id du qcm à sauvegarder
 	public String enregistrerMcq(MCQ mcq,@PathVariable("id") int id, Model model) {
-		
+		System.out.println(mcq.getBody());
 		MCQService mcqService=new MCQService();
 		MCQ mcqUpdate=mcqService.searchById(id);
 		mcqUpdate.setBody(mcq.getBody());

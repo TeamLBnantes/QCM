@@ -26,7 +26,7 @@ public class User extends Entitie{
 
 
 
-	@OneToOne (mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.ALL}, fetch = FetchType.EAGER)  //car O ou 1 designer
+	@OneToOne (mappedBy = "user", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)  //car O ou 1 designer
 	private Designer designer;
 	
 	@OneToMany (mappedBy = "user") 

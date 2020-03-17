@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import fr.dawan.formation.AppQCMMono.Models.Answer;
 import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
@@ -14,7 +16,7 @@ import fr.dawan.formation.AppQCMMono.Persistence.AnswerDAO;
 import fr.dawan.formation.AppQCMMono.Persistence.Constantes;
 import fr.dawan.formation.AppQCMMono.Persistence.QuestionDAO;
 import fr.dawan.formation.AppQCMMono.Persistence.UserDAO;
-
+@Service
 public class QuestionService {
 
 	

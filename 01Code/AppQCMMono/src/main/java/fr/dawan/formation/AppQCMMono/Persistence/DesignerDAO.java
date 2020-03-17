@@ -35,7 +35,7 @@ public class DesignerDAO extends GenericDAO<Designer> implements DAODesignerInte
 	public List<Designer> searchByDate(LocalDate dateInf, LocalDate dateSup) { 
 		String requete = "SELECT DISTINCT d FROM "
 		+ Designer.class.getName()
-		+ " WHERE ((d.dateDesigner > :dateInf)&&(d.dateDesigner < :dateSup))";
+		+ " WHERE ((d.dateStatus > :dateInf)&&(d.dateStatus < :dateSup))";
 		return super.entityManager
 				.createQuery(requete, Designer.class)
 				.setParameter("dateInf", dateInf)

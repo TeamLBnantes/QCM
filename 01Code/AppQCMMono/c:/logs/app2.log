@@ -20,3 +20,5 @@
 2020-03-16 15:12:51,648 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
 2020-03-16 15:44:43,939 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
 2020-03-16 15:44:44,398 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-17 08:58:29,253 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-17 08:58:29,765 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'

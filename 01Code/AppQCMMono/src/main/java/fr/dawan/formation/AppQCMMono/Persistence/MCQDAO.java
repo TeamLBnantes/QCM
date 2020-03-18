@@ -169,16 +169,28 @@ public class MCQDAO extends GenericDAO<MCQ> implements DAOMCQInterface {
 	}
 
 
+	
+	//cette requete plante, je ne parviens pas à lire dans la base MCQpassed ??? !!!
+	//soucis avec l'entityManager de MCQ qui ne me donne pas acces à la table MCQPAssed ??
+	
 	public List<MCQpassed> findMCQpassedByMcq(MCQ mcq) {
-		String requete = "select q from "  
-				+ MCQpassed.class.getName() 
-				+ " q where ( q.mcq= :mcq )";
+		List<MCQpassed> mcqPasseds=new ArrayList<>();
+		try {
+			String requete = "select q from "  
+					+ MCQpassed.class.getName() 
+					+ " q where ( q.mcq= :mcq )";
+			
+			// JPQL (ou HQL)
+			mcqPasseds=super.entityManager
+					.createQuery(requete, MCQpassed.class)
+					.setParameter("mcq", mcq)
+					.getResultList();
+	
+		} catch (Exception e) {
+			System.out.println("exception leve par findMCQpassedByMcq");
+		}
+		return mcqPasseds;
 		
-		// JPQL (ou HQL)
-		return super.entityManager
-				.createQuery(requete, MCQpassed.class)
-				.setParameter("mcq", mcq)
-				.getResultList();
 	}
 	
 

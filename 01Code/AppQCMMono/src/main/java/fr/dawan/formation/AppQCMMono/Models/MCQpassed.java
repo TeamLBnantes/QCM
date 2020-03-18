@@ -46,5 +46,7 @@ public class MCQpassed extends Entitie{
 		this.finalise=false;
 	}
 	
+	public MCQpassed() {
+	}
 	
 }

@@ -28,6 +28,7 @@ public class TestUserDao {
 	private int id;
 	private int idDesigner;
 	private String uuid;
+	private int nbDesigner;
 	
 	@Before
 	public void testSaveOrUpdate() {
@@ -46,6 +47,9 @@ public class TestUserDao {
 		id = user.getId();
 		userDao.close();
 
+		users = userDao.searchDesigners();
+		nbDesigner = users.size();
+		
 		designerDao = new DesignerDAO(Constantes.PERSISTENCE_UNIT_NAME);
 		designer = new Designer();
 		designer.setUser(user);
@@ -111,13 +115,9 @@ public class TestUserDao {
 	
 	@Test public void testSearchByDesigner() { 
 		userDao = new UserDAO(Constantes.PERSISTENCE_UNIT_NAME);
-		users = new ArrayList<>();
-		users.add(user);
-		System.out.println("------"+users.size()+"------");
-		users = userDao.searchByDesigner();
-		System.out.println("*******"+user+"*******");
-		System.out.println("------"+users.size()+"------");
-		assertNotEquals(0, users.size());
+		users = new ArrayList<>();	
+		//ajouter un user non designer et verif le comptage
+		assertEquals(nbDesigner+1, users.size());
 		userDao.close();
 	}
 	 

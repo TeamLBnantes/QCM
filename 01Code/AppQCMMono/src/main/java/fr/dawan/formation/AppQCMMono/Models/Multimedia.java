@@ -14,7 +14,10 @@ public class Multimedia extends Entitie{
 	@Enumerated(EnumType.STRING)
 	TypeMultimedia typeMultimedia;
 	String adresseCible;
+	String adresseVignette;
+	String legende;
 	
+
 	@OneToOne   
 //	@JoinColumn(name="mcq_id", unique=true)
 	@JoinColumn(name="mcq_id")
@@ -31,6 +34,12 @@ public class Multimedia extends Entitie{
 	
 	
 	
+	public String getAdresseVignette() {
+		return adresseVignette;
+	}
+	public void setAdresseVignette(String adresseVignette) {
+		this.adresseVignette = adresseVignette;
+	}
 	public MCQ getMcq() {
 		return mcq;
 	}
@@ -62,5 +71,10 @@ public class Multimedia extends Entitie{
 		this.adresseCible = adresseCible;
 	}
 	
-	
+	public String getLegende() {
+		return legende;
+	}
+	public void setLegende(String legende) {
+		this.legende = legende;
+	}
 }

@@ -2,16 +2,37 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="fr-FR">
 <head>
-<meta name="description" content="une série de témoignages relatant l'histoire de la poche de Saint-Nazaire en 1944-45" />
+<meta name="description"
+	content="une série de témoignages relatant l'histoire de la poche de Saint-Nazaire en 1944-45" />
 <meta name="keywords" content="mots, clefs" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<link  href="resources/media/lib/fancybox/dist/jquery.fancybox.min.css" rel="stylesheet">
+<link href="resources/media/lib/fancybox/dist/jquery.fancybox.min.css"
+	rel="stylesheet">
 <!-- <link href="resources/media/lib/bootstrap-4.4.1-dist/css/bootstrap.min.css" rel="stylesheet"> -->
 <style type="text/css">
-	.thumb { width: 100%; }
+.thumb {
+	width: 100%;
+}
+
+/* pour le texte sur l'image, tmp' */
+.container {
+	position: relative;
+}
+
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 24px;
+	color: red;
+}
+
+
+/* fin pour le texte sur l'image, tmp' */
 </style>
 
 <script src="resources/media/lib/jquery-3.3.1.min.js"></script>
@@ -47,86 +68,167 @@
 		</div>
 		<div class="row form-group">
 			<div class="col-lg-6 col-md-6 form-group">
-			<label for="inputUsername">Statut</label> 
-				
-								
-				<select class="form-control" name="status" id="status" >
-										<c:forEach items="${ enumStatus }" var="status">
-											<option value="${ status }"
-												${ question.status == status ? 'selected' : '' }>
-												<tag:message code="${ status.libelle }"
-													text="${status.libelle }" />
-											</option>
-										</c:forEach>
-								</select>				
-								
-								
-								
-								
+				<label for="inputUsername">Statut</label> <select
+					class="form-control" name="status" id="status">
+					<c:forEach items="${ enumStatus }" var="status">
+						<option value="${ status }"
+							${ mcq.status == status ? 'selected' : '' }>
+							<tag:message code="${ status.libelle }" text="${status.libelle }" />
+						</option>
+					</c:forEach>
+				</select>
+
+
+
+
 			</div>
 			<div class="col-lg-6 col-md-6 form-group">
-				<label for="inputEmail">Créé le </label> ${ mcq.createDate} <br/> <label for="inputEmail">Derniere modification </label> ${ mcq.editDate}
+				<label for="inputEmail">Créé le </label> ${ mcq.createDate} <br />
+				<label for="inputEmail">Derniere modification </label> ${ mcq.editDate}
 			</div>
 		</div>
-<br/>
-<c:if test="${mcq.multimedia.typeMultimedia=='image'}">
+		<br />
+		<div class="row form-group">
+			<div class="col-lg-6 col-md-6 form-group">
+				<c:if test="${mcq.multimedia.typeMultimedia=='image'}">
+					<div class="album py-5 bg-light">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="card mb-4 shadow-sm">
+										<div align="center">
+											<figure>
+												<a class="d-block mb-4" data-fancybox="images"
+													href="${mcq.multimedia.adresseCible}" data-width="1200px">
+													<img class="img-fluid"
+													src="${mcq.multimedia.adresseCible}" width="240px"
+													align="center" /> <!-- height="180px"  -->
+												</a>
+												<figcaption>
+													<h6>${mcq.multimedia.legende}</h6>
+													<a href="${mcq.multimedia.adresseCible}"></a>
+												</figcaption>
+											</figure>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${mcq.multimedia.typeMultimedia=='audio'}">
+					<div class="album py-5 bg-light">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="card mb-4 shadow-sm">
+										<div align="center">
+											<figure>
+												<a class="d-block mb-4" data-fancybox="images"
+													href="${mcq.multimedia.adresseVignette}" data-width="2400">
+													<img class="img-fluid"
+													src="${mcq.multimedia.adresseVignette}" width="240px"
+													align="center" /> <!-- height="180px"  -->
+												</a>
+												<figcaption>
+													<h6>${mcq.multimedia.legende}</h6>
+													<a href="${mcq.multimedia.adresseVignette}"></a>
+												</figcaption>
+											</figure>
+											<!--code pour affichage audi  -->
+											<div class="audio-section" align="center">
+												<audio controls>
+													<source src="${mcq.multimedia.adresseCible}"
+														type="audio/mpeg">
+													Your browser does not support the audio element.
+												</audio>
+											</div>
+											<!--  fin-code pour affichage audi  -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${mcq.multimedia.typeMultimedia=='video'}">
+					<div class="album py-5 bg-light">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="card mb-4 shadow-sm">
+										<div align="center">
+											<a data-fancybox data-width="640" data-height="360"
+												href="${mcq.multimedia.adresseCible}"> <img
+												src="${mcq.multimedia.adresseVignette}" alt="" width="320px"
+												height="180px" align="center" />
+												<div class="center">Lire la video</div>
+												<p align="center">${mcq.multimedia.legende}</p> <!-- <img class="thumb" src="resources/media/kayak.jpg" alt="" /> -->
+											</a>
 
-<img src="${mcq.multimedia.adresseCible}"/>
-</c:if>
-<c:if test="${mcq.multimedia.typeMultimedia=='audio'}">
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</c:if>
+
+			</div>
+			<!-- fin de l'affichage de la zone multimedia -->
+			<div class="col-lg-6 col-md-6 form-group">
+				<!-- div pour les attributs champs media -->
+				<!-- enum du typ emultimedia -->
+				<tr>
+					<td><b>Type Multimedia:</b></td>
+					<td><select class="form-control"
+						name="multimedia.typeMultimedia" id="typeMultimedia">
+							<c:forEach items="${ enumTypeMultimedia }" var="typeMultimedia">
+								<option value="${ typeMultimedia }"
+									${ mcq.multimedia.typeMultimedia == typeMultimedia ? 'selected' : '' }>
+									<tag:message code="${ typeMultimedia.libelle }"
+										text="${typeMultimedia.libelle }" />
+								</option>
+							</c:forEach>
+					</select></td>
+				</tr>
+				<tr>
+					<td><b>cible (jpg) Vignette du contenu
+							multimedia (audio/video)</b></td>
+					<td><input type="text" class="form-control"
+						name="multimedia.adresseVignette" placeholder="adresse image"
+						value="${mcq.multimedia.adresseVignette}" /></td>
+				</tr>
+				<tr>
+					<td><b>cible du contenu multimedia</b></td>
+					<td><input type="text" class="form-control"
+						name="multimedia.adresseCible" placeholder="cible multimedia"
+						value="${mcq.multimedia.adresseCible}" /></td>
+				</tr>
+				<tr>
+					<td><b>legende du contenu multimedia</b></td>
+					<td><input type="text" class="form-control"
+						name="multimedia.legende" placeholder="legende"
+						value="${mcq.multimedia.legende}" /></td>
+				</tr>
 
 
 
-</c:if>
-<c:if test="${mcq.multimedia.typeMultimedia=='video'}">
 
-<%-- video trouvé, lien ${mcq.multimedia.adresseCible}
-<div>
-<iframe width="560" height="315" src="${mcq.multimedia.adresseCible}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<!-- https://www.youtube.com/embed/CwpWl9WnO0Y -->
-</div>
-<p>autre essai d'integration des video
-</p> --%>
-  <div class="album py-5 bg-light">
-    <div class="container">
-      <div class="row">
+			</div>
+			<!-- div pour les champs media -->
 
 
- <div class="col-md-4">
-      <div class="card mb-4 shadow-sm"> 
-    
-		<a data-fancybox data-width="640" data-height="360" href="${mcq.multimedia.adresseCible}">
-            	<img  src="resources/media/kayak.jpg" alt="" width="320px" height="180px"/>
-            	<!-- <img class="thumb" src="resources/media/kayak.jpg" alt="" /> -->
-		</a>
-            <%-- <%-- <div class="card-body">
-	      <h5 class="card-title">test laurent</h5>
-              <p class="card-text">Elle avait 16<sup>1/2</sup> ans le 26 août 1944 et raconte la prise d'ôtages à Pornic.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-		  <a type="button" class="btn btn-sm btn-outline-secondary" data-fancybox data-width="640" data-height="360" href="${mcq.multimedia.adresseCible}">Voir</a>
-                </div>
-                <small class="text-muted">XY mins</small>
-              </div>
-            </div> --%> 
-          </div>
-        </div>
-                  </div>
-        </div>
-                  </div>
+	</div>
 
-</c:if>
-<br/>
-
-
-
-		<div class="form-group text-right">
-			<button type="submit" class="templatemo-blue-button">Mise à
-				jour</button>
-			<button type="reset" class="templatemo-white-button">Retour
-				à l'état précédent</button>
-		</div>
+			<div class="form-group text-right">
+				<button type="submit" class="templatemo-blue-button">Mise à
+					jour</button>
+				<button type="reset" class="templatemo-white-button">Retour
+					à l'état précédent</button>
+			</div>
 	</form>
 </div>
 <!-- fin de la zone formulaire -->
@@ -138,8 +240,8 @@
 		class="templatemo-login-form" method="get">
 		<input type="hidden" name="id" value="${mcq.id}" />
 		<div class="form-group text-center">
-			<button type="submit" class="templatemo-blue-button">Ajouter / Supprimer
-				des Questions</button>
+			<button type="submit" class="templatemo-blue-button">Ajouter
+				/ Supprimer des Questions</button>
 		</div>
 	</form>
 	<div class="templatemo-content-widget no-padding">
@@ -148,12 +250,10 @@
 				class="table table-striped table-bordered templatemo-user-table">
 				<thead>
 					<tr>
-						<td width="3%"
-							class="white-text templatemo-sort-by">#</td>
+						<td width="3%" class="white-text templatemo-sort-by">#</td>
 						<td width="80%" class="white-text templatemo-sort-by">Question
 						</td>
-						<td width="10%"
-							class="white-text templatemo-sort-by">Theme</td>
+						<td width="10%" class="white-text templatemo-sort-by">Theme</td>
 						<td width="7%">Editer</td>
 					</tr>
 				</thead>
@@ -163,7 +263,8 @@
 							<td>${question.id}</td>
 							<td>${question.body}</td>
 							<td>${question.theme}</td>
-							<td><a href="" class="templatemo-blue-button"><i class="fa fa-edit"></i></a></td>
+							<td><a href="" class="templatemo-blue-button"><i
+									class="fa fa-edit"></i></a></td>
 							<!--                     <td><a href="" class="templatemo-link">Action</a></td> -->
 						</tr>
 					</c:forEach>
@@ -172,13 +273,14 @@
 		</div>
 	</div>
 	<!-- fin de la zone du tableau -->
-	<form action="ManagementMCQDesigner"
-		class="templatemo-login-form" method="get">
+	<form action="ManagementMCQDesigner" class="templatemo-login-form"
+		method="get">
 		<input type="hidden" name="id" value="${mcq.id}" />
 		<div class="form-group text-right">
-			<button type="submit" class="templatemo-blue-button">Retour à la liste des QCM</button>
+			<button type="submit" class="templatemo-blue-button">Retour
+				à la liste des QCM</button>
 		</div>
-		</form>
+	</form>
 </div>
 
 <!--           <div class="templatemo-flex-row flex-content-row">
@@ -201,7 +303,3 @@
 <footer class="text-right">
 	<p>Copyright &copy; 2020 QuizizSkillz | Design: Template Mo</p>
 </footer>
-
-
-
-

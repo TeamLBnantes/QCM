@@ -23,7 +23,7 @@
 								<td><input type="text" class="form-control" name="topic"
 									placeholder="theme" value="${mcq.topic}" /></td>
 							</tr>
-							<tr>
+							<tr>   
 								<td><b>Statut:</b></td>
 								<td><select class="form-control" name="status" id="status">
 										<c:forEach items="${ enumStatus }" var="status">
@@ -48,10 +48,21 @@
 										</c:forEach>
 								</select></td>
 							</tr>
-														<tr>
+							<tr>
+								<td><b>cible (jpg) Vignette du contenu
+							multimedia (audio/video)</b></td>
+								<td><input type="text" class="form-control" name="multimedia.adresseVignette"
+									placeholder="adresse image" value="${mcq.multimedia.adresseVignette}" /></td>
+							</tr>
+							<tr>
 								<td><b>cible du contenu multimedia</b></td>
 								<td><input type="text" class="form-control" name="multimedia.adresseCible"
-									placeholder="theme" value="${mcq.multimedia.adresseCible}" /></td>
+									placeholder="cible multimedia" value="${mcq.multimedia.adresseCible}" /></td>
+							</tr>
+							<tr>
+								<td><b>legende du contenu multimedia</b></td>
+								<td><input type="text" class="form-control" name="multimedia.legende"
+									placeholder="legende" value="${mcq.multimedia.legende}" /></td>
 							</tr>
 						</table>
 					</div>

@@ -97,6 +97,7 @@ public class ManagementMCQDesignerController {
 	public String deleteQuestion(@PathVariable("id") int id, HttpSession session, Model model) {
 		
 		MCQService mcqService=new MCQService();
+		
 		mcqService.deleteById(id);
 
 		// on renvoie le nom de la jsp
@@ -123,6 +124,7 @@ public class ManagementMCQDesignerController {
 		model.addAttribute("mcq", mcq);
 		model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
+		model.addAttribute("enumTypeMultimedia", TypeMultimedia.values());
 		// on renvoie le nom de la jsp
 		return "ManagementMCQDesigner";
 	}
@@ -135,10 +137,24 @@ public class ManagementMCQDesignerController {
 		MCQ mcqUpdate=mcqService.searchById(id);
 		mcqUpdate.setBody(mcq.getBody());
 		mcqUpdate.setEditDate(LocalDateTime.now());
-		mcqUpdate.setTopic(mcq.getTopic());
+		mcqUpdate.setTopic(mcq.getTopic());  //sauv du theme
+		mcqUpdate.setStatus(mcq.getStatus());
+		
+		//mise à jour des données de l'objet multimedia. (il sera sauvegardé par la sauvegarde
+		// de mcq update, et le lien fort entre les deux table
+		//poura aventageusement etre remplacé par une methode ServiceMultimedia.update(old, new)
+		mcqUpdate.getMultimedia().setAdresseCible(mcq.getMultimedia().getAdresseCible());
+		mcqUpdate.getMultimedia().setAdresseVignette(mcq.getMultimedia().getAdresseVignette());
+		mcqUpdate.getMultimedia().setLegende(mcq.getMultimedia().getLegende());
+		mcqUpdate.getMultimedia().setTypeMultimedia(mcq.getMultimedia().getTypeMultimedia());
+		
+		
+		
+		
+		
 		mcqService.saveOrUpdate(mcqUpdate);
 	//***********************************************************************************************
-
+		System.out.println(mcqService);
 		// on renvoie le nom de la jsp
 		return "redirect:/ManagementMCQDesigner/"+id;
 	}	

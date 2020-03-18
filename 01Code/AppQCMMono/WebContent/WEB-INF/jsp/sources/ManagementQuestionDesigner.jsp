@@ -181,6 +181,36 @@
 
 	<br>
 	<br>
+	
+<!-- 	liste des MCQ utilisant cette question -->
+	
+		<div class="container">
+		<div class="templatemo-content-widget white-bg">
+			<div class="templatemo-content-container">
+				<h2 class="text-uppercase">liste des Formulaires utilisants cette Question</h2>
+				<div class="table-responsive">
+					<table class="table table-bordered">
+						<tr>
+							<th>Body</th>
+<!-- 							<th>designer</th> -->
+						</tr>
+						<c:forEach var="mcq" items="${listDto.mcqs}">
+							<!-- parcours des reponses liées à cette questions pour les afficher-->
+							<tr>
+								<td>${mcq.body}</td>
+<%-- 								<td>${liste.designerName}</td> --%>
+							</tr>
+						</c:forEach>
+						<!-- <tr><td><button type="submit" class="btn btn-primary" name="action" value="valider">Valider</button></td><td></td></tr> -->
+						<!-- </table>
+</div>
+</form> -->
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- 	fin liste des MCQ utilisant cette question -->	
 	<br />
 
 

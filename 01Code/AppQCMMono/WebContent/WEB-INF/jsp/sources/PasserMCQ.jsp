@@ -11,7 +11,27 @@
 <link  href="resources/media/lib/fancybox/dist/jquery.fancybox.min.css" rel="stylesheet">
 <!-- <link href="resources/media/lib/bootstrap-4.4.1-dist/css/bootstrap.min.css" rel="stylesheet"> -->
 <style type="text/css">
-	.thumb { width: 100%; }
+.thumb { width: 100%; }
+	
+/* pour le texte sur l'image, tmp' */
+.container {
+	position: relative;
+}
+
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 24px;
+	color: red;
+}
+
+
+/* fin pour le texte sur l'image, tmp' */	
+	
+	
+	
 </style>
 
 <script src="resources/media/lib/jquery-3.3.1.min.js"></script>
@@ -63,47 +83,100 @@
            		 C'est parti quand vous voulez .... ;-)  </h2>
            
            		<br>
-           		<!-- test positionnement contenu multimedia -->
-           						<c:if test="${mcq.multimedia.typeMultimedia=='video'}">
+           		<!--  positionnement contenu multimedia MCQ-->
+		<div class="row form-group" align="right">
+<!-- 			<div class="col-lg-6 col-md-6 form-group" align="right"> -->
 
-<%-- video trouvé, lien ${mcq.multimedia.adresseCible}
-<div>
-<iframe width="560" height="315" src="${mcq.multimedia.adresseCible}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<c:if test="${mcq.multimedia.typeMultimedia=='image'}">
+					<div class="album py-5 bg-light">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="card mb-4 shadow-sm">
+										<div align="center">
+											<figure>
+												<a class="d-block mb-4" data-fancybox="images"
+													href="${mcq.multimedia.adresseCible}" data-width="1200px">
+													<img class="img-fluid"
+													src="${mcq.multimedia.adresseCible}" width="240px"
+													align="center" /> <!-- height="180px"  -->
+												</a>
+												<figcaption>
+													<h6>${mcq.multimedia.legende}</h6>
+													<a href="${mcq.multimedia.adresseCible}"></a>
+												</figcaption>
+											</figure>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${mcq.multimedia.typeMultimedia=='audio'}">
+					<div class="album py-5 bg-light">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="card mb-4 shadow-sm">
+										<div align="center">
+											<figure>
+												<a class="d-block mb-4" data-fancybox="images"
+													href="${mcq.multimedia.adresseVignette}" data-width="2400">
+													<img class="img-fluid"
+													src="${mcq.multimedia.adresseVignette}" width="240px"
+													align="center" /> <!-- height="180px"  -->
+												</a>
+												<figcaption>
+													<h6>${mcq.multimedia.legende}</h6>
+													<a href="${mcq.multimedia.adresseVignette}"></a>
+												</figcaption>
+											</figure>
+											<!--code pour affichage audi  -->
+											<div class="audio-section" align="center">
+												<audio controls>
+													<source src="${mcq.multimedia.adresseCible}"
+														type="audio/mpeg">
+													Your browser does not support the audio element.
+												</audio>
+											</div>
+											<!--  fin-code pour affichage audi  -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:if>
+				<c:if test="${mcq.multimedia.typeMultimedia=='video'}">
+					<div class="album py-5 bg-light">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="card mb-4 shadow-sm">
+										<div align="center">
+											<a data-fancybox data-width="640" data-height="360"
+												href="${mcq.multimedia.adresseCible}"> <img
+												src="${mcq.multimedia.adresseVignette}" alt="" width="320px"
+												height="180px" align="center" />
+												<div class="center">Lire la video</div>
+												<p align="center">${mcq.multimedia.legende}</p> <!-- <img class="thumb" src="resources/media/kayak.jpg" alt="" /> -->
+											</a>
 
-<!-- https://www.youtube.com/embed/CwpWl9WnO0Y -->
-</div>
-<p>autre essai d'integration des video
-</p> --%>
-  <div class="album py-5 bg-light">
-    <div class="container">
-      <div class="row">
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</c:if>
+<!-- 				</div> -->
+			</div>
 
 
- <div class="col-md-4">
-      <div class="card mb-4 shadow-sm"> 
-    
-		<a data-fancybox data-width="640" data-height="360" href="${mcq.multimedia.adresseCible}">
-            	<img  src="resources/media/kayak.jpg" alt="" width="320px" height="180px"/>
-            	<!-- <img class="thumb" src="resources/media/kayak.jpg" alt="" /> -->
-		</a>
-            <%-- <%-- <div class="card-body">
-	      <h5 class="card-title">test laurent</h5>
-              <p class="card-text">Elle avait 16<sup>1/2</sup> ans le 26 août 1944 et raconte la prise d'ôtages à Pornic.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-		  <a type="button" class="btn btn-sm btn-outline-secondary" data-fancybox data-width="640" data-height="360" href="${mcq.multimedia.adresseCible}">Voir</a>
-                </div>
-                <small class="text-muted">XY mins</small>
-              </div>
-            </div> --%> 
-          </div>
-        </div>
-                  </div>
-        </div>
-                  </div>
-
-</c:if>	
-           		<!-- fin du test contenu multimedia -->
+           		<!-- fin positionnement contenu multimedia MCQ -->
            		<br>
            
            		<div class="form-group text-center">

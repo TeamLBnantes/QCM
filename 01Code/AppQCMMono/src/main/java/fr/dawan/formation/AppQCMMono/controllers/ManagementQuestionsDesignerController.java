@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import fr.dawan.formation.AppQCMMono.Enum.Status;
 import fr.dawan.formation.AppQCMMono.Models.Answer;
+import fr.dawan.formation.AppQCMMono.Models.ObjectListDto;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Services.AnswerService;
+import fr.dawan.formation.AppQCMMono.Services.MCQService;
 import fr.dawan.formation.AppQCMMono.Services.QuestionService;
 import fr.dawan.formation.AppQCMMono.Services.SessionServiceDTO;
 import fr.dawan.formation.AppQCMMono.Services.UserService;
@@ -66,13 +68,21 @@ public class ManagementQuestionsDesignerController {
 		return "QuestionsDesignerListe";
 	}
 
+	//eran de modification de la question
 	@GetMapping(value = { "/{id}" }) // id de la question à cibler
 	public String afficherQuestion(@PathVariable("id") int id, HttpSession session, Model model) {
 
 		User user = (User) session.getAttribute("user");
 		QuestionService questionService = new QuestionService();
+		//TODO: il me semble que la ligne suivant ene sert à rien, on gere ici une question, pas la liste des question de l'utilisateur
 		List<Question> questions = questionService.searchByDesigner(user.getDesigner());
 		Question question = questionService.findById(id);
+		
+		//recuperation de la liste des QCM qui utilisent cette question
+		ObjectListDto listDto=new ObjectListDto();
+		listDto.setMcqs(MCQService.findMcqByIdQuestion(id));
+		model.addAttribute("listDto", listDto);
+		
 		
 		SessionServiceDTO ssdto = new SessionServiceDTO();
 		//l'User est designer?
@@ -83,6 +93,7 @@ public class ManagementQuestionsDesignerController {
 		
 		model.addAttribute("Response", false);
 		model.addAttribute("question", question);
+		//TODO: et donc la ligne suivante ne sert pas non pls à rand chose
 		model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
 		// on renvoie le nom de la jsp

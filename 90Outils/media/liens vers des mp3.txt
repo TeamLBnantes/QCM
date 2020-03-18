@@ -1,0 +1,16 @@
+https://cdn.radiofrance.fr/s3/cruiser-production/2020/02/e625fdb2-ff3b-43db-8a50-252888c48344/lecode_pylone.mp3
+fonctionne bien
+
+et le site ou j'ai trouver ça
+https://www.franceinter.fr/emissions/le-code-a-change
+
+
+batucada sur mon drive    (tjs du mp3)
+https://drive.google.com/open?id=1rQFL5PWZ9__g4uCS6UoTqdcXRHTq04P0
+ne fonctionne pas :-(
+
+
+
+ressources local dans le dossier du projet
+resources/media/batucada.mp3
+fonctionne bien

@@ -6,6 +6,7 @@ import java.util.List;
 import fr.dawan.formation.AppQCMMono.Enum.Status;
 import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
+import fr.dawan.formation.AppQCMMono.Models.MCQpassed;
 import fr.dawan.formation.AppQCMMono.Models.ObjectFiltresMCQ;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.QuestionUsed;
@@ -155,8 +156,7 @@ public class MCQDAO extends GenericDAO<MCQ> implements DAOMCQInterface {
 	}
 
 
-	public List<QuestionUsed> findQuestionUsedbyMcq(MCQ mcq) {
-		// TODO Auto-generated method stub
+	public List<QuestionUsed> findQuestionUsedbyMcq(MCQ mcq) {		
 		String requete = "select q from "  
 				+ QuestionUsed.class.getName() 
 				+ " q where ( q.mcq= :mcq )";
@@ -167,4 +167,34 @@ public class MCQDAO extends GenericDAO<MCQ> implements DAOMCQInterface {
 				.setParameter("mcq", mcq)
 				.getResultList();
 	}
+
+
+	public List<MCQpassed> findMCQpassedByMcq(MCQ mcq) {
+		String requete = "select q from "  
+				+ MCQpassed.class.getName() 
+				+ " q where ( q.mcq= :mcq )";
+		
+		// JPQL (ou HQL)
+		return super.entityManager
+				.createQuery(requete, MCQpassed.class)
+				.setParameter("mcq", mcq)
+				.getResultList();
+	}
+	
+
+
+		
+		public List<MCQ> findMcqByQuestion(Question question) {
+			String requete = "select f from "  
+					+ MCQ.class.getName() 
+					+ " f join fetch f.questionUseds t"
+					+ " where t.question = :question";
+			
+			// JPQL (ou HQL)
+			return super.entityManager
+					.createQuery(requete, MCQ.class)
+					.setParameter("question", question)
+					.getResultList();
+	}
+	
 }

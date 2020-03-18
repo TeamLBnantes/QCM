@@ -40,9 +40,38 @@ public class MCQService {
 		mcqDao.close();
 	}
 
+	
+	//choix fonctionnel, si demande de sup le qcm, on sup mêm si il y a encore des questions 
+	//	attachées et/ou qu'il a dejà été passé
+	//ce comportement poura être affiné par la suite
 	public void deleteById(int id) {
 		
 		MCQDAO mcqDao = new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		
+		MCQ mcq=searchById(id);
+		//sup des questionsUsed qui sont potentiellement attachées à ce qcm
+		
+		List<QuestionUsed> listeQuestions=mcqDao.findQuestionUsedbyMcq(mcq);
+		if (listeQuestions.size()!=0) {
+			for (QuestionUsed questionUsed : listeQuestions) {
+				deleteQuestion(id, questionUsed.getQuestion().getId());
+			}
+		}
+		
+		//idem pour les QCMPassed
+		
+		List<MCQpassed> mcqsList=mcqDao.findMCQpassedByMcq(mcq);
+		if (mcqsList.size()!=0) {
+			GenericDAO<MCQpassed> mcqPassedDao=new GenericDAO<>(Constantes.PERSISTENCE_UNIT_NAME);
+			for (MCQpassed mcQpassed : mcqsList) {
+				mcqPassedDao.deleteById(MCQpassed.class, mcQpassed.getId());
+			}
+			mcqPassedDao.close();
+		}
+		
+		
+		
+		//plus de questions Used ni de QCM passed, je peux donc sup le qcm
 		mcqDao.deleteById(MCQ.class, id);
 		mcqDao.close();
 	}
@@ -76,6 +105,10 @@ public class MCQService {
 		
 	}
 
+	
+		//id represente l'identifiant du mcq
+	//cette methode, sup les questionsUsed attachées à ce MCQ
+	// ce qui revient à sup la question de QCM
 	public void deleteQuestion(int id, int questionId) {
 	
 		GenericDAO<QuestionUsed> questionUsedDao=new GenericDAO<>(Constantes.PERSISTENCE_UNIT_NAME);
@@ -127,6 +160,17 @@ public class MCQService {
 		trackMcq.setEtape("beforeMCQ");
 		
 		return trackMcq;
+	}
+
+	public static List<MCQ> findMcqByIdQuestion(int id) {
+		MCQDAO mcqDao=new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		
+		QuestionService questionService=new QuestionService();
+		Question question=questionService.findById(id);
+		
+		List<MCQ> listMcqs=mcqDao.findMcqByQuestion(question);
+	
+		return listMcqs;
 	}
 
 

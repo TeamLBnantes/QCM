@@ -2,6 +2,7 @@ package fr.dawan.formation.AppQCMMono.Enum;
 
 
 public enum TypeMultimedia {
+aucun("aucun"),
 image("image"),
 audio("audio"),
 video("video");

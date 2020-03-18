@@ -1,0 +1,4 @@
+AppQCMMono: Appli Web monolithique, création, edition, suppression QCM et Question; passage QCM - port :8080
+QCMapp : Appli modulaire Maven. Abandonnée.
+QuestionQCM :API SprinBoot Spring Data. Récupération des Questions et QCM uniquement (bdd conjointe avec AppQCMMono) - port :8081
+QuestionQCMAngular: App Angular pour utiliser les JSon de QuestionQCM 

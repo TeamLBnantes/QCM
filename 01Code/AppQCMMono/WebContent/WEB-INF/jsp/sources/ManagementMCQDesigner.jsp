@@ -254,17 +254,97 @@
 						<td width="80%" class="white-text templatemo-sort-by">Question
 						</td>
 						<td width="10%" class="white-text templatemo-sort-by">Theme</td>
-						<td width="7%">Editer</td>
+						<td width="7%">Visualiser</td>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="question" items="${questions}">
+					<c:forEach var="question" items="${questions}" varStatus="countQuestion">
 						<tr>
 							<td>${question.id}</td>
 							<td>${question.body}</td>
 							<td>${question.theme}</td>
-							<td><a href="" class="templatemo-blue-button"><i
-									class="fa fa-edit"></i></a></td>
+<!-- 							<td><a href="" class="templatemo-edit-btn"><i -->
+<!-- 									class="fa fa-edit"></i></a></td> -->
+							<td>
+							
+															<!-- debut  affichage bouton mode Fanzy -###########################################################################################-->
+								<div class="card p-lg-3">
+									<div class="card-body">
+										<p class="mb-0">
+											<a data-fancybox="hello"
+												data-src="#hello${countQuestion.count}" href="javascript:;"
+												class="templatemo-edit-btn"> détail </a>
+										</p>
+									</div>
+								</div>
+
+								<form id="hello${countQuestion.count}" action="" method="post"
+									style="display: none; width: 100%; max-width: 660px;">
+									<h4 class="mb-3">Détail de la Question</h4>
+									<br />
+									<p>
+										texte de la Question : <br />
+									<h2 class="mb-3">${question.body}</h2>
+									<br /> <br /> theme de la Question : <br />
+									${question.theme} <br /> <br />
+									<!--             	###############tableau des reps dans la fancybox########## -->
+									<div class="templatemo-content-widget no-padding"> 
+										<div class="panel panel-default table-responsive">
+											<table
+												class="table table-striped table-bordered templatemo-user-table">
+												<thead>
+													<tr>
+														<td width="30px" class="white-text templatemo-sort-by">#
+														</td>
+														<td class="white-text templatemo-sort-by">Réponses
+															proposée</td>
+														<td width="100px" class="white-text templatemo-sort-by">Attendue</td>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach var="answer" items="${question.answers}"
+														varStatus="count">
+														<tr>
+															<td>${count.count}</td>
+															<td>${answer.body}</td>
+															<td>${answer.expectedAnswer}</td>
+														</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<!--             	###############fi de tableau des reps dans la fancybox################# -->
+									</p>
+									<br />
+									<c:if test="${question.designer.user.id==user.id}">
+										<br />
+										<h3>Vous êtes le propriétaire de cette question</h3>
+									</c:if>
+									<c:if test="${question.designer.user.id!=user.id}">
+										<br />C'est question est gèrée par : 
+            		<h3 align="center">
+											${question.designer.user.firstName}
+											${question.designer.user.lastName}</h3>
+										<br />
+										<p class="mb-0 text-center">
+											<input type="button" class="templatemo-edit-btn"
+												value="Signaler ou envoyer un mail" />
+										</p>
+									</c:if>
+									<br />
+									<!--         <p> -->
+									<!--             <input type="text" value="" name="hi2" class="form-control" placeholder="Another input" /> -->
+									<!--         </p> -->
+									<p class="mb-0 text-right">
+										<input data-fancybox-close type="button"
+											class="templatemo-edit-btn" value="Fermer" />
+										<!--  -->
+									</p>
+								</form> 
+			<!-- fin affichage bouton mode Fanzy ######################################################################################"--> 
+							
+							</td>
 							<!--                     <td><a href="" class="templatemo-link">Action</a></td> -->
 						</tr>
 					</c:forEach>

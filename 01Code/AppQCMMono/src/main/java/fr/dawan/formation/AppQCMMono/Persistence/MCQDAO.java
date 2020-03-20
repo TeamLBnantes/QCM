@@ -2,6 +2,7 @@ package fr.dawan.formation.AppQCMMono.Persistence;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import fr.dawan.formation.AppQCMMono.Enum.Status;
 import fr.dawan.formation.AppQCMMono.Models.Designer;
@@ -208,5 +209,18 @@ public class MCQDAO extends GenericDAO<MCQ> implements DAOMCQInterface {
 					.setParameter("question", question)
 					.getResultList();
 	}
+
+
+		public List<MCQ> findByStatus(Status status) {
+			String requete = "select f from "  
+					+ MCQ.class.getName() 
+					+ " f where f.status = :status";
+			
+			// JPQL (ou HQL)
+			return super.entityManager
+					.createQuery(requete, MCQ.class)
+					.setParameter("status", status)
+					.getResultList();
+		}
 	
 }

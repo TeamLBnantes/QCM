@@ -1,0 +1,24 @@
+2020-03-16 11:19:01,825 ERROR o.h.i.ExceptionMapperStandardImpl [main] HHH000346: Error during managed flush [org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : fr.dawan.formation.AppQCMMono.Models.MCQ.designer -> fr.dawan.formation.AppQCMMono.Models.Designer]
+2020-03-16 11:19:01,870 ERROR o.h.i.ExceptionMapperStandardImpl [main] HHH000346: Error during managed flush [org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : fr.dawan.formation.AppQCMMono.Models.Question.designer -> fr.dawan.formation.AppQCMMono.Models.Designer]
+2020-03-16 11:19:01,882 ERROR o.h.i.ExceptionMapperStandardImpl [main] HHH000346: Error during managed flush [org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : fr.dawan.formation.AppQCMMono.Models.Question.designer -> fr.dawan.formation.AppQCMMono.Models.Designer]
+2020-03-16 11:43:56,089 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-16 11:43:56,938 ERROR o.h.i.ExceptionMapperStandardImpl [main] HHH000346: Error during managed flush [org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : fr.dawan.formation.AppQCMMono.Models.MCQ.designer -> fr.dawan.formation.AppQCMMono.Models.Designer]
+2020-03-16 11:43:56,951 ERROR o.h.i.ExceptionMapperStandardImpl [main] HHH000346: Error during managed flush [org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : fr.dawan.formation.AppQCMMono.Models.Question.designer -> fr.dawan.formation.AppQCMMono.Models.Designer]
+2020-03-16 11:43:56,957 ERROR o.h.i.ExceptionMapperStandardImpl [main] HHH000346: Error during managed flush [org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance before flushing : fr.dawan.formation.AppQCMMono.Models.Question.designer -> fr.dawan.formation.AppQCMMono.Models.Designer]
+2020-03-16 14:03:51,094 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-16 14:03:51,715 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-16 14:03:52,273 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-16 14:03:52,858 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-16 14:03:53,364 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-16 15:03:50,846 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-16 15:03:51,143 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-16 15:08:36,313 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-16 15:08:36,819 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-16 15:10:33,794 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-16 15:10:34,370 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-16 15:12:51,150 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-16 15:12:51,648 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-16 15:44:43,939 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-16 15:44:44,398 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-17 08:58:29,253 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'
+2020-03-17 08:58:29,765 ERROR o.h.e.j.s.SqlExceptionHelper [main] Duplicate entry 'gj@gj.fr' for key 'UK_e6gkqunxajvyxl5uctpl2vl2p'

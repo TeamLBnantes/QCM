@@ -15,7 +15,7 @@ import fr.dawan.formation.AppQCMMono.Models.Theme;
 import fr.dawan.formation.AppQCMMono.Persistence.Constantes;
 import fr.dawan.formation.AppQCMMono.Persistence.QuestionDAO;
 
-public class QuestionDaoTest {
+public class TestQuestionDao {
 	
 	private  QuestionDAO daoQuestion;
 	private Question question;

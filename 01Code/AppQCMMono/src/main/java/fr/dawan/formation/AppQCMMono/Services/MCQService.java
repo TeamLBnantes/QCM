@@ -1,9 +1,11 @@
 package fr.dawan.formation.AppQCMMono.Services;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import fr.dawan.formation.AppQCMMono.Enum.Status;
 import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
 import fr.dawan.formation.AppQCMMono.Models.MCQpassed;
@@ -137,8 +139,14 @@ public class MCQService {
 	public List<MCQ> searchWithFiltre(ObjectFiltresMCQ filtresMCQ, User user) {
 		MCQDAO mcqDao=new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
 		List<MCQ> mcqs= mcqDao.searchWithFiltre(filtresMCQ, user);
+		List<MCQ> mcqsPlayable= new ArrayList<>();
+		for (MCQ mcq : mcqs) {
+			if ((mcq.getStatus()==Status.disponible) && (mcq.getQuestionUseds().size()!=0)){
+				mcqsPlayable.add(mcq);
+			}
+		}
 		mcqDao.close();
-		return mcqs;
+		return mcqsPlayable;
 	}
 
 	public ObjectPasserMcq initTrackMcq(MCQ mcq, User user) {
@@ -171,6 +179,26 @@ public class MCQService {
 		List<MCQ> listMcqs=mcqDao.findMcqByQuestion(question);
 	
 		return listMcqs;
+	}
+
+	public List<MCQ> findPlayable() {
+		MCQDAO mcqDao=new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		
+		List<MCQ> mcqs= mcqDao.findByStatus(Status.disponible);
+		List<MCQ> mcqsPlayable= new ArrayList<MCQ>();
+//		QuestionDAO questionDAO=new QuestionDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		int nbQ=0;
+		for (MCQ mcq : mcqs) {
+//			nbQ=questionDAO.searchByMcq(mcq).size();
+			nbQ=mcq.getQuestionUseds().size();
+			if( nbQ!=0) {
+				mcqsPlayable.add(mcq);
+			}
+			
+		}
+		mcqDao.close();
+//		questionDAO.close();
+		return mcqsPlayable;
 	}
 
 

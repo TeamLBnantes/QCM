@@ -96,11 +96,11 @@
 					class="table table-striped table-bordered templatemo-user-table">
 					<thead>
 						<tr>
-							<th class="white-text templatemo-sort-by" width=60%>Intitulé</th>
+							<th class="white-text templatemo-sort-by" width=50%>Intitulé</th>
 							<th class="white-text templatemo-sort-by" width=10%>Statut</th>
 							<th class="white-text templatemo-sort-by" width=10%>Theme</th>
 							<c:if test="${!newMcq}">
-								<th class="white-text templatemo-sort-by" width=20%>Action</th>
+								<th class="white-text templatemo-sort-by" width=30%>Action</th>
 							</c:if>
 					</thead>
 					<c:forEach var="qcm" items="${mcqs}">

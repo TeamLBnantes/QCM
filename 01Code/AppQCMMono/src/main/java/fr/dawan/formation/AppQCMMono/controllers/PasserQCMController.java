@@ -46,8 +46,8 @@ public class PasserQCMController {
 		}
 
 		MCQService mcqService=new MCQService();
-		Set<MCQ> mcqs=mcqService.findAll();
-
+//		Set<MCQ> mcqs=mcqService.findAll();         //je vais affiner en ne proposant que les QCM qui sont à l'etat pret, et qui comporte au moint une question
+		List<MCQ> mcqs=mcqService.findPlayable();
 		
 		SessionServiceDTO ssdto = new SessionServiceDTO();
 		ssdto.isDesignerService(user, model);

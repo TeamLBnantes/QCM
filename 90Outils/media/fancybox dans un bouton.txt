@@ -1,0 +1,39 @@
+clique sr le bouton, ouverture d'une fenetre interne, avec les elet ci-dessous
+
+
+
+    <div class="card p-lg-3">
+        <div class="card-body">
+		<!--    <p class="card-text">
+                Hidden HTML element
+            </p> -->
+            <p class="mb-0">
+                <a data-fancybox="hello" data-src="#hello" href="javascript:;" class="templatemo-edit-btn">
+                    détail
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <form id="hello" action="" method="post" style="display: none;width:100%;max-width:660px;">
+        <h2 class="mb-3">
+            Détail de la Question
+        </h2>
+        <p>
+            The first focusable element in the modal gets the focus for better accessibility.
+            <br />
+            The script traps focus within the modal to disable the user to access the content behind it.
+
+            Focus is restored to last focused element when modal closes.
+        </p>
+        <p>
+            <input type="text" value="" name="hi1" class="form-control" placeholder="Example input" />
+        </p>
+        <p>
+            <input type="text" value="" name="hi2" class="form-control" placeholder="Another input" />
+        </p>
+        <p class="mb-0 text-right">
+            <input data-fancybox-close type="button" class="btn btn-primary" value="Submit" />
+        </p>
+    </form>    
+<!-- fin affichage bouton mode Fanzy -->

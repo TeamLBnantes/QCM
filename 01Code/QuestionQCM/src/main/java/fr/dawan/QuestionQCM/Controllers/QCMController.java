@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.dawan.QuestionQCM.Beans.MCQ;
+import fr.dawan.QuestionQCM.DTO.MCQdto;
 import fr.dawan.QuestionQCM.Services.QCMService;
 
 @RestController
@@ -50,8 +51,8 @@ public class QCMController {
 	}
 
 	@GetMapping(value = { "/", "", "/all" })
-	public List<MCQ> findAll() {
-		return service.findAll();
+	public List<MCQdto> findAll() {
+		return service.findAllDto();
 	}
 
 

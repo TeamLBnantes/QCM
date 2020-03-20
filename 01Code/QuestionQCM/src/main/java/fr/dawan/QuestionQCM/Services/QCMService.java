@@ -1,11 +1,15 @@
 package fr.dawan.QuestionQCM.Services;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.dawan.QuestionQCM.Beans.MCQ;
+import fr.dawan.QuestionQCM.Beans.Multimedia;
+import fr.dawan.QuestionQCM.DTO.MCQdto;
 import fr.dawan.QuestionQCM.Repositories.QCMRepository;
 
 @Service
@@ -20,6 +24,27 @@ public class QCMService {
 
 	public List<MCQ> findAll() {
 		return repository.findAll2();
+	}
+	public List<MCQdto> findAllDto() {
+		List <MCQ> listMcq = repository.findAll2();
+		List <MCQdto> listMcqDto = new ArrayList();
+		
+	
+		for (MCQ mcq : listMcq) {
+			MCQdto mcqdto =new MCQdto();
+			mcqdto.setId(mcq.getId());
+			mcqdto.setBody(mcq.getBody());
+			mcqdto.setTopic(mcq.getTopic());
+			mcqdto.setCreateDate(mcq.getCreateDate());
+			mcqdto.setEditDate(mcq.getEditDate());
+			mcqdto.setDesignerPseudo(mcq.getDesigner().getUser().getPseudo());
+			mcqdto.setMultimedia(mcq.getMultimedia());
+			mcqdto.setNbOfQuestions(mcq.getQuestionUseds().size());
+			
+			listMcqDto.add(mcqdto);
+		}
+		
+		return listMcqDto;
 	}
 
 	public MCQ create(MCQ qcm) {

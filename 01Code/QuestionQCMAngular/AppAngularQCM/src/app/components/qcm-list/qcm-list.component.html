@@ -1,1 +1,29 @@
 <p>qcm-list works!</p>
+
+<button mat-button (click)="getAllQcm()">Afficher les QCM</button>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Jouer</th>
+    <th hidden>ID</th>
+    <th>Intitulé</th>
+    <th>Créé le</th>
+    <th>Derniere édition</th>
+    <th>Créateur</th>
+    <th>Nombre de question</th>
+    <th>Thème</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let qcm of qcms$">
+      <td> <button btn btn-primary>Go !</button>
+      <td hidden>{{qcm.id}}</td>
+      <td>{{qcm.body}}</td>
+      <td>{{qcm.createDate}}</td>
+      <td>{{qcm.editDate}}</td>
+      <td>{{qcm.designerPseudo}}</td>
+      <td>{{qcm.nbOfQuestions}}</td>
+      <td>{{qcm.topic}}</td>
+    </tr>
+  </tbody>
+</table>

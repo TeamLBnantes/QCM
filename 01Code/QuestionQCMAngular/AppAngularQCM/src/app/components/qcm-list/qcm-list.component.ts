@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Qcm } from 'src/app/classes/qcm';
+import { Subscription } from 'rxjs';
+import { QcmServiceService } from 'src/app/service/qcm-service.service';
 
 @Component({
   selector: 'app-qcm-list',
@@ -6,10 +9,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./qcm-list.component.css']
 })
 export class QcmListComponent implements OnInit {
-
-  constructor() { }
+  qcms$: Qcm[];
+  private subscription: Subscription;
+  constructor(private qcmService: QcmServiceService) { }
 
   ngOnInit(): void {
   }
 
+  getAllQcm() {
+    this.subscription = this.qcmService.getAllQcm().subscribe(
+      (data: Qcm[]) => {
+        this.qcms$ = data;
+      }
+    );
+  }
+ngOnDestroy(): void {
+  // eviter les fuites de memoires
+  if (this.subscription) {
+    this.subscription.unsubscribe();
+  }
 }
+
+}
+

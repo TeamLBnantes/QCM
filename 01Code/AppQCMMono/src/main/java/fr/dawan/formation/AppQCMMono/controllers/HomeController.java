@@ -14,6 +14,20 @@ import fr.dawan.formation.AppQCMMono.Services.SessionServiceDTO;
 @RequestMapping("/home")
 public class HomeController {
 	
+	/**
+	 * from:
+	 * 	page login.jsp
+	 * 	button connexion
+	 * 
+	 *  nav lateral: navigateur.jsp
+	 *  button accueil
+	 * 	
+	 * @param session
+	 * @param model
+	 * @return
+	 */
+	
+	
 	@GetMapping(value= {"", "/"})
 	public String hello(HttpSession session, Model model) {
 		SessionServiceDTO ssdto = new SessionServiceDTO();
@@ -25,8 +39,6 @@ public class HomeController {
 			model.addAttribute("message", "Bonjour " 
 				+ user.getFirstName());
 		}
-		
-	
 		ssdto.isDesignerService(user, model);
 		
 		

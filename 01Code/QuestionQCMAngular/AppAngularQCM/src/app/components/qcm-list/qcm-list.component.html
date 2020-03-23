@@ -16,7 +16,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let qcm of qcms$">
-      <td> <button btn btn-primary>Go !</button>
+      <td> <button btn btn-primary [routerLink]="['/qcm-play', qcmId]" [queryParams]="qcmId:{qcm.id}">Go !</button>
       <td hidden>{{qcm.id}}</td>
       <td>{{qcm.body}}</td>
       <td>{{qcm.createDate}}</td>

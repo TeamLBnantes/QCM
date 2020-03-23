@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.dawan.formation.AppQCMMono.Models.Designer;
-import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Models.SubscribeValidator;
-import fr.dawan.formation.AppQCMMono.Services.DesignerService;
+import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Services.SessionServiceDTO;
 import fr.dawan.formation.AppQCMMono.Services.UserService;
 
@@ -20,12 +19,42 @@ import fr.dawan.formation.AppQCMMono.Services.UserService;
 @RequestMapping("/inscription")
 public class InscriptionController {
 
+	/**
+	 * from :
+	 *  login.jsp
+	 *  button "inscrption"
+	 * 
+	 */
+	
 	@GetMapping("")
 	public String Inscription() {
 		return "inscription";
 	}
 	
-	
+	/**
+	 * 
+	 * from :
+	 *  inscription.jsp
+	 *  button "valider"
+	 *  
+	 *  Create a new user from
+	 *  @param user
+	 *  
+	 *  Validation of password and email using
+	 *  @param user
+	 *  @param confirmPassword
+	 *  @param confirmEmail
+	 *  
+	 *  If validation is Ok, register this user in bdd
+	 *  
+	 *  To:
+	 *  Validation Ok : redirect to login.jsp, w/ email already filled
+	 *  Validation not Ok : stay on inscription.jsp, w/ an error message
+	 * 
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@PostMapping(value="", params= {"confirmPassword", "confirmEmail"})
 	public String EnregistrerUser(User user, Model model,
 			@RequestParam("confirmPassword") String confirmPassword,
@@ -34,10 +63,7 @@ public class InscriptionController {
 		SubscribeValidator subsVal;
 		UserService userService = new UserService();
 		
-			
 			subsVal=userService.createUser(user, confirmPassword, confirmEmail);
-			
-			
 			
 			//possible de tester la valeur de retour de createUser
 			// en fonction, si l'utilisateur n'a pas été cérer, possible de renvoyer sur eecran de création en disant pourquoi
@@ -51,7 +77,20 @@ public class InscriptionController {
 			}
 		
 	}
-
+	
+	/**
+	 * from:
+	 *  lateral nav navigateur.jsp
+	 *  button "inscription designer"
+	 *  
+	 * To:
+	 *  inscriptionDesigner.jsp
+	 * 
+	 * @param session
+	 * @param model
+	 * @return
+	 */
+	
 	@GetMapping("/designer")
 	public String inscriptionDesigner(HttpSession session, Model model) {
 		SessionServiceDTO ssdto = new SessionServiceDTO();
@@ -60,33 +99,38 @@ public class InscriptionController {
 		return "inscriptionDesigner";
 	}
 	
+	
+	/**
+	 * From :
+	 *  inscriptionDesigner.jsp
+	 *  button : valider
+	 * 
+	 * create a new designer from form
+	 * @param designer
+	 * designer is linked to user using the user stocked in :
+	 * @param model
+	 * 
+	 * To:
+	 *  home.jsp
+	 * 
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/designer")
 	public String EnregistrementDesigner(			
 			HttpSession session,
 			Designer designer,
 			Model model) {
 		
-
-		
 		UserService userService = new UserService();
-
-
 		User userSession=(User) session.getAttribute("user");
-
-		
 		userSession = userService.createUserDesigner(userSession, designer);
-		
 		SessionServiceDTO ssdto = new SessionServiceDTO();
 		User user = ssdto.sessionUserService(session);
 		ssdto.isDesignerService(user, model);
-		
-		//userSession.setDesigner(designer);
-		
+				
 		session.setAttribute("user", userSession);
 		
-		//model.addAttribute("isDesigner", true);
-		
-
 		return "redirect:/home";
 	}
 	

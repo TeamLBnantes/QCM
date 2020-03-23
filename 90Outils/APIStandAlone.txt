@@ -1,0 +1,10 @@
+Pour avoir un .jar de l'API et l'executer hors de STS:
+
+-> creer le jar
+Ouvrir une commande dans le dossier contenant pom.xml
+mvn clean install
+
+-> lancer le jar
+Ouvrir une commande dans le dossier target
+java -jar QCMSpringQuestion-0.0.1-SNAPSHOT.jar
+(auto completion avec tab)

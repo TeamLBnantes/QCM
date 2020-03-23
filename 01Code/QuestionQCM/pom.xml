@@ -55,7 +55,7 @@
 	</dependencies>
 
 
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<build>
 		<plugins>
 			<plugin>
@@ -63,7 +63,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<mainClass>fr.dawan.QuestionQCM.Demo1Application</mainClass>
-					<layout>WAR</layout>
+					<layout>JAR</layout>
 				</configuration>
 				<executions>
 					<execution>
@@ -73,6 +73,25 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<plugin> 
+
+                <!-- Building an executable jar -->
+
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                  <archive>
+                    <manifest>
+
+                    <!-- give full qualified name of your main class-->
+                      <mainClass>/QCMSpringQuestion/src/main/java/fr/dawan/QuestionQCM/Demo1Application.java</mainClass>
+
+                    </manifest>
+                  </archive>
+                </configuration>
+    </plugin>
 		</plugins>
 	</build>
 

@@ -4,14 +4,13 @@ import java.time.LocalDateTime;
 
 import fr.dawan.QuestionQCM.Beans.Multimedia;
 
-public class MCQdto {
+public class MCQforListDto {
 	private int id;
 	private String body;
 	private String topic;
 	private LocalDateTime createDate;
 	private LocalDateTime editDate;
 	private String designerPseudo;
-	private Multimedia multimedia;
 	private int nbOfQuestions;
 	public int getId() {
 		return id;
@@ -49,20 +48,15 @@ public class MCQdto {
 	public void setDesignerPseudo(String designerPseudo) {
 		this.designerPseudo = designerPseudo;
 	}
-	public Multimedia getMultimedia() {
-		return multimedia;
-	}
-	public void setMultimedia(Multimedia multimedia) {
-		this.multimedia = multimedia;
-	}
+	
 	public int getNbOfQuestions() {
 		return nbOfQuestions;
 	}
 	public void setNbOfQuestions(int nbOfQuestions) {
 		this.nbOfQuestions = nbOfQuestions;
 	}
-	public MCQdto(int id, String body, String topic, LocalDateTime createDate, LocalDateTime editDate,
-			String designerPseudo, Multimedia multimedia, int nbOfQuestions) {
+	public MCQforListDto(int id, String body, String topic, LocalDateTime createDate, LocalDateTime editDate,
+			String designerPseudo, int nbOfQuestions) {
 		super();
 		this.id = id;
 		this.body = body;
@@ -70,10 +64,9 @@ public class MCQdto {
 		this.createDate = createDate;
 		this.editDate = editDate;
 		this.designerPseudo = designerPseudo;
-		this.multimedia = multimedia;
 		this.nbOfQuestions = nbOfQuestions;
 	}
-	public MCQdto() {
+	public MCQforListDto() {
 		super();
 	}
 	

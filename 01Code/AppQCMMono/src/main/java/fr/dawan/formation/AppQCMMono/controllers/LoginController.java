@@ -25,7 +25,25 @@ public class LoginController {
 		return "login";
 	}
 	
-	
+	/**
+	 * from:
+	 *  login.jsp
+	 *  
+	 *  userService.controlLogin check if 
+	 *   user is in bdd
+	 *   psw is correct
+	 *   
+	 *  To :
+	 *   if Ok : home.jsp
+	 *   If not Ok : stay on login.jsp, w/ an error message
+	 * 
+	 * 
+	 * @param session
+	 * @param user
+	 * @param returnUrl
+	 * @param model
+	 * @return
+	 */
 	
 	@PostMapping("")
 	public String login(
@@ -39,26 +57,18 @@ public class LoginController {
 		if (userService.controlLogin(user.getEmail(), user.getPassword())){
 			user=userService.searchByEmail(user.getEmail());	
 			
-
-			
-			
 			session.setAttribute("user", user);
 			if(returnUrl != null && !"".equals(returnUrl)) {
 				return "redirect:/"+returnUrl;
 			}
-			
-			
 			return "redirect:/home";
-			
 			
 		}else {
 			System.out.println("pb d'authentification");
 			model.addAttribute("message", "pb d'authentification");
 			return "login";
 		}
-		
-	
-		
+
 		// TODO : vérif du login/mdp
 		
 
@@ -85,6 +95,18 @@ public class LoginController {
 //	13	  System.out.println("It does not match");
 	
 	
+	/**
+	 * logout
+	 *  from:
+	 *   nav lateral navigateur.jsp
+	 *   button: deconnexion
+	 *   
+	 *  to:
+	 *  index.jsp
+	 *  
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/out")
 	public String logout(HttpSession session) {
 		//session.setAttribute("user", null);

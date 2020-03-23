@@ -33,7 +33,6 @@ public class UserService {
 		userDao.close();
 		if (userLogin != null) {
 			
-
 			//if (password.equals(userLogin.getPassword())) {
 			if (BCrypt.checkpw(password, userLogin.getPassword())) {
 				return true;

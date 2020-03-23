@@ -27,23 +27,5 @@ export class QcmServiceService {
 
     );
   }
-  /*
-  public getPlayableQcm(id): Observable<Qcm> {
-    return this.http.get<Qcm>(`${this.URL}/qcm/${id}`).pipe();
-  }
-  */
-/*
-  public getPlayableQuestion(id): Observable<Question> {
-    // get, put post renvoient tjs un observable
-    // pipe de rx.js => observables
-    return this.http.get<Qcm>(`${this.URL}/qcm/${id}`).pipe(
-      // map permet de faire des opérations sur la listes
-      map((qcm: Qcm) => {
-          return new Qcm(qcm);
-        }));
-  }
-  */
-
-
 
 }

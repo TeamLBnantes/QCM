@@ -1,1 +1,37 @@
 <p>qcm-play works!</p>
+
+Vous avez choisi le QCM :
+<table class="table">
+  <thead>
+  <tr>
+    <th hidden>ID</th>
+    <th>Intitulé</th>
+    <th>Créé le</th>
+    <th>Derniere édition</th>
+    <th>Créateur</th>
+    <th>liste de question</th>
+    <th>Thème</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td hidden>{{qcm.id}}</td>
+      <td>{{qcm.body}}</td>
+      <td>{{qcm.createDate}}</td>
+      <td>{{qcm.editDate}}</td>
+      <td>{{qcm.designerPseudo}}</td>
+      <td><span *ngFor="let questionId of qcm.questionsId">
+        {{questionId}} </span>
+      </td>
+      <td>{{qcm.topic}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="!lancer, else qcmLancer">
+<button onclick="LancerQcm(), lancer = !lancer">Lancer le QCM</button>
+</p>
+<ng-template #qcmLancer>
+  C'est parti
+</ng-template>
+

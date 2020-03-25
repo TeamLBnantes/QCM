@@ -1,6 +1,7 @@
 <p>qcm-list works!</p>
 
-<button mat-button (click)="getAllQcm()">Afficher les QCM</button>
+<div *ngInit gelAllQcm()></div>
+<button mat-button (click)="getAllQcm()">Afficher les QCM</button> >> ICI filtres <<
 <table class="table">
   <thead>
   <tr>
@@ -16,7 +17,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let qcm of qcms$">
-      <td> <button btn btn-primary>Go !</button>
+      <td> <button btn btn-primary [routerLink]="['/play', qcm.id]">Go !</button>
       <td hidden>{{qcm.id}}</td>
       <td>{{qcm.body}}</td>
       <td>{{qcm.createDate}}</td>

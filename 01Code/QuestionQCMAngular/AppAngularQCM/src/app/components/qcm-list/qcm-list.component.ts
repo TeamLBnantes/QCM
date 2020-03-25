@@ -11,9 +11,11 @@ import { QcmServiceService } from 'src/app/service/qcm-service.service';
 export class QcmListComponent implements OnInit {
   qcms$: Qcm[];
   private subscription: Subscription;
+  lancer: boolean;
   constructor(private qcmService: QcmServiceService) { }
 
   ngOnInit(): void {
+    this.getAllQcm();
   }
 
   getAllQcm() {

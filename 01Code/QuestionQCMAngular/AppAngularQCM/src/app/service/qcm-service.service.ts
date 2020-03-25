@@ -3,6 +3,8 @@ import { Qcm } from '../classes/qcm';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { QcmPlayable } from '../classes/qcm-playable';
+import { Question } from '../classes/question';
 
 
 @Injectable({
@@ -27,5 +29,11 @@ export class QcmServiceService {
 
     );
   }
+  public getQcmPlayable(id: number): Observable<QcmPlayable> {
+    return this.http.get<QcmPlayable>(`${this.URL}/qcm/${id}`);
+}
 
+public getQuestion(id: number): Observable<Question> {
+  return this.http.get<Question>(`${this.URL}/question/${id}`);
+}
 }

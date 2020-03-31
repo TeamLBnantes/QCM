@@ -2,6 +2,8 @@ package fr.dawan.QuestionQCM.Services;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,12 +40,17 @@ public class QCMService {
 		mcqdto.setEditDate(mcq.getEditDate());
 		mcqdto.setDesignerPseudo(mcq.getDesigner().getUser().getPseudo());
 		mcqdto.setMultimedia(mcq.getMultimedia());
-		Set<Integer> questionsId = new HashSet<Integer>();
+//		Set<Integer> questionsId = new HashSet<Integer>();
+		List<Integer> questionsId = new ArrayList<>();
 		for (QuestionUsed questionused : mcq.getQuestionUseds()) {
 			questionsId.add(questionused.getQuestion().getId());
 		}
+		System.out.println(questionsId);
+		Collections.shuffle(questionsId);
+		System.out.println(questionsId);
+
 		mcqdto.setQuestionsId(questionsId);
-		
+
 		return mcqdto;
 	}
 
@@ -61,20 +68,21 @@ public class QCMService {
 	public List<MCQforListDto> findAllDto() {
 		List <MCQ> listMcq = repository.findAll2();
 		List <MCQforListDto> listMcqDto = new ArrayList<MCQforListDto>();
-		
+		int i=0;
 		for (MCQ mcq : listMcq) {
-			MCQforListDto mcqdto =new MCQforListDto();
-			mcqdto.setId(mcq.getId());
-			mcqdto.setBody(mcq.getBody());
-			mcqdto.setTopic(mcq.getTopic());
-			mcqdto.setCreateDate(mcq.getCreateDate());
-			mcqdto.setEditDate(mcq.getEditDate());
-			mcqdto.setDesignerPseudo(mcq.getDesigner().getUser().getPseudo());
-			mcqdto.setNbOfQuestions(mcq.getQuestionUseds().size());
-			
-			listMcqDto.add(mcqdto);
+			i=mcq.getQuestionUseds().size();
+			if (i!=0) {       //je ne retourne que les qcm qui ont au moins une question
+				MCQforListDto mcqdto =new MCQforListDto();
+				mcqdto.setId(mcq.getId());
+				mcqdto.setBody(mcq.getBody());
+				mcqdto.setTopic(mcq.getTopic());
+				mcqdto.setCreateDate(mcq.getCreateDate());
+				mcqdto.setEditDate(mcq.getEditDate());
+				mcqdto.setDesignerPseudo(mcq.getDesigner().getUser().getPseudo());
+				mcqdto.setNbOfQuestions(i);
+				listMcqDto.add(mcqdto);
+			}
 		}
-		
 		return listMcqDto;
 	}
 

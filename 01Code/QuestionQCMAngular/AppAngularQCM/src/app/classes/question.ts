@@ -12,5 +12,5 @@ export class Question {
       typeMultimedia: string;
       adresseCible: string;
   };
-  answersPlayableDto: Answer[];
+  answersPlayableDto: Answer[];    // liste des réponses, ordonnees aléatoirement pour ce passage 
 }

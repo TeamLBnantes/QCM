@@ -4,7 +4,8 @@ package fr.dawan.QuestionQCM.Enum;
 public enum TypeMultimedia {
 image("image"),
 audio("audio"),
-video("video");
+video("video"),
+aucun("aucun");
 
 
 

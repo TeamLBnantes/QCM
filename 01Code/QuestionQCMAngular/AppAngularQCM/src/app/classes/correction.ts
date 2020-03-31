@@ -1,7 +1,7 @@
 import { AnswerCorrectionDto } from './answer-correction-dto';
 
 export class Correction {
-id: number;
+id: number;                         //correspond à l'id de la question
 commentPostAnswer: string ;
-answerCorrectionDto: Array<AnswerCorrectionDto>;
+answersCorrectionDto: Array<AnswerCorrectionDto>;
 }

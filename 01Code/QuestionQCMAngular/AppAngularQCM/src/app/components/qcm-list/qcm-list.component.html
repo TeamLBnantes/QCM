@@ -2,29 +2,104 @@
 
 <div *ngInit gelAllQcm()></div>
 <button mat-button (click)="getAllQcm()">Afficher les QCM</button> >> ICI filtres <<
-<table class="table">
+<table class="table table-hover">
   <thead>
   <tr>
-    <th>Jouer</th>
+    <th scope="col">Jouer</th>
     <th hidden>ID</th>
-    <th>Intitulé</th>
-    <th>Créé le</th>
-    <th>Derniere édition</th>
-    <th>Créateur</th>
-    <th>Nombre de question</th>
-    <th>Thème</th>
+    <th scope="col">Intitulé</th>
+    <th hidden>Créé le</th>
+    <th hidden>Derniere édition</th>
+    <th scope="col">Créateur</th>
+    <th hidden>Nombre de question</th>
+    <th scope="col">Thème</th>
   </tr>
   </thead>
-  <tbody>
-    <tr *ngFor="let qcm of qcms$">
+  <tbody *ngFor="let qcm of qcms$; let index=index">
+    <!-- <tr class="table-success" > -->
+      <tr [class]="tableVisuel[index % 10]" >
       <td> <button btn btn-primary [routerLink]="['/play', qcm.id]">Go !</button>
       <td hidden>{{qcm.id}}</td>
       <td>{{qcm.body}}</td>
-      <td>{{qcm.createDate}}</td>
-      <td>{{qcm.editDate}}</td>
+      <td hidden>{{qcm.createDate}}</td>
+      <td hidden>{{qcm.editDate}}</td>
       <td>{{qcm.designerPseudo}}</td>
-      <td>{{qcm.nbOfQuestions}}</td>
+      <td hidden>{{qcm.nbOfQuestions}}</td>
       <td>{{qcm.topic}}</td>
-    </tr>
+      </tr>
   </tbody>
 </table>
+
+
+<!-- <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Type</th>
+      <th scope="col">Column heading</th>
+      <th scope="col">Column heading</th>
+      <th scope="col">Column heading</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-active">
+      <th scope="row">Active</th>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr>
+      <th scope="row">Default</th>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr class="table-primary">
+      <th scope="row">Primary</th>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr class="table-secondary">
+      <th scope="row">Secondary</th>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr class="table-success">
+      <th scope="row">Success</th>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr class="table-danger">
+      <th scope="row">Danger</th>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr class="table-warning">
+      <th scope="row">Warning</th>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr class="table-info">
+      <th scope="row">Info</th>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr class="table-light">
+      <th scope="row">Light</th>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr class="table-dark">
+      <th scope="row">Dark</th>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+  </tbody>
+</table>  -->

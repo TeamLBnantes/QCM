@@ -1,6 +1,7 @@
 package fr.dawan.QuestionQCM.DTO;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 import fr.dawan.QuestionQCM.Beans.Multimedia;
@@ -14,7 +15,7 @@ public class MCQPlayableDto {
 	private LocalDateTime editDate;
 	private String designerPseudo;
 	private Multimedia multimedia;
-	private Set<Integer> questionsId;
+	private List<Integer> questionsId;
 	public int getId() {
 		return id;
 	}
@@ -60,17 +61,17 @@ public class MCQPlayableDto {
 	
 	
 	
-	public Set<Integer> getQuestionsId() {
+	public List<Integer> getQuestionsId() {
 		return questionsId;
 	}
-	public void setQuestionsId(Set<Integer> questionsId) {
+	public void setQuestionsId(List<Integer> questionsId) {
 		this.questionsId = questionsId;
 	}
 	public MCQPlayableDto() {
 		super();
 	}
 	public MCQPlayableDto(int id, String body, String topic, LocalDateTime createDate, LocalDateTime editDate,
-			String designerPseudo, Multimedia multimedia, Set<Integer> questionsId) {
+			String designerPseudo, Multimedia multimedia, List<Integer> questionsId) {
 		super();
 		this.id = id;
 		this.body = body;

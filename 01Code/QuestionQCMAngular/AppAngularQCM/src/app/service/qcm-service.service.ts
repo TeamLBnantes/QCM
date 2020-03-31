@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { QcmPlayable } from '../classes/qcm-playable';
 import { Question } from '../classes/question';
-
+import { Correction } from 'src/app/classes/Correction';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +35,9 @@ export class QcmServiceService {
 
 public getQuestion(id: number): Observable<Question> {
   return this.http.get<Question>(`${this.URL}/question/${id}`);
+}
+
+public getCorrection(id: number): Observable<Correction>{
+  return this.http.get<Correction>(`${this.URL}/question/${id}/correction`);
 }
 }

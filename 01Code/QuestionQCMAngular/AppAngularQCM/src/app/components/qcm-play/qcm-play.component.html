@@ -1,37 +1,158 @@
 <p>qcm-play works!</p>
 
-Vous avez choisi le QCM :
-<table class="table">
-  <thead>
-  <tr>
-    <th hidden>ID</th>
-    <th>Intitulé</th>
-    <th>Créé le</th>
-    <th>Derniere édition</th>
-    <th>Créateur</th>
-    <th>liste de question</th>
-    <th>Thème</th>
-  </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td hidden>{{qcm.id}}</td>
-      <td>{{qcm.body}}</td>
-      <td>{{qcm.createDate}}</td>
-      <td>{{qcm.editDate}}</td>
-      <td>{{qcm.designerPseudo}}</td>
-      <td><span *ngFor="let questionId of qcm.questionsId">
-        {{questionId}} </span>
-      </td>
-      <td>{{qcm.topic}}</td>
-    </tr>
-  </tbody>
-</table>
+<span *ngIf="!lancer, else qcmLancer">
+<!-- <div class="card border-success mb-3" style="max-width: 20rem;">   ceci pour afficher un cadre qui fait au plus 20 rem de large-->
+<div class="card border-success mb-3" >
+    <div class="card-header"><h1>{{qcm.body}}</h1></div>
+    <img style="height: 200px; width: 100%; display: block;" src="https://image.jimcdn.com/app/cms/image/transf/none/path/s5f3909cce3072a25/image/id366849d1b3234f7/version/1506546440/stand-up-paddle-%C3%A0-waterfun-la-tranche-sur-mer.jpg" alt="Card image">
+    <div class="card-body">
+       <h4 class="card-title">id du QCM : {{qcm.id}}</h4>
+       auteur du QCM :<h2 class="card-text"> {{qcm.designerPseudo}}</h2>
+      <p class="card-text">id des questuions : <span *ngFor="let questionId of qcm.questionsId">
+          {{questionId}} </span></p>
+          theme du QCM :<h2 class="card-title"> {{qcm.topic}}</h2>   
+    </div>
+  </div>
+      <button (click)="lancerQcm()">Lancer le QCM</button></span>
 
-<p *ngIf="!lancer, else qcmLancer">
-<button onclick="LancerQcm(), lancer = !lancer">Lancer le QCM</button>
-</p>
 <ng-template #qcmLancer>
-  C'est parti
-</ng-template>
 
+  <span *ngIf="!corriger, else questionCorriger">
+
+<!-- affichage de la carte contenant la question et les réponses-->
+<div class="card mb-3">
+  <h5 class="card-header">question n° xxxxxxxx sur xxxxxxxxxxx</h5>
+  <div class="card-body">
+    <h2 class="card-title">{{question.body}}</h2>
+    <h6 class="card-subtitle text-muted">id de la question : {{question.id}}</h6>
+  </div>
+  <img style="height: 200px; width: 100%; display: block;" src="http://www.paddlehouse.fr/image/data/paddle_yoga_2018_2.jpg" alt="Card image">
+  <div class="card-body">
+    <h5 class="card-text">commentaire sur contenu media de la question</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+      <span *ngFor="let answer of question.answersPlayableDto; let index=index">
+
+          
+
+    <li class="list-group-item">
+        <input type="checkbox" 
+        [value]="reponsesAnswersUser[index]" 
+        [checked]="reponsesAnswersUser[index]" 
+        (change)="reponsesAnswersUser[index] = !(reponsesAnswersUser[index])">
+          _    _  {{answer.body}}  <h6>- id reponse :  {{answer.id}} </h6>
+
+    </li>
+    </span>
+  </ul>
+ 
+  <div class="card-footer text-muted">
+    mettre le bouton au centre
+    <button (click)="lancerQuestionCorriger()">corriger</button>
+  </div>
+</div>
+</span>
+<br/>
+</ng-template>    <!-- fin affichage de la carte contenant la question et les réponses proposées-->
+<ng-template #questionCorriger>     <!-- affichage de la carte correction de la question-->
+  <span *ngIf="!bilan, else afficherBilan">
+  
+
+  
+  
+<!-- affichage de la carte correction-->
+<div class="card mb-3">
+  <h5 class="card-header">question n° xxxxxxxx sur xxxxxxxxxxx</h5>
+  <div class="card-body">
+    <h2 class="card-title">{{question.body}}</h2>
+    <h6 class="card-subtitle text-muted">id de la question : {{question.id}}</h6>
+    <span *ngIf="reponsesQCMUser[qIndex]"><h2 class="text-success"> la reponse à la question est Correct, BRAVO</h2></span>
+    <span *ngIf="!reponsesQCMUser[qIndex]"><h2 class="text-danger"> Il y a des erreurs, voyer la correction</h2></span>
+    comment post question : {{reponsesAttendus.commentPostAnswer}} <br/>
+  </div>
+  <img style="height: 200px; width: 100%; display: block;" src="http://www.paddlehouse.fr/image/data/paddle_yoga_2018_2.jpg" alt="Card image">
+  <div class="card-body">
+    <h5 class="card-text">commentaire sur contenu media de la question</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+      <span *ngFor="let answer of question.answersPlayableDto; let index=index">
+
+          
+
+    <li class="list-group-item">
+      
+        <input type="checkbox" 
+        [value]="reponsesAnswersUser[index]" 
+        [checked]="reponsesAnswersUser[index]" 
+        (change)="reponsesAnswersUser[index] = !(reponsesAnswersUser[index])"
+        disabled="">
+          _    _  {{answer.body}}  - id reponse :  {{answer.id}} 
+          
+          <span *ngIf="trueReponseAnswerUser[index]"><h3 class="text-success"> bonne réponse</h3></span>
+          <span *ngIf="!trueReponseAnswerUser[index]"><h3 class="text-danger"> Il y a une erreur, voyer le commentaire</h3></span> 
+          _   _   comment rep : {{varAnswersCorrection[index].commentPostAnswer}}
+        
+        </li>
+    </span>
+  </ul>
+ 
+  <div class="card-footer text-muted">
+    <p *ngIf="!thisIsTheEnd">
+      <!-- <button onclick="lancerQcm(), lancer = !lancer">Lancer le QCM</button> -->
+      <button (click)="nextQuestion()">question suivante</button>
+      
+      </p> 
+      <p *ngIf="thisIsTheEnd">
+          <!-- <button onclick="lancerQcm(), lancer = !lancer">Lancer le QCM</button> -->
+          <button (click)="bilanQCM()">Terminer le QCM</button>
+          
+      </p>
+  </div>
+</div>     <!--fin affichage de la carte correction-->
+
+
+
+
+  <!-- <br/>
+  question id : {{question.id}} <br/>
+  question : {{question.body}}<br/>
+  ####################<br/>
+  <span *ngFor="let answer of question.answersPlayableDto; let index=index">
+   id reponse :  {{answer.id}} <br/>
+  body reponse : {{answer.body}} <br/>
+  id de la reponse : {{varAnswersCorrection[index].id}}<br/>
+  valeur attendu rep : {{varAnswersCorrection[index].expectedAnswer}}<br/>
+  comment rep : {{varAnswersCorrection[index].commentPostAnswer}}<br/>
+  reponse de l'utilisateur : {{reponsesAnswersUser[index]}}<br/>
+  c'est donc une : {{trueReponseAnswerUser[index]}}<br/>
+   reponse id : {{mapRep[answer.id].id}} 
+
+####################<br/></span>
+ réponses attendus
+ id question :  {{reponsesAttendus.id}} <br/>
+ comment post question : {{reponsesAttendus.commentPostAnswer}} <br/> -->
+<!-- <span *ngFor="let answer of reponsesAttendus.answersCorrectionDto">
+id de la reponse : {{answer.id}} <br/>
+reponse : {{answer.expectedAnswer}} <br/>
+comment : {{answer.commentPostAnswer}} <br/>
+####################<br/></span> -->
+<!-- 
+<p *ngIf="!thisIsTheEnd, else terminerQcm"> 
+<p *ngIf="!thisIsTheEnd">
+ <button onclick="lancerQcm(), lancer = !lancer">Lancer le QCM</button> 
+<button (click)="nextQuestion()">question suivante</button>
+
+</p> 
+<p *ngIf="thisIsTheEnd">
+     <button onclick="lancerQcm(), lancer = !lancer">Lancer le QCM</button> 
+    <button (click)="bilanQCM()">Terminer le QCM</button>
+    
+</p> -->
+</span>
+</ng-template>
+<ng-template #afficherBilan>
+  ceci est la fin du QCM<br/>
+  affichage du bilan pour l'utilisateur ........ <br/>
+
+   <button btn btn-primary [routerLink]="['/qcmList']">retour liste des QCM</button> 
+</ng-template>

@@ -1,0 +1,47 @@
+deploiement test de notre environnement V0
+appli servlet-Spring de gestion de qcm
+appli springBoot, webservices pour passage de qcm
+appli angular utilisant les webservice pour passer les qcm
+
+====================================================
+
+bas de données, tel que config pour tester les sources mises à dispo
+type de base : MySql          (nous avons pour notre part utilsié le serveur wamp)
+adresse du serveur : http://localhost:3308  et sans SSL
+user : root
+mot de passe :			(en rien mettre)
+nom de la base : qcmdb
+codage : utf8-general CI
+
+====================================================
+
+lancer l'appli AppQCMMono via serveur appache par exemple
+	ne pas utiliser le localhost:8080, que nous avons reservé à MySQL, via wamp
+	proposition, utiliser le 8082
+   suite au lancement de du serveur apache, l'appli sera alors dispo 
+	http://localhost:8082/AppQCMMono
+appli de gestion complete, user, concepteur, question, qcm et passage de qcm
+
+====================================================
+
+appli questionQCM, est une appli springBoot, donc quasi autonome.
+la lancer via l'invite de commande dans le dossier qui contient la sources : 
+java -jar nomDeLaSource.java
+l'appli est alors dispo sur le port 8081 de localhost
+Attention, le port 8081 ne doit donc pas etre deja utilisé sur votre poste
+role de l'appli : mise à dispo de webservices pour pouvoir passer les qcm
+elle utilise la même base de données que AppQCMMono
+
+son bon fonctionnement peut être tetsé avec Postaman par exemple, 
+al requete de type GET, http://localhost:8081/qcm doit vous retourner un json contenant la liste des qcm dispo pour etre passés
+
+====================================================
+
+appli "site Angular" 
+possible d'utiliser la encore le serveur web de Wamp
+deposer le site dans le www de wamp (AppAngularQCM et out-tsc)
+l'appli est config pour repondre (et converser avec les webservices) à l'adresse http://localhost:4200
+il faudra donc parametrer wamp (ajouter un listen port à apache, et ajouter un virtual host vers notre appli au port 4200)
+
+(pour le moment, comme bp d'autre choses, la page d'accueil n'est pas prete, vous pouvez donc directement cliquer sur le lien liste des QCM)
+=====================================================

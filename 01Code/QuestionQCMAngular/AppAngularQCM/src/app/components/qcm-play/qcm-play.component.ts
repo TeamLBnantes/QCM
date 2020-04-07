@@ -23,23 +23,28 @@ export class QcmPlayComponent implements OnInit {
   lancer = false;
   corriger = false;
   thisIsTheEnd = false;
-  bilan=false;
-  qIndex: number=0;
+  bilan = false;
+  qIndex= 0;
   idQuestion: number;
-  question: Question;          //dans la question, les rep sont dans anwerPlayableDTO. ordre aléatoire
-  reponsesAttendus: Correction;   //il faudra les mettre dans le même ordre que presentée dans la qiestion
-  mapRep : Map<number, AnswerCorrectionDto>;   //map entre l'id d'une réponse et son contenu
+  question: Question;          // dans la question, les rep sont dans anwerPlayableDTO. ordre aléatoire
+  reponsesAttendus: Correction;   // il faudra les mettre dans le même ordre que presentée dans la qiestion
+  mapRep: Map<number, AnswerCorrectionDto>;   // map entre l'id d'une réponse et son contenu
   varAnswersCorrection: AnswerCorrectionDto[];  // tab des réponses attendu dans même ordre que reponses proposées
-  //reponsesQuestionUser: Correction;    //servira à stoker les réponses de l'utilisateur à cette question
-  reponsesQCMUser: boolean[]; //stockage de l'ensembles des réponses de l'utilisateur sur le qcm
+  // reponsesQuestionUser: Correction;    //servira à stoker les réponses de l'utilisateur à cette question
+  reponsesQCMUser: boolean[]; // stockage de l'ensembles des réponses de l'utilisateur sur le qcm
                                 // qui poura etre retourné à QuizIzSkillz (l'id de ces rep sera recup dans l'objet qcm)
-  reponsesAnswersUser: boolean[]; //reponse de l'utilisateur à Une question (donc à la liste des reponses)
-  trueReponseAnswerUser : boolean[];  //tableau correction des reponses de l'utilisateur pour la question courante
+  reponsesAnswersUser: boolean[]; // reponse de l'utilisateur à Une question (donc à la liste des reponses)
+  trueReponseAnswerUser: boolean[];  // tableau correction des reponses de l'utilisateur pour la question courante
+  questionnumber: number;
+  totalquestion: number;
+  progress: string ='0%';
+
+
   ngOnInit(): void {
     this.idqcm = this.route.snapshot.paramMap.get('id');
     console.log(this.idqcm);
     this.getQcm();
-    this.reponsesQCMUser=[]; //init le tableau des resultat de l'utilisateur sur ce qcm. Eval des question dans l'ordre
+    this.reponsesQCMUser = []; // init le tableau des resultat de l'utilisateur sur ce qcm. Eval des question dans l'ordre
   }
   getQcm() {
     this.subscription = this.qcmService.getQcmPlayable (parseInt(this.idqcm)).subscribe(
@@ -49,7 +54,9 @@ export class QcmPlayComponent implements OnInit {
     );
   }
   lancerQcm() {
-    this.lancer=true;
+    this.lancer = true;
+    this.questionnumber = 1;
+    this.totalquestion = this.qcm.questionsId.length;
     this.idQuestion = this.qcm.questionsId[this.qIndex];
     this.subscription = this.qcmService.getQuestion (this.idQuestion).subscribe(
       (data: Question) => {
@@ -62,64 +69,61 @@ export class QcmPlayComponent implements OnInit {
         this.reponsesAttendus = data;
       }
     );
-    this.reponsesAnswersUser=[];
+    this.reponsesAnswersUser = [];
   }
   lancerQuestionCorriger() {
-    this.corriger=true;    //pour afficher les reponses
-
-     this.mapRep = new Map<number, AnswerCorrectionDto>();
-     for (let rep of this.reponsesAttendus.answersCorrectionDto) {
+    this.corriger = true;    // pour afficher les reponses
+    this.mapRep = new Map<number, AnswerCorrectionDto>();
+    for (const rep of this.reponsesAttendus.answersCorrectionDto) {
        this.mapRep.set(rep.id, rep);
-       console.log("############################# ")
-       console.log("id : "+rep.id)
-       console.log("answer id: "+this.mapRep.get(rep.id).id)
-       console.log("answer valeur attendu: "+this.mapRep.get(rep.id).expectedAnswer)
-       console.log("comment: "+this.mapRep.get(rep.id).commentPostAnswer)
-     }; 
-     this.varAnswersCorrection=[];     //tableau des réponses attendus
-     for (let rep of this.question.answersPlayableDto){
-        this.varAnswersCorrection.push(this.mapRep.get(rep.id))
-     };
-     //le tableau des reponse de l'utilisateur est initié et maj dans la page html
-     this.trueReponseAnswerUser=[];    //tableau comparatif et donc de ercensement des bonnes reponses, init à vide
-     
-     let i=0;
-     this.reponsesQCMUser.push(true);
-     for (let rep of this.varAnswersCorrection){
-      if (this.reponsesAnswersUser[i]){
-              }else{this.reponsesAnswersUser[i]=false}
-      this.trueReponseAnswerUser.push(rep.expectedAnswer==this.reponsesAnswersUser[i]);
-      this.reponsesQCMUser[this.qIndex]=(this.trueReponseAnswerUser[i] && this.reponsesQCMUser[this.qIndex])
-      //console.log(rep.expectedAnswer==this.reponsesAnswersUser[i])
+       console.log('############################# ');
+       console.log('id : '+ rep.id);
+       console.log('answer id: '+ this.mapRep.get(rep.id).id);
+       console.log('answer valeur attendu: '+ this.mapRep.get(rep.id).expectedAnswer);
+       console.log('comment: '+ this.mapRep.get(rep.id).commentPostAnswer);
+     }
+    this.varAnswersCorrection = [];     // tableau des réponses attendus
+    for (const rep of this.question.answersPlayableDto) {
+        this.varAnswersCorrection.push(this.mapRep.get(rep.id));
+     }
+     // le tableau des reponse de l'utilisateur est initié et maj dans la page html
+    this.trueReponseAnswerUser = [];    // tableau comparatif et donc de ercensement des bonnes reponses, init à vide
+
+    let i = 0;
+    this.reponsesQCMUser.push(true);
+    for (const rep of this.varAnswersCorrection) {
+      if (this.reponsesAnswersUser[i]) {
+              } else {this.reponsesAnswersUser[i] = false;}
+      this.trueReponseAnswerUser.push(rep.expectedAnswer == this.reponsesAnswersUser[i]);
+      this.reponsesQCMUser[this.qIndex] = (this.trueReponseAnswerUser[i] && this.reponsesQCMUser[this.qIndex]);
+      // console.log(rep.expectedAnswer==this.reponsesAnswersUser[i])
       i++;
      }
 
-    console.log("je suis dans le corrige");
-    if (this.qIndex == this.qcm.questionsId.length-1){
+    console.log('je suis dans le corrige');
+    if (this.qIndex == this.qcm.questionsId.length - 1) {
       this.thisIsTheEnd = true;
     }
-    console.log("thisIsTheAnd vaut : "+this.thisIsTheEnd);
+    console.log('thisIsTheAnd vaut : '+ this.thisIsTheEnd);
 
-    
-
-
-
-  };
+  }
   nextQuestion() {
-    this.corriger=false;
-    this.reponsesAnswersUser=[];
-    this.qIndex = (this.qIndex + 1);
+    this.corriger = false;
+    this.reponsesAnswersUser = [];
+    this.qIndex++;
+    this.questionnumber++;
+    this.progress = (this.questionnumber/this.totalquestion)*100 + "%" ;
     // if (this.qIndex > this.qcm.questionsId.length) {
     //   this.thisIsTheEnd = true;
     // } else {
-      this.idQuestion = this.qcm.questionsId[this.qIndex];
-      this.subscription = this.qcmService.getQuestion (this.idQuestion).subscribe(
+    this.idQuestion = this.qcm.questionsId[this.qIndex];
+    this.subscription = this.qcmService.getQuestion (this.idQuestion).subscribe(
         (data: Question) => {
           this.question = data;
         }
       );
         ////// pour le test
-      this.subscription2 = this.qcmService.getCorrection (this.idQuestion).subscribe(
+    this.subscription2 = this.qcmService.getCorrection (this.idQuestion).subscribe(
         (data: Correction) => {
           this.reponsesAttendus = data;
         }
@@ -131,8 +135,8 @@ export class QcmPlayComponent implements OnInit {
     // }
   }
 
-  bilanQCM(){
-    this.bilan=true;
+  bilanQCM() {
+    this.bilan = true;
   }
 
 ngOnDestroy(): void {

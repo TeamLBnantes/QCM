@@ -16,6 +16,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AppRoutingModule } from './app-routing.module';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { MatButtonModule } from "@angular/material/button";
 import { FancyComponent } from './components/fancy/fancy.component';
@@ -53,6 +54,7 @@ registerLocaleData(localeFr);
     AppRoutingModule,
     MatSnackBarModule,
     MatButtonModule,
+    MatProgressBarModule
 
   ],
   providers: [{provide: LOCALE_ID, useValue: 'fr'}],

@@ -53,5 +53,9 @@
     "ts-node": "~8.3.0",
     "tslint": "~5.18.0",
     "typescript": "~3.7.5"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.6.",
+  "main": "karma.conf.js",
+  "author": "",
+  "license": "ISC"
 }

@@ -1,7 +1,5 @@
-<p>qcm-list works!</p>
-
 <div *ngInit gelAllQcm()></div>
-<button mat-button (click)="getAllQcm()">Afficher les QCM</button> >> ICI filtres <<
+<button mat-button class="primary" (click)="getAllQcm()">Afficher les QCM</button> >> ICI filtres <<
 <table class="table table-hover">
   <thead>
   <tr>
@@ -18,7 +16,9 @@
   <tbody *ngFor="let qcm of qcms$; let index=index">
     <!-- <tr class="table-success" > -->
       <tr [class]="tableVisuel[index % 10]" >
-      <td> <button btn btn-primary [routerLink]="['/play', qcm.id]">Go !</button>
+      <td> <button class="btn btn-secondary" [routerLink]="['/play', qcm.id]">Go !
+        <img class="questionmark" src="../../..\assets\img\Qrotated.png" alt="logo questionmark">
+      </button>
       <td hidden>{{qcm.id}}</td>
       <td>{{qcm.body}}</td>
       <td hidden>{{qcm.createDate}}</td>

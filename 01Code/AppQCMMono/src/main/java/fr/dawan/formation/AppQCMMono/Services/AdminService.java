@@ -8,11 +8,14 @@ import org.apache.commons.mail.SimpleEmail;
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.stereotype.Service;
 
+import fr.dawan.formation.AppQCMMono.Models.AdminTechniqueAppli;
 import fr.dawan.formation.AppQCMMono.Models.Answer;
+import fr.dawan.formation.AppQCMMono.Models.MCQ;
 import fr.dawan.formation.AppQCMMono.Models.MailDTO;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Persistence.Constantes;
+import fr.dawan.formation.AppQCMMono.Persistence.GenericDAO;
 import fr.dawan.formation.AppQCMMono.Persistence.UserDAO;
 
 @Service
@@ -28,14 +31,31 @@ public class AdminService {
 		String body=mailDTO.getBody();
 		String objet=mailDTO.getTitre();
 		
-		switch (mailDTO.getCible()) {     
-		case "question":	//le mail concerne une question, mais pas de lien avec un qcm. la question doit être dans le mail et dans le titre
+  
+		if (mailDTO.getCible().equals("qcm")||mailDTO.getCible().equals("questionQcm")) {
+			//le mail concerne un QCM, . le QCM doit être dans le mail et dans le titre
+			//recupèrer		
+			MCQService mcqService = new MCQService();
+			MCQ mcq = mcqService.searchById(mailDTO.getMcqId());
+			int l1=(mcq.getBody().length()>20)?19:mcq.getBody().length();
+			objet=objet+" | QCM (id:"+mcq.getId()+") : "+mcq.getBody().substring(0, l1-1)+"...";
+			
+			body=body+"\r\n\r\n xxxxxxxxxxxxxx QCM concernée xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
+					"id : "+mcq.getId()+"\r\n"+
+					"texte : "+mcq.getBody()+"\r\n"+
+					"theme : "+mcq.getTopic()+"\r\n"+
+					"lien Vignette Multimedia : "+mcq.getMultimedia().getAdresseVignette()+"\r\n"+
+					"legende Multimedia : "+mcq.getMultimedia().getLegende()+"\r\n"+
+					"lien Multimedia : "+mcq.getMultimedia().getAdresseCible()+"\r\n"+
+					"\r\n\r\n";	
+		}	
+		if (mailDTO.getCible().equals("question")||mailDTO.getCible().equals("questionQcm")) {
+			//le mail concerne une question, . la question doit être dans le mail et dans le titre
 			//recupèrer les info de la question
 			QuestionService questionService = new QuestionService();
 			Question question = questionService.findById(mailDTO.getQuestionId());
-			
-			objet=objet+"  | question (id:"+question.getId()+") : "+question.getBody().substring(0, 20)+"...";
-			
+			int l2=(question.getBody().length()>20)?19:question.getBody().length();
+			objet=objet+"  | question (id:"+question.getId()+") : "+question.getBody().substring(0, l2-1)+"...";
 			body=body+"\r\n\r\n xxxxxxxxxxxxxx question concernée xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
 					"id : "+question.getId()+"\r\n"+
 					"texte : "+question.getBody()+"\r\n"+
@@ -49,17 +69,15 @@ public class AdminService {
 				"commentaire post réponse : "+question.getCommentPostAnswer()+"\r\n"+
 				"-------------- \r\n";	
 			}
-			body=body+" xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n\r\n";
-			break;
-		case "qcm":
-			
-			break;
-		case "qcmQuestion":
-			
-			break;
-		default: //le mail ne concerne ni une question ni un qcm, il sera donc à destination exclusive de l'administrateur
-			
-			break;
+		}
+		
+		body=body+"\r\n ~~~~~~~~~~~~~~~~~~~~~~~~~~~ suivi ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n\r\n";
+		
+		if (mailDTO.getCible().equals("admin")) {
+				//ce mail concerne ni une question ni un QCM, c'est simplement un user qui souhaite s'adresser au administrateurs
+		//pour le moment je ne vois rien à completer
+			body=body+"\r\n\r\n\r\n\r\n Ce message vous est envoyé par "+user.getEmail() +" qui a souhaité écrire à l'administrateur de l'application. \r\n"+
+					" Se message n'est pas en lien direct avec un QCM ou une Question. \r\n\r\n";
 		}
 		
 		
@@ -75,25 +93,32 @@ public class AdminService {
 		
 		if (mailDTO.isMailToQuestionDesigner()) {
 			String adrQuestionDesigner=userDao.searchMailDesignerByQuestionId(mailDTO.getQuestionId()).getEmail();
-			email.addBcc(adrQuestionDesigner);  //donc adresse en dur pour le moment
+			//ligne suivant pour ne pas ecrire 2 fois à la même personne. (si designerQCM=designer de la question
+			if (!mailDTO.isMailToQCMDesigner() || !adrQuestionDesigner.equals(adrQuestionDesigner))	email.addBcc(adrQuestionDesigner);  		
 			body=body+"l'Utilisateur à souhaité envoyer ce mail au gestionnaire de cette Question \r\n";
-		}
-		
-		if (mailDTO.isMailToUser()) {
-			  
-			if (mailDTO.isEmetteurAnonyme()) {
+		}  
+		if (mailDTO.isEmetteurAnonyme()) {
+				if (mailDTO.isMailToUser()) {
 				email.addBcc(user.getEmail());
 				body=body+"Une copie de ce mail a été conservée par l'utilisateur \r\n";
-			}else {
-				email.addTo(user.getEmail());
-				body=body+"Une copie de ce mail a été envoyée par l'utilisateur, vous pouvez donc lui répondre en utilisant 'Répondre à Tous' \r\n";
-			}
-			
+				}else {
+					body=body+"L'utilisateur à fait le choix de rester anonyme (seul les admins ont une trace de cet envoie) \r\n";
+				}
+		}else {
+				if (mailDTO.isMailToUser()) {
+					email.addTo(user.getEmail());
+					body=body+"Une copie de ce mail a été envoyée par l'utilisateur ("+user.getEmail()+"), vous pouvez donc lui répondre en utilisant 'Répondre à Tous' \r\n";
+				}else if (!mailDTO.getCible().equals("admin")){
+					body=body+"l'utilisateur à laissé son identité ("+user.getEmail()+"), vous pouvez donc le recontacter si vous le souhaitez \r\n";
+				}	
 		}
+			
+			
+		
 		
 		
 		body=body+"\r\n\r\n~~~~~~~~~~~infos techniques~~~~~~~~~~~ \r\n"+
-				"id user à l'origine du mail : "+mailDTO.getUserId()+
+				"id user à l'origine du mail : "+user.getId()+
 				"\r\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n";
 		
 		body=body+"\r\n\r\n Ceci est un message automatique. Merci de ne pas y répondre.\r\n" + 
@@ -101,26 +126,36 @@ public class AdminService {
 		
 		
 		userDao.close();
-		
+		mailDTO.setTitre(objet);
 		mailDTO.setBody(body);
 		
 		//envoi du mail
 		
-		//Email email = new HtmlEmail();
-		email.setHostName("smtp.gmail.com");
-		email.setSmtpPort(465);
-//		email.setAuthentication("quizizskillz@gmail.com", "@dawan20");
-//		email.setSSL(true);
-		email.setAuthenticator(new DefaultAuthenticator("quizizskillz@gmail.com", "@dawan20"));
-		email.setSSLOnConnect(true);
-		email.setFrom("quizizskillz@gmail.com");
+		//par la suite, possible de recup ces infos des l'entree dans l'appli, et stoker dans la session.
+		AdminTechniqueAppli donneesAdmin=AdminTechniqueAppli.getInstance();
+	    GenericDAO<AdminTechniqueAppli> adminDAO=new GenericDAO<AdminTechniqueAppli>(Constantes.PERSISTENCE_UNIT_NAME);
+	    donneesAdmin=adminDAO.findById(AdminTechniqueAppli.class, 1);
+	    adminDAO.close();
+	    
+	    
+
+		
+		//Email email = new HtmlEmail();   possible eventuellement de passer à un format de mail HTTP
+		//email.setHostName("smtp.gmail.com");
+		email.setHostName(donneesAdmin.getServeurSmtp());
+		//email.setSmtpPort(465);
+		email.setSmtpPort(donneesAdmin.getServeurSmtpPort());
+		//email.setAuthenticator(new DefaultAuthenticator("quizizskillz@gmail.com", "@dawan20"));
+		email.setAuthenticator(new DefaultAuthenticator(donneesAdmin.getServeurMailCompte(), donneesAdmin.getServeurMailComptePassword()));
+		//email.setSSLOnConnect(true);
+		email.setSSLOnConnect(donneesAdmin.isModeSSL());
+		//email.setFrom("quizizskillz@gmail.com");
+		email.setFrom(donneesAdmin.getMailAdmin());
 		email.setSubject(objet);
 		email.setMsg(body);
-//		email.setMsg("mon message");
-//		email.addTo("laurent.boureau.nant@gmail.com");
-//		email.addTo("quizizskillz@gmail.com");
-		email.send();
+		email.send();       //decommenter la ligne pour activer l'envois de mail
 		return mailDTO;
+		     
 		
 	}
 

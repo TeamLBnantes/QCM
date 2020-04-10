@@ -9,11 +9,12 @@ public class MailDTO {
 		private int questionId;
 		private int userId;
 		private String cible;
+		//cible=question (dans gestion des qcm et question), 
+		//      =qcm, 
+		//      =questionQcm (question dans un qcm)
+		//		=admin   des fois que plus tard nou sayont besoin d'un mail vers les admin non lié à qcm ou question
 		private boolean emetteurAnonyme;
-				//objet=question (dans gestion des qcm et question), 
-				//      =qcm, 
-				//      =questionQcm (question dans un qcm)
-		
+
 		public boolean isMailToAdmin() {
 			return mailToAdmin;
 		}

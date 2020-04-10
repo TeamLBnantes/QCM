@@ -1,0 +1,94 @@
+Travail de cette semaine sur messagerie QCMmono - Laurent - 10/04/20 (push sur git à 17h30)
+
+les infos technique des mails sont dans une table de la base de données : Table: admintechniqueappli
+cette table ne comportera qu'un élement
+pour le moment, je n'ai rien fait pour gérer cette table via l'appli
+il y a juste un message d'erreur au moment de l'envois des mails, indiquant que la table admin n'est pas renseignée
+
+en java, AdminTechniqueAppli.java, c'est une classe de type singleton (histoire de manipuler un peu, mais pas sur que cela ai vraiment de sens ici dans la mesure ou la table elle peut en contenir plusieur
+et egalement dans le sens ou il faut de toute facon aller chercher les données dans la table :-(
+
+l'activation des mails se fait par des liens hypertextes
+clique sur le lien = ouverture d'une page externe pour l'envois du mail
+4 types de liens
+	- mail qui ne concerne ni une question ni un qcm, en direct d'un user vers les admin
+		(j'ai mis un lien dans la barre de menu, donc accessible en permanence)
+	- mail d'un designer vers un autre designer (et potentiellement les admin, lié à une question)
+		lien à dispo dans la gestion des qcm, au moment de regarder les question, si question d'un autres designer
+	- mail d'un utilisateur concernant un qcm (possible d'écrire au designer du QCM et ou aux admin, en anonye ou pas)
+		lien en haut de la page du qcm, au moment de le passer, et pdt toute la durée du passage de celui ci. 	
+	- lien d'un user concernant une question d'un qcm (possible d'écrire au designer du QCM et/ou de la question et/ou à l'admin, en anonyme ou pas)
+		lien visible sur la page de réponse de chaque question
+
+le ou les mails envoyés contient l'objet du mail,  le corp, les infos sur le qcm et la question si concerné, les infos sur la diffusion (à qui) ...
+
+les mails sont envoyé avec une adresse mail générique, l'anonyma est respecté, sauf si emetteur décoche explicitement l'anonimisation de son mail
+(bien sur dans tous les cas, les admin ont les id (emetteur et recepteurs)
+
+les liens peuvent être rejouté assez simplement à d'autres endroits dans l'appli
+
+
+4 types de liens pour acceder aux mails
+
+mail concernant une question, de la part d'un designer :
+<a href=""  onclick="open('MailEngine/questionFromGestion/${question.id}', 'Popup', 'scrollbars=1,resizable=1,height=550,width=870'); return false;" >Signaler ou Envoyer un mail</a>
+mail vers admin : 
+<a href="" onclick="open('MailEngine', 'Popup', 'scrollbars=1,resizable=1,height=500,width=870'); return false;">Mail Admin</a>
+mail sur un qcm
+<a href="" onclick="open('MailEngine/fromQCM/${mcq.id}', 'Popup', 'scrollbars=1,resizable=1,height=550,width=870'); return false;">Signaler (vers Admin) ou échanger avec le concepteur du QCM</a>
+mail sur une question d'un qcm
+<a href="" onclick="open('MailEngine/${mcq.id}/questionFromQCM/${question.id}', 'Popup', 'scrollbars=1,resizable=1,height=600,width=870'); return false;">Signaler (vers Admin) ou échanger avec le concepteur du QCM</a>
+
+4 controleurs pour la génération des mails (en get)
+	MailEngine/questionFromGestion/${question.id}
+	MailEngine
+	MailEngine/fromQCM/${mcq.id}
+	MailEngine/${mcq.id}/questionFromQCM/${question.id}
+
+1 controleur pour envoyer le mail (en post)
+	MailEngine	
+
+un service AdminService qui accueil la methode d'envoi de mail : envoyerMail
+
+une page jsp qui met en forme les mail et le log : mail.jsp
+
+une classe objet support des mail : MailDTO.java
+
+les info messagerie pour les tests (à inscrire manuellement pour le moment en bdd): 
+mailAdmin		quizizskillz@gmail.com
+modeSSL			1
+serveurMailCompte		quizizskillz@gmail.com
+serveurMailComptePassword	@dawan20
+serveurSmtp		smtp.gmail.com
+serveurSmtpPort		465
+
+techno mail utilisée :
+public void sendEmail(String toEmail, String subject, String body, String exp) throws EmailException {
+		// https://myaccount.google.com/security
+		// Paramètre "Autoriser les applications moins sécurisées" à activer		Email email = new SimpleEmail();
+		// email.setHostName("smtp.dsl.ovh.net");
+		email.setHostName("smtp.gmail.com");
+		email.setSmtpPort(465);
+		email.setAuthentication("moncompte@gmail.com", "mon_mot_depasse");
+		email.setSSL(true);
+		email.setFrom(exp);
+		email.setSubject(subject);
+		email.setMsg(body);
+		email.addTo(toEmail);
+		email.send();
+	}
+
+
+==================================================================================
+les dépendances à ajouter
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>		
+		<dependency>
+			<groupId>commons-email</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.1</version>
+		</dependency>

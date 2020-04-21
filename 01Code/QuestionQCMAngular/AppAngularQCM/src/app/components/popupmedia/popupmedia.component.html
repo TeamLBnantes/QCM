@@ -1,0 +1,23 @@
+<div class="popup">
+<p>{{legende}}</p>
+
+<script async charset="utf-8"
+    src="//cdn.iframe.ly/embed.js?api_key=1cfcdc5b115c5e9c6101ab"
+></script>
+
+<mat-dialog-content>
+<div *ngIf="(typeMedia == 'video')">
+<iframe [src]=safeAddresseMedia frameborder="0" allowfullscreen class="media"></iframe>
+</div>
+<div *ngIf="(typeMedia == 'image')">
+  <img [src]=safeAddresseMedia />
+  </div>
+  <div *ngIf="(typeMedia == 'son')">
+    <audio [src]=safeAddresseMedia></audio>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button matDialogClose>Close</button>
+</mat-dialog-actions>
+</div>

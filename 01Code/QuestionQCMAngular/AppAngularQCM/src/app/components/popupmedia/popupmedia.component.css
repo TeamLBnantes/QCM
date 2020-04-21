@@ -1,0 +1,12 @@
+.popup{
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  flex-direction: column;
+
+}
+
+.media{
+  height: 450px;
+  width: 800px;
+}

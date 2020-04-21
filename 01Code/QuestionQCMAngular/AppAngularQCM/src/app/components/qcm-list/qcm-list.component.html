@@ -1,10 +1,8 @@
-<p>qcm-list works!</p>
-
 <div *ngInit gelAllQcm()></div>
-<button mat-button (click)="getAllQcm()">Afficher les QCM</button> >> ICI filtres <<
+<button mat-button class="primary" (click)="getAllQcm()">Afficher les QCM</button> >> ICI filtres <<
 <table class="table table-hover">
   <thead>
-  <tr>
+  <tr class='table-primary'>
     <th scope="col">Jouer</th>
     <th hidden>ID</th>
     <th scope="col">Intitulé</th>
@@ -16,9 +14,9 @@
   </tr>
   </thead>
   <tbody *ngFor="let qcm of qcms$; let index=index">
-    <!-- <tr class="table-success" > -->
-      <tr [class]="tableVisuel[index % 10]" >
-      <td> <button btn btn-primary [routerLink]="['/play', qcm.id]">Go !</button>
+      <tr [class]="tableVisuel[index % 2]" >
+      <td> <button class="btn btn-secondary" [routerLink]="['/play', qcm.id]">Go !
+      </button>
       <td hidden>{{qcm.id}}</td>
       <td>{{qcm.body}}</td>
       <td hidden>{{qcm.createDate}}</td>
@@ -29,77 +27,3 @@
       </tr>
   </tbody>
 </table>
-
-
-<!-- <table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">Type</th>
-      <th scope="col">Column heading</th>
-      <th scope="col">Column heading</th>
-      <th scope="col">Column heading</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr class="table-active">
-      <th scope="row">Active</th>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-    <tr>
-      <th scope="row">Default</th>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-    <tr class="table-primary">
-      <th scope="row">Primary</th>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-    <tr class="table-secondary">
-      <th scope="row">Secondary</th>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-    <tr class="table-success">
-      <th scope="row">Success</th>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-    <tr class="table-danger">
-      <th scope="row">Danger</th>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-    <tr class="table-warning">
-      <th scope="row">Warning</th>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-    <tr class="table-info">
-      <th scope="row">Info</th>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-    <tr class="table-light">
-      <th scope="row">Light</th>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-    <tr class="table-dark">
-      <th scope="row">Dark</th>
-      <td>Column content</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-  </tbody>
-</table>  -->

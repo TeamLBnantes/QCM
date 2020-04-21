@@ -16,9 +16,14 @@ import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AppRoutingModule } from './app-routing.module';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { MatButtonModule } from "@angular/material/button";
 import { FancyComponent } from './components/fancy/fancy.component';
+import { PopupmediaComponent } from './components/popupmedia/popupmedia.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 registerLocaleData(localeFr);
 
@@ -33,7 +38,9 @@ registerLocaleData(localeFr);
 
     PageNotFoundComponent,
 
-    FancyComponent
+    FancyComponent,
+
+    PopupmediaComponent
   ],
   imports: [
     BrowserModule,
@@ -43,16 +50,20 @@ registerLocaleData(localeFr);
     ReactiveFormsModule,
     // pour Material
     BrowserAnimationsModule,
-    // 1 outil Material
-    // MatButtonModule,
     // pour etre à l'écoute d'une API
     HttpClientModule,
 
 
     // pour le routing
     AppRoutingModule,
+
     MatSnackBarModule,
     MatButtonModule,
+    MatProgressBarModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    FontAwesomeModule
+
 
   ],
   providers: [{provide: LOCALE_ID, useValue: 'fr'}],

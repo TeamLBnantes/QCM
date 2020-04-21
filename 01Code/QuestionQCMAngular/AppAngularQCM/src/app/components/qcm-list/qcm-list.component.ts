@@ -12,9 +12,9 @@ export class QcmListComponent implements OnInit {
   qcms$: Qcm[];
   private subscription: Subscription;
   lancer: boolean;
-  tableVisuel: string[]=["table-success","table-default","table-primary","table-secondary","table-info","table-danger","table-warning","table-active","table-light","table-dark",];
+  tableVisuel: string[]=["table-default", "table-secondary", "table-primary", "table-success","table-info","table-danger","table-warning","table-active","table-light","table-dark",];
   constructor(private qcmService: QcmServiceService) {
-    
+
    }
 
   ngOnInit(): void {

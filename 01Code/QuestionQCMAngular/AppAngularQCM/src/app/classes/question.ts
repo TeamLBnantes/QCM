@@ -11,6 +11,8 @@ export class Question {
       id: number;
       typeMultimedia: string;
       adresseCible: string;
+      adresseVignette: string;
+      legende: string;
   };
-  answersPlayableDto: Answer[];    // liste des réponses, ordonnees aléatoirement pour ce passage 
+  answersPlayableDto: Answer[];    // liste des réponses, ordonnees aléatoirement pour ce passage
 }

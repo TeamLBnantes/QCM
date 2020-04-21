@@ -1,15 +1,17 @@
 export class QcmPlayable {
   id: number;
   body: string;
-  topic: string;
   createDate: Date;
   editDate: Date;
   designerPseudo: string;
+  topic: string;
   multimedia: {
-      id: number;
-      typeMultimedia: string;
-      adresseCible: string;
-  };
+    id: number;
+    typeMultimedia: string;
+    adresseCible: string;
+    adresseVignette: string;
+    legende: string;
+};
   questionsId: number[];
 
   constructor(obj: object) {

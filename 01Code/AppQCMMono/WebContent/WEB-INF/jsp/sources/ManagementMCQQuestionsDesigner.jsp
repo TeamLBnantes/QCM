@@ -114,8 +114,7 @@
 											${question.designer.user.lastName}</h3>
 										<br />
 										<p class="mb-0 text-center">
-											<input type="button" class="templatemo-edit-btn"
-												value="Signaler ou envoyer un mail" />
+	<a href=""  onclick="open('MailEngine/questionFromGestion/${question.id}', 'Popup', 'scrollbars=1,resizable=1,height=560,width=870'); return false;" >Signaler ou Envoyer un mail</a>
 										</p>
 									</c:if>
 									<br />
@@ -307,8 +306,7 @@
 											${qDTO.question.designer.user.lastName}</h3>
 										<br />
 										<p class="mb-0 text-center">
-											<input type="button" class="templatemo-edit-btn"
-												value="Signaler ou envoyer un mail" />
+	<a href=""  onclick="open('MailEngine/questionFromGestion/${qDTO.question.id}', 'Popup', 'scrollbars=1,resizable=1,height=560,width=870'); return false;" >Signaler ou Envoyer un mail</a>
 										</p>
 									</c:if>
 									<br />

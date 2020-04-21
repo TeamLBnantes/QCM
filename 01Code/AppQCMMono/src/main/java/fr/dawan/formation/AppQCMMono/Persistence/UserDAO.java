@@ -1,8 +1,11 @@
  package fr.dawan.formation.AppQCMMono.Persistence;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+import fr.dawan.formation.AppQCMMono.Models.MCQ;
+import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Persistence.Interfaces.DAOInterfaceUser;
 
@@ -66,9 +69,37 @@ public class UserDAO extends GenericDAO<User> implements DAOInterfaceUser {
 		
 	}
 
+	public User searchMailDesignerByMcqId(int mcqId) {
+		String requete = "select u from "  
+				+ User.class.getName() 
+				+ " u join fetch u.designer d"
+				+ "  join fetch d.mcq m"
+				+ " where m.id = :id";
+				//+ " f where f.value = theme";
+		
+		// JPQL (ou HQL)
+		return super.entityManager
+				.createQuery(requete, User.class)
+				.setParameter("id", mcqId)
+				.getSingleResult();	
 
+	}
 
+	public User searchMailDesignerByQuestionId(int questionId) {
+		String requete = "select u from "  
+				+ User.class.getName() 
+				+ " u join fetch u.designer d"
+				+ "  join fetch d.questions q"
+				+ " where q.id = :id";
+				//+ " f where f.value = theme";
+		
+		// JPQL (ou HQL)
+		return super.entityManager
+				.createQuery(requete,  User.class)
+				.setParameter("id", questionId)
+				.getSingleResult();	
 
+	}
 	
 	
 }

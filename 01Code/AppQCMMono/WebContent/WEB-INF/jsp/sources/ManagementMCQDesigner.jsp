@@ -321,16 +321,18 @@
 										<br />
 										<h3>Vous êtes le propriétaire de cette question</h3>
 									</c:if>
-									<c:if test="${question.designer.user.id!=user.id}">
+									<c:if test="${question.designer.user.id!=user.id}">   <!-- ce n'est pas un question de l'utilisateur actuel -->
+										
 										<br />C'est question est gèrée par : 
-            		<h3 align="center">
+            							<h3 align="center">
 											${question.designer.user.firstName}
 											${question.designer.user.lastName}</h3>
 										<br />
 										<p class="mb-0 text-center">
-											<input type="button" class="templatemo-edit-btn"
-												value="Signaler ou envoyer un mail" />
+												<a href=""  onclick="open('MailEngine/questionFromGestion/${question.id}', 'Popup', 'scrollbars=1,resizable=1,height=550,width=870'); return false;" >Signaler ou Envoyer un mail</a>
 										</p>
+									
+										
 									</c:if>
 									<br />
 									<!--         <p> -->

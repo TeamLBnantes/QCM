@@ -61,6 +61,7 @@
                    <div class="templatemo-content-widget white-bg">
             
            <h3> Intitulé du formulaire : ${mcq.body } </h3>
+           <a href="" onclick="open('MailEngine/fromQCM/${mcq.id}', 'Popup', 'scrollbars=1,resizable=1,height=550,width=870'); return false;">Signaler (vers Admin) ou échanger avec le concepteur du QCM</a>
 <!-- fin tableau affichage des questions dispo-->           
            <br>
            		<br>
@@ -277,6 +278,7 @@
            				<button type="submit" class="templatemo-blue-button " name="action" value="chercher">Corriger</button>
            			</form>
            		</div>
+           
            </c:if>
  <!-- ############################################################### affichage de la Correction de la question #######################################################################################  -->          
                 
@@ -338,7 +340,8 @@
                 </tbody>
               </table>    
             </div>                          
-          </div>                  
+          </div>   
+          	<br/>	<a href="" onclick="open('MailEngine/${mcq.id}/questionFromQCM/${question.id}', 'Popup', 'scrollbars=1,resizable=1,height=600,width=870'); return false;">Signaler (vers Admin) ou échanger avec le concepteur de la Question</a>               
                  <br/><br/>
         <p>   Nombre de questions dans le QCM :     ${tarckMcq.nbQuestionsTotal }           </p>
         <p>   Nombre de question(s) passée(s) :     ${tarckMcq.nbQuestionsPassed }           </p>

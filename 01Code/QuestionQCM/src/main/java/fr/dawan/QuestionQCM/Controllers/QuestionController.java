@@ -20,7 +20,7 @@ import fr.dawan.QuestionQCM.DTO.QuestionPlayableDto;
 import fr.dawan.QuestionQCM.Services.QuestionService;
 
 @RestController
-@CrossOrigin (origins="http://localhost:4200")
+@CrossOrigin (origins= {"http://localhost:4200", "http://localhost:8080","https://homer.iguane.org:4200","*"})
 @RequestMapping("/question")
 public class QuestionController {
 

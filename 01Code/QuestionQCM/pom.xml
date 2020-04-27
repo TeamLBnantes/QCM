@@ -52,6 +52,26 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.46</version>
 		</dependency>
+		
+	<!-- ajout dépendances pour mariaDB et pour mise en ligne sur sereur -->	
+	<!-- essai, ajout d'une dépendance pour compatibilté java 11 -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+<!-- j'ajoute le connecteur mariadb https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+			<version>2.6.0</version>
+		</dependency>	
+		<!-- ajout dépendance pour deploiement en mode war -->
+<!-- 	<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-tomcat</artifactId>
+    <scope>provided</scope>
+</dependency> -->
 	</dependencies>
 
 

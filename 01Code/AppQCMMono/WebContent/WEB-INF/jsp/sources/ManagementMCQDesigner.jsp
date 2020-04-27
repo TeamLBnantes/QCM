@@ -2,8 +2,7 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="fr-FR">
 <head>
-<meta name="description"
-	content="une série de témoignages relatant l'histoire de la poche de Saint-Nazaire en 1944-45" />
+<meta name="description"/>
 <meta name="keywords" content="mots, clefs" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,13 +38,6 @@
 <script src="resources/media/lib/fancybox/dist/jquery.fancybox.min.js"></script>
 </head>
 
-<!-- dossier source : ManagementMCQDesigner.jsp  -->
-
-<!-- debut de la zone du tableau -->
-
-<!-- <h3>je suis sur la page test MCQ Designer</h3> -->
-
-<!-- debut zone formmulaire -->
 
 
 <div class="templatemo-content-widget white-bg">
@@ -77,10 +69,6 @@
 						</option>
 					</c:forEach>
 				</select>
-
-
-
-
 			</div>
 			<div class="col-lg-6 col-md-6 form-group">
 				<label for="inputEmail">Créé le </label> ${ mcq.createDate} <br />
@@ -88,15 +76,16 @@
 			</div>
 		</div>
 		<br />
+		<!--  zone multimedia -->
 		<div class="row form-group">
 			<div class="col-lg-6 col-md-6 form-group">
-				<c:if test="${mcq.multimedia.typeMultimedia=='image'}">
 					<div class="album py-5 bg-light">
 						<div class="container">
 							<div class="row">
 								<div class="col-md-4">
 									<div class="card mb-4 shadow-sm">
 										<div align="center">
+											<c:if test="${mcq.multimedia.typeMultimedia=='image'}">
 											<figure>
 												<a class="d-block mb-4" data-fancybox="images"
 													href="${mcq.multimedia.adresseCible}" data-width="1200px">
@@ -109,20 +98,8 @@
 													<a href="${mcq.multimedia.adresseCible}"></a>
 												</figcaption>
 											</figure>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</c:if>
-				<c:if test="${mcq.multimedia.typeMultimedia=='audio'}">
-					<div class="album py-5 bg-light">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-4">
-									<div class="card mb-4 shadow-sm">
-										<div align="center">
+											</c:if>
+											<c:if test="${mcq.multimedia.typeMultimedia=='audio'}">
 											<figure>
 												<a class="d-block mb-4" data-fancybox="images"
 													href="${mcq.multimedia.adresseVignette}" data-width="2400">
@@ -144,20 +121,8 @@
 												</audio>
 											</div>
 											<!--  fin-code pour affichage audi  -->
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</c:if>
-				<c:if test="${mcq.multimedia.typeMultimedia=='video'}">
-					<div class="album py-5 bg-light">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-4">
-									<div class="card mb-4 shadow-sm">
-										<div align="center">
+											</c:if>
+											<c:if test="${mcq.multimedia.typeMultimedia=='video'}">
 											<a data-fancybox data-width="640" data-height="360"
 												href="${mcq.multimedia.adresseCible}"> <img
 												src="${mcq.multimedia.adresseVignette}" alt="" width="320px"
@@ -165,20 +130,20 @@
 												<div class="center">Lire la video</div>
 												<p align="center">${mcq.multimedia.legende}</p> <!-- <img class="thumb" src="resources/media/kayak.jpg" alt="" /> -->
 											</a>
-
+											</c:if>
 										</div>
-
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 
-				</c:if>
-
 			</div>
 			<!-- fin de l'affichage de la zone multimedia -->
+			<br/>
+			<div class="col-12 form-group row">
 			<div class="col-lg-6 col-md-6 form-group">
+			<table>
 				<!-- div pour les attributs champs media -->
 				<!-- enum du typ emultimedia -->
 				<tr>
@@ -213,10 +178,8 @@
 						name="multimedia.legende" placeholder="legende"
 						value="${mcq.multimedia.legende}" /></td>
 				</tr>
-
-
-
-
+				</table>
+			</div>
 			</div>
 			<!-- div pour les champs media -->
 
@@ -231,6 +194,7 @@
 			</div>
 	</form>
 </div>
+
 <!-- fin de la zone formulaire -->
 
 
@@ -267,7 +231,7 @@
 <!-- 									class="fa fa-edit"></i></a></td> -->
 							<td>
 							
-															<!-- debut  affichage bouton mode Fanzy -###########################################################################################-->
+								<!-- debut  affichage bouton mode Fanzy -###########################################################################################-->
 								<div class="card p-lg-3">
 									<div class="card-body">
 										<p class="mb-0">
@@ -287,6 +251,48 @@
 									<h2 class="mb-3">${question.body}</h2>
 									<br /> <br /> theme de la Question : <br />
 									${question.theme} <br /> <br />
+									
+									
+						<c:if test="${question.multimedia != null}">
+									
+												<c:if test="${question.multimedia.typeMultimedia=='image'}">
+											<figure>
+													<img 
+													src="${question.multimedia.adresseCible}" width="240px"
+													align="center" /> <!-- height="180px"  -->
+												<figcaption>
+													<h6>${question.multimedia.legende}</h6>
+												</figcaption>
+											</figure>
+											</c:if>
+											<c:if test="${question.multimedia.typeMultimedia=='audio'}">
+											<figure>
+													<img 
+													src="${question.multimedia.adresseVignette}" width="240px"
+													align="center" /> <!-- height="180px"  -->
+												<figcaption>
+													<h6>${question.multimedia.legende}</h6>
+												</figcaption>
+											</figure>
+											<!--code pour affichage audi  -->
+											<div align="center">
+												<audio controls>
+													<source src="${question.multimedia.adresseCible}"
+														type="audio/mpeg">
+													Your browser does not support the audio element.
+												</audio>
+											</div>
+											<!--  fin-code pour affichage audi  -->
+											</c:if>
+											<c:if test="${question.multimedia.typeMultimedia=='video'}">
+ 												<video
+												src="${question.multimedia.adresseCible}" alt="" width="320px"
+												height="180px" align="center" ></video>
+												<p align="center">${question.multimedia.legende}</p> 
+											</c:if>
+										
+									</c:if>
+									
 									<!--             	###############tableau des reps dans la fancybox########## -->
 									<div class="templatemo-content-widget no-padding"> 
 										<div class="panel panel-default table-responsive">
@@ -307,7 +313,11 @@
 														<tr>
 															<td>${count.count}</td>
 															<td>${answer.body}</td>
-															<td>${answer.expectedAnswer}</td>
+															<td><c:if test="${answer.expectedAnswer}">
+										<i class="fa fa-check"></i>
+									</c:if> <c:if test="${!answer.expectedAnswer}">
+										<i class="fa fa-times-circle" style="color: #ff4a4a"></i>
+									</c:if></td>
 														</tr>
 													</c:forEach>
 												</tbody>
@@ -321,7 +331,7 @@
 										<br />
 										<h3>Vous êtes le propriétaire de cette question</h3>
 									</c:if>
-									<c:if test="${question.designer.user.id!=user.id}">   <!-- ce n'est pas un question de l'utilisateur actuel -->
+									<c:if test="${question.designer.user.id!=user.id}">   <!-- ce n'est pas une question de l'utilisateur actuel -->
 										
 										<br />C'est question est gèrée par : 
             							<h3 align="center">
@@ -335,9 +345,7 @@
 										
 									</c:if>
 									<br />
-									<!--         <p> -->
-									<!--             <input type="text" value="" name="hi2" class="form-control" placeholder="Another input" /> -->
-									<!--         </p> -->
+
 									<p class="mb-0 text-right">
 										<input data-fancybox-close type="button"
 											class="templatemo-edit-btn" value="Fermer" />
@@ -347,7 +355,6 @@
 			<!-- fin affichage bouton mode Fanzy ######################################################################################"--> 
 							
 							</td>
-							<!--                     <td><a href="" class="templatemo-link">Action</a></td> -->
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -365,23 +372,6 @@
 	</form>
 </div>
 
-<!--           <div class="templatemo-flex-row flex-content-row">
-
-          <div class="pagination-wrap"> -->
-
-<!--             <ul class="pagination">
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li class="active"><a href="#">3 <span class="sr-only">(current)</span></a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li>
-                <a href="#" aria-label="Next">
-                  <span aria-hidden="true"><i class="fa fa-play"></i></span>
-                </a>
-              </li>
-            </ul> -->
-<!--  </div>       -->
 <footer class="text-right">
 	<p>Copyright &copy; 2020 QuizizSkillz | Design: Template Mo</p>
 </footer>

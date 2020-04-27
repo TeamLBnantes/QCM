@@ -1,4 +1,27 @@
 <!-- dossier source : ManagementQuestionDesigner.jsp  -->
+<!-- param pour fancybox -->
+
+<!DOCTYPE html>
+<html dir="ltr" lang="fr-FR">
+<head>
+<meta name="keywords" content="mots, clefs" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link href="resources/media/lib/fancybox/dist/jquery.fancybox.min.css"
+	rel="stylesheet">
+<!-- <link href="resources/media/lib/bootstrap-4.4.1-dist/css/bootstrap.min.css" rel="stylesheet"> -->
+<style type="text/css">
+.thumb {
+	width: 100%;
+}
+</style>
+
+<script src="resources/media/lib/jquery-3.3.1.min.js"></script>
+<script src="resources/media/lib/fancybox/dist/jquery.fancybox.min.js"></script>
+</head>
+<!-- fin param fancybox -->
 
 <body>
 	<div class="container">
@@ -46,16 +69,126 @@
 								<td><textarea class="form-control" name="commentPostAnswer"
 										placeholder="Expliquez pourquoi chaque réponse est vraie ou fausse. Affiché après avoir répondu.">${question.commentPostAnswer }</textarea></td>
 							</tr>
-							<!-- </div> -->
+							<!--  zone multimedia -->
+							<input type="hidden" name="id" value="${question.multimedia.id}" />
+
 						</table>
-						<br />
+						<div class="row form-group">
+							<div class="col-lg-6 col-md-6 form-group">
+								<div class="album py-5 bg-light">
+									<div class="container">
+										<div class="row">
+											<div class="col-md-4">
+												<div class="card mb-4 shadow-sm">
+													<div align="center">
+														<c:if
+															test="${question.multimedia.typeMultimedia=='image'}">
+															<figure>
+																<a class="d-block mb-4" data-fancybox="images"
+																	href="${question.multimedia.adresseCible}"
+																	data-width="1200px"> <img class="img-fluid"
+																	src="${question.multimedia.adresseCible}" width="240px"
+																	align="center" /> <!-- height="180px"  -->
+																</a>
+																<figcaption>
+																	<h6>${question.multimedia.legende}</h6>
+																	<a href="${question.multimedia.adresseCible}"></a>
+																</figcaption>
+															</figure>
+														</c:if>
+														<c:if
+															test="${question.multimedia.typeMultimedia=='audio'}">
+															<figure>
+																<a class="d-block mb-4" data-fancybox="images"
+																	href="${question.multimedia.adresseVignette}"
+																	data-width="2400"> <img class="img-fluid"
+																	src="${question.multimedia.adresseVignette}"
+																	width="240px" align="center" /> <!-- height="180px"  -->
+																</a>
+																<figcaption>
+																	<h6>${question.multimedia.legende}</h6>
+																	<a href="${question.multimedia.adresseVignette}"></a>
+																</figcaption>
+															</figure>
+															<!--code pour affichage audi  -->
+															<div class="audio-section" align="center">
+																<audio controls>
+																	<source src="${question.multimedia.adresseCible}"
+																		type="audio/mpeg">
+																	Your browser does not support the audio element.
+																</audio>
+															</div>
+															<!--  fin-code pour affichage audi  -->
+														</c:if>
+														<c:if
+															test="${question.multimedia.typeMultimedia=='video'}">
+															<a data-fancybox data-width="640" data-height="360"
+																href="${question.multimedia.adresseCible}"> <img
+																src="${question.multimedia.adresseVignette}" alt=""
+																width="320px" height="180px" align="center" />
+																<div class="center">Lire la video</div>
+																<p align="center">${question.multimedia.legende}</p>
+															</a>
+														</c:if>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<!-- fin de l'affichage de la zone multimedia -->
+							<div class="col-lg-6 col-md-6 form-group">
+								<!-- div pour les attributs champs media -->
+								<!-- enum du typ emultimedia -->
+								<table>
+									<tr>
+										<td><b>Type Multimedia:</b></td>
+										<td><select class="form-control"
+											name="multimedia.typeMultimedia" id="typeMultimedia">
+												<c:forEach items="${ enumTypeMultimedia }"
+													var="typeMultimedia">
+													<option value="${ typeMultimedia }"
+														${ question.multimedia.typeMultimedia == typeMultimedia ? 'selected' : '' }>
+														<tag:message code="${ typeMultimedia.libelle }"
+															text="${typeMultimedia.libelle }" />
+													</option>
+												</c:forEach>
+										</select></td>
+									</tr>
+									<tr>
+										<td><b>cible (jpg) Vignette du contenu multimedia
+												(audio/video)</b></td>
+										<td><input type="text" class="form-control"
+											name="multimedia.adresseVignette" placeholder="adresse image"
+											value="${question.multimedia.adresseVignette}" /></td>
+									</tr>
+									<tr>
+										<td><b>cible du contenu multimedia</b></td>
+										<td><input type="text" class="form-control"
+											name="multimedia.adresseCible" placeholder="cible multimedia"
+											value="${question.multimedia.adresseCible}" /></td>
+									</tr>
+									<tr>
+										<td><b>legende du contenu multimedia</b></td>
+										<td><input type="text" class="form-control"
+											name="multimedia.legende" placeholder="legende"
+											value="${question.multimedia.legende}" /></td>
+									</tr>
+									</div>
+									<!-- div pour les champs media -->
+								</table>
+								<br />
+							</div>
+						</div>
+
 					</div>
-				</div>
-				<br/>
-				<c:if test="${Response!=true}">
-					<button type="submit" class="btn btn-primary" name="action"
-						value="valider">Valider</button>
-				</c:if>
+					<br />
+					<c:if test="${Response!=true}">
+						<button type="submit" class="btn btn-primary" name="action"
+							value="valider">Valider</button>
+					</c:if>
 			</form>
 		</div>
 	</div>
@@ -166,10 +299,6 @@
 								</a></td>
 							</tr>
 						</c:forEach>
-						<!-- <tr><td><button type="submit" class="btn btn-primary" name="action" value="valider">Valider</button></td><td></td></tr> -->
-						<!-- </table>
-</div>
-</form> -->
 					</table>
 				</div>
 			</div>
@@ -181,36 +310,33 @@
 
 	<br>
 	<br>
-	
-<!-- 	liste des MCQ utilisant cette question -->
-	
-		<div class="container">
+
+	<!-- 	liste des MCQ utilisant cette question -->
+
+	<div class="container">
 		<div class="templatemo-content-widget white-bg">
 			<div class="templatemo-content-container">
-				<h2 class="text-uppercase">liste des Formulaires utilisants cette Question</h2>
+				<h2 class="text-uppercase">liste des Formulaires utilisants
+					cette Question</h2>
 				<div class="table-responsive">
 					<table class="table table-bordered">
 						<tr>
 							<th>Body</th>
-<!-- 							<th>designer</th> -->
 						</tr>
 						<c:forEach var="mcq" items="${listDto.mcqs}">
 							<!-- parcours des reponses liées à cette questions pour les afficher-->
 							<tr>
 								<td>${mcq.body}</td>
-<%-- 								<td>${liste.designerName}</td> --%>
+								<%-- 								<td>${liste.designerName}</td> --%>
 							</tr>
 						</c:forEach>
-						<!-- <tr><td><button type="submit" class="btn btn-primary" name="action" value="valider">Valider</button></td><td></td></tr> -->
-						<!-- </table>
-</div>
-</form> -->
+
 					</table>
 				</div>
 			</div>
 		</div>
 	</div>
-<!-- 	fin liste des MCQ utilisant cette question -->	
+	<!-- 	fin liste des MCQ utilisant cette question -->
 	<br />
 
 

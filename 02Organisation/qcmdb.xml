@@ -1,0 +1,1280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.8.5
+- https://www.phpmyadmin.net
+-
+- Hôte : 127.0.0.1:3308
+- Généré le :  lun. 27 avr. 2020 à 15:10
+- Version du serveur :  5.7.26
+- Version de PHP :  7.2.18
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="qcmdb" collation="utf8_general_ci" charset="utf8">
+            <pma:table name="admintechniqueappli">
+                CREATE TABLE `admintechniqueappli` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `adminPassword` varchar(255) DEFAULT NULL,
+                  `mailAdmin` varchar(255) DEFAULT NULL,
+                  `modeSSL` bit(1) NOT NULL,
+                  `organisation` varchar(255) DEFAULT NULL,
+                  `serveurMailCompte` varchar(255) DEFAULT NULL,
+                  `serveurMailComptePassword` varchar(255) DEFAULT NULL,
+                  `serveurSmtp` varchar(255) DEFAULT NULL,
+                  `serveurSmtpPort` int(11) NOT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:table name="answer">
+                CREATE TABLE `answer` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `body` varchar(255) DEFAULT NULL,
+                  `commentPostAnswer` varchar(255) DEFAULT NULL,
+                  `expectedAnswer` bit(1) NOT NULL,
+                  `question_id` int(11) DEFAULT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `FKfiomvt17psxodcis3d8nmopx8` (`question_id`),
+                  CONSTRAINT `FKfiomvt17psxodcis3d8nmopx8` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:table name="designer">
+                CREATE TABLE `designer` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `certifier` bit(1) NOT NULL,
+                  `dateStatus` datetime(6) DEFAULT NULL,
+                  `expertiseField` varchar(255) DEFAULT NULL,
+                  `presentation` varchar(255) DEFAULT NULL,
+                  `user_id` int(11) NOT NULL,
+                  PRIMARY KEY (`id`),
+                  UNIQUE KEY `UK_1iop30hmiwmekf5rwvx1yjum3` (`user_id`),
+                  CONSTRAINT `FKespeylw7x8lr30761vfmp048y` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:table name="forum">
+                CREATE TABLE `forum` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:table name="mcq">
+                CREATE TABLE `mcq` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `body` varchar(255) DEFAULT NULL,
+                  `createDate` datetime(6) DEFAULT NULL,
+                  `editDate` datetime(6) DEFAULT NULL,
+                  `status` varchar(255) DEFAULT NULL,
+                  `topic` varchar(255) DEFAULT NULL,
+                  `designer_id` int(11) DEFAULT NULL,
+                  `forum_id` int(11) DEFAULT NULL,
+                  `designer_user_id` int(11) DEFAULT NULL,
+                  `theme` varchar(255) DEFAULT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `FKjs49pc7g618918oygxqggl03q` (`designer_id`),
+                  KEY `FKbl459pyxuw4l7qynwgbw8aa76` (`forum_id`),
+                  KEY `FKie0h5daw03rstdk8g575ni2uu` (`designer_user_id`),
+                  CONSTRAINT `FKbl459pyxuw4l7qynwgbw8aa76` FOREIGN KEY (`forum_id`) REFERENCES `forum` (`id`),
+                  CONSTRAINT `FKie0h5daw03rstdk8g575ni2uu` FOREIGN KEY (`designer_user_id`) REFERENCES `designer` (`user_id`),
+                  CONSTRAINT `FKjs49pc7g618918oygxqggl03q` FOREIGN KEY (`designer_id`) REFERENCES `designer` (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:table name="mcqpassed">
+                CREATE TABLE `mcqpassed` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `finalise` bit(1) NOT NULL,
+                  `result` int(11) NOT NULL,
+                  `mcq_id` int(11) DEFAULT NULL,
+                  `user_id` int(11) DEFAULT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `FK841qniu3yrbnl8wjbx5n8npug` (`mcq_id`),
+                  KEY `FKspwx99nsladdd9a81jq3whonp` (`user_id`),
+                  CONSTRAINT `FK841qniu3yrbnl8wjbx5n8npug` FOREIGN KEY (`mcq_id`) REFERENCES `mcq` (`id`),
+                  CONSTRAINT `FKspwx99nsladdd9a81jq3whonp` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:table name="multimedia">
+                CREATE TABLE `multimedia` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `adresseCible` text,
+                  `typeMultimedia` varchar(255) DEFAULT NULL,
+                  `answer_id` int(11) DEFAULT NULL,
+                  `mcq_id` int(11) DEFAULT NULL,
+                  `question_id` int(11) DEFAULT NULL,
+                  `adresseVignette` mediumtext,
+                  `legende` varchar(255) DEFAULT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `FKhr1mrgf3q15ah89bj7p9ole6c` (`answer_id`),
+                  KEY `FKgvus7fhvm9x18c2ec0nkybmih` (`mcq_id`),
+                  KEY `FKkib5d3uwk0q8gvpal6f8iuon` (`question_id`),
+                  CONSTRAINT `FKgvus7fhvm9x18c2ec0nkybmih` FOREIGN KEY (`mcq_id`) REFERENCES `mcq` (`id`),
+                  CONSTRAINT `FKhr1mrgf3q15ah89bj7p9ole6c` FOREIGN KEY (`answer_id`) REFERENCES `answer` (`id`),
+                  CONSTRAINT `FKkib5d3uwk0q8gvpal6f8iuon` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:table name="question">
+                CREATE TABLE `question` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `body` varchar(255) DEFAULT NULL,
+                  `commentPostAnswer` varchar(255) DEFAULT NULL,
+                  `createDate` datetime(6) DEFAULT NULL,
+                  `editDate` datetime(6) DEFAULT NULL,
+                  `help` varchar(255) DEFAULT NULL,
+                  `status` varchar(255) DEFAULT NULL,
+                  `theme` varchar(255) DEFAULT NULL,
+                  `topic` varchar(255) DEFAULT NULL,
+                  `designer_id` int(11) DEFAULT NULL,
+                  `forum_id` int(11) DEFAULT NULL,
+                  `theme_id` int(11) DEFAULT NULL,
+                  `designer_user_id` int(11) DEFAULT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `FKmjvtsevkm2ttmp11h9b1dunir` (`designer_id`),
+                  KEY `FKfafki43vjc1wck2j1p0ocrx3p` (`forum_id`),
+                  KEY `FK71jjxmbbuukinwc0a4x611vc5` (`theme_id`),
+                  KEY `FKcyd27mbnwxbdwemn3jf3amf6s` (`designer_user_id`),
+                  CONSTRAINT `FK71jjxmbbuukinwc0a4x611vc5` FOREIGN KEY (`theme_id`) REFERENCES `theme` (`id`),
+                  CONSTRAINT `FKcyd27mbnwxbdwemn3jf3amf6s` FOREIGN KEY (`designer_user_id`) REFERENCES `designer` (`user_id`),
+                  CONSTRAINT `FKfafki43vjc1wck2j1p0ocrx3p` FOREIGN KEY (`forum_id`) REFERENCES `forum` (`id`),
+                  CONSTRAINT `FKmjvtsevkm2ttmp11h9b1dunir` FOREIGN KEY (`designer_id`) REFERENCES `designer` (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:table name="questionused">
+                CREATE TABLE `questionused` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `AnswerAverageTime` time DEFAULT NULL,
+                  `nbAnswered` int(11) NOT NULL,
+                  `nbCorrect` int(11) NOT NULL,
+                  `mcq_id` int(11) DEFAULT NULL,
+                  `question_id` int(11) DEFAULT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `FKmv53td79rf0xwpsol4nylij8g` (`mcq_id`),
+                  KEY `FK9k3kmnndd5stimrck2lxa0k0j` (`question_id`),
+                  CONSTRAINT `FK9k3kmnndd5stimrck2lxa0k0j` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`),
+                  CONSTRAINT `FKmv53td79rf0xwpsol4nylij8g` FOREIGN KEY (`mcq_id`) REFERENCES `mcq` (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:table name="theme">
+                CREATE TABLE `theme` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `value` varchar(255) DEFAULT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+            </pma:table>
+            <pma:table name="user">
+                CREATE TABLE `user` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `email` varchar(255) DEFAULT NULL,
+                  `firstName` varchar(255) DEFAULT NULL,
+                  `lastConnectionDate` datetime(6) DEFAULT NULL,
+                  `lastName` varchar(255) DEFAULT NULL,
+                  `password` varchar(255) DEFAULT NULL,
+                  `pseudo` varchar(255) DEFAULT NULL,
+                  `signInDate` datetime(6) DEFAULT NULL,
+                  PRIMARY KEY (`id`),
+                  UNIQUE KEY `UK_e6gkqunxajvyxl5uctpl2vl2p` (`email`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Base de données :  'qcmdb'
+    -->
+    <database name="qcmdb">
+        <!-- Table admintechniqueappli -->
+        <!-- Table answer -->
+        <table name="answer">
+            <column name="id">1</column>
+            <column name="body">Clark Kent</column>
+            <column name="commentPostAnswer">Clark Kent est Superman</column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">2</column>
+        </table>
+        <table name="answer">
+            <column name="id">2</column>
+            <column name="body">Bruce Wayne</column>
+            <column name="commentPostAnswer">Exact !</column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">2</column>
+        </table>
+        <table name="answer">
+            <column name="id">3</column>
+            <column name="body">Bruce Banner</column>
+            <column name="commentPostAnswer">Bruce Banner est Hulk</column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">2</column>
+        </table>
+        <table name="answer">
+            <column name="id">4</column>
+            <column name="body">Obi Wan Kenobi</column>
+            <column name="commentPostAnswer">Obi Wan est un personnage de Star Wars.</column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">2</column>
+        </table>
+        <table name="answer">
+            <column name="id">5</column>
+            <column name="body">Bob Kane </column>
+            <column name="commentPostAnswer">Bob Kane crea ce personnage en 1938</column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">3</column>
+        </table>
+        <table name="answer">
+            <column name="id">6</column>
+            <column name="body">Todd McFarlane</column>
+            <column name="commentPostAnswer">Mac Farlane a travaillé sur Batman, mais ne l'a pas créé. I a par contre créé Spawn et Venom</column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">3</column>
+        </table>
+        <table name="answer">
+            <column name="id">7</column>
+            <column name="body">Franck Miller</column>
+            <column name="commentPostAnswer">Miller a dessine &quot;Batman Year One&quot; et &quot;Batman Dark Knight&quot;, mais ne l'a pas cree</column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">3</column>
+        </table>
+        <table name="answer">
+            <column name="id">8</column>
+            <column name="body">Joker</column>
+            <column name="commentPostAnswer">Joker est LE vilain de Batman</column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">4</column>
+        </table>
+        <table name="answer">
+            <column name="id">9</column>
+            <column name="body">Double Face</column>
+            <column name="commentPostAnswer">LE procureur Harvey Dent a mal tourné et est un des ennemis de Batman</column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">4</column>
+        </table>
+        <table name="answer">
+            <column name="id">10</column>
+            <column name="body">Docteur Doom</column>
+            <column name="commentPostAnswer">Doom est le vilain pricipal de la serie des 4 Fantastiques</column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">4</column>
+        </table>
+        <table name="answer">
+            <column name="id">11</column>
+            <column name="body">Java</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">5</column>
+        </table>
+        <table name="answer">
+            <column name="id">12</column>
+            <column name="body">C#</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">5</column>
+        </table>
+        <table name="answer">
+            <column name="id">13</column>
+            <column name="body">Cobol</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">5</column>
+        </table>
+        <table name="answer">
+            <column name="id">14</column>
+            <column name="body">Spring</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">5</column>
+        </table>
+        <table name="answer">
+            <column name="id">15</column>
+            <column name="body">Git</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">5</column>
+        </table>
+        <table name="answer">
+            <column name="id">16</column>
+            <column name="body">Des questionnaires</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">6</column>
+        </table>
+        <table name="answer">
+            <column name="id">17</column>
+            <column name="body">Des questions</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">6</column>
+        </table>
+        <table name="answer">
+            <column name="id">18</column>
+            <column name="body">Des voitures</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">6</column>
+        </table>
+        <table name="answer">
+            <column name="id">19</column>
+            <column name="body">Des produits</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">6</column>
+        </table>
+        <table name="answer">
+            <column name="id">20</column>
+            <column name="body">Des formations</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">6</column>
+        </table>
+        <table name="answer">
+            <column name="id">21</column>
+            <column name="body">Oui</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">7</column>
+        </table>
+        <table name="answer">
+            <column name="id">22</column>
+            <column name="body">Non, et ce n'est pas prevu</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">7</column>
+        </table>
+        <table name="answer">
+            <column name="id">23</column>
+            <column name="body">Pas encore, mais on y travaille !</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">7</column>
+        </table>
+        <table name="answer">
+            <column name="id">24</column>
+            <column name="body">Blanc</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">9</column>
+        </table>
+        <table name="answer">
+            <column name="id">25</column>
+            <column name="body">Noir</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">9</column>
+        </table>
+        <table name="answer">
+            <column name="id">26</column>
+            <column name="body">Archi seches !</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">10</column>
+        </table>
+        <table name="answer">
+            <column name="id">27</column>
+            <column name="body">Pas seches du tout </column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">10</column>
+        </table>
+        <table name="answer">
+            <column name="id">28</column>
+            <column name="body">etre</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">11</column>
+        </table>
+        <table name="answer">
+            <column name="id">29</column>
+            <column name="body">ne pas etre</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">11</column>
+        </table>
+        <table name="answer">
+            <column name="id">30</column>
+            <column name="body">réponse 1</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">12</column>
+        </table>
+        <table name="answer">
+            <column name="id">31</column>
+            <column name="body">Maxime Chattam</column>
+            <column name="commentPostAnswer">Aucun rapport. Chattam écrit des polars.</column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">13</column>
+        </table>
+        <table name="answer">
+            <column name="id">32</column>
+            <column name="body">Victor Hugo</column>
+            <column name="commentPostAnswer">Victor Hugo a bien écrit les Misérables</column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">13</column>
+        </table>
+        <table name="answer">
+            <column name="id">33</column>
+            <column name="body">Emile Zola</column>
+            <column name="commentPostAnswer">Zola a écrit notamment la série des Rougon-Macquart, constituée de 20 romans (!), dont &quot;Germinal&quot;</column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">13</column>
+        </table>
+        <table name="answer">
+            <column name="id">34</column>
+            <column name="body">Alexandre Dumas</column>
+            <column name="commentPostAnswer">Dumas est l'auteur des &quot;3 Mousquetaires&quot;, entre autres.</column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">13</column>
+        </table>
+        <table name="answer">
+            <column name="id">35</column>
+            <column name="body">Mary Higgins Clark</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">14</column>
+        </table>
+        <table name="answer">
+            <column name="id">37</column>
+            <column name="body">Mary Higgin Clark</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">14</column>
+        </table>
+        <table name="answer">
+            <column name="id">38</column>
+            <column name="body">Marie Higgin Clark</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">14</column>
+        </table>
+        <table name="answer">
+            <column name="id">39</column>
+            <column name="body">Mary Higgins Clarck</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">14</column>
+        </table>
+        <table name="answer">
+            <column name="id">40</column>
+            <column name="body">Mary Higgin Clarck</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">14</column>
+        </table>
+        <table name="answer">
+            <column name="id">41</column>
+            <column name="body">Oui</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">15</column>
+        </table>
+        <table name="answer">
+            <column name="id">42</column>
+            <column name="body">Non</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">15</column>
+        </table>
+        <table name="answer">
+            <column name="id">43</column>
+            <column name="body">Lénine</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">16</column>
+        </table>
+        <table name="answer">
+            <column name="id">44</column>
+            <column name="body">Staline</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">16</column>
+        </table>
+        <table name="answer">
+            <column name="id">45</column>
+            <column name="body">Trotski</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">16</column>
+        </table>
+        <table name="answer">
+            <column name="id">46</column>
+            <column name="body">Molotov</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">16</column>
+        </table>
+        <table name="answer">
+            <column name="id">47</column>
+            <column name="body">France</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">17</column>
+        </table>
+        <table name="answer">
+            <column name="id">48</column>
+            <column name="body">Italie</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">17</column>
+        </table>
+        <table name="answer">
+            <column name="id">49</column>
+            <column name="body">Espagne</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">17</column>
+        </table>
+        <table name="answer">
+            <column name="id">50</column>
+            <column name="body">Maroc</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">17</column>
+        </table>
+        <table name="answer">
+            <column name="id">51</column>
+            <column name="body">Portugal</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">17</column>
+        </table>
+        <table name="answer">
+            <column name="id">52</column>
+            <column name="body">Rome</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">18</column>
+        </table>
+        <table name="answer">
+            <column name="id">53</column>
+            <column name="body">Vérone</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">18</column>
+        </table>
+        <table name="answer">
+            <column name="id">54</column>
+            <column name="body">Milan</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">18</column>
+        </table>
+        <table name="answer">
+            <column name="id">55</column>
+            <column name="body">Venise</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">18</column>
+        </table>
+        <table name="answer">
+            <column name="id">56</column>
+            <column name="body">Hadès</column>
+            <column name="commentPostAnswer">Hadès est le dieu des enfers</column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">19</column>
+        </table>
+        <table name="answer">
+            <column name="id">57</column>
+            <column name="body">Ares</column>
+            <column name="commentPostAnswer">Ares est le dieu de la Guerre</column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">19</column>
+        </table>
+        <table name="answer">
+            <column name="id">58</column>
+            <column name="body">Hermes</column>
+            <column name="commentPostAnswer">Hermes est le dieu des voyageurs</column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">19</column>
+        </table>
+        <table name="answer">
+            <column name="id">59</column>
+            <column name="body">Apollon</column>
+            <column name="commentPostAnswer">Apollon est le dieu du soleil</column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">19</column>
+        </table>
+        <table name="answer">
+            <column name="id">60</column>
+            <column name="body">Vienne</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">20</column>
+        </table>
+        <table name="answer">
+            <column name="id">61</column>
+            <column name="body">Prague</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">20</column>
+        </table>
+        <table name="answer">
+            <column name="id">62</column>
+            <column name="body">Salzbourg</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">20</column>
+        </table>
+        <table name="answer">
+            <column name="id">63</column>
+            <column name="body">Bergenz</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">20</column>
+        </table>
+        <table name="answer">
+            <column name="id">64</column>
+            <column name="body">Turin</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">20</column>
+        </table>
+        <table name="answer">
+            <column name="id">65</column>
+            <column name="body">La théorie des cordes</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">21</column>
+        </table>
+        <table name="answer">
+            <column name="id">66</column>
+            <column name="body">La théorie de l'évolution des espèces</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">21</column>
+        </table>
+        <table name="answer">
+            <column name="id">67</column>
+            <column name="body">La théorie de la gravitation universelle</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">21</column>
+        </table>
+        <table name="answer">
+            <column name="id">68</column>
+            <column name="body">La théorie de la relativité générale</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">21</column>
+        </table>
+        <table name="answer">
+            <column name="id">69</column>
+            <column name="body">756</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">22</column>
+        </table>
+        <table name="answer">
+            <column name="id">70</column>
+            <column name="body">800</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">1</column>
+            <column name="question_id">22</column>
+        </table>
+        <table name="answer">
+            <column name="id">71</column>
+            <column name="body">787</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">22</column>
+        </table>
+        <table name="answer">
+            <column name="id">72</column>
+            <column name="body">843</column>
+            <column name="commentPostAnswer"></column>
+            <column name="expectedAnswer">0</column>
+            <column name="question_id">22</column>
+        </table>
+        <!-- Table designer -->
+        <table name="designer">
+            <column name="id">1</column>
+            <column name="certifier">0</column>
+            <column name="dateStatus">2020-03-12 18:32:47.000000</column>
+            <column name="expertiseField"></column>
+            <column name="presentation"></column>
+            <column name="user_id">1</column>
+        </table>
+        <table name="designer">
+            <column name="id">3</column>
+            <column name="certifier">0</column>
+            <column name="dateStatus">2020-03-12 18:32:47.000000</column>
+            <column name="expertiseField"></column>
+            <column name="presentation"></column>
+            <column name="user_id">3</column>
+        </table>
+        <!-- Table forum -->
+        <!-- Table mcq -->
+        <table name="mcq">
+            <column name="id">2</column>
+            <column name="body">  Batman</column>
+            <column name="createDate">2020-03-12 21:52:35.000000</column>
+            <column name="editDate">2020-03-12 21:54:59.000000</column>
+            <column name="status">disponible</column>
+            <column name="topic"></column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+            <column name="theme">NULL</column>
+        </table>
+        <table name="mcq">
+            <column name="id">3</column>
+            <column name="body">  QuizizSkillz</column>
+            <column name="createDate">2020-03-12 21:54:50.000000</column>
+            <column name="editDate">2020-03-12 21:54:50.000000</column>
+            <column name="status">disponible</column>
+            <column name="topic">QuizizSkillz</column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+            <column name="theme">NULL</column>
+        </table>
+        <table name="mcq">
+            <column name="id">4</column>
+            <column name="body">  qcm
+</column>
+            <column name="createDate">2020-03-16 22:32:46.097000</column>
+            <column name="editDate">2020-03-16 22:32:46.097000</column>
+            <column name="status">free</column>
+            <column name="topic"></column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+            <column name="theme">NULL</column>
+        </table>
+        <table name="mcq">
+            <column name="id">5</column>
+            <column name="body">  test</column>
+            <column name="createDate">2020-04-25 14:52:31.779000</column>
+            <column name="editDate">2020-04-26 23:18:44.958000</column>
+            <column name="status">enConstruction</column>
+            <column name="topic">test</column>
+            <column name="designer_id">3</column>
+            <column name="forum_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+            <column name="theme">NULL</column>
+        </table>
+        <!-- Table mcqpassed -->
+        <table name="mcqpassed">
+            <column name="id">1</column>
+            <column name="finalise">0</column>
+            <column name="result">0</column>
+            <column name="mcq_id">2</column>
+            <column name="user_id">1</column>
+        </table>
+        <table name="mcqpassed">
+            <column name="id">2</column>
+            <column name="finalise">0</column>
+            <column name="result">0</column>
+            <column name="mcq_id">3</column>
+            <column name="user_id">1</column>
+        </table>
+        <table name="mcqpassed">
+            <column name="id">3</column>
+            <column name="finalise">0</column>
+            <column name="result">0</column>
+            <column name="mcq_id">3</column>
+            <column name="user_id">2</column>
+        </table>
+        <table name="mcqpassed">
+            <column name="id">4</column>
+            <column name="finalise">0</column>
+            <column name="result">0</column>
+            <column name="mcq_id">2</column>
+            <column name="user_id">1</column>
+        </table>
+        <table name="mcqpassed">
+            <column name="id">5</column>
+            <column name="finalise">0</column>
+            <column name="result">0</column>
+            <column name="mcq_id">2</column>
+            <column name="user_id">1</column>
+        </table>
+        <!-- Table multimedia -->
+        <table name="multimedia">
+            <column name="id">1</column>
+            <column name="adresseCible">https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/King_Henry_IV_of_France.jpg/330px-King_Henry_IV_of_France.jpg</column>
+            <column name="typeMultimedia">image</column>
+            <column name="answer_id">NULL</column>
+            <column name="mcq_id">NULL</column>
+            <column name="question_id">9</column>
+            <column name="adresseVignette"></column>
+            <column name="legende">Henri IV</column>
+        </table>
+        <!-- Table question -->
+        <table name="question">
+            <column name="id">2</column>
+            <column name="body">      Quel est le nom de Batman sans son masque ?</column>
+            <column name="commentPostAnswer"></column>
+            <column name="createDate">2020-03-12 21:17:21.000000</column>
+            <column name="editDate">2020-04-26 17:01:53.672000</column>
+            <column name="help">NULL</column>
+            <column name="status">disponible</column>
+            <column name="theme">NULL</column>
+            <column name="topic">Comics</column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">3</column>
+            <column name="body">  Qui a cree Batman?</column>
+            <column name="commentPostAnswer"></column>
+            <column name="createDate">2020-03-12 21:23:01.000000</column>
+            <column name="editDate">2020-03-12 21:25:05.000000</column>
+            <column name="help">NULL</column>
+            <column name="status">disponible</column>
+            <column name="theme">NULL</column>
+            <column name="topic">Comics</column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">4</column>
+            <column name="body"> Lequel de ces super Vilains n'est pas un ennemi de Batman</column>
+            <column name="commentPostAnswer"></column>
+            <column name="createDate">2020-03-12 21:33:01.000000</column>
+            <column name="editDate">2020-03-12 21:33:01.000000</column>
+            <column name="help">NULL</column>
+            <column name="status">disponible</column>
+            <column name="theme">NULL</column>
+            <column name="topic">Comics</column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">5</column>
+            <column name="body">  Dans quel langage est codee l'application  QuizizSkillz?</column>
+            <column name="commentPostAnswer">L'application est codee en JAVA. C# et Cobol sont bien des langages mais n'ont pas etes utilise. Spring n'est pas un langage de programmation, mais un Framework. GIt est un outil de &quot;versionning&quot;.</column>
+            <column name="createDate">2020-03-12 21:37:46.000000</column>
+            <column name="editDate">2020-03-12 21:46:10.000000</column>
+            <column name="help">NULL</column>
+            <column name="status">disponible</column>
+            <column name="theme">NULL</column>
+            <column name="topic">QuizizSkillz</column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">6</column>
+            <column name="body">  QuizizSkillz permet de gerer :</column>
+            <column name="commentPostAnswer">Pour coder une application pour gerer des produits, des voitures ou des formations, suivez une POE Dawan ! QuizizSkillz ne s'occupe que des questionnaires et de leurs questions.</column>
+            <column name="createDate">2020-03-12 21:47:35.000000</column>
+            <column name="editDate">2020-03-12 21:51:55.000000</column>
+            <column name="help">NULL</column>
+            <column name="status">disponible</column>
+            <column name="theme">NULL</column>
+            <column name="topic">QuizizSkillz</column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">7</column>
+            <column name="body">  Puis-je jouer à QuizizSkillz depuis un mobile ?</column>
+            <column name="commentPostAnswer">QuizizSkillz est responsive ! Jouez d'ou vous voulez !</column>
+            <column name="createDate">2020-03-12 22:02:00.000000</column>
+            <column name="editDate">2020-03-12 22:02:08.000000</column>
+            <column name="help">NULL</column>
+            <column name="status">disponible</column>
+            <column name="theme">NULL</column>
+            <column name="topic">QuizizSkillz</column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">9</column>
+            <column name="body">            Quelle est la couleur du cheval blanc d'Henry IV?</column>
+            <column name="commentPostAnswer"></column>
+            <column name="createDate">2020-03-12 22:02:00.000000</column>
+            <column name="editDate">2020-04-27 11:08:05.548000</column>
+            <column name="help">NULL</column>
+            <column name="status">disponible</column>
+            <column name="theme">NULL</column>
+            <column name="topic">QuizizSkillz</column>
+            <column name="designer_id">3</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">10</column>
+            <column name="body">Les chaussettes de l'archiduchesse sont-elles seches?</column>
+            <column name="commentPostAnswer">Archi seche !</column>
+            <column name="createDate">2020-03-12 22:02:00.000000</column>
+            <column name="editDate">2020-03-12 22:02:08.000000</column>
+            <column name="help">NULL</column>
+            <column name="status">disponible</column>
+            <column name="theme">NULL</column>
+            <column name="topic">QuizizSkillz</column>
+            <column name="designer_id">3</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">11</column>
+            <column name="body">Etre ou ne pas etre ?</column>
+            <column name="commentPostAnswer">Telle est la question ?</column>
+            <column name="createDate">2020-03-12 22:02:00.000000</column>
+            <column name="editDate">2020-03-12 22:02:08.000000</column>
+            <column name="help">NULL</column>
+            <column name="status">disponible</column>
+            <column name="theme">NULL</column>
+            <column name="topic">QuizizSkillz</column>
+            <column name="designer_id">3</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">12</column>
+            <column name="body">une question </column>
+            <column name="commentPostAnswer"></column>
+            <column name="createDate">2020-03-16 22:32:15.553000</column>
+            <column name="editDate">2020-03-16 22:32:15.553000</column>
+            <column name="help">NULL</column>
+            <column name="status">enConstruction</column>
+            <column name="theme">NULL</column>
+            <column name="topic">un theme</column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">13</column>
+            <column name="body">  Qui a écrit &quot;Les Misérables&quot;</column>
+            <column name="commentPostAnswer"></column>
+            <column name="createDate">2020-04-22 15:31:29.113000</column>
+            <column name="editDate">2020-04-22 15:38:07.187000</column>
+            <column name="help">NULL</column>
+            <column name="status">enConstruction</column>
+            <column name="theme">NULL</column>
+            <column name="topic">Littérature</column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">14</column>
+            <column name="body">Comment s'appelle cette célèbre autrice de romans policier ?</column>
+            <column name="commentPostAnswer"></column>
+            <column name="createDate">2020-04-22 15:39:55.912000</column>
+            <column name="editDate">2020-04-22 15:39:55.912000</column>
+            <column name="help">NULL</column>
+            <column name="status">disponible</column>
+            <column name="theme">NULL</column>
+            <column name="topic">Littérature</column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">15</column>
+            <column name="body"> Java, c'est bien?</column>
+            <column name="commentPostAnswer"></column>
+            <column name="createDate">2020-04-22 15:54:47.760000</column>
+            <column name="editDate">2020-04-22 15:54:47.760000</column>
+            <column name="help">NULL</column>
+            <column name="status">free</column>
+            <column name="theme">NULL</column>
+            <column name="topic"></column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">16</column>
+            <column name="body">Qui a dirigé l'URSS entre 1920 et 1953</column>
+            <column name="commentPostAnswer"></column>
+            <column name="createDate">2020-04-22 15:56:38.174000</column>
+            <column name="editDate">2020-04-22 15:56:38.174000</column>
+            <column name="help">NULL</column>
+            <column name="status">disponible</column>
+            <column name="theme">NULL</column>
+            <column name="topic">Histoire</column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">17</column>
+            <column name="body"> Ou se trouve l'Andalousie?</column>
+            <column name="commentPostAnswer"></column>
+            <column name="createDate">2020-04-22 15:58:55.938000</column>
+            <column name="editDate">2020-04-22 15:58:55.938000</column>
+            <column name="help">NULL</column>
+            <column name="status">free</column>
+            <column name="theme">NULL</column>
+            <column name="topic">Géographie</column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">18</column>
+            <column name="body"> Dans quelle Ville se déroule &quot;Roméo et Juliette&quot;</column>
+            <column name="commentPostAnswer"></column>
+            <column name="createDate">2020-04-22 16:01:11.885000</column>
+            <column name="editDate">2020-04-22 16:01:11.885000</column>
+            <column name="help">NULL</column>
+            <column name="status">disponible</column>
+            <column name="theme">NULL</column>
+            <column name="topic">Théatre</column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">19</column>
+            <column name="body">Qui est le dieu de la guerre dans la mythologie grecque? </column>
+            <column name="commentPostAnswer"></column>
+            <column name="createDate">2020-04-22 16:03:00.572000</column>
+            <column name="editDate">2020-04-22 16:03:00.572000</column>
+            <column name="help">NULL</column>
+            <column name="status">disponible</column>
+            <column name="theme">NULL</column>
+            <column name="topic">Mythologie</column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">20</column>
+            <column name="body"> Où est né Mozart?</column>
+            <column name="commentPostAnswer"></column>
+            <column name="createDate">2020-04-22 16:06:37.200000</column>
+            <column name="editDate">2020-04-22 16:06:37.200000</column>
+            <column name="help">NULL</column>
+            <column name="status">disponible</column>
+            <column name="theme">NULL</column>
+            <column name="topic">Musique Histoire</column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">21</column>
+            <column name="body"> Quelle théorie doit-on à Isaac Newton?</column>
+            <column name="commentPostAnswer"></column>
+            <column name="createDate">2020-04-22 16:09:04.575000</column>
+            <column name="editDate">2020-04-22 16:09:04.575000</column>
+            <column name="help">NULL</column>
+            <column name="status">disponible</column>
+            <column name="theme">NULL</column>
+            <column name="topic"></column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <table name="question">
+            <column name="id">22</column>
+            <column name="body"> En quelle année Charlemagne se fait-il sacrer empereur ?</column>
+            <column name="commentPostAnswer"></column>
+            <column name="createDate">2020-04-22 16:11:36.648000</column>
+            <column name="editDate">2020-04-22 16:11:36.648000</column>
+            <column name="help">NULL</column>
+            <column name="status">enConstruction</column>
+            <column name="theme">NULL</column>
+            <column name="topic"></column>
+            <column name="designer_id">1</column>
+            <column name="forum_id">NULL</column>
+            <column name="theme_id">NULL</column>
+            <column name="designer_user_id">NULL</column>
+        </table>
+        <!-- Table questionused -->
+        <table name="questionused">
+            <column name="id">1</column>
+            <column name="AnswerAverageTime">NULL</column>
+            <column name="nbAnswered">0</column>
+            <column name="nbCorrect">0</column>
+            <column name="mcq_id">2</column>
+            <column name="question_id">3</column>
+        </table>
+        <table name="questionused">
+            <column name="id">2</column>
+            <column name="AnswerAverageTime">NULL</column>
+            <column name="nbAnswered">0</column>
+            <column name="nbCorrect">0</column>
+            <column name="mcq_id">2</column>
+            <column name="question_id">2</column>
+        </table>
+        <table name="questionused">
+            <column name="id">3</column>
+            <column name="AnswerAverageTime">NULL</column>
+            <column name="nbAnswered">0</column>
+            <column name="nbCorrect">0</column>
+            <column name="mcq_id">2</column>
+            <column name="question_id">4</column>
+        </table>
+        <table name="questionused">
+            <column name="id">4</column>
+            <column name="AnswerAverageTime">NULL</column>
+            <column name="nbAnswered">0</column>
+            <column name="nbCorrect">0</column>
+            <column name="mcq_id">4</column>
+            <column name="question_id">10</column>
+        </table>
+        <table name="questionused">
+            <column name="id">5</column>
+            <column name="AnswerAverageTime">NULL</column>
+            <column name="nbAnswered">0</column>
+            <column name="nbCorrect">0</column>
+            <column name="mcq_id">4</column>
+            <column name="question_id">4</column>
+        </table>
+        <table name="questionused">
+            <column name="id">6</column>
+            <column name="AnswerAverageTime">NULL</column>
+            <column name="nbAnswered">0</column>
+            <column name="nbCorrect">0</column>
+            <column name="mcq_id">4</column>
+            <column name="question_id">9</column>
+        </table>
+        <table name="questionused">
+            <column name="id">7</column>
+            <column name="AnswerAverageTime">NULL</column>
+            <column name="nbAnswered">0</column>
+            <column name="nbCorrect">0</column>
+            <column name="mcq_id">5</column>
+            <column name="question_id">10</column>
+        </table>
+        <table name="questionused">
+            <column name="id">8</column>
+            <column name="AnswerAverageTime">NULL</column>
+            <column name="nbAnswered">0</column>
+            <column name="nbCorrect">0</column>
+            <column name="mcq_id">5</column>
+            <column name="question_id">9</column>
+        </table>
+        <!-- Table theme -->
+        <!-- Table user -->
+        <table name="user">
+            <column name="id">1</column>
+            <column name="email">a-einstein@dawan.fr</column>
+            <column name="firstName">Albert</column>
+            <column name="lastConnectionDate">NULL</column>
+            <column name="lastName">EINSTEIN</column>
+            <column name="password">$2a$10$8C5ltgjFobzvA90iNlzEaeQ5QYuMIQTEBCSluxPG.qPT4i1cbBg0.</column>
+            <column name="pseudo">E=MC2</column>
+            <column name="signInDate">2020-03-12 18:27:50.000000</column>
+        </table>
+        <table name="user">
+            <column name="id">2</column>
+            <column name="email">h-potter@dawan.fr</column>
+            <column name="firstName">Harry</column>
+            <column name="lastConnectionDate">NULL</column>
+            <column name="lastName">POTTER</column>
+            <column name="password">$2a$10$8C5ltgjFobzvA90iNlzEaeQ5QYuMIQTEBCSluxPG.qPT4i1cbBg0.</column>
+            <column name="pseudo">RoiDuQuidditch</column>
+            <column name="signInDate">2020-03-12 18:27:50.000000</column>
+        </table>
+        <table name="user">
+            <column name="id">3</column>
+            <column name="email">hl@dawan.fr</column>
+            <column name="firstName">Hannibal</column>
+            <column name="lastConnectionDate">NULL</column>
+            <column name="lastName">LECTER</column>
+            <column name="password">$2a$10$8C5ltgjFobzvA90iNlzEaeQ5QYuMIQTEBCSluxPG.qPT4i1cbBg0.</column>
+            <column name="pseudo">Le Cannibale</column>
+            <column name="signInDate">2020-03-12 18:27:50.000000</column>
+        </table>
+        <table name="user">
+            <column name="id">4</column>
+            <column name="email">bm@dawan.fr</column>
+            <column name="firstName">Bob</column>
+            <column name="lastConnectionDate">NULL</column>
+            <column name="lastName">MORANE</column>
+            <column name="password">$2a$10$8C5ltgjFobzvA90iNlzEaeQ5QYuMIQTEBCSluxPG.qPT4i1cbBg0.</column>
+            <column name="pseudo">L'aventurier</column>
+            <column name="signInDate">2020-03-12 18:27:50.000000</column>
+        </table>
+        <table name="user">
+            <column name="id">6</column>
+            <column name="email">mc@dawan.fr</column>
+            <column name="firstName">Marie</column>
+            <column name="lastConnectionDate">NULL</column>
+            <column name="lastName">CURIE</column>
+            <column name="password">$2a$10$7J58cm0ITfhW0OmUhAyAuuwjwDiIpNkIErZhW3nBBRt8fGYg7Ucn2</column>
+            <column name="pseudo">RadiocGirl</column>
+            <column name="signInDate">2020-04-22 15:15:19.226000</column>
+        </table>
+        <table name="user">
+            <column name="id">7</column>
+            <column name="email">mhc@dawan.fr</column>
+            <column name="firstName">Mary</column>
+            <column name="lastConnectionDate">NULL</column>
+            <column name="lastName">HIGGINS CLARK</column>
+            <column name="password">$2a$10$yoGoWfzHf5bPAxmUuf6RFOlLDv9NQK4jvNnwFUGEIgxfis0C.3h9i</column>
+            <column name="pseudo">PolarQueen</column>
+            <column name="signInDate">2020-04-22 15:16:43.469000</column>
+        </table>
+        <table name="user">
+            <column name="id">8</column>
+            <column name="email">jbp@dawan.fr</column>
+            <column name="firstName">Jean-Baptiste</column>
+            <column name="lastConnectionDate">NULL</column>
+            <column name="lastName">POQUELIN</column>
+            <column name="password">$2a$10$8gT1XxIOOm77UeFG5HKgzu9TCJG2zfE4EsR0ESQJxI6HhuzRmVUFi</column>
+            <column name="pseudo">Moliere</column>
+            <column name="signInDate">2020-04-22 15:17:51.371000</column>
+        </table>
+        <table name="user">
+            <column name="id">9</column>
+            <column name="email">mj@dawan.fr</column>
+            <column name="firstName">Mickael</column>
+            <column name="lastConnectionDate">NULL</column>
+            <column name="lastName">JACKSON</column>
+            <column name="password">$2a$10$Nm3DJm3wezAw/0aHhDeEGOEpfZiUCIxVuSyU7DxypS5oy/fPuCl1q</column>
+            <column name="pseudo">KingOfPop</column>
+            <column name="signInDate">2020-04-22 15:18:43.809000</column>
+        </table>
+        <table name="user">
+            <column name="id">10</column>
+            <column name="email">ph@dawan.fr</column>
+            <column name="firstName">Hermé</column>
+            <column name="lastConnectionDate">NULL</column>
+            <column name="lastName">PIERRE</column>
+            <column name="password">$2a$10$R0.6oFOYBziY03lSRmT2Y.tEGDonwTt0C32HK9aJsmtELbvUiwtwe</column>
+            <column name="pseudo">LE pâtissier</column>
+            <column name="signInDate">2020-04-22 15:19:51.658000</column>
+        </table>
+        <table name="user">
+            <column name="id">11</column>
+            <column name="email">ysl@dawan.fr</column>
+            <column name="firstName">Yves</column>
+            <column name="lastConnectionDate">NULL</column>
+            <column name="lastName">SAINT LAURENT</column>
+            <column name="password">$2a$10$72FvKV65caZ6Q/ptY8KOQO1hGoIOewrMIpG2QSePc0Oo7.ZZw5QLK</column>
+            <column name="pseudo">Modiste</column>
+            <column name="signInDate">2020-04-22 15:20:46.587000</column>
+        </table>
+        <table name="user">
+            <column name="id">12</column>
+            <column name="email">pp@dawan.fr</column>
+            <column name="firstName">Pablo</column>
+            <column name="lastConnectionDate">NULL</column>
+            <column name="lastName">PICASSO</column>
+            <column name="password">$2a$10$Zb/RP0WVBD7ibrrQ7Yv0puFDsa.GBY/BS3BJKtKvZnk77khcjW4gG</column>
+            <column name="pseudo">Cubist</column>
+            <column name="signInDate">2020-04-22 15:21:52.596000</column>
+        </table>
+    </database>
+</pma_xml_export>

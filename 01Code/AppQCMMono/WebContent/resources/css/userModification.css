@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+.hiddenBlock{
+	hidden: true;
+}
+
+.error{
+        background-color: rgb(253, 154, 154);
+        color :rgb(168, 2, 2);
+        
+    }
+    
+ erreurChamp{
+ align: middle;
+ color:rgb(168, 2, 2);
+ }
+ 
+ #h1SignIn{
+ align: middle;
+ }
+
+
+  .form-signin {
+  width: 100%;
+  max-width: 800px;
+  padding: 15px;
+  margin: auto;
+}

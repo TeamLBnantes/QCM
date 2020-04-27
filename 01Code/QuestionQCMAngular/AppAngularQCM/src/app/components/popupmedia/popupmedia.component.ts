@@ -33,12 +33,15 @@ export class PopupmediaComponent implements OnInit {
   urlVideoModifier(addresse) {
     if (addresse.includes("youtube")) {
       this.addresseModified = addresse.replace("watch?v=", "embed/");
+    } else if (addresse.includes("youtu.be")){
+      this.addresseModified = addresse.replace("youtu.be/", "www.youtube.com/embed/");
     } else if (addresse.includes("vimeo")){
       this.addresseModified = addresse.replace("vimeo", "player.vimeo");
     } else if (addresse.includes("dailymotion")){
       this.addresseModified = addresse.replace("/video", "embed/video");
     } else if (addresse.includes("drive.google")){
       this.addresseModified = addresse.replace("view?usp=sharing", "preview");
+
     } else {
       this.addresseModified = addresse;
     }

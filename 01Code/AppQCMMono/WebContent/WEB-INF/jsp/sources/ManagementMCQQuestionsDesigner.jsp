@@ -3,8 +3,6 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="fr-FR">
 <head>
-<meta name="description"
-	content="une série de témoignages relatant l'histoire de la poche de Saint-Nazaire en 1944-45" />
 <meta name="keywords" content="mots, clefs" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -73,6 +71,8 @@
 									<h2 class="mb-3">${question.body}</h2>
 									<br /> <br /> theme de la Question : <br />
 									${question.theme} <br /> <br />
+									
+									
 									<!--             	###############tableau des reps dans la fancybox########## -->
 									<div class="templatemo-content-widget no-padding"> 
 										<div class="panel panel-default table-responsive">
@@ -93,7 +93,13 @@
 														<tr>
 															<td>${count.count}</td>
 															<td>${answer.body}</td>
-															<td>${answer.expectedAnswer}</td>
+															<td>
+										<c:if test="${answer.expectedAnswer}">
+										<i class="fa fa-check"></i>
+									</c:if> <c:if test="${!answer.expectedAnswer}">
+										<i class="fa fa-times-circle" style="color: #ff4a4a"></i>
+									</c:if>
+									</td>
 														</tr>
 													</c:forEach>
 												</tbody>
@@ -114,17 +120,14 @@
 											${question.designer.user.lastName}</h3>
 										<br />
 										<p class="mb-0 text-center">
-	<a href=""  onclick="open('MailEngine/questionFromGestion/${question.id}', 'Popup', 'scrollbars=1,resizable=1,height=560,width=870'); return false;" >Signaler ou Envoyer un mail</a>
+								<a href=""  onclick="open('MailEngine/questionFromGestion/${question.id}', 'Popup', 'scrollbars=1,resizable=1,height=560,width=870'); return false;" >Signaler ou Envoyer un mail</a>
 										</p>
 									</c:if>
 									<br />
-									<!--         <p> -->
-									<!--             <input type="text" value="" name="hi2" class="form-control" placeholder="Another input" /> -->
-									<!--         </p> -->
+									
 									<p class="mb-0 text-right">
 										<input data-fancybox-close type="button"
 											class="templatemo-edit-btn" value="Fermer" />
-										<!--  -->
 									</p>
 								</form> 
 			<!-- fin affichage bouton mode Fanzy ######################################################################################"-->  
@@ -199,7 +202,6 @@
 
 <div class="templatemo-content-widget no-padding">
 	<!-- enctype="multipart/form-data" -->
-	<%--  <input type="hidden" name="id" value="${idMCQ}" /> --%>
 	<input type="hidden" name="questionsTrouveesDTO"
 		value="${questionsTrouveesDTO}" />
 	<div class="panel panel-default table-responsive">
@@ -257,6 +259,7 @@
 										</p>
 									</div>
 								</div>
+				
 							<form id="helloDTO${countQuestionDTO.count}" action="" method="post" style="display: none; width: 100%; max-width: 660px;">
 									<h4 class="mb-3">Détail de la Question</h4>
 									<br />
@@ -265,6 +268,46 @@
 									<h2 class="mb-3">${qDTO.question.body}</h2>
 									<br /> <br /> theme de la Question : <br />
 									${qDTO.question.theme} <br /> <br />
+									<c:if test="${question.multimedia != null}">
+									
+												<c:if test="${question.multimedia.typeMultimedia=='image'}">
+											<figure>
+													<img 
+													src="${question.multimedia.adresseCible}" width="240px"
+													align="center" /> <!-- height="180px"  -->
+												<figcaption>
+													<h6>${question.multimedia.legende}</h6>
+												</figcaption>
+											</figure>
+											</c:if>
+											<c:if test="${question.multimedia.typeMultimedia=='audio'}">
+											<figure>
+													<img 
+													src="${question.multimedia.adresseVignette}" width="240px"
+													align="center" /> <!-- height="180px"  -->
+												<figcaption>
+													<h6>${question.multimedia.legende}</h6>
+												</figcaption>
+											</figure>
+											<!--code pour affichage audi  -->
+											<div align="center">
+												<audio controls>
+													<source src="${question.multimedia.adresseCible}"
+														type="audio/mpeg">
+													Your browser does not support the audio element.
+												</audio>
+											</div>
+											<!--  fin-code pour affichage audi  -->
+											</c:if>
+											<c:if test="${question.multimedia.typeMultimedia=='video'}">
+ 												<video
+												src="${question.multimedia.adresseCible}" alt="" width="320px"
+												height="180px" align="center" ></video>
+												<p align="center">${question.multimedia.legende}</p> 
+											</c:if>
+										
+									</c:if>
+									
 									<!--             	###############tableau des reps dans la fancybox########## -->
 									<div class="templatemo-content-widget no-padding">
 										<div class="panel panel-default table-responsive">
@@ -285,7 +328,12 @@
 														<tr>
 															<td>${count.count}</td>
 															<td>${answer.body}</td>
-															<td>${answer.expectedAnswer}</td>
+															<td>
+											<c:if test="${answer.expectedAnswer}">
+										<i class="fa fa-check"></i>
+									</c:if> <c:if test="${!answer.expectedAnswer}">
+										<i class="fa fa-times-circle" style="color: #ff4a4a"></i>
+									</c:if></td>
 														</tr>
 													</c:forEach>
 												</tbody>
@@ -310,18 +358,13 @@
 										</p>
 									</c:if>
 									<br />
-									<!--         <p> -->
-									<!--             <input type="text" value="" name="hi2" class="form-control" placeholder="Another input" /> -->
-									<!--         </p> -->
+									
 									<p class="mb-0 text-right">
 										<input data-fancybox-close type="button"
 											class="templatemo-edit-btn" value="Fermer" />
-										<!--  -->
 									</p>
 								</form> <!-- fin affichage bouton mode Fanzy pour les quetion à ajouter ######################################################################################"-->	 				
 						</td>
-
-						<!-- </form> -->
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -161,8 +161,6 @@ public class ManagementMCQDesignerController {
 	
 	
 	
-	
-
 	//accès à la gestion de la liste des questions qui composent le qcm, + listes des questions candidates
 	@GetMapping(value = { "/{id}/questions" })    //id du qcm pour lequel nous allons chercher d'autres questions
 	public String listerQuestionsMcq(@PathVariable("id") int id, HttpSession session, Model model) {
@@ -231,7 +229,6 @@ public class ManagementMCQDesignerController {
 		mcqService.addQuestion(mcq, question.getId());
 
 
-
 		// on renvoie le nom de la jsp
 		//return "redirect:/ManagementMCQDesigner/"+id+"/questions";
 		// TODO: je ne parviens pas pour le moment à renvoyer des info en direct au controleur 
@@ -273,7 +270,6 @@ public class ManagementMCQDesignerController {
 	}
 	
 
-	
 //filtre des question candidates dans la page Management MCQQuestionDesigner
 	//  ${idMCQ}/filtres
 	@PostMapping(value = { "/{id}/filtres" })    //id du qcm pour lequel nous allons chercher d'autres questions

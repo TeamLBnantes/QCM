@@ -19,6 +19,8 @@
 
 <!-- Bootstrap core CSS -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
+     <link rel="shortcut icon" href="resources/images/favicon.ico">
+
 
 <!--     Favicons
 <link rel="apple-touch-icon" href="/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">

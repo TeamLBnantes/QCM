@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import fr.dawan.formation.AppQCMMono.Enum.Status;
+import fr.dawan.formation.AppQCMMono.Enum.TypeMultimedia;
 import fr.dawan.formation.AppQCMMono.Models.Answer;
+import fr.dawan.formation.AppQCMMono.Models.Multimedia;
 import fr.dawan.formation.AppQCMMono.Models.ObjectListDto;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.User;
@@ -46,6 +48,8 @@ public class ManagementQuestionsDesignerController {
 		ssdto.isDesignerService(user, model);
 		model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
+		model.addAttribute("enumTypeMultimedia", TypeMultimedia.values());
+
 		// on renvoie le nom de la jsp
 		return "QuestionsDesignerListe";
 	}
@@ -58,12 +62,13 @@ public class ManagementQuestionsDesignerController {
 		questionService.deleteById(id);
 
 		List<Question> questions = questionService.searchByDesigner(user.getDesigner());
-		// Question question=questionService.findById(id);
 		
 		SessionServiceDTO ssdto = new SessionServiceDTO();
 		ssdto.isDesignerService(user, model);
 		model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
+		model.addAttribute("enumTypeMultimedia", TypeMultimedia.values());
+
 		// on renvoie le nom de la jsp
 		return "QuestionsDesignerListe";
 	}
@@ -96,6 +101,8 @@ public class ManagementQuestionsDesignerController {
 		//TODO: et donc la ligne suivante ne sert pas non pls à rand chose
 		model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
+		model.addAttribute("enumTypeMultimedia", TypeMultimedia.values());
+
 		// on renvoie le nom de la jsp
 		return "ManagementQuestionDesigner";
 	}
@@ -111,6 +118,8 @@ public class ManagementQuestionsDesignerController {
 		ssdto.isDesignerService(user, model);
 		model.addAttribute("Response", false);
 		model.addAttribute("enumStatus", Status.values());
+		model.addAttribute("enumTypeMultimedia", TypeMultimedia.values());
+
 		// on renvoie le nom de la jsp
 		return "ManagementQuestionDesigner";
 	}
@@ -134,6 +143,8 @@ public class ManagementQuestionsDesignerController {
 		model.addAttribute("question", question);
 		model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
+		model.addAttribute("enumTypeMultimedia", TypeMultimedia.values());
+
 		// on renvoie le nom de la jsp
 		return "ManagementQuestionDesigner";
 	}
@@ -159,6 +170,8 @@ public class ManagementQuestionsDesignerController {
 		model.addAttribute("question", question);
 		// model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
+		model.addAttribute("enumTypeMultimedia", TypeMultimedia.values());
+
 		// on renvoie le nom de la jsp
 		return "ManagementQuestionDesigner";
 	}
@@ -172,8 +185,10 @@ public class ManagementQuestionsDesignerController {
 
 		System.out.println("l'id de la question est : " + question.getId());
 		System.out.println("le body (avant save or update)est  : " + question.getBody());
+		
 
 		Question questionMaj = new Question();
+		Multimedia multimediaMaj = new Multimedia();
 
 		
 
@@ -189,6 +204,7 @@ public class ManagementQuestionsDesignerController {
 
 			} else {
 				questionMaj = questionService.findById(question.getId());
+				
 			}
 
 			questionMaj.setEditDate(LocalDateTime.now());
@@ -196,6 +212,17 @@ public class ManagementQuestionsDesignerController {
 			questionMaj.setBody(question.getBody());
 			questionMaj.setCommentPostAnswer(question.getCommentPostAnswer());
 			questionMaj.setStatus(question.getStatus());
+			questionMaj = questionService.saveOrUpdate(questionMaj);
+
+
+			//mise à jour des données de l'objet multimedia. (il sera sauvegardé par la sauvegarde
+			// de mcq update, et le lien fort entre les deux table
+			//poura aventageusement etre remplacé par une methode ServiceMultimedia.update(old, new)
+			questionMaj.getMultimedia().setAdresseCible(question.getMultimedia().getAdresseCible());
+			questionMaj.getMultimedia().setAdresseVignette(question.getMultimedia().getAdresseVignette());
+			questionMaj.getMultimedia().setLegende(question.getMultimedia().getLegende());
+			questionMaj.getMultimedia().setTypeMultimedia(question.getMultimedia().getTypeMultimedia());
+	
 
 			question = questionService.saveOrUpdate(questionMaj);
 
@@ -211,6 +238,8 @@ public class ManagementQuestionsDesignerController {
 		model.addAttribute("question", question);
 		// model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
+		model.addAttribute("enumTypeMultimedia", TypeMultimedia.values());
+
 		// on renvoie le nom de la jsp
 		return "ManagementQuestionDesigner";
 	}
@@ -247,6 +276,8 @@ public class ManagementQuestionsDesignerController {
 		model.addAttribute("question", question);
 		// model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
+		model.addAttribute("enumTypeMultimedia", TypeMultimedia.values());
+
 		// on renvoie le nom de la jsp
 		return "ManagementQuestionDesigner";
 	}
@@ -295,6 +326,8 @@ public class ManagementQuestionsDesignerController {
 		model.addAttribute("question", question);
 		// model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
+		model.addAttribute("enumTypeMultimedia", TypeMultimedia.values());
+
 		// on renvoie le nom de la jsp
 		return "ManagementQuestionDesigner";
 	}

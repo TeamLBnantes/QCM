@@ -32,7 +32,7 @@ Attention, le port 8081 ne doit donc pas etre deja utilisé sur votre poste
 role de l'appli : mise à dispo de webservices pour pouvoir passer les qcm
 elle utilise la même base de données que AppQCMMono
 
-son bon fonctionnement peut être tetsé avec Postaman par exemple, 
+son bon fonctionnement peut être tetsé avec Postman par exemple, 
 al requete de type GET, http://localhost:8081/qcm doit vous retourner un json contenant la liste des qcm dispo pour etre passés
 
 ====================================================

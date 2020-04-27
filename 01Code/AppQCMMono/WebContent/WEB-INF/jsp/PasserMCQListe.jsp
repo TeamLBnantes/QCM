@@ -29,6 +29,8 @@
     <link href="resources/css/font-awesome.min.css" rel="stylesheet">
     <link href="resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="resources/css/templatemo-style.css" rel="stylesheet">
+         <link rel="shortcut icon" href="resources/images/favicon.ico">
+    
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -39,7 +41,6 @@
 
   </head>
   <body>  
-  <h2>Je suis bien sur la page ManagementMCQDesigner</h2>
     <!-- Left column -->
     <div class="templatemo-flex-row">
       <div class="templatemo-sidebar">    <!--div barre de navigation de gauche -->

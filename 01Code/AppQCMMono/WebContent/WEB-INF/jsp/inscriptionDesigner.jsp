@@ -29,6 +29,7 @@
     <link href="resources/css/font-awesome.min.css" rel="stylesheet">
     <link href="resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="resources/css/templatemo-style.css" rel="stylesheet">
+          <link rel="shortcut icon" href="resources/images/favicon.ico">
      
     
     

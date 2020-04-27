@@ -20,6 +20,7 @@
 <!-- Bootstrap core CSS -->
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
 
+
 <base
 	href="<%=request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 					+ request.getContextPath() + "/"%>" />

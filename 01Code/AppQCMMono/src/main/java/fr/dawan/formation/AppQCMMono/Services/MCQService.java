@@ -177,7 +177,8 @@ public class MCQService {
 		Question question=questionService.findById(id);
 		
 		List<MCQ> listMcqs=mcqDao.findMcqByQuestion(question);
-	
+		mcqDao.close();
+
 		return listMcqs;
 	}
 

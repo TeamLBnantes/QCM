@@ -1,5 +1,6 @@
 package fr.dawan.formation.AppQCMMono.Models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,7 +14,9 @@ public class Multimedia extends Entitie{
 	
 	@Enumerated(EnumType.STRING)
 	TypeMultimedia typeMultimedia;
+	@Column(columnDefinition="text", length=2000)
 	String adresseCible;
+	@Column(columnDefinition="text", length=2000)
 	String adresseVignette;
 	String legende;
 	

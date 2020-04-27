@@ -24,6 +24,8 @@ public class AnswerService {
 	public Answer findById(int idAnswer) {
 		
 		Answer a=answerDAO.findById(Answer.class, idAnswer);
+		answerDAO.close();
+
 		return a;
 	}
 }

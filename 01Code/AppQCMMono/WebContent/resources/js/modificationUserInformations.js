@@ -18,7 +18,7 @@ window.addEventListener("load", () => {
     let displayError = document.querySelector('#displayError')
     let displayConfirmPassword = document.querySelector('#displayConfirmPassword');
     
-    let valider =document.querySelector('#valider');
+    let valider = document.querySelector('#valider');
     
     let validationPassword = false;
     let validationEmail = false;
@@ -26,8 +26,25 @@ window.addEventListener("load", () => {
     let validationLastName = false;
     let validationFirstName = false;
     
+    let btnMail = document.querySelector('#mail');
+    let showEmail = document.querySelector('#showEmail');
+    let showPwd = document.querySelector('#showPwd');
+    let showEmailCheck = false;
+    let showPwdCheck = false;
+    
     //let errorAz = '<tag:message code="CONFIRMPASSWORD" text="traduction manquante!"></tag>';
 
+    btnMail.addEventListener("click", (event) =>{
+    	system.out
+    	showEmailCheck = !showEmailCheck
+    	if (!showEmailCheck) { 
+    		showEmail.classList.add("hiddenBlock");
+    		}else {
+    		showEmail.classList.remove("hiddenBlock");
+    		}
+    	
+    })
+    
     inputLastName.addEventListener("keydown", (event) => {
         regAZ(regexaZ, event, displayLastName);
        if (displayLastName == "") {  validationLastName = true; 

@@ -24,6 +24,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { FancyComponent } from './components/fancy/fancy.component';
 import { PopupmediaComponent } from './components/popupmedia/popupmedia.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TemplateComponent } from './template/template.component';
 
 registerLocaleData(localeFr);
 
@@ -40,7 +41,9 @@ registerLocaleData(localeFr);
 
     FancyComponent,
 
-    PopupmediaComponent
+    PopupmediaComponent,
+
+    TemplateComponent
   ],
   imports: [
     BrowserModule,

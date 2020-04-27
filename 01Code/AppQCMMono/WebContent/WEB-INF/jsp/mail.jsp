@@ -30,6 +30,8 @@
 <link href="resources/css/templatemo-style2.css" rel="stylesheet">
 <link href="resources/media/lib/fancybox/dist/jquery.fancybox.min.css"
 	rel="stylesheet">
+	     <link rel="shortcut icon" href="resources/images/favicon.ico">
+	
 <!-- <link href="resources/media/lib/bootstrap-4.4.1-dist/css/bootstrap.min.css" rel="stylesheet"> -->
 <style type="text/css">
 .thumb {

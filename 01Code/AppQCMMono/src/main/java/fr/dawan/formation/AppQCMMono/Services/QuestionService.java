@@ -27,8 +27,10 @@ public class QuestionService {
 		QuestionDAO questionDao = new QuestionDAO(Constantes.PERSISTENCE_UNIT_NAME);
 		Question question=questionDao.saveOrUpdate(q);
 		Multimedia multimedia = question.getMultimedia();
+		if (multimedia != null) {
 		multimedia.setQuestion(question);
 		questionDao.saveOrUpdate(question);
+		}
 		questionDao.close();
 		return question;
 	}

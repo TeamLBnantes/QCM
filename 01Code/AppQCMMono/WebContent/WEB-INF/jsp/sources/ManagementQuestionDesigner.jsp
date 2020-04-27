@@ -70,9 +70,12 @@
 										placeholder="Expliquez pourquoi chaque réponse est vraie ou fausse. Affiché après avoir répondu.">${question.commentPostAnswer }</textarea></td>
 							</tr>
 							<!--  zone multimedia -->
-							<input type="hidden" name="id" value="${question.multimedia.id}" />
+
 
 						</table>
+						
+						<c:if test="${question.id!=null}">	
+						<input type="hidden" name="id" value="${question.multimedia.id}" />
 						<div class="row form-group">
 							<div class="col-lg-6 col-md-6 form-group">
 								<div class="album py-5 bg-light">
@@ -82,13 +85,13 @@
 												<div class="card mb-4 shadow-sm">
 													<div align="center">
 														<c:if
-															test="${question.multimedia.typeMultimedia=='image'}">
+															test="${question.multimedia.typeMultimedia =='image'}">
 															<figure>
 																<a class="d-block mb-4" data-fancybox="images"
 																	href="${question.multimedia.adresseCible}"
 																	data-width="1200px"> <img class="img-fluid"
 																	src="${question.multimedia.adresseCible}" width="240px"
-																	align="center" /> <!-- height="180px"  -->
+																	align="center" /> 
 																</a>
 																<figcaption>
 																	<h6>${question.multimedia.legende}</h6>
@@ -97,20 +100,19 @@
 															</figure>
 														</c:if>
 														<c:if
-															test="${question.multimedia.typeMultimedia=='audio'}">
+															test="${question.multimedia.typeMultimedia =='audio'}">
 															<figure>
 																<a class="d-block mb-4" data-fancybox="images"
 																	href="${question.multimedia.adresseVignette}"
 																	data-width="2400"> <img class="img-fluid"
 																	src="${question.multimedia.adresseVignette}"
-																	width="240px" align="center" /> <!-- height="180px"  -->
+																	width="240px" align="center" /> 
 																</a>
 																<figcaption>
 																	<h6>${question.multimedia.legende}</h6>
 																	<a href="${question.multimedia.adresseVignette}"></a>
 																</figcaption>
 															</figure>
-															<!--code pour affichage audi  -->
 															<div class="audio-section" align="center">
 																<audio controls>
 																	<source src="${question.multimedia.adresseCible}"
@@ -118,7 +120,6 @@
 																	Your browser does not support the audio element.
 																</audio>
 															</div>
-															<!--  fin-code pour affichage audi  -->
 														</c:if>
 														<c:if
 															test="${question.multimedia.typeMultimedia=='video'}">
@@ -136,12 +137,9 @@
 										</div>
 									</div>
 								</div>
-
 							</div>
-							<!-- fin de l'affichage de la zone multimedia -->
 							<div class="col-lg-6 col-md-6 form-group">
-								<!-- div pour les attributs champs media -->
-								<!-- enum du typ emultimedia -->
+								
 								<table>
 									<tr>
 										<td><b>Type Multimedia:</b></td>
@@ -177,11 +175,12 @@
 											value="${question.multimedia.legende}" /></td>
 									</tr>
 									</div>
-									<!-- div pour les champs media -->
 								</table>
 								<br />
 							</div>
 						</div>
+						</c:if>
+						 
 
 					</div>
 					<br />

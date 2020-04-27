@@ -81,7 +81,19 @@
     <artifactId>commons-email</artifactId>
     <version>1.5</version>
 </dependency>
-		
+
+<!-- essai, ajout d'une dépendance pour compatibilté java 11 -->		
+<dependency>
+    <groupId>javax.xml.bind</groupId>
+    <artifactId>jaxb-api</artifactId>
+    <version>2.3.0</version>
+</dependency>
+<!-- j'ajoute le connecteur mariadb https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+<dependency>
+    <groupId>org.mariadb.jdbc</groupId>
+    <artifactId>mariadb-java-client</artifactId>
+    <version>2.6.0</version>
+</dependency>
 
 	</dependencies>
 	</project>

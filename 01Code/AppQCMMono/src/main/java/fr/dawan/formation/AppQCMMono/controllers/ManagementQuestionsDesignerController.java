@@ -200,6 +200,9 @@ public class ManagementQuestionsDesignerController {
 				questionMaj.setDesigner(user.getDesigner());
 				questionMaj.setCreateDate(LocalDateTime.now());
 				questionMaj.setEditDate(LocalDateTime.now());
+				Multimedia multimedia = new Multimedia();
+				questionMaj.setMultimedia(multimedia);
+
 
 			} else {
 				questionMaj = questionService.findById(question.getId());
@@ -219,14 +222,12 @@ public class ManagementQuestionsDesignerController {
 			//poura aventageusement etre remplacé par une methode ServiceMultimedia.update(old, new)
 			
 			if (question.getMultimedia() != null){
-				Multimedia multimedia = new Multimedia();
 				
-			multimedia.setAdresseCible(question.getMultimedia().getAdresseCible());
-			multimedia.setAdresseVignette(question.getMultimedia().getAdresseVignette());
-			multimedia.setLegende(question.getMultimedia().getLegende());
-			multimedia.setTypeMultimedia(question.getMultimedia().getTypeMultimedia());
+			questionMaj.getMultimedia().setAdresseCible(question.getMultimedia().getAdresseCible());
+			questionMaj.getMultimedia().setAdresseVignette(question.getMultimedia().getAdresseVignette());
+			questionMaj.getMultimedia().setLegende(question.getMultimedia().getLegende());
+			questionMaj.getMultimedia().setTypeMultimedia(question.getMultimedia().getTypeMultimedia());
 			
-			questionMaj.setMultimedia(multimedia);
 			}
 	
 

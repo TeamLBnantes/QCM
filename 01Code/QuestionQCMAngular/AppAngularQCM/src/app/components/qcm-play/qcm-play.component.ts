@@ -50,7 +50,11 @@ export class QcmPlayComponent implements OnInit {
   icone: any;
   vignette: string;
   vignetteDefault = '../../../assets/img/Qquestionmark.png';
-
+  correctAnswer: number;
+  begining: any;
+  time:any;
+  timeMin: number;
+  pourcentReussite: number;
 
 
   ngOnInit(): void {
@@ -65,13 +69,16 @@ export class QcmPlayComponent implements OnInit {
       (data: QcmPlayable) => {
         this.qcm = data;
         if (this.qcm.multimedia != null) {
-        if (this.qcm.multimedia.typeMultimedia = "video") {
+        if (this.qcm.multimedia.typeMultimedia == "video") {
           this.icone = faPlayCircle;
-        } else if (this.qcm.multimedia.typeMultimedia = "image") {
+        } else if (this.qcm.multimedia.typeMultimedia == "image") {
+          this.vignette = this.qcm.multimedia.adresseCible;
           this.icone = faExpand;
+        } else if (this.question.multimedia.typeMultimedia == "audio") {
+          this.icone = faVolumeUp;
         }
       }
-        if (this.qcm.multimedia != null && this.qcm.multimedia.adresseVignette != null) {
+        if (this.qcm.multimedia != null || this.qcm.multimedia.adresseVignette != null || this.qcm.multimedia.typeMultimedia != "image") {
           this.vignette = this.qcm.multimedia.adresseVignette;
         }
 
@@ -84,7 +91,9 @@ export class QcmPlayComponent implements OnInit {
     );
   }
   lancerQcm() {
+    this.begining = Date.now();
     this.vignette = this.vignetteDefault;
+    this.icone = null;
     this.lancer = true;
     this.questionnumber = 1;
     this.totalquestion = this.qcm.questionsId.length;
@@ -93,19 +102,20 @@ export class QcmPlayComponent implements OnInit {
       (data: Question) => {
         this.question = data;
         if (this.question.multimedia != null ) {
-        if (this.question.multimedia.typeMultimedia = "video") {
+        if (this.question.multimedia.typeMultimedia == "video") {
           this.icone = faPlayCircle;
-        } else if (this.question.multimedia.typeMultimedia = "image") {
+        } else if (this.question.multimedia.typeMultimedia == "image") {
+          this.vignette = this.question.multimedia.adresseCible;
           this.icone = faExpand;
-        }
+      } else if (this.question.multimedia.typeMultimedia == "audio") {
+        this.icone = faVolumeUp;
       }
-        if (this.question.multimedia != null && this.question.multimedia.adresseVignette != null) {
+      }
+        if (this.question.multimedia != null || this.question.multimedia.adresseVignette != null || this.question.multimedia.typeMultimedia != "image") {
           this.vignette = this.question.multimedia.adresseVignette;
         }
-
-
+        console.log(this.question.multimedia.adresseCible);
       }
-
     );
 
     this.reponsesAnswersUser = [];
@@ -138,7 +148,6 @@ export class QcmPlayComponent implements OnInit {
         }
       }
     );
-    console.log('je suis dans le corrige');
     if (this.qIndex == this.qcm.questionsId.length - 1) {
       this.thisIsTheEnd = true;
     }
@@ -158,35 +167,66 @@ export class QcmPlayComponent implements OnInit {
     this.subscription = this.qcmService.getQuestion(this.idQuestion).subscribe(
       (data: Question) => {
         this.question = data;
-        if (this.question.multimedia != null || this.question.multimedia.adresseVignette != null) {
+        if (this.question.multimedia != null && this.question.multimedia.adresseVignette != null || this.question.multimedia.typeMultimedia != "image") {
           this.vignette = this.question.multimedia.adresseVignette;
         }
-        if (this.question.multimedia.typeMultimedia = "video") {
+        if (this.question.multimedia != null){
+        if (this.question.multimedia.typeMultimedia == "video") {
           this.icone = faPlayCircle;
-        } else if (this.question.multimedia.typeMultimedia = "image") {
+        } else if (this.question.multimedia.typeMultimedia == "image") {
           this.icone = faExpand;
-        } else if (this.question.multimedia.typeMultimedia = "image") {
+          this.vignette = this.question.multimedia.adresseCible;
+
+        } else if (this.question.multimedia.typeMultimedia == "audio") {
           this.icone = faVolumeUp;
         }
+      }
       }
     );
   }
 
   bilanQCM() {
     this.bilan = true;
+    this.correctAnswer=0;
+    this.reponsesQCMUser.forEach(element => {
+      if (element == true){
+        this.correctAnswer++;
+      };
+      this.pourcentReussite = Math.round(this.correctAnswer / this.totalquestion * 100);
+      this.time = Math.round((Date.now() - this.begining) / 1000);
+      if (this.time >= 60){
+        this.timeMin = Math.floor(this.time / 60);
+        this.time = this.time % 60;
+      }
+
+
+    });
   }
   openMedia() {
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    console.log(this.question.multimedia.adresseCible);
     this.adressTemp = this.question.multimedia.adresseCible;
-    console.log(this.adressTemp);
     dialogConfig.data = {
       addresseMedia: this.question.multimedia.adresseCible,
       typeMedia: this.question.multimedia.typeMultimedia,
       legende: this.question.multimedia.legende
+    };
+    dialogConfig.height = '90%';
+    dialogConfig.width = '90%';
+
+    this.dialog.open(PopupmediaComponent, dialogConfig);
+  }
+  openQcmMedia() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    this.adressTemp = this.qcm.multimedia.adresseCible;
+    dialogConfig.data = {
+      addresseMedia: this.qcm.multimedia.adresseCible,
+      typeMedia: this.qcm.multimedia.typeMultimedia,
+      legende: this.qcm.multimedia.legende
     };
     dialogConfig.height = '90%';
     dialogConfig.width = '90%';

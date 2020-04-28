@@ -78,12 +78,7 @@
 
 		<br>
 		<!--  positionnement contenu multimedia MCQ-->
-		<div class="row form-group" align="right">
-			<div class="album py-5 bg-light">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-4">
-							<div class="card mb-4 shadow-sm">
+		
 								<div align="center">
 									<c:if test="${mcq.multimedia.typeMultimedia=='image'}">
 										<figure>
@@ -126,16 +121,11 @@
 											src="${mcq.multimedia.adresseVignette}" alt="" width="320px"
 											height="180px" align="center" />
 											<div class="center">Lire la video</div>
-											<p align="center">${mcq.multimedia.legende}</p> 
+											<p align="center">${mcq.multimedia.legende}</p>
 										</a>
 									</c:if>
 								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+							
 		<!-- fin positionnement contenu multimedia MCQ -->
 		<br>
 
@@ -155,48 +145,93 @@
 		<p>Question :</p>
 		<h1>${question.body}</h1>
 		<br />
-		<br />
-		<!-- affichage de la question, avec ces réponses il faudra donc mettre ici un formulair epour recupèrer le resultat-->
-		<form action="passerQCM/next" class="templatemo-login-form"
-			method="post">
-			<div class="templatemo-content-widget no-padding">
-				<div class="panel panel-default table-responsive">
-					<table
-						class="table table-striped table-bordered templatemo-user-table">
-						<thead>
-							<tr>
-
-								<td width="30px">Vrai</td>
-								<td>Réponse</td>
-
-							</tr>
-						</thead>
-						<tbody>
-							<c:set var="count" value="0" scope="page" />
-							<c:forEach var="answer" items="${question.answers}">
-								<tr>
-
-									<td>
-										<!-- td de la case à cocher --> <input type="hidden"
-										name="reponsesUser[${count}].idRepCor" value="${answer.id}">
-										<input type="checkbox" name="reponsesUser[${count}].repUser"
-										id="${answer.id}" value="true"> <label
-										for="${answer.id}" class="font-weight-400"><span></span></label>
-										<c:set var="count" value="${count + 1}" scope="page" />
-									</td>
-									<td>${answer.body}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
+									<div align="center">
+		
+			<c:if test="${question.multimedia.typeMultimedia =='image'}">
+			<figure>
+				<a class="d-block mb-4" data-fancybox="images"
+					href="${question.multimedia.adresseCible}" data-width="1200px">
+					<img class="img-fluid" src="${question.multimedia.adresseCible}"
+					width="240px" align="center" />
+				</a>
+				<figcaption>
+					<h6>${question.multimedia.legende}</h6>
+					<a href="${question.multimedia.adresseCible}"></a>
+				</figcaption>
+			</figure>
+		</c:if>
+		<c:if test="${question.multimedia.typeMultimedia =='audio'}">
+			<figure>
+				<a class="d-block mb-4" data-fancybox="images"
+					href="${question.multimedia.adresseVignette}" data-width="2400">
+					<img class="img-fluid" src="${question.multimedia.adresseVignette}"
+					width="240px" align="center" />
+				</a>
+				<figcaption>
+					<h6>${question.multimedia.legende}</h6>
+					<a href="${question.multimedia.adresseVignette}"></a>
+				</figcaption>
+			</figure>
+			<div class="audio-section" align="center">
+				<audio controls>
+					<source src="${question.multimedia.adresseCible}" type="audio/mpeg">
+					Your browser does not support the audio element.
+				</audio>
 			</div>
+		</c:if>
+		<c:if test="${question.multimedia.typeMultimedia=='video'}">
+			<a data-fancybox data-width="640" data-height="360"
+				href="${question.multimedia.adresseCible}"> <img
+				src="${question.multimedia.adresseVignette}" alt="" width="320px"
+				height="180px" align="center" />
+				<div class="center">Lire la video</div>
+				<p align="center">${question.multimedia.legende}</p>
+			</a>
+		</c:if>
+</div>
 
-			<div class="form-group text-center">
+<br />
+<!-- affichage de la question, avec ces réponses il faudra donc mettre ici un formulair epour recupèrer le resultat-->
+<form action="passerQCM/next" class="templatemo-login-form"
+	method="post">
+	<div class="templatemo-content-widget no-padding">
+		<div class="panel panel-default table-responsive">
+			<table
+				class="table table-striped table-bordered templatemo-user-table">
+				<thead>
+					<tr>
 
-				<button type="submit" class="templatemo-blue-button " name="action"
-					value="chercher">Corriger</button>
-		</form>
+						<td width="30px">Vrai</td>
+						<td>Réponse</td>
+
+					</tr>
+				</thead>
+				<tbody>
+					<c:set var="count" value="0" scope="page" />
+					<c:forEach var="answer" items="${question.answers}">
+						<tr>
+
+							<td>
+								<!-- td de la case à cocher --> <input type="hidden"
+								name="reponsesUser[${count}].idRepCor" value="${answer.id}">
+								<input type="checkbox" name="reponsesUser[${count}].repUser"
+								id="${answer.id}" value="true"> <label
+								for="${answer.id}" class="font-weight-400"><span></span></label>
+								<c:set var="count" value="${count + 1}" scope="page" />
+							</td>
+							<td>${answer.body}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="form-group text-center">
+
+		<button type="submit" class="templatemo-blue-button " name="action"
+			value="chercher">Corriger</button>
+</form>
 </div>
 
 </c:if>
@@ -216,7 +251,56 @@
 	<p>Question :</p>
 	<h1>${question.body}</h1>
 	<br />
+	
+							<div align="center">
+								<c:if test="${question.multimedia.typeMultimedia =='image'}">
+									<figure>
+										<a class="d-block mb-4" data-fancybox="images"
+											href="${question.multimedia.adresseCible}"
+											data-width="1200px"> <img class="img-fluid"
+											src="${question.multimedia.adresseCible}" width="240px"
+											align="center" />
+										</a>
+										<figcaption>
+											<h6>${question.multimedia.legende}</h6>
+											<a href="${question.multimedia.adresseCible}"></a>
+										</figcaption>
+									</figure>
+								</c:if>
+								<c:if test="${question.multimedia.typeMultimedia =='audio'}">
+									<figure>
+										<a class="d-block mb-4" data-fancybox="images"
+											href="${question.multimedia.adresseVignette}"
+											data-width="2400"> <img class="img-fluid"
+											src="${question.multimedia.adresseVignette}" width="240px"
+											align="center" />
+										</a>
+										<figcaption>
+											<h6>${question.multimedia.legende}</h6>
+											<a href="${question.multimedia.adresseVignette}"></a>
+										</figcaption>
+									</figure>
+									<div class="audio-section" align="center">
+										<audio controls>
+											<source src="${question.multimedia.adresseCible}"
+												type="audio/mpeg">
+											Your browser does not support the audio element.
+										</audio>
+									</div>
+								</c:if>
+								<c:if test="${question.multimedia.typeMultimedia=='video'}">
+									<a data-fancybox data-width="640" data-height="360"
+										href="${question.multimedia.adresseCible}"> <img
+										src="${question.multimedia.adresseVignette}" alt=""
+										width="320px" height="180px" align="center" />
+										<div class="center">Lire la video</div>
+										<p align="center">${question.multimedia.legende}</p>
+									</a>
+								</c:if>
+							</div>
+						
 	<br />
+	${question.commentPostAnswer}
 	<form action="passerQCM/next" class="templatemo-login-form"
 		method="post">
 		<div class="templatemo-content-widget no-padding">
@@ -263,8 +347,7 @@
 		</div>
 		<br /> <a href=""
 			onclick="open('MailEngine/${mcq.id}/questionFromQCM/${question.id}', 'Popup', 'scrollbars=1,resizable=1,height=600,width=870'); return false;">Signaler
-			(vers Admin) ou échanger avec le concepteur de la Question</a> <br />
-		<br />
+			(vers Admin) ou échanger avec le concepteur de la Question</a> <br /> <br />
 		<p>Nombre de questions dans le QCM : ${tarckMcq.nbQuestionsTotal }
 		</p>
 		<p>Nombre de question(s) passée(s) : ${tarckMcq.nbQuestionsPassed }
@@ -272,8 +355,7 @@
 		<p>Nombre de bonne(s) réponse(s) : ${tarckMcq.nbBonnesReponses }</p>
 		<p>Il reste ${tarckMcq.nbQuestionsTotal -  tarckMcq.nbQuestionsPassed  }
 			question(s) dans ce QCM</p>
-		<br />
-		<br />
+		<br /> <br />
 		<div class="form-group text-center">
 			<form action="passerQCM/next" class="templatemo-login-form"
 				method="post">

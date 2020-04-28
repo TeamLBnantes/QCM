@@ -8,7 +8,7 @@
     <!-- <div class="card border-success mb-3" style="max-width: 20rem;">   ceci pour afficher un cadre qui fait au plus 20 rem de large-->
     <div class="card mb-3 center">
       <div mediablock>
-        <a (click)=openMedia()>
+        <a (click)=openQcmMedia()>
           <fa-icon *ngIf="icone != null" [icon]=icone size="6x" class="mediablockiconeelement"></fa-icon>
           <img src="{{vignette}}" class="mediablockelement vignette" />
         </a>
@@ -155,11 +155,27 @@
 
 </div>
 <ng-template #afficherBilan>
-  Ceci est la fin du QCM !<br />
-  affichage du bilan pour l'utilisateur ........ <br />
-  Nombre de bonnes réponses :
 
-  <button btn btn-primary [routerLink]="['/qcmList']">retour liste des QCM</button>
+  <div class="card mb-3">
+    <h1 class="card-header">
+  Fin du QCM !</h1>
+  <div class="card-body">
+  Nombre de questions au total:
+ <h2> {{totalquestion}}</h2><br />
+  Nombre de bonnes réponses :
+  <h2>{{correctAnswer}}</h2><br />
+  soit <span style="font-size: 2em;">{{pourcentReussite}}%</span> de bonnes réponses<br />
+  <br />
+  Temps:<br />
+  <h2>
+  <span *ngIf="timeMin!=null"> {{timeMin}}min et </span>
+  {{time}}s
+</h2><br />
+</div>
+<div class="card-footer">
+  <button class="btn btn-primary" [routerLink]="['/qcmList']">retour liste des QCM</button>
+  </div>
+  </div>
 </ng-template>
 
 <!-- pour les icones FontAwsome-->

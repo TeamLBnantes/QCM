@@ -188,7 +188,6 @@ public class ManagementQuestionsDesignerController {
 		
 
 		Question questionMaj = new Question();
-		Multimedia multimediaMaj = new Multimedia();
 
 		
 
@@ -201,6 +200,9 @@ public class ManagementQuestionsDesignerController {
 				questionMaj.setDesigner(user.getDesigner());
 				questionMaj.setCreateDate(LocalDateTime.now());
 				questionMaj.setEditDate(LocalDateTime.now());
+				Multimedia multimedia = new Multimedia();
+				questionMaj.setMultimedia(multimedia);
+
 
 			} else {
 				questionMaj = questionService.findById(question.getId());
@@ -218,10 +220,15 @@ public class ManagementQuestionsDesignerController {
 			//mise à jour des données de l'objet multimedia. (il sera sauvegardé par la sauvegarde
 			// de mcq update, et le lien fort entre les deux table
 			//poura aventageusement etre remplacé par une methode ServiceMultimedia.update(old, new)
+			
+			if (question.getMultimedia() != null){
+				
 			questionMaj.getMultimedia().setAdresseCible(question.getMultimedia().getAdresseCible());
 			questionMaj.getMultimedia().setAdresseVignette(question.getMultimedia().getAdresseVignette());
 			questionMaj.getMultimedia().setLegende(question.getMultimedia().getLegende());
 			questionMaj.getMultimedia().setTypeMultimedia(question.getMultimedia().getTypeMultimedia());
+			
+			}
 	
 
 			question = questionService.saveOrUpdate(questionMaj);

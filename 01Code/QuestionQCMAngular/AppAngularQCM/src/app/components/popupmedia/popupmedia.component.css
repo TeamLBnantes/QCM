@@ -5,8 +5,16 @@
   flex-direction: column;
 
 }
+.mediaContainer{
+  text-align: center;
 
-.media{
+}
+
+.mediaVideo{
   height: 450px;
   width: 800px;
+}
+.mediaImg{
+  height: 450px;
+  width: auto;
 }

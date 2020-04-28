@@ -42,16 +42,17 @@
 		<div class="table-responsive">
 			<table
 				class="table table-striped table-bordered templatemo-user-table">
+								<c:forEach var="question" items="${questions}">
+				
 				<thead>
 					<tr>
-						<th class="white-text templatemo-sort-by ">Intitulé</th>
-						<th class="white-text templatemo-sort-by ">Statut</th>
-						<th class="white-text templatemo-sort-by ">Theme</th>
-						<th class="white-text templatemo-sort-by ">Commentaire</th>
-						<th class="white-text templatemo-sort-by ">Actions</th>
+						<th class="white-text templatemo-sort-by "width=40%>Intitulé</th>
+						<th class="white-text templatemo-sort-by "width=10%>Statut</th>
+						<th class="white-text templatemo-sort-by "width=10%>Theme</th>
+						<th class="white-text templatemo-sort-by " width=30%>Commentaire</th>
+						<th class="white-text templatemo-sort-by " width=10%>Actions</th>
 					</tr>
 				</thead>
-				<c:forEach var="question" items="${questions}">
 					<tr>
 						<td>${question.body}</td>
 						<td>${question.status}</td>

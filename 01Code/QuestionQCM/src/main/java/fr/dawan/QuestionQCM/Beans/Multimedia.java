@@ -1,5 +1,6 @@
 package fr.dawan.QuestionQCM.Beans;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,8 +19,12 @@ public class Multimedia extends Entitie{
 	
 	@Enumerated(EnumType.STRING)
 	TypeMultimedia typeMultimedia;
+	@Column(columnDefinition="text", length=2000)
 	String adresseCible;
-	
+	@Column(columnDefinition="text", length=2000)
+	String adresseVignette;
+	String legende;
+		
 	@JsonIgnore
 	@OneToOne(fetch=FetchType.LAZY)   
 //	@JoinColumn(name="mcq_id", unique=true)
@@ -69,6 +74,18 @@ public class Multimedia extends Entitie{
 	public void setAdresseCible(String adresseCible) {
 		this.adresseCible = adresseCible;
 	}
-	
+	public String getAdresseVignette() {
+		return adresseVignette;
+	}
+	public void setAdresseVignette(String adresseVignette) {
+		this.adresseVignette = adresseVignette;
+	}
+	public String getLegende() {
+		return legende;
+	}
+	public void setLegende(String legende) {
+		this.legende = legende;
+	}
+
 	
 }

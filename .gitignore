@@ -6,7 +6,8 @@
 *MANIFEST.MF
 
 #01Code/AppQCMMono/src/main/resources/META-INF/persistence.xml
-persistence.xml/
+
+persistence.xml
 
 application.properties/
 

@@ -5,7 +5,10 @@
 *.class
 *MANIFEST.MF
 
-persistence.xml
+persistence.xml/
+
+application.properties/
+
 
 *.metadata/
 *.settings

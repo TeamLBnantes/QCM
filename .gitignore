@@ -5,10 +5,12 @@
 *.class
 *MANIFEST.MF
 
+#01Code/AppQCMMono/src/main/resources/META-INF/persistence.xml
 persistence.xml/
 
 application.properties/
 
+#1234.txt
 
 *.metadata/
 *.settings

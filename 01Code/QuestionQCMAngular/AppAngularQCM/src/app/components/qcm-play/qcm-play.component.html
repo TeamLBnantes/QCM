@@ -9,7 +9,7 @@
     <div class="card mb-3 center">
       <div mediablock>
         <a (click)=openQcmMedia()>
-          <fa-icon *ngIf="icone != null" [icon]=icone size="6x" class="mediablockiconeelement"></fa-icon>
+          <fa-icon *ngIf="icone != null" [icon]=icone size="6x" color="LightGray" class="mediablockiconeelement"></fa-icon>
           <img src="{{vignette}}" class="mediablockelement vignette" />
         </a>
         <p class="card-text" *ngIf="qcm.multimedia != null">{{qcm.multimedia.legende}}</p>
@@ -45,8 +45,12 @@
           <h5 class="card-header">question n° {{questionnumber}} sur {{totalquestion}}</h5>
           <div class="card-body">
             <div class="mediablock">
-              <a (click)=openMedia()>
-                <fa-icon *ngIf="icone != null" [icon]=icone size="6x" class="mediablockiconeelement"></fa-icon>
+<div *ngIf="qcm.multimedia!=null">
+              <button class="btn btn-secondary" *ngIf="qcm.multimedia!=null" (click)=openQcmMedia()>
+                {{mediaTypeDisplay}} du qcm </button> <br/><br/>
+              </div>
+                <a *ngIf="question.multimedia!=null" (click)=openMedia()>
+                <fa-icon *ngIf="icone != null" [icon]=icone color="LightGray" size="6x" class="mediablockiconeelement"></fa-icon>
                 <img src="{{vignette}}" class="mediablockelement vignette" />
               </a>
             </div>
@@ -93,10 +97,16 @@
         <div class="card mb-3" [ngClass]="{success : reponsesQCMUser[qIndex], fail :!reponsesQCMUser[qIndex] }">
           <h5 class="card-header">question n° {{questionnumber}} sur {{totalquestion}}</h5>
           <div class="card-body">
-            <div>
-              <a (click)=openMedia() class="mediablock">
-                <fa-icon *ngIf="icone != null" [icon]=icone size="6x" class="mediablockiconeelement"></fa-icon>
-                <img src="{{vignette}}" class="mediablockelement vignette" center />
+            <div class="mediablock">
+
+              <div *ngIf="qcm.multimedia!=null">
+                <button class="btn btn-secondary" *ngIf="qcm.multimedia!=null" (click)=openQcmMedia()>
+                  {{mediaTypeDisplay}} du qcm </button> <br/><br/>
+                </div>
+                <a *ngIf="question.multimedia!=null" (click)=openMedia()>
+
+                <fa-icon *ngIf="icone != null" [icon]=icone color="LightGray" size="6x" class="mediablockiconeelement"></fa-icon>
+                <img src="{{vignette}}" class="mediablockelement vignette" />
               </a>
             </div>
 
@@ -104,14 +114,7 @@
 
             <h1 class="card-title">{{question.body}}</h1>
             <h6 class="card-subtitle text-muted" hidden>id de la question : {{question.id}}</h6>
-           <!--
-            <span *ngIf="reponsesQCMUser[qIndex]">
-              <h2 class="text-success"> la reponse à la question est Correct, BRAVO</h2>
-            </span>
-            <span *ngIf="!reponsesQCMUser[qIndex]">
-              <h2 class="text-danger"> Il y a des erreurs, voyez la correction</h2>
-            </span>
-          -->
+
             <span *ngIf="reponsesAttendus.commentPostAnswer"> Notes : {{reponsesAttendus.commentPostAnswer}}</span>
           </div>
 
@@ -178,5 +181,22 @@
   </div>
 </ng-template>
 
+<br/>
+<div *ngIf="!signalInProgress">
+<a (click)=initSignaler()> <fa-icon [icon]=signalerIcone color=RED ></fa-icon> Signaler </a>
+</div>
+<div *ngIf="signalInProgress">
+  Signaler :
+  <mat-radio-group
+  [(ngModel)]="causeSignal">
+  <mat-radio-button *ngFor="let causeSignal of causesSignal" [value]="causeSignal">
+    {{causeSignal}}
+  </mat-radio-button>
+</mat-radio-group>
+<button mat-button (click)=signaler()>
+  Envoyer
+</button>
+
+</div>
 <!-- pour les icones FontAwsome-->
 <script src="https://kit.fontawesome.com/ee94e8f5a2.js" crossorigin="anonymous"></script>

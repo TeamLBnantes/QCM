@@ -9,11 +9,14 @@ import { Correction } from 'src/app/classes/correction';
 import { AnswerCorrectionDto } from 'src/app/classes/answer-correction-dto';
 
 // material
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
+
 import { PopupmediaComponent } from '../popupmedia/popupmedia.component';
 
 //icones FontAwsome
-import { faPlayCircle, faVolumeUp, faExpand } from '@fortawesome/free-solid-svg-icons';
+import { faPlayCircle, faVolumeUp, faExpand, faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
+import { SignalerService } from 'src/app/service/signaler.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -22,7 +25,12 @@ import { faPlayCircle, faVolumeUp, faExpand } from '@fortawesome/free-solid-svg-
   styleUrls: ['./qcm-play.component.css']
 })
 export class QcmPlayComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private qcmService: QcmServiceService, private dialog: MatDialog) { }
+  constructor(
+    private route: ActivatedRoute,
+    private qcmService: QcmServiceService,
+    private signalerService: SignalerService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar) { }
 
   private subscription: Subscription;
   private subscription2: Subscription;
@@ -46,15 +54,24 @@ export class QcmPlayComponent implements OnInit {
   questionnumber: number;
   totalquestion: number;
   progress: string = '0%';
+  //media
   adressTemp: string;
+  mediaTypeDisplay: string;
   icone: any;
   vignette: string;
   vignetteDefault = '../../../assets/img/Qquestionmark.png';
+  // Bilan
   correctAnswer: number;
   begining: any;
-  time:any;
+  time: any;
   timeMin: number;
   pourcentReussite: number;
+  // Signalement
+  signalerIcone = faExclamationCircle;
+  causeSignal: string;
+  signalInProgress = false;
+  causesSignal = ['Contenu inapproprié', 'Contenu erroné', 'Contenu incompréhensible'];
+
 
 
   ngOnInit(): void {
@@ -71,11 +88,14 @@ export class QcmPlayComponent implements OnInit {
         if (this.qcm.multimedia != null) {
         if (this.qcm.multimedia.typeMultimedia == "video") {
           this.icone = faPlayCircle;
+          this.mediaTypeDisplay = 'Rejouer la vidéo';
         } else if (this.qcm.multimedia.typeMultimedia == "image") {
           this.vignette = this.qcm.multimedia.adresseCible;
           this.icone = faExpand;
+          this.mediaTypeDisplay = `Revoir l'image`;
         } else if (this.question.multimedia.typeMultimedia == "audio") {
           this.icone = faVolumeUp;
+          this.mediaTypeDisplay = `Rejouer le son`;
         }
       }
         if (this.qcm.multimedia != null || this.qcm.multimedia.adresseVignette != null || this.qcm.multimedia.typeMultimedia != "image") {
@@ -98,28 +118,30 @@ export class QcmPlayComponent implements OnInit {
     this.questionnumber = 1;
     this.totalquestion = this.qcm.questionsId.length;
     this.idQuestion = this.qcm.questionsId[this.qIndex];
+    this.reponsesAnswersUser = [];
+
     this.subscription = this.qcmService.getQuestion(this.idQuestion).subscribe(
       (data: Question) => {
         this.question = data;
-        if (this.question.multimedia != null ) {
+        if (this.question.multimedia != null && this.question.multimedia.adresseVignette != null || this.question.multimedia.typeMultimedia != "image") {
+          this.vignette = this.question.multimedia.adresseVignette;
+        }
+        if (this.question.multimedia != null){
         if (this.question.multimedia.typeMultimedia == "video") {
           this.icone = faPlayCircle;
         } else if (this.question.multimedia.typeMultimedia == "image") {
-          this.vignette = this.question.multimedia.adresseCible;
           this.icone = faExpand;
-      } else if (this.question.multimedia.typeMultimedia == "audio") {
-        this.icone = faVolumeUp;
-      }
-      }
-        if (this.question.multimedia != null || this.question.multimedia.adresseVignette != null || this.question.multimedia.typeMultimedia != "image") {
-          this.vignette = this.question.multimedia.adresseVignette;
+          this.vignette = this.question.multimedia.adresseCible;
+
+        } else if (this.question.multimedia.typeMultimedia == "audio") {
+          this.icone = faVolumeUp;
         }
-        console.log(this.question.multimedia.adresseCible);
+      }
       }
     );
-
-    this.reponsesAnswersUser = [];
   }
+
+
   lancerQuestionCorriger() {
     this.corriger = true;    // pour afficher les reponses
     this.mapRep = new Map<number, AnswerCorrectionDto>();
@@ -232,6 +254,20 @@ export class QcmPlayComponent implements OnInit {
     dialogConfig.width = '90%';
 
     this.dialog.open(PopupmediaComponent, dialogConfig);
+  }
+
+  signaler(){
+    this.subscription = this.signalerService.postSignal(this.idQuestion, parseInt(this.idqcm), this.causeSignal).subscribe(
+      );
+    this.signalInProgress = false;
+    console.log('qcm: '+ this.idqcm + '; question ' + this.idQuestion + '; message: ' + this.causeSignal)
+    this.snackBar.open('Message envoyé', 'OK' ,{
+      duration: 5000,
+    });
+  }
+
+  initSignaler(){
+    this.signalInProgress = true;
   }
 
   ngOnDestroy(): void {

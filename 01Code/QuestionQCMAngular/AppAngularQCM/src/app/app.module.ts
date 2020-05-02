@@ -19,8 +19,9 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import {MatRadioModule} from '@angular/material/radio';
 import { MatButtonModule } from "@angular/material/button";
+
 import { FancyComponent } from './components/fancy/fancy.component';
 import { PopupmediaComponent } from './components/popupmedia/popupmedia.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -43,7 +44,8 @@ registerLocaleData(localeFr);
 
     PopupmediaComponent,
 
-    TemplateComponent
+    TemplateComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -62,6 +64,7 @@ registerLocaleData(localeFr);
 
     MatSnackBarModule,
     MatButtonModule,
+    MatRadioModule,
     MatProgressBarModule,
     MatDialogModule,
     MatProgressSpinnerModule,

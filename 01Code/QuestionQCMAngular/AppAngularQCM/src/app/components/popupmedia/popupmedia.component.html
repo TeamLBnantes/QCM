@@ -13,8 +13,8 @@
   <img [src]=safeAddresseMedia class="mediaImg"/>
   </div>
   <div *ngIf="(typeMedia == 'son')">
-    <audio [src]=safeAddresseMedia></audio>
-    </div>
+    <iframe [src]=safeAddresseMedia frameborder="0" class="mediaAudio"></iframe>
+  </div>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>

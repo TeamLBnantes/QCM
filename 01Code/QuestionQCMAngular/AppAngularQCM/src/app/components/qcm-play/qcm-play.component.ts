@@ -14,7 +14,7 @@ import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { PopupmediaComponent } from '../popupmedia/popupmedia.component';
 
 //icones FontAwsome
-import { faPlayCircle, faVolumeUp, faExpand, faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
+import { faPlayCircle, faVolumeUp, faExpand, faExclamationCircle, faReply} from '@fortawesome/free-solid-svg-icons';
 import { SignalerService } from 'src/app/service/signaler.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -60,6 +60,7 @@ export class QcmPlayComponent implements OnInit {
   icone: any;
   vignette: string;
   vignetteDefault = '../../../assets/img/Qquestionmark.png';
+  rejouerIcone = faReply;
   // Bilan
   correctAnswer: number;
   begining: any;
@@ -71,6 +72,7 @@ export class QcmPlayComponent implements OnInit {
   causeSignal: string;
   signalInProgress = false;
   causesSignal = ['Contenu inapproprié', 'Contenu erroné', 'Contenu incompréhensible'];
+  chargementOK = false;
 
 
 
@@ -106,7 +108,7 @@ export class QcmPlayComponent implements OnInit {
           this.qcm.topic = 'inconnu';
         }
         this.totalquestion = this.qcm.questionsId.length;
-        console.log(this.qcm);
+        this.chargementOK = true;
       }
     );
   }
@@ -119,6 +121,7 @@ export class QcmPlayComponent implements OnInit {
     this.totalquestion = this.qcm.questionsId.length;
     this.idQuestion = this.qcm.questionsId[this.qIndex];
     this.reponsesAnswersUser = [];
+    this.chargementOK = false;
 
     this.subscription = this.qcmService.getQuestion(this.idQuestion).subscribe(
       (data: Question) => {
@@ -136,6 +139,7 @@ export class QcmPlayComponent implements OnInit {
         } else if (this.question.multimedia.typeMultimedia == "audio") {
           this.icone = faVolumeUp;
         }
+        this.chargementOK = true;
       }
       }
     );
@@ -143,6 +147,8 @@ export class QcmPlayComponent implements OnInit {
 
 
   lancerQuestionCorriger() {
+    this.chargementOK = false;
+    this.trueReponseAnswerUser = [];
     this.corriger = true;    // pour afficher les reponses
     this.mapRep = new Map<number, AnswerCorrectionDto>();
     this.subscription2 = this.qcmService.getCorrection(this.idQuestion).subscribe(
@@ -168,6 +174,7 @@ export class QcmPlayComponent implements OnInit {
           this.reponsesQCMUser[this.qIndex] = (this.trueReponseAnswerUser[i] && this.reponsesQCMUser[this.qIndex]);
           i++;
         }
+        this.chargementOK = true;
       }
     );
     if (this.qIndex == this.qcm.questionsId.length - 1) {
@@ -177,6 +184,7 @@ export class QcmPlayComponent implements OnInit {
 
   }
   nextQuestion() {
+    this.chargementOK = false;
     this.vignette = this.vignetteDefault;
     this.question = null;
     this.icone = null;
@@ -203,6 +211,7 @@ export class QcmPlayComponent implements OnInit {
           this.icone = faVolumeUp;
         }
       }
+      this.chargementOK = true;
       }
     );
   }

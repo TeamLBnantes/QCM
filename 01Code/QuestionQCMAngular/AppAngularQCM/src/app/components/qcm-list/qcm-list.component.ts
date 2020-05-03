@@ -10,12 +10,13 @@ import { QcmServiceService } from 'src/app/service/qcm-service.service';
 })
 export class QcmListComponent implements OnInit {
   qcms$: Qcm[];
+  charged: boolean;
   private subscription: Subscription;
-  lancer: boolean;
   tableVisuel: string[]=["table-default", "table-secondary", "table-primary", "table-success","table-info","table-danger","table-warning","table-active","table-light","table-dark",];
   constructor(private qcmService: QcmServiceService) {
 
    }
+
 
   ngOnInit(): void {
     this.getAllQcm();
@@ -25,7 +26,10 @@ export class QcmListComponent implements OnInit {
     this.subscription = this.qcmService.getAllQcm().subscribe(
       (data: Qcm[]) => {
         this.qcms$ = data;
+        this.charged = true;
+
       }
+
     );
   }
 ngOnDestroy(): void {

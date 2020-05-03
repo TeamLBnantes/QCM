@@ -3,6 +3,11 @@
   ####### PAS ENCORE UTILE ########
 <button mat-button class="primary" (click)="getAllQcm()">Afficher les QCM</button> >> ICI filtres <<
   -->
+  <div *ngIf="!charged; else blockcharged0" class="center">
+    <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>
+
+  </div>
+  <ng-template #blockcharged0>
 <table class="table table-hover">
   <thead>
   <tr class='table-primary'>
@@ -30,3 +35,4 @@
       </tr>
   </tbody>
 </table>
+</ng-template>

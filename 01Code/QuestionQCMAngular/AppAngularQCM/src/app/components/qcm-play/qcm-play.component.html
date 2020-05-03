@@ -7,12 +7,12 @@
   <div *ngIf="!lancer, else qcmLancer">
     <!-- <div class="card border-success mb-3" style="max-width: 20rem;">   ceci pour afficher un cadre qui fait au plus 20 rem de large-->
     <div class="card mb-3 center">
-      <div mediablock>
+      <div class="mediablock">
         <a (click)=openQcmMedia()>
-          <fa-icon *ngIf="icone != null" [icon]=icone size="6x" color="LightGray" class="mediablockiconeelement"></fa-icon>
+          <fa-icon *ngIf="icone != null" [icon]=icone size="6x" class="mediablockiconeelement"></fa-icon>
           <img src="{{vignette}}" class="mediablockelement vignette" />
         </a>
-        <p class="card-text" *ngIf="qcm.multimedia != null">{{qcm.multimedia.legende}}</p>
+        <p *ngIf="qcm.multimedia != null">{{qcm.multimedia.legende}}</p>
       </div>
       <div class="card-header">
         <h1>{{qcm.body}}</h1>
@@ -44,20 +44,17 @@
         <div class="card mb-3">
           <h5 class="card-header">question n° {{questionnumber}} sur {{totalquestion}}</h5>
           <div class="card-body">
-            <div class="mediablock">
-<div *ngIf="qcm.multimedia!=null">
-              <button class="btn btn-secondary" *ngIf="qcm.multimedia!=null" (click)=openQcmMedia()>
-                {{mediaTypeDisplay}} du qcm </button> <br/><br/>
+              <div *ngIf="qcm.multimedia!=null">
+                <button class="btn btn-light btn-sm " *ngIf="qcm.multimedia!=null" (click)=openQcmMedia()>
+                  <fa-icon [icon]=rejouerIcone ></fa-icon> {{mediaTypeDisplay}} du qcm </button> <br/>
               </div>
-                <a *ngIf="question.multimedia!=null" (click)=openMedia()>
-                <fa-icon *ngIf="icone != null" [icon]=icone color="LightGray" size="6x" class="mediablockiconeelement"></fa-icon>
-                <img src="{{vignette}}" class="mediablockelement vignette" />
-              </a>
+              <div class="mediablock" *ngIf="question.multimedia!=null">
+                <a  (click)=openMedia()>
+                  <fa-icon *ngIf="icone != null" [icon]=icone size="6x" class="mediablockiconeelement"></fa-icon>
+                  <img src="{{vignette}}" class="mediablockelement vignette" />
+                </a>
+                <p class="card-text" *ngIf="question.multimedia != null">{{question.multimedia.legende}}</p>
             </div>
-            <div class="card-body">
-              <p class="card-text" *ngIf="question.multimedia != null">{{question.multimedia.legende}}</p>
-            </div>
-
             <h1 class="card-title">{{question.body}}</h1>
             <h6 class="card-subtitle text-muted" hidden>id de la question : {{question.id}}</h6>
           </div>
@@ -97,20 +94,17 @@
         <div class="card mb-3" [ngClass]="{success : reponsesQCMUser[qIndex], fail :!reponsesQCMUser[qIndex] }">
           <h5 class="card-header">question n° {{questionnumber}} sur {{totalquestion}}</h5>
           <div class="card-body">
-            <div class="mediablock">
-
-              <div *ngIf="qcm.multimedia!=null">
-                <button class="btn btn-secondary" *ngIf="qcm.multimedia!=null" (click)=openQcmMedia()>
-                  {{mediaTypeDisplay}} du qcm </button> <br/><br/>
-                </div>
-                <a *ngIf="question.multimedia!=null" (click)=openMedia()>
-
-                <fa-icon *ngIf="icone != null" [icon]=icone color="LightGray" size="6x" class="mediablockiconeelement"></fa-icon>
-                <img src="{{vignette}}" class="mediablockelement vignette" />
-              </a>
+            <div *ngIf="qcm.multimedia!=null">
+              <button class="btn btn-light btn-sm " *ngIf="qcm.multimedia!=null" (click)=openQcmMedia()>
+                {{mediaTypeDisplay}} du qcm </button> <br/>
             </div>
-
-              <p class="card-text" *ngIf="question.multimedia != null">{{question.multimedia.legende}}</p>
+              <div class="mediablock" *ngIf="question.multimedia!=null">
+                <a  (click)=openMedia()>
+                  <fa-icon *ngIf="icone != null" [icon]=icone size="6x" class="mediablockiconeelement"></fa-icon>
+                  <img src="{{vignette}}" class="mediablockelement vignette" />
+                </a>
+                <p class="card-text" *ngIf="question.multimedia != null">{{question.multimedia.legende}}</p>
+            </div>
 
             <h1 class="card-title">{{question.body}}</h1>
             <h6 class="card-subtitle text-muted" hidden>id de la question : {{question.id}}</h6>
@@ -118,10 +112,9 @@
             <span *ngIf="reponsesAttendus.commentPostAnswer"> Notes : {{reponsesAttendus.commentPostAnswer}}</span>
           </div>
 
-
           <div class="blockanswers">
             <span *ngFor="let answer of question.answersPlayableDto; let index=index" class="btn-group buttonsgroup">
-              <div>
+
                 <input type="checkbox" [value]="reponsesAnswersUser[index]" [checked]="reponsesAnswersUser[index]"
                   [id]="reponsesAnswersUser[index]" hidden disabled>
                 <button class="buttonblocked" [ngClass]="{buttonblockedclickedcorrect : reponsesAnswersUser[index]&&trueReponseAnswerUser[index],
@@ -136,7 +129,7 @@
                     {{varAnswersCorrection[index].commentPostAnswer}}
                   </em>
                 </button>
-              </div>
+
             </span>
 
           </div>
@@ -182,8 +175,9 @@
 </ng-template>
 
 <br/>
+<div *ngIf="chargementOK">
 <div *ngIf="!signalInProgress">
-<a (click)=initSignaler()> <fa-icon [icon]=signalerIcone color=RED ></fa-icon> Signaler </a>
+<a (click)=initSignaler()> <fa-icon [icon]=signalerIcone [styles]="{'stroke': 'red', 'color': 'red'}" ></fa-icon> Signaler </a>
 </div>
 <div *ngIf="signalInProgress">
   Signaler :
@@ -193,10 +187,11 @@
     {{causeSignal}}
   </mat-radio-button>
 </mat-radio-group>
+Les références du QCM et de la questions seront transmises à un administrateur
 <button mat-button (click)=signaler()>
   Envoyer
 </button>
-
+</div>
 </div>
 <!-- pour les icones FontAwsome-->
 <script src="https://kit.fontawesome.com/ee94e8f5a2.js" crossorigin="anonymous"></script>

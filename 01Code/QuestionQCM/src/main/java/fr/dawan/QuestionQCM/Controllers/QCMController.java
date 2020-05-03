@@ -15,7 +15,7 @@ import fr.dawan.QuestionQCM.DTO.MCQforListDto;
 import fr.dawan.QuestionQCM.Services.QCMService;
 
 @RestController
-@CrossOrigin (origins= {"http://localhost:4200", "http://localhost:8080"})
+@CrossOrigin (origins= {"http://localhost:4200", "http://localhost:8080","http://ratiatum.iguane.org:4200","*"})
 @RequestMapping("/qcm")
 public class QCMController {
 

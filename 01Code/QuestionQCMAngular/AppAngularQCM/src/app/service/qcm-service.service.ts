@@ -12,6 +12,7 @@ import { Correction } from 'src/app/classes/Correction';
 })
 export class QcmServiceService {
 
+  // private readonly URL = `http://ratiatum.iguane.org:8081`;
   private readonly URL = `http://localhost:8081`;
   constructor(private http: HttpClient) { }
 

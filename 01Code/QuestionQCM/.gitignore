@@ -1,7 +1,8 @@
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**
+### j'ajoute java à la ligne suivnate, car application.properties remonte, ce qui n'est pas souhaitable###
+!**/src/main/java/**
 !**/src/test/**
 
 ### STS ###

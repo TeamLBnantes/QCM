@@ -27,7 +27,7 @@ public class TestMcqDao {
 		mcqDao = new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
 		mcq = new MCQ();
 		mcq.setBody("questionnaire1");
-		mcq.setStatus(Status.free);
+		mcq.setStatus(Status.disponible);
 		mcq.setTheme("java888");
 		Assert.assertEquals(0L, mcq.getId());
 		mcqDao.saveOrUpdate(mcq);
@@ -65,13 +65,13 @@ public class TestMcqDao {
 	public void testSearchByStatus() {
 		  mcqDao = new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
 		  List<MCQ> mcqs = new ArrayList<>();
-		  mcqs=mcqDao.searchByStatus(Status.free);
+		  mcqs=mcqDao.searchByStatus(Status.disponible);
 		  int size = mcqs.size();
 		  Assert.assertEquals(size,mcqs.size());
 		  mcq=new MCQ();
-		  mcq.setStatus(Status.free);
+		  mcq.setStatus(Status.disponible);
 		  mcqDao.saveOrUpdate(mcq);
-		  mcqs=mcqDao.searchByStatus(Status.free);
+		  mcqs=mcqDao.searchByStatus(Status.disponible);
 		  Assert.assertEquals(size+1,mcqs.size());
 		  mcqDao.deleteById(MCQ.class, mcq.getId());
 		  mcqDao.close(); 

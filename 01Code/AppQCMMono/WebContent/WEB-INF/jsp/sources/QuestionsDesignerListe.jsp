@@ -1,23 +1,9 @@
 <!-- Dossier source : QuestionDesignerListe  -->
-<body>
+<!-- <body> -->
 
-	<!-- Formulaire de recherche -->
-	<!-- 
+
 	<div class="templatemo-content-widget white-bg">
-		<form action="ManagementQuestionsDesigner/search" method="post">
-			<table>
-				<tr>
-					<td>Mot clé:</td>
-					<td><input type="text" class="form-control" name="motCle" /></td>
-					<td><button type="submit" class="templatemo-white-button"
-							name="action" value="chercher">Chercher</button></td>
-			</table>
-		</form>
-		<table>
-			<td>--------------------------</td>
-
-			<td>
-			 -->
+			 
 	<a href="ManagementQuestionsDesigner/new">
 		<button type="button" class="templatemo-blue-button form-group text-center" name="action"
 			value="chercher">Creer Question</button>
@@ -31,7 +17,24 @@
 						</td>
 							 -->
 	<br />
-	<br />
+	
+		<!-- Formulaire de recherche -->
+	 
+
+		<!-- <form action="" method="post"> -->
+		<form name="recherche">
+			<table>
+				<tr>
+					<td>Filtrer avec le mot clef  :  </td>
+					<td width=400px><input type="text" id="motCle" class="form-control" name="motCle" /></td>
+<!-- 					<td>
+							<button class="templatemo-white-button" onclick="chercher()" >Chercher</button></td>
+					<td><button type="reset" class="templatemo-white-button"
+							name="action" value="chercher">reset</button></td> -->		
+			</table>
+		</form>
+	<!-- 	<table> -->
+	<!--fin  Formulaire de recherc -->
 
 
 
@@ -39,36 +42,44 @@
 
 	<div class="templatemo-content-widget white-bg">
 		<h2 class="text-uppercase">Liste de vos questions</h2>
-		<div class="table-responsive">
+						<div class="table-responsive">
+ 
+			<c:forEach var="question" items="${questions}">
+			<!-- 	<span  class="question">  -->
 			<table
-				class="table table-striped table-bordered templatemo-user-table">
-								<c:forEach var="question" items="${questions}">
-				
-				<thead>
+				class="table table-striped table-bordered templatemo-user-table question">
+					<thead>
+						<tr>
+							<th class="white-text templatemo-sort-by "width=40%>Intitulé</th>
+							<th class="white-text templatemo-sort-by "width=10%>Statut</th>
+							<th class="white-text templatemo-sort-by "width=10%>Theme</th>
+							<th class="white-text templatemo-sort-by " width=20%>Commentaire</th>
+							<th class="white-text templatemo-sort-by " width=10%>reponses</th>
+							<th class="white-text templatemo-sort-by " width=10%>Actions</th>
+						</tr>
+					</thead>
+					<tbody >
 					<tr>
-						<th class="white-text templatemo-sort-by "width=40%>Intitulé</th>
-						<th class="white-text templatemo-sort-by "width=10%>Statut</th>
-						<th class="white-text templatemo-sort-by "width=10%>Theme</th>
-						<th class="white-text templatemo-sort-by " width=30%>Commentaire</th>
-						<th class="white-text templatemo-sort-by " width=10%>Actions</th>
-					</tr>
-				</thead>
-					<tr>
-						<td>${question.body}</td>
-						<td>${question.status}</td>
-						<td>${question.theme}</td>
-						<td>${question.commentPostAnswer}</td>
-						<td><a href="ManagementQuestionsDesigner/${question.id}"><button
+						<td class="zoneRecherche">${question.body}</td>
+						<td class="zoneRecherche">${question.status}</td>
+						<td class="zoneRecherche">${question.topic}</td>
+						<td class="zoneRecherche">${question.commentPostAnswer}</td>
+						<%-- <td><button onclick="javascript:visibilite(repQ${question.id}); return false;" >afficher/masquer</button></td> --%>
+						<td><button class="templatemo-blue-button" onclick="visibilite(`repQ${question.id}`)" >Aff./Masq.</button></td>
+						<td>
+								<a href="ManagementQuestionsDesigner/${question.id}"><button
 									type="button" class="templatemo-blue-button">
 									<i class="far fa-edit"></i>
-								</button></a> <a href="ManagementQuestionsDesigner/delete/${question.id}"><button
+								</button></a> 
+								<a href="ManagementQuestionsDesigner/delete/${question.id}"><button
 									type="button" class="templatemo-white-button">
 									<i class="far fa-trash-alt" style="color: #ff4a4a"></i>
 								</button></a></td>
 					</tr>
+
 					<c:if test="${question.answers != null}">
-						<tr>
-							<td colspan="5">
+						<tr id="repQ${question.id}" style="display:none">
+							<td colspan="6">
 
 								<table
 									class="table table-striped table-bordered templatemo-user-table">
@@ -94,8 +105,12 @@
 							</td>
 						</tr>
 					</c:if>
+					</tbody>
+				<!--	</span>  fi de la dic class=question -->
+				</table> 
 				</c:forEach>
-			</table>
+
+		
 		</div>
 
 	</div>

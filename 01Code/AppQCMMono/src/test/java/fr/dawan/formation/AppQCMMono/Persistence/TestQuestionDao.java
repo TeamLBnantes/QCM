@@ -28,7 +28,7 @@ public class TestQuestionDao {
 		//ajout question 1
 		question.setBody("taratata 1");
 		question.setAnswers(null);
-		question.setStatus(Status.free);
+		question.setStatus(Status.disponible);
 		question.setTheme("uml389");
 		Assert.assertEquals(0L, question.getId());
 		daoQuestion.saveOrUpdate(question);	
@@ -89,13 +89,13 @@ public class TestQuestionDao {
 	  public void TestSearchByStatus() {
 	  daoQuestion = new QuestionDAO(Constantes.PERSISTENCE_UNIT_NAME);
 	  List<Question> questions = new ArrayList<>();
-	  questions=daoQuestion.searchByStatus(Status.free);
+	  questions=daoQuestion.searchByStatus(Status.disponible);
 	  int size = questions.size();
 	  Assert.assertEquals(size,questions.size());
 	  question=new Question();
-	  question.setStatus(Status.free);
+	  question.setStatus(Status.disponible);
 	  daoQuestion.saveOrUpdate(question);
-	  questions=daoQuestion.searchByStatus(Status.free);
+	  questions=daoQuestion.searchByStatus(Status.disponible);
 	  Assert.assertEquals(size+1,questions.size());
 	  daoQuestion.deleteById(Question.class, question.getId());
 	  daoQuestion.close(); 

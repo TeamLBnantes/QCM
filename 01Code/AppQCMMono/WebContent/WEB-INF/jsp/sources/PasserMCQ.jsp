@@ -50,12 +50,37 @@
 
 <div class="templatemo-content-widget white-bg">
 
-	<h3>Intitulé du formulaire : ${mcq.body }</h3>
+	Intitulé du formulaire : <h3> ${mcq.body }</h3>
 	<a href=""
 		onclick="open('MailEngine/fromQCM/${mcq.id}', 'Popup', 'scrollbars=1,resizable=1,height=550,width=870'); return false;">Signaler
 		(vers Admin) ou échanger avec le concepteur du QCM</a>
 	<!-- fin tableau affichage des questions dispo-->
-	<br> <br>
+	<br>
+
+<c:if test="${tarckMcq.etape !='beforeMCQ'}">   <!-- affichage multimedia qcm seulement lorsqu'il est lancé à cet endroit -->
+	<!-- ajout lien contenu media qcm tout au lon du qcm -->
+										<c:if test="${mcq.multimedia.typeMultimedia=='video'}">						
+										<a data-fancybox data-width="640" data-height="360"
+											href="${mcq.multimedia.adresseCible}">
+											revoir la vidéo liée au Formulaire : ${mcq.multimedia.legende}
+										</a>
+										</c:if>
+										<c:if test="${mcq.multimedia.typeMultimedia=='audio'}"> 
+											Ré-ecouter l'audio lié au Formulaire : ${mcq.multimedia.legende}
+										<!--code pour affichage audi  -->
+										<div class="audio-section">
+										
+											<audio controls>
+												<source src="${mcq.multimedia.adresseCible}"
+													type="audio/mpeg">
+											</audio>
+										</div>
+										</c:if>
+	
+	<!-- fin ajoutr lien edia qcm -->
+	</c:if> 
+	
+	 <br>
 
 
 	<!-- ############################################################### beforeMCQ #######################################################################################  -->
@@ -73,6 +98,12 @@
 			comporte ${tarckMcq.nbQuestionsTotal } questions.
 			<p>Attention, si vous quittez la page en cours, vous ne pourrez
 				pas revenir en arriere, il faudra reprendre du début.</p>
+			
+			<c:if test="${(mcq.multimedia.typeMultimedia=='audio')||(mcq.multimedia.typeMultimedia=='video')}">	
+			<p>Un contenu Multimédia est proposé pour ce QCM, il est conseillé de le parcourir avant de se lancer ;-)
+			</p>
+			</c:if>
+			
 			C'est parti quand vous voulez .... ;-)
 		</h2>
 
@@ -323,16 +354,16 @@
 								<c:forEach var="reponse" items="${repsUserCOrrigees}">
 									<c:if test="${answer.id==reponse.idRepCor}">
 										<td><c:if test="${!reponse.asDesigner}"> 
-                  	    			!!!
+                  	    			ici ->
                   	    		</c:if></td>
 										<td>
 											<!-- td de la case à cocher --> <c:if
 												test="${reponse.repUser}">
 												<input type="checkbox" name="${reponses.repUser}"
-													id="${answer.id}" value="true" checked>
+													id="${answer.id}" value="true" checked disabled>
 											</c:if> <c:if test="${!reponse.repUser}">
 												<input type="checkbox" name="${reponses.repUser}"
-													id="${answer.id}" value="true">
+													id="${answer.id}" value="true" disabled>
 											</c:if> <label for="${answer.id}" class="font-weight-400"><span></span></label>
 										</td>
 									</c:if>

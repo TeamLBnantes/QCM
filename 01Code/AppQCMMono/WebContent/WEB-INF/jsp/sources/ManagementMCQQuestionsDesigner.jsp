@@ -72,7 +72,53 @@
 									<br /> <br /> theme de la Question : <br />
 									${question.theme} <br /> <br />
 									
-									
+									<!--affichage multimedia de la question  -->
+						             <c:if test="${question.multimedia.typeMultimedia!='aucun'}">
+												<c:if test="${question.multimedia.typeMultimedia=='image'}">
+												<div align="center">
+											<figure>
+													<img 
+													src="${question.multimedia.adresseCible}" width="240px"
+													align="center" /> <!-- height="180px"  -->
+												<figcaption>
+													<h6>${question.multimedia.legende}</h6>
+												</figcaption>
+											</figure>
+											</div>
+											</c:if>
+											<c:if test="${question.multimedia.typeMultimedia=='audio'}">
+											<div align="center">
+											<figure>
+													<img 
+													src="${question.multimedia.adresseVignette}" width="240px"
+													align="center" /> <!-- height="180px"  -->
+												<figcaption>
+													<h6>${question.multimedia.legende}</h6>
+												</figcaption>
+											</figure>
+											<!--code pour affichage audi  -->
+												<audio controls>
+													<source src="${question.multimedia.adresseCible}"
+														type="audio/mpeg">
+													Your browser does not support the audio element.
+												</audio>
+											</div>
+											<!--  fin-code pour affichage audi  -->
+											</c:if>
+											<c:if test="${question.multimedia.typeMultimedia=='video'}">
+											<div align="center">
+												<a data-fancybox data-width="640" data-height="360"
+													href="${question.multimedia.adresseCible}"> <img
+													src="${question.multimedia.adresseVignette}" alt="" width="320px"
+													height="180px" align="center" />
+													<div class="center">Lire la video</div>
+													<p align="center">${question.multimedia.legende}</p>
+												</a>
+											</div>
+											</c:if>
+									</c:if>
+									<!-- fin affichage multimedia de la question  -->			
+															
 									<!--             	###############tableau des reps dans la fancybox########## -->
 									<div class="templatemo-content-widget no-padding"> 
 										<div class="panel panel-default table-responsive">
@@ -268,45 +314,53 @@
 									<h2 class="mb-3">${qDTO.question.body}</h2>
 									<br /> <br /> theme de la Question : <br />
 									${qDTO.question.theme} <br /> <br />
-									<c:if test="${question.multimedia != null}">
 									
-												<c:if test="${question.multimedia.typeMultimedia=='image'}">
+									<!--affichage multimedia de la question  -->
+						             <c:if test="${qDTO.question.multimedia.typeMultimedia!='aucun'}">
+												<c:if test="${qDTO.question.multimedia.typeMultimedia=='image'}">
+												<div align="center">
 											<figure>
 													<img 
-													src="${question.multimedia.adresseCible}" width="240px"
+													src="${qDTO.question.multimedia.adresseCible}" width="240px"
 													align="center" /> <!-- height="180px"  -->
 												<figcaption>
-													<h6>${question.multimedia.legende}</h6>
+													<h6>${qDTO.question.multimedia.legende}</h6>
 												</figcaption>
 											</figure>
+											</div>
 											</c:if>
-											<c:if test="${question.multimedia.typeMultimedia=='audio'}">
+											<c:if test="${qDTO.question.multimedia.typeMultimedia=='audio'}">
+											<div align="center">
 											<figure>
 													<img 
-													src="${question.multimedia.adresseVignette}" width="240px"
+													src="${qDTO.question.multimedia.adresseVignette}" width="240px"
 													align="center" /> <!-- height="180px"  -->
 												<figcaption>
-													<h6>${question.multimedia.legende}</h6>
+													<h6>${qDTO.question.multimedia.legende}</h6>
 												</figcaption>
 											</figure>
 											<!--code pour affichage audi  -->
-											<div align="center">
 												<audio controls>
-													<source src="${question.multimedia.adresseCible}"
+													<source src="${qDTO.question.multimedia.adresseCible}"
 														type="audio/mpeg">
 													Your browser does not support the audio element.
 												</audio>
 											</div>
 											<!--  fin-code pour affichage audi  -->
 											</c:if>
-											<c:if test="${question.multimedia.typeMultimedia=='video'}">
- 												<video
-												src="${question.multimedia.adresseCible}" alt="" width="320px"
-												height="180px" align="center" ></video>
-												<p align="center">${question.multimedia.legende}</p> 
+											<c:if test="${qDTO.question.multimedia.typeMultimedia=='video'}">
+											<div align="center">
+												<a data-fancybox data-width="640" data-height="360"
+													href="${qDTO.question.multimedia.adresseCible}"> <img
+													src="${qDTO.question.multimedia.adresseVignette}" alt="" width="320px"
+													height="180px" align="center" />
+													<div class="center">Lire la video</div>
+													<p align="center">${qDTO.question.multimedia.legende}</p>
+												</a>
+											</div>
 											</c:if>
-										
 									</c:if>
+									<!-- fin affichage multimedia de la question  -->
 									
 									<!--             	###############tableau des reps dans la fancybox########## -->
 									<div class="templatemo-content-widget no-padding">

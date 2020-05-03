@@ -59,5 +59,7 @@
         $('img.content-bg-img').hide();        
       });
     </script>
+    
+    <script type="text/javascript" src="resources/js/QuestionsDesignerListe.js"></script>
   </body>
 </html>

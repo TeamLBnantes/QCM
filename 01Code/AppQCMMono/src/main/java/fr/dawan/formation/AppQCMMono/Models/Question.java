@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,11 +21,13 @@ import fr.dawan.formation.AppQCMMono.Enum.Status;
 @Entity
 public class Question extends Entitie{
 
+	@Column(columnDefinition="text", length=2000)
 	private String body;
 	private LocalDateTime createDate;
 	private LocalDateTime editDate;
 	@Enumerated(EnumType.STRING)
 	private Status status;
+	@Column(columnDefinition="text", length=2000)
 	private String commentPostAnswer;
 	private String help;
 	

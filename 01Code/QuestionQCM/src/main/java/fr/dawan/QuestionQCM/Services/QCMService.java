@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,11 +43,29 @@ public class QCMService {
 		mcqdto.setMultimedia(mcq.getMultimedia());
 //		Set<Integer> questionsId = new HashSet<Integer>();
 		List<Integer> questionsId = new ArrayList<>();
+		
+		//mcq.getQuestionUseds() fournis un set, je vais transformer en list, pour trier suivant id questionUsed
+		List<QuestionUsed> listQuestionsUsed=new ArrayList<>();
 		for (QuestionUsed questionused : mcq.getQuestionUseds()) {
+			listQuestionsUsed.add(questionused);
+		}
+		System.out.println(listQuestionsUsed);
+		Collections.sort(listQuestionsUsed, new Comparator<QuestionUsed>() {
+		    @Override
+		    public int compare(QuestionUsed QU1, QuestionUsed QU2) {
+		    	return Integer.compare(QU1.getId(),QU2.getId());
+		    }
+		});
+		
+		//for (QuestionUsed questionused : mcq.getQuestionUseds()) {
+		for (QuestionUsed questionused : listQuestionsUsed) {
 			questionsId.add(questionused.getQuestion().getId());
 		}
 		System.out.println(questionsId);
-		Collections.shuffle(questionsId);
+		if (!(mcq.getBody().indexOf("[QOrdonnees]")>=0)){
+			//les question sont dans l'ordre id Question Used, je les melange puisque mcq non ordonn�es
+			Collections.shuffle(questionsId);
+		}
 		System.out.println(questionsId);
 
 		mcqdto.setQuestionsId(questionsId);

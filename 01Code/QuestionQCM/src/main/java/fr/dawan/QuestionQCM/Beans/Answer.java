@@ -1,6 +1,7 @@
 package fr.dawan.QuestionQCM.Beans;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -11,8 +12,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Answer extends Entitie{
 	
+	@Column(columnDefinition="text", length=2000)
 	private String body;
 	private boolean expectedAnswer;
+	@Column(columnDefinition="text", length=2000)
 	private String commentPostAnswer;
 	
 	@JsonIgnore

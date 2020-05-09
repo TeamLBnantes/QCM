@@ -156,8 +156,11 @@ public class MCQService {
 		mcqDao.close();
 		trackMcq.setNbQuestionsTotal(trackMcq.getListQuestionsUsed().size());
 		//mélange de la liste des question
+		//if (mcq.getId()!=1) {    //je melange sauf si mcqID=1
+		if (!(mcq.getBody().indexOf("[QOrdonnees]")>=0)){
 		Collections.shuffle(trackMcq.getListQuestionsUsed());
 		//fin du mélange
+		}
 		trackMcq.setNbQuestionsPassed(0);
 		trackMcq.setNbBonnesReponses(0);
 		GenericDAO<MCQpassed> mcqPassedDao=new GenericDAO<>(Constantes.PERSISTENCE_UNIT_NAME);

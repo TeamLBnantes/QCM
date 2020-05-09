@@ -30,6 +30,7 @@ import fr.dawan.QuestionQCM.Enum.Status;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Question extends Entitie{
 
+	@Column(columnDefinition="text", length=2000)
 	private String body;
 	@Column (name="createdate")
 	private LocalDateTime createDate;
@@ -37,7 +38,7 @@ public class Question extends Entitie{
 	private LocalDateTime editDate;
 	@Enumerated(EnumType.STRING)
 	private Status status;
-	@Column (name="commentpostanswer")
+	@Column (name="commentpostanswer", columnDefinition="text", length=2000)
 	private String commentPostAnswer;
 	private String help;
 	

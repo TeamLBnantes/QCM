@@ -120,7 +120,7 @@ public class MCQDAO extends GenericDAO<MCQ> implements DAOMCQInterface {
 		case 1: // on ne filtre que sur le theme
 			requete = "select f from "  
 					+ MCQ.class.getName() 
-					+ " f where f.theme LIKE :theme";
+					+ " f where f.topic LIKE :theme";
 			mcqs = super.entityManager
 					.createQuery(requete, MCQ.class)
 //					.setParameter("designer", designer)
@@ -139,10 +139,10 @@ public class MCQDAO extends GenericDAO<MCQ> implements DAOMCQInterface {
 //					.setParameter("theme","%"+ filtresQuestion.getThemeFiltre()+"%")
 					.getResultList();
 			break;
-		case 11: // on ne filtre que sur le body
+		case 11: // on ne filtre  sur le body et le theme
 			requete = "select f from "  
 					+ MCQ.class.getName() 
-					+ " f where f.body LIKE :body and f.theme LIKE :theme";
+					+ " f where f.body LIKE :body and f.topic LIKE :theme";
 			mcqs = super.entityManager
 					.createQuery(requete, MCQ.class)
 //					.setParameter("designer", designer)

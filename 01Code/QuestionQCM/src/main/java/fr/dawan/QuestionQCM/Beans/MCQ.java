@@ -21,6 +21,7 @@ import fr.dawan.QuestionQCM.Enum.Status;
 @Entity
 public class MCQ extends Entitie {
 
+	@Column(columnDefinition="text", length=2000)
 	private String body;
 	private String topic;
 	private String theme;

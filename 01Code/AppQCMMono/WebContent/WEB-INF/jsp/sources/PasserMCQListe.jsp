@@ -29,7 +29,9 @@
                     <label for="inputUsername">xxxxxxxxxxx</label>
                     <input type="text" class="form-control" id="inputUsername" placeholder="Admin">                  
                 </div> -->
-                    <div class="templatemo-block margin-bottom-5 text-center">
+                
+                <!-- je desactive la case a cocher uniquemet ceux que vous n'avez jamais passés, pas encore implementée -->
+<%--                    <div class="templatemo-block margin-bottom-5 text-center">
                     <c:if test="${filtresMCQ.nonPassedFiltre}">
                     <input type="checkbox" name="yoursFiltre" id="c1" value="true" checked> 
                     </c:if> 
@@ -37,12 +39,12 @@
                       <input type="checkbox" name="yoursFiltre" id="c1" value="true" > 
                       </c:if> 
                       <label for="c1" class="font-weight-400"><span></span>Uniquement ceux que vous n'avez jamais passé</label> 
-                    </div> 
+                    </div>  --%>
             </div>      
  
               <div class="form-group text-right">
                 <button type="submit" class="templatemo-blue-button">Rechercher</button>
-                <button type="reset" class="templatemo-white-button">Reset</button>
+               <!--  <button type="reset" class="templatemo-white-button">Reset</button> -->
          </form>
          <!-- un petit form, juste pour le bouton re-init recherche -->
          <form action="passerQCM/filtres" class="templatemo-login-form" method="post" >
@@ -91,7 +93,7 @@
                     <!-- </div> -->
                     </td>
                     <td>${mcq.body}</td>
-                    <td>${mcq.theme}</td>
+                    <td>${mcq.topic}</td>
              		   
                     
 

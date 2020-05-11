@@ -7,12 +7,12 @@
   <div *ngIf="!lancer, else qcmLancer">
     <!-- <div class="card border-success mb-3" style="max-width: 20rem;">   ceci pour afficher un cadre qui fait au plus 20 rem de large-->
     <div class="card mb-3 center">
-      <div class="mediablock">
+      <div  *ngIf="qcm.multimedia.typeMultimedia != 'aucun'" class="mediablock">
         <a (click)=openQcmMedia()>
           <fa-icon *ngIf="icone != null" [icon]=icone size="6x" class="mediablockiconeelement"></fa-icon>
           <img src="{{vignette}}" class="mediablockelement vignette" />
         </a>
-        <p *ngIf="qcm.multimedia != null">{{qcm.multimedia.legende}}</p>
+        <p>{{qcm.multimedia.legende}}</p>
       </div>
       <div class="card-header">
         <h1>{{qcm.body}}</h1>
@@ -44,22 +44,22 @@
         <div class="card mb-3">
           <h5 class="card-header">question n° {{questionnumber}} sur {{totalquestion}}</h5>
           <div class="card-body">
-              <div *ngIf="qcm.multimedia!=null">
-                <button class="btn btn-light btn-sm " *ngIf="qcm.multimedia!=null" (click)=openQcmMedia()>
+              <div *ngIf="qcm.multimedia.typeMultimedia != 'aucun'">
+                <button class="btn btn-light btn-sm"  (click)=openQcmMedia()>
                   <fa-icon [icon]=rejouerIcone ></fa-icon> {{mediaTypeDisplay}} du qcm </button> <br/>
               </div>
-              <div class="mediablock" *ngIf="question.multimedia!=null">
+              <div *ngIf="question.multimedia.typeMultimedia != 'aucun'" class="mediablock" >
                 <a  (click)=openMedia()>
                   <fa-icon *ngIf="icone != null" [icon]=icone size="6x" class="mediablockiconeelement"></fa-icon>
                   <img src="{{vignette}}" class="mediablockelement vignette" />
                 </a>
-                <p class="card-text" *ngIf="question.multimedia != null">{{question.multimedia.legende}}</p>
+                <p class="card-text">{{question.multimedia.legende}}</p>
             </div>
             <h1 class="card-title">{{question.body}}</h1>
             <h6 class="card-subtitle text-muted" hidden>id de la question : {{question.id}}</h6>
           </div>
 
-          <div class="blockanswers">
+          <div class="blockanswers clearfix">
             <span *ngFor="let answer of question.answersPlayableDto; let index=index" class="btn-group buttonsgroup">
               <input type="checkbox" [value]="reponsesAnswersUser[index]" [checked]="reponsesAnswersUser[index]"
                 [id]="reponsesAnswersUser[index]" hidden>
@@ -94,16 +94,16 @@
         <div class="card mb-3" [ngClass]="{success : reponsesQCMUser[qIndex], fail :!reponsesQCMUser[qIndex] }">
           <h5 class="card-header">question n° {{questionnumber}} sur {{totalquestion}}</h5>
           <div class="card-body">
-            <div *ngIf="qcm.multimedia!=null">
-              <button class="btn btn-light btn-sm " *ngIf="qcm.multimedia!=null" (click)=openQcmMedia()>
+            <div *ngIf="qcm.multimedia.typeMultimedia != 'aucun'">
+              <button class="btn btn-light btn-sm"  (click)=openQcmMedia()>
                 {{mediaTypeDisplay}} du qcm </button> <br/>
             </div>
-              <div class="mediablock" *ngIf="question.multimedia!=null">
+              <div class="mediablock" *ngIf="question.multimedia.typeMultimedia != 'aucun'">
                 <a  (click)=openMedia()>
                   <fa-icon *ngIf="icone != null" [icon]=icone size="6x" class="mediablockiconeelement"></fa-icon>
                   <img src="{{vignette}}" class="mediablockelement vignette" />
                 </a>
-                <p class="card-text" *ngIf="question.multimedia != null">{{question.multimedia.legende}}</p>
+                <p class="card-text">{{question.multimedia.legende}}</p>
             </div>
 
             <h1 class="card-title">{{question.body}}</h1>
@@ -112,7 +112,7 @@
             <span *ngIf="reponsesAttendus.commentPostAnswer"> Notes : {{reponsesAttendus.commentPostAnswer}}</span>
           </div>
 
-          <div class="blockanswers">
+          <div class="blockanswers clearfix" >
             <span *ngFor="let answer of question.answersPlayableDto; let index=index" class="btn-group buttonsgroup">
 
                 <input type="checkbox" [value]="reponsesAnswersUser[index]" [checked]="reponsesAnswersUser[index]"
@@ -133,7 +133,7 @@
             </span>
 
           </div>
-
+        
           <div class="card-footer text-muted">
             <p *ngIf="!thisIsTheEnd">
               <button class="btn btn-secondary" (click)="nextQuestion()">question suivante</button>

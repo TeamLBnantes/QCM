@@ -93,14 +93,17 @@ export class QcmPlayComponent implements OnInit {
           this.mediaTypeDisplay = 'Rejouer la vidéo';
         } else if (this.qcm.multimedia.typeMultimedia == "image") {
           this.vignette = this.qcm.multimedia.adresseCible;
+          //this.qcm.multimedia.adresseVignette=this.qcm.multimedia.adresseCible;
           this.icone = faExpand;
           this.mediaTypeDisplay = `Revoir l'image`;
-        } else if (this.question.multimedia.typeMultimedia == "audio") {
+        } else if (this.qcm.multimedia.typeMultimedia == "audio") {
           this.icone = faVolumeUp;
           this.mediaTypeDisplay = `Rejouer le son`;
         }
+      
       }
-        if (this.qcm.multimedia != null || this.qcm.multimedia.adresseVignette != null || this.qcm.multimedia.typeMultimedia != "image") {
+        // if (this.qcm.multimedia != null || this.qcm.multimedia.adresseVignette != null || this.qcm.multimedia.typeMultimedia != "image") {
+          if ( this.qcm.multimedia.adresseVignette != null && this.qcm.multimedia.typeMultimedia != "image" && this.qcm.multimedia.typeMultimedia != "aucun") {
           this.vignette = this.qcm.multimedia.adresseVignette;
         }
 
@@ -126,7 +129,8 @@ export class QcmPlayComponent implements OnInit {
     this.subscription = this.qcmService.getQuestion(this.idQuestion).subscribe(
       (data: Question) => {
         this.question = data;
-        if (this.question.multimedia != null && this.question.multimedia.adresseVignette != null || this.question.multimedia.typeMultimedia != "image") {
+        // if (this.question.multimedia != null && this.question.multimedia.adresseVignette != null || this.question.multimedia.typeMultimedia != "image") {
+          if (this.question.multimedia.adresseVignette != null ) {  
           this.vignette = this.question.multimedia.adresseVignette;
         }
         if (this.question.multimedia != null){
@@ -197,7 +201,8 @@ export class QcmPlayComponent implements OnInit {
     this.subscription = this.qcmService.getQuestion(this.idQuestion).subscribe(
       (data: Question) => {
         this.question = data;
-        if (this.question.multimedia != null && this.question.multimedia.adresseVignette != null || this.question.multimedia.typeMultimedia != "image") {
+        // if (this.question.multimedia != null && this.question.multimedia.adresseVignette != null || this.question.multimedia.typeMultimedia != "image") {
+        if (this.question.multimedia.adresseVignette != null) {
           this.vignette = this.question.multimedia.adresseVignette;
         }
         if (this.question.multimedia != null){

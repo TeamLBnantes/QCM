@@ -226,7 +226,7 @@
 						<tr>
 							<td>${question.id}</td>
 							<td>${question.body}</td>
-							<td>${question.theme}</td>
+							<td>${question.topic}</td>
 <!-- 							<td><a href="" class="templatemo-edit-btn"><i -->
 <!-- 									class="fa fa-edit"></i></a></td> -->
 							<td>
@@ -250,7 +250,7 @@
 										texte de la Question : <br />
 									<h2 class="mb-3">${question.body}</h2>
 									<br /> <br /> theme de la Question : <br />
-									${question.theme} <br /> <br />
+									${question.topic} <br /> <br />
 									
 									<!--affichage multimedia de la question  -->
 						             <c:if test="${question.multimedia.typeMultimedia!='aucun'}">

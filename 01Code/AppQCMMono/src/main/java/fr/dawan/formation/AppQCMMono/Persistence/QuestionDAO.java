@@ -132,7 +132,7 @@ public class QuestionDAO extends GenericDAO<Question> implements DAOQuestionInte
 		case 1: // on ne filtre que sur le theme
 			requete = "select f from "  
 					+ Question.class.getName() 
-					+ " f where f.theme LIKE :theme";
+					+ " f where f.topic LIKE :theme";
 			questions = super.entityManager
 					.createQuery(requete, Question.class)
 //					.setParameter("designer", designer)
@@ -151,10 +151,10 @@ public class QuestionDAO extends GenericDAO<Question> implements DAOQuestionInte
 //					.setParameter("theme","%"+ filtresQuestion.getThemeFiltre()+"%")
 					.getResultList();
 			break;	
-		case 11: // on ne filtre que sur le body
+		case 11: // on ne filtre que sur le body et theme
 			requete = "select f from "  
 					+ Question.class.getName() 
-					+ " f where f.body LIKE :body and f.theme LIKE :theme";
+					+ " f where f.body LIKE :body and f.topic LIKE :theme";
 			questions = super.entityManager
 					.createQuery(requete, Question.class)
 //					.setParameter("designer", designer)
@@ -173,10 +173,10 @@ public class QuestionDAO extends GenericDAO<Question> implements DAOQuestionInte
 //					.setParameter("theme","%"+ filtresQuestion.getThemeFiltre()+"%")
 					.getResultList();
 			break;	
-		case 101: // on ne filtre que sur le designer
+		case 101: // on ne filtre  sur le designer et le theme
 			requete = "select f from "  
 					+ Question.class.getName() 
-					+ " f where f.designer = :designer and f.theme LIKE :theme";
+					+ " f where f.designer = :designer and f.topic LIKE :theme";
 			questions = super.entityManager
 					.createQuery(requete, Question.class)
 					.setParameter("designer", designer)
@@ -184,7 +184,7 @@ public class QuestionDAO extends GenericDAO<Question> implements DAOQuestionInte
 					.setParameter("theme","%"+ filtresQuestion.getThemeFiltre()+"%")
 					.getResultList();
 			break;	
-		case 110: // on ne filtre que sur le designer
+		case 110: // on ne filtre que sur le designer et body
 			requete = "select f from "  
 					+ Question.class.getName() 
 					+ " f where f.designer = :designer and f.body LIKE :body";
@@ -195,10 +195,10 @@ public class QuestionDAO extends GenericDAO<Question> implements DAOQuestionInte
 //					.setParameter("theme","%"+ filtresQuestion.getThemeFiltre()+"%")
 					.getResultList();
 			break;	
-		case 111: // on ne filtre que sur le designer
+		case 111: // on ne filtre que sur le designer, body et theme
 			requete = "select f from "  
 					+ Question.class.getName() 
-					+ " f where f.designer = :designer and f.body LIKE :body and f.theme LIKE :theme";
+					+ " f where f.designer = :designer and f.body LIKE :body and f.topic LIKE :theme";
 			questions = super.entityManager
 					.createQuery(requete, Question.class)
 					.setParameter("designer", designer)

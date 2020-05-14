@@ -2,8 +2,8 @@ package fr.dawan.QuestionQCM.Enum;
 
 
 public enum Status {
-free("libre"),
-validate("validate"),
+//free("libre"),
+//validate("validate"),
 enConstruction("En construction"),
 disponible("disponible");
 

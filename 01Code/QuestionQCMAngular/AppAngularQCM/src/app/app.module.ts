@@ -26,6 +26,7 @@ import { FancyComponent } from './components/fancy/fancy.component';
 import { PopupmediaComponent } from './components/popupmedia/popupmedia.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TemplateComponent } from './template/template.component';
+import { FiltreQCMPipe } from './pipes/filtre-qcm.pipe';
 
 registerLocaleData(localeFr);
 
@@ -45,6 +46,8 @@ registerLocaleData(localeFr);
     PopupmediaComponent,
 
     TemplateComponent,
+
+    FiltreQCMPipe,
 
   ],
   imports: [

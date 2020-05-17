@@ -69,7 +69,8 @@
 									<p>
 										texte de la Question : <br />
 									<h2 class="mb-3">${question.body}</h2>
-									<br /> <br /> theme de la Question : <br />
+									<br /> <br /><i> Commentaire apres réponse : <br />
+									${question.commentPostAnswer} </i><br /> <br />theme de la Question : <br />
 									${question.topic} <br /> <br />
 									
 									<!--affichage multimedia de la question  -->
@@ -146,6 +147,9 @@
 										<i class="fa fa-times-circle" style="color: #ff4a4a"></i>
 									</c:if>
 									</td>
+														</tr>
+														<tr>
+														<td colspan="3"><i>commentaire après réponse : ${answer.commentPostAnswer}</i></td>
 														</tr>
 													</c:forEach>
 												</tbody>
@@ -312,7 +316,8 @@
 									<p>
 										texte de la Question : <br />
 									<h2 class="mb-3">${qDTO.question.body}</h2>
-									<br /> <br /> theme de la Question : <br />
+									<br /> <br /><i> Commentaire apres réponse : <br />
+									${qDTO.question.commentPostAnswer} </i><br /> <br /> theme de la Question : <br />
 									${qDTO.question.topic} <br /> <br />
 									
 									<!--affichage multimedia de la question  -->
@@ -388,6 +393,8 @@
 									</c:if> <c:if test="${!answer.expectedAnswer}">
 										<i class="fa fa-times-circle" style="color: #ff4a4a"></i>
 									</c:if></td>
+														</tr>														<tr>
+														<td colspan="3"><i>commentaire après reponse : ${answer.commentPostAnswer}</i></td>
 														</tr>
 													</c:forEach>
 												</tbody>

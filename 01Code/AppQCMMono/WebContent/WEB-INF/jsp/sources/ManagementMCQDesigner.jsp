@@ -231,7 +231,7 @@
 <!-- 									class="fa fa-edit"></i></a></td> -->
 							<td>
 							
-								<!-- debut  affichage bouton mode Fanzy -###########################################################################################-->
+								<!-- debut  affichage bouton detail d'une question et fenetre mode Fanzybox -###########################################################################################-->
 								<div class="card p-lg-3">
 									<div class="card-body">
 										<p class="mb-0">
@@ -249,7 +249,8 @@
 									<p>
 										texte de la Question : <br />
 									<h2 class="mb-3">${question.body}</h2>
-									<br /> <br /> theme de la Question : <br />
+									<br /> <br /><i> Commentaire apres réponse : <br />
+									${question.commentPostAnswer} </i><br /> <br />theme de la Question : <br />
 									${question.topic} <br /> <br />
 									
 									<!--affichage multimedia de la question  -->
@@ -325,6 +326,9 @@
 										<i class="fa fa-times-circle" style="color: #ff4a4a"></i>
 									</c:if></td>
 														</tr>
+														<tr>
+														<td colspan="3"><i>commentaire après reponse : ${answer.commentPostAnswer}</i></td>
+														</tr>
 													</c:forEach>
 												</tbody>
 											</table>
@@ -358,7 +362,7 @@
 										<!--  -->
 									</p>
 								</form> 
-			<!-- fin affichage bouton mode Fanzy ######################################################################################"--> 
+			<!-- fin affichage bouton detail d'une question et fenetre mode Fanzybox#############################################################################"--> 
 							
 							</td>
 						</tr>

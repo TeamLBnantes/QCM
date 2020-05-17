@@ -32,7 +32,11 @@
 				liste</button>
 		</a> <br />
 		<div class="templatemo-content-widget white-bg">
-			<form action="ManagementQuestionsDesigner/updateQuestion"
+		<c:if test="${Response==true}"><tab><tr><td><button class="templatemo-blue-button" onclick="visibilite(`detailRep`), visibilite(`Detail`)" >Aff./Masq. infos question</button></td>
+		<td><span  id="Detail" style="display:''">  <i> ${question.body} </i></span></td> </tr></tab>
+		<div id="detailRep" style="display:none">
+		</c:if>
+			<form id="testformid" action="ManagementQuestionsDesigner/updateQuestion"
 				method="post">
 				<!-- <div class="templatemo-content col-1 light-gray-bg"> -->
 				<div class="templatemo-content-container">
@@ -43,13 +47,15 @@
 								<input type="hidden" name="id" value="${ question.id }" />
 							</c:if>
 							<tr>
-								<td><b>Intitulé</b></td>
-								<td><textarea class="form-control" name="body"
-										placeholder="Texte de la question. Requis" required> ${question.body}</textarea></td>
+								<td><b>Intitulé   </b></td>
+<%-- 								<td><textarea class="form-control" name="body"
+										placeholder="Texte de la question. Requis" required > ${question.body}</textarea></td> --%>
+								<td><textarea class="form-control" form ="testformid" name="body"
+										placeholder="Texte de la question. Requis" required <c:if test="${Response==true}">disabled </c:if>>${question.body}</textarea></td>		
 							</tr>
 							<tr>
 								<td><b>Statut</b></td>
-								<td><select class="form-control" name="status" id="status">
+								<td><select class="form-control" name="status" id="status" <c:if test="${Response==true}">disabled </c:if>>
 										<c:forEach items="${ enumStatus }" var="status">
 											<option value="${ status }"
 												${ question.status == status ? 'selected' : '' }>
@@ -62,12 +68,12 @@
 							<tr>
 								<td><b>Theme(s)</b></td>
 								<td><textarea class="form-control" name="topic"
-										placeholder="theme(s)" rows="1">${question.topic }</textarea></td>
+										placeholder="theme(s)" rows="1" <c:if test="${Response==true}">disabled </c:if>>${question.topic }</textarea></td>
 							</tr>
 							<tr>
 								<td><b>Commentaire</b></td>
 								<td><textarea class="form-control" name="commentPostAnswer"
-										placeholder="Expliquez pourquoi chaque réponse est vraie ou fausse. Affiché après avoir répondu.">${question.commentPostAnswer }</textarea></td>
+										placeholder="Expliquez pourquoi chaque réponse est vraie ou fausse. Affiché après avoir répondu." <c:if test="${Response==true}">disabled </c:if>>${question.commentPostAnswer }</textarea></td>
 							</tr>
 							<!--  zone multimedia -->
 
@@ -144,7 +150,7 @@
 									<tr>
 										<td><b>Type Multimedia:</b></td>
 										<td><select class="form-control"
-											name="multimedia.typeMultimedia" id="typeMultimedia">
+											name="multimedia.typeMultimedia" id="typeMultimedia" <c:if test="${Response==true}">disabled </c:if>>
 												<c:forEach items="${ enumTypeMultimedia }"
 													var="typeMultimedia">
 													<option value="${ typeMultimedia }"
@@ -160,19 +166,19 @@
 												(audio/video)</b></td>
 										<td><input type="text" class="form-control"
 											name="multimedia.adresseVignette" placeholder="adresse image"
-											value="${question.multimedia.adresseVignette}" /></td>
+											value="${question.multimedia.adresseVignette}" <c:if test="${Response==true}">disabled </c:if>/></td>
 									</tr>
 									<tr>
 										<td><b>cible du contenu multimedia</b></td>
 										<td><input type="text" class="form-control"
 											name="multimedia.adresseCible" placeholder="cible multimedia"
-											value="${question.multimedia.adresseCible}" /></td>
+											value="${question.multimedia.adresseCible}" <c:if test="${Response==true}">disabled </c:if>/></td>
 									</tr>
 									<tr>
 										<td><b>legende du contenu multimedia</b></td>
 										<td><input type="text" class="form-control"
 											name="multimedia.legende" placeholder="legende"
-											value="${question.multimedia.legende}" /></td>
+											value="${question.multimedia.legende}" <c:if test="${Response==true}">disabled </c:if>/></td>
 									</tr>
 									</div>
 								</table>
@@ -188,18 +194,20 @@
 						<button type="submit" class="btn btn-primary" name="action"
 							value="valider">Valider</button>
 					</c:if>
+
 			</form>
+		  <c:if test="${Response==true}"> </div></c:if>
 		</div>
 	</div>
 	<c:if test="${Response==true}">
-		<div class=container>
+		<div class=container >
 			<div class="templatemo-content-widget white-bg">
 
 				<form
 					action="ManagementQuestionsDesigner/updateAnswer/${question.id}"
 					method="post">
 					<input type="hidden" name="id" value="${answer.id}" />
-					<h2 class="text-uppercase">Ajout d'une réponse</h2>
+					<h2 class="text-uppercase">Ajout / Modification d'une réponse</h2>
 					<div class="table-responsive">
 						<table class="table table-striped table-bordered">
 							<%-- <input type="hidden" name="idQuestion" value="${ question.id }" /> --%>
@@ -253,7 +261,7 @@
 				</div>
 			</h3>
 		</c:if>
-		<c:if test="${(Response==false) && (question.id!=null)}">
+		<c:if test="${(Response==false) && (question.id!=null)}">     
 			<c:if test="${!maxQ}">
 				<td><a
 					href="ManagementQuestionsDesigner/newResponse/${question.id}">
@@ -261,8 +269,10 @@
 							value="chercher">Ajouter une reponse</button>
 				</a></td>
 			</c:if>
+         </c:if>
 	</div>
-
+	<c:if test="${(question.id!=null)}">    
+<%--    <c:if test="${(Response==false) && (question.id!=null)}">   --%>
 	<div class="container">
 		<div class="templatemo-content-widget white-bg">
 			<div class="templatemo-content-container">
@@ -273,11 +283,13 @@
 							<th>Véracité</th>
 							<th>Intitulé</th>
 							<th>Commentaire</th>
+							<c:if test="${(Response==false)}"> 
 							<th>Actions</th>
+							</c:if>
 						</tr>
 						<c:forEach var="answer" items="${question.answers}">
 							<!-- parcours des reponses liées à cette questions pour les afficher-->
-							<tr>
+							<tr>								
 								<td><c:if test="${answer.expectedAnswer}">
 										<i class="fa fa-check"></i>
 									</c:if> <c:if test="${!answer.expectedAnswer}">
@@ -285,7 +297,9 @@
 									</c:if></td>
 								<td>${answer.body}</td>
 								<td>${answer.commentPostAnswer}</td>
-								<td align="center"><a
+								<c:if test="${(Response==false)}"> 
+								<td align="center">
+								<a
 									href="ManagementQuestionsDesigner/updateResponse/${question.id}/${answer.id}">
 										<button type="button" class="templatemo-blue-button">
 											<i class="far fa-edit"></i>
@@ -296,15 +310,17 @@
 											<i class="far fa-trash-alt" style="color: #ff4a4a"></i>
 										</button>
 								</a></td>
+								</c:if>
 							</tr>
 						</c:forEach>
+						
 					</table>
 				</div>
 			</div>
 		</div>
 	</div>
+		</c:if>
 
-	</c:if>
 
 
 	<br>
@@ -345,6 +361,7 @@
 	<!--  jQuery Migrate Plugin -->
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript" src="js/templatemo-script.js"></script>
+
 </body>
 <footer class="text-right">
 	<p>Copyright &copy; 2020 QuizizSkillz | Design: Template Mo</p>

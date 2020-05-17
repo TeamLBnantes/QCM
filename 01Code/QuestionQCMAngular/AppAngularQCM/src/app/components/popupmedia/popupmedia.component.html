@@ -7,10 +7,11 @@
 <mat-dialog-content>
   <div class="mediaContainer">
 <div *ngIf="(typeMedia == 'video')">
-<iframe [src]=safeAddresseMedia frameborder="0" allowfullscreen class="mediaVideo"></iframe>
+<iframe [src]=safeAddresseMedia frameborder="0" allowfullscreen class="mediaVideo displayed"></iframe>
 </div>
 <div *ngIf="(typeMedia == 'image')">
-  <img [src]=safeAddresseMedia class="mediaImg"/>
+    <!-- <iframe [src]=safeAddresseMedia frameborder="0" allowfullscreen class="mediaVideo displayed"></iframe> -->
+   <img [src]=safeAddresseMedia class="mediaImg"/> 
   </div>
   <div *ngIf="(typeMedia == 'audio')">
     <iframe [src]=safeAddresseMedia frameborder="0" class="mediaAudio"></iframe>

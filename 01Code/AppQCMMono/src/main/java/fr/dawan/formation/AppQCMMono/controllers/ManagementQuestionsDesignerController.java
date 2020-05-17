@@ -85,6 +85,7 @@ public class ManagementQuestionsDesignerController {
 		
 		//recuperation de la liste des QCM qui utilisent cette question
 		ObjectListDto listDto=new ObjectListDto();
+		//findMcqByIdQuestion est une methode static de MCQService, donc inutile d'instancier un MCQService
 		listDto.setMcqs(MCQService.findMcqByIdQuestion(id));
 		model.addAttribute("listDto", listDto);
 		
@@ -108,7 +109,7 @@ public class ManagementQuestionsDesignerController {
 	}
 
 	
-
+//creation d'une question
 	@GetMapping(value = { "/new" })
 	public String renseignerNouvelleQuestion(HttpSession session, Model model) {
 
@@ -124,6 +125,7 @@ public class ManagementQuestionsDesignerController {
 		return "ManagementQuestionDesigner";
 	}
 
+	//demande affichage de la page ajout d'une reponse à la question d'id id
 	@GetMapping(value = { "/newResponse/{id}" }) // id de la question à cibler
 	public String renseignerNouvelleReponse(@PathVariable("id") int id, HttpSession session, Model model) {
 
@@ -138,17 +140,25 @@ public class ManagementQuestionsDesignerController {
 		ssdto.isDesignerService(user, model);
 		ssdto.nbMaxAnswers(model, question);
 
+		//recuperation de la liste des QCM qui utilisent cette question
+		ObjectListDto listDto=new ObjectListDto();
+		//findMcqByIdQuestion est une methode static de MCQService, donc inutile d'instancier un MCQService
+		listDto.setMcqs(MCQService.findMcqByIdQuestion(id));
+		model.addAttribute("listDto", listDto);
+		
+		
 		model.addAttribute("Response", true);
 		model.addAttribute("answer", answer);
 		model.addAttribute("question", question);
 		model.addAttribute("questions", questions);
 		model.addAttribute("enumStatus", Status.values());
 		model.addAttribute("enumTypeMultimedia", TypeMultimedia.values());
-
+		
 		// on renvoie le nom de la jsp
 		return "ManagementQuestionDesigner";
 	}
 
+//enregistrement de la rep .... de la question ....	
 	@GetMapping(value = { "/updateResponse/{idQuestion}/{idAnswer}" }) // id de la reponse à cibler
 	public String majAffichageReponse(@PathVariable("idQuestion") int idQuestion,
 			@PathVariable("idAnswer") int idAnswer, HttpSession session, Model model) {
@@ -165,6 +175,13 @@ public class ManagementQuestionsDesignerController {
 		User user = ssdto.sessionUserService(session);
 		ssdto.isDesignerService(user, model);
 		ssdto.nbMaxAnswers(model, question);
+		
+		//recuperation de la liste des QCM qui utilisent cette question
+		ObjectListDto listDto=new ObjectListDto();
+		//findMcqByIdQuestion est une methode static de MCQService, donc inutile d'instancier un MCQService
+		listDto.setMcqs(MCQService.findMcqByIdQuestion(idQuestion));
+		model.addAttribute("listDto", listDto);
+		
 		model.addAttribute("Response", true);
 		model.addAttribute("answer", answer);
 		model.addAttribute("question", question);
@@ -176,6 +193,7 @@ public class ManagementQuestionsDesignerController {
 		return "ManagementQuestionDesigner";
 	}
 
+	//maj de la question
 	@PostMapping("updateQuestion")
 	public String updateQuestion(Question question, HttpSession session, Model model) {
 
@@ -206,6 +224,12 @@ public class ManagementQuestionsDesignerController {
 
 			} else {
 				questionMaj = questionService.findById(question.getId());
+				
+				//recuperation de la liste des QCM qui utilisent cette question
+				ObjectListDto listDto=new ObjectListDto();
+				//findMcqByIdQuestion est une methode static de MCQService, donc inutile d'instancier un MCQService
+				listDto.setMcqs(MCQService.findMcqByIdQuestion(question.getId()));
+				model.addAttribute("listDto", listDto);
 				
 			}
 
@@ -279,6 +303,14 @@ public class ManagementQuestionsDesignerController {
 
 		ssdto.isDesignerService(user, model);
 		ssdto.nbMaxAnswers(model, question);
+		
+		
+		//recuperation de la liste des QCM qui utilisent cette question
+		ObjectListDto listDto=new ObjectListDto();
+		//findMcqByIdQuestion est une methode static de MCQService, donc inutile d'instancier un MCQService
+		listDto.setMcqs(MCQService.findMcqByIdQuestion(idQuestion));
+		model.addAttribute("listDto", listDto);
+		
 		model.addAttribute("Response", false);
 		model.addAttribute("question", question);
 		// model.addAttribute("questions", questions);
@@ -290,6 +322,7 @@ public class ManagementQuestionsDesignerController {
 	}
 
 	// deleteResponse/${question.id}/${answer.id}
+	// 
 
 	@GetMapping(value = { "deleteResponse/{idQuestion}/{idAnswer}" }) // id de la reponse à cibler
 	public String deleteReponse(@PathVariable("idQuestion") int idQuestion, @PathVariable("idAnswer") int idAnswer,
@@ -301,33 +334,37 @@ public class ManagementQuestionsDesignerController {
 		// todo : enlever la ref vers la reponse d'id idAnswer
 		// Answer a=answerService.findById(idAnswer);
 
-		Set<Answer> newAnswers = new HashSet<Answer>();
-		for (Answer answer : question.getAnswers()) {
-			if (answer.getId() != idAnswer)
-				newAnswers.add(answer);
+		//recuperation de la liste des QCM qui utilisent cette question
+		ObjectListDto listDto=new ObjectListDto();
+		//findMcqByIdQuestion est une methode static de MCQService, donc inutile d'instancier un MCQService
+		listDto.setMcqs(MCQService.findMcqByIdQuestion(idQuestion));
+		model.addAttribute("listDto", listDto);
+		
+		int nbQcmUsedQ=listDto.getMcqs().size();
+		int nbRepBeforeDel=question.getAnswers().size();
+		if ((nbRepBeforeDel>1)||(nbQcmUsedQ==0)) {
+				//sup de la derniere reponse uniquement si aucun qcm rataché
+				Set<Answer> newAnswers = new HashSet<Answer>();
+				for (Answer answer : question.getAnswers()) {
+					if (answer.getId() != idAnswer)
+						newAnswers.add(answer);
+				}
+				//System.out.println(newAnswers);
+				//System.out.println(question.getAnswers());
+				question.setAnswers(newAnswers);
+				//System.out.println(question.getAnswers());
+				question = questionService.saveOrUpdate(question);
+				question = questionService.findById(idQuestion);
+				answerService.deleteById(idAnswer);
 		}
-		System.out.println(newAnswers);
-		System.out.println(question.getAnswers());
-		question.setAnswers(newAnswers);
-
-//		Iterator<Answer> iterator = question.getAnswers().iterator();
-//	      while (iterator.hasNext()) {
-//	           Answer ans=iterator.next();
-//	           if (ans.getId()==idAnswer) iterator.remove();
-//	      }
-		System.out.println(question.getAnswers());
-
-		question = questionService.saveOrUpdate(question);
-		// .remove();
-		// question.setAnswers(question.getAnswers().remove(a));
-		question = questionService.findById(idQuestion);
-
-		answerService.deleteById(idAnswer);
 
 		SessionServiceDTO ssdto = new SessionServiceDTO();
 		User user = ssdto.sessionUserService(session);
 		ssdto.isDesignerService(user, model);
 		ssdto.nbMaxAnswers(model, question);
+		
+
+		
 		model.addAttribute("Response", false);
 
 		model.addAttribute("question", question);

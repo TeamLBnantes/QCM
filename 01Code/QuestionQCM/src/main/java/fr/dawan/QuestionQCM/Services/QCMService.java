@@ -90,7 +90,7 @@ public class QCMService {
 		int i=0;
 		for (MCQ mcq : listMcq) {
 			i=mcq.getQuestionUseds().size();
-			if (i!=0) {       //je ne retourne que les qcm qui ont au moins une question
+			if ((i!=0) && (mcq.getStatus().getLibelle()=="disponible")) {       //je ne retourne que les qcm qui ont au moins une question
 				MCQforListDto mcqdto =new MCQforListDto();
 				mcqdto.setId(mcq.getId());
 				mcqdto.setBody(mcq.getBody());

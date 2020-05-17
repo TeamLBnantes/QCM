@@ -1,14 +1,27 @@
 
 <div *ngInit gelAllQcm()></div>
-<!--
-PAS ENCORE UTILE ########
-<button mat-button class="primary" (click)="getAllQcm()">Afficher les QCM</button> >> ICI filtres <<
-  -->
+
+<!-- <button mat-button class="primary" (click)="getAllQcm()">Afficher les QCM</button> >> ICI filtres << -->
+
+<div class="row">
+  <div class="col">
+    <!-- <label for="inputText"><i>filtre : </i></label> -->
+    <input  id="inputText" type="text" #textElement placeholder="mot à rechercher" value="{{message}}" (keyup.enter)="refreshList(textElement.value)"/>
+    <button mat-button class="primary" (click)="refreshList(textElement.value)">filtrer</button>
+  </div>
+  <button mat-button class="primary" (click)="initFiltre()">init filtre</button> 
+</div>
+
+
+<!--  -->
   <div *ngIf="!charged; else blockcharged0" class="center">
     <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>
 
   </div>
   <ng-template #blockcharged0>
+
+
+
 <table class="table table-hover">
   <thead>
   <tr class='table-primary'>
@@ -22,7 +35,7 @@ PAS ENCORE UTILE ########
     <th scope="col">Thème</th>
   </tr>
   </thead>
-  <tbody *ngFor="let qcm of qcms$; let index=index">
+  <tbody *ngFor="let qcm of qcms$ | filtreQCM:message; let index=index">
       <tr [class]="tableVisuel[index % 2]" >
       <td> <button class="btn btn-secondary" [routerLink]="['/play', qcm.id]">Go !
       </button>

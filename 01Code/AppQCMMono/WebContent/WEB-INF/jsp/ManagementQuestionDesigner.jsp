@@ -72,6 +72,7 @@
     <script type="text/javascript" src="resources/js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
     <script type="text/javascript" src="resources/js/templatemo-script.js"></script> 
     <script src="https://kit.fontawesome.com/ee94e8f5a2.js" crossorigin="anonymous"></script>     <!-- Templatemo Script -->
+    	<script type="text/javascript" src="resources/js/ManagementQuestionDesigner.js"></script>
     <script>
       $(document).ready(function(){
         // Content widget with background image

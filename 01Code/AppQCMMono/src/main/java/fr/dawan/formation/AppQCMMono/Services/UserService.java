@@ -52,24 +52,14 @@ public class UserService {
 		return user;
 	}
 
-	public SubscribeValidator createUser(User user, String confirmPassword, String confirmEmail) {
+	public SubscribeValidator createUser(User user) {
 		UserDAO userDao = new UserDAO(Constantes.PERSISTENCE_UNIT_NAME);
 		SubscribeValidator subsVal=new SubscribeValidator();
 		subsVal.setValidation(false);
 		
 		
 		if (userDao.searchByEmail(user.getEmail())!=null) {
-			subsVal.setComment("l'utilisateur existe déjà");
-		} else if (user.getFirstName()==""||user.getFirstName().length()<=1) {
-				subsVal.setComment("Prénom invalide");
-		}else if(user.getLastName()==""||user.getLastName().length()<=1) {
-				subsVal.setComment("Nom invalide");			
-		}else if(!(user.getPassword().equals(confirmPassword))) {
-			subsVal.setComment("Confirmation du mot de passe non conforme");
-		}else if(!(user.getEmail().equals(confirmEmail))){
-			subsVal.setComment("Confirmation de l'Email non conforme");	
-			
-		
+			subsVal.setComment("l'adresse email "+user.getEmail()+" est déjà utilisée");	
 		}else {
 			String pwd=BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 			user.setLastName(user.getLastName().toUpperCase());
@@ -130,16 +120,23 @@ public class UserService {
 		updatedUser.setFirstName(userEcran.getFirstName());
 		updatedUser.setPseudo(userEcran.getPseudo());
 		
-		if(!updatedUser.getEmail().equals(userEcran.getEmail())) {
-			if(userDao.searchByEmail(userEcran.getEmail())==null) {
+		//si mail de userEcran non null, c'est une demande de modif (idem pour le password)
+		// et j'ai deja vérifié que ce n'était pas son mail actuel. si il est retrouvé dans la base, ce sera donc celui de quelqu'un d'autre.
+		if (userEcran.getEmail()!=null) {
+			if(userDao.searchByEmail(userEcran.getEmail())==null) {   //adresse mail non encore presente dans la base, donc dispo
 				updatedUser.setEmail(userEcran.getEmail());
 			}else {
 				System.out.println("refus de modifier l'email car déja présent en BDD");
 			}
 		}
-		//Hashage d'un mot de passe
-		String pwd=BCrypt.hashpw(userEcran.getPassword(), BCrypt.gensalt());
-		updatedUser.setPassword(pwd);
+		        
+		if(userEcran.getPassword()!=null) {
+			//demande de modif de mot de passe
+			//Hashage d'un mot de passe
+			String pwd=BCrypt.hashpw(userEcran.getPassword(), BCrypt.gensalt());
+			updatedUser.setPassword(pwd);
+		}
+
 		
 		userDao.saveOrUpdate(updatedUser);
 		userDao.close();

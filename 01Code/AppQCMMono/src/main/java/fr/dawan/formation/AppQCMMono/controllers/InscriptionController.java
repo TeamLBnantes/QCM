@@ -60,10 +60,24 @@ public class InscriptionController {
 			@RequestParam("confirmPassword") String confirmPassword,
 			@RequestParam("confirmEmail") String confirmEmail ) {
 		
-		SubscribeValidator subsVal;
+		SubscribeValidator subsVal=new SubscribeValidator();
 		UserService userService = new UserService();
 		
-			subsVal=userService.createUser(user, confirmPassword, confirmEmail);
+	if(!(user.getPassword().equals(confirmPassword))) {
+		subsVal.setComment("Confirmation du mot de passe non conforme");
+		model.addAttribute("confirmEmail", confirmEmail);
+		user.setPassword("");
+	}else if(!(user.getEmail().equals(confirmEmail))){
+		subsVal.setComment("Confirmation de l'Email non conforme");
+		model.addAttribute("confirmPassword", confirmPassword);
+		}else {
+		    
+			subsVal=userService.createUser(user);
+			if (!subsVal.isValidation()) {
+				user.setEmail("");
+				model.addAttribute("confirmPassword", confirmPassword);
+				}
+			}
 			
 			//possible de tester la valeur de retour de createUser
 			// en fonction, si l'utilisateur n'a pas été cérer, possible de renvoyer sur eecran de création en disant pourquoi

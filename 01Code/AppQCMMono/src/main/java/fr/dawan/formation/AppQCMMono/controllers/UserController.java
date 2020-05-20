@@ -34,36 +34,62 @@ public class UserController {
 		SessionServiceDTO ssdto = new SessionServiceDTO();
 		User user = ssdto.sessionUserService(session);
 		ssdto.isDesignerService(user, model);
-		
+		session.setAttribute("messageProblemeChangeEmail", "");
 		return "modificationUserInformations";
 	}
 	
 	//Maj des données de l'utilisateur après modification en base de données
 	// user = information en provenance du formulaire - session = valeur de la session active
 	@PostMapping("/update")
-	public String updateUserInformations(User userEcran, HttpSession session, Model model) {
+	public String updateUserInformations(User userEcran,boolean changeMailDemande,boolean changePasswordDemande, HttpSession session, Model model) {
+		System.out.println("changement de mail demandé : "+changeMailDemande);
+		System.out.println("changement de password demandé : "+changePasswordDemande);
 		SessionServiceDTO ssdto = new SessionServiceDTO();
 		User user = ssdto.sessionUserService(session);
-		ssdto.isDesignerService(user, model);
+		ssdto.isDesignerService(user, model);   //envoie dans le model l'info isNotDesigner pour user en cours. qui vaut true ou false.
+						//il en me semble pas que ce soit utile pour le moment, nous n'en faisons rien !!!
+		// a moins que /home ne le recup dans le model ??? (mais je ne crois pas, vu qu'elle relance la procedure !!
 		User userSession = (User) session.getAttribute("user");
-		/*userSession.setLastName(user.getLastName());
-		userSession.setFirstName(user.getFirstName());
-		
-		if(!userSession.getEmail().equals(user.getEmail())){
-			if(userService.searchByEmail(user.getEmail())==null) {
-				userSession.setEmail(user.getEmail());
-			}else {
-				System.out.println("refus de modifier l'email car déja présent en BDD");
-			}
+		//si changement de mail non demandé, alors on affect pour etre plus sur, sinon, on laisse donc le nouveau
+		// dans le service de maj, si le mail est identique, pas besoin de se compliquer la vie
+		if (!changeMailDemande) {
+			userEcran.setEmail(null);
+			//si pas de demande de changement de mot de passe, alors je le vide pour etre plus sur
+		}else if (userEcran.getEmail().equals(userSession.getEmail())) {
+			//demande de changement, mais en fait c'est le même :-(, on ne change donc rien
+			userEcran.setEmail(null);
 		}
-		// Hashage d'un mot de passe
-		String pwd=BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-		userSession.setPassword(pwd);*/
-		/*userService.saveOrUpdate(userSession);*/
+		    
+		if (!changePasswordDemande) {
+			userEcran.setPassword(null);
+		}
+		
+		//et donc dans le service, les champs à null (mail et password ne seront pas modifiés
+		// au retour, nous pourons tester si le mail à bien été changé si demandé, et reagir si ce n'est pas le cas
+		// en informant l'utilisateur et en retournant sur la page de maj
+		
+
 		
 		User userMaj = userService.UpdateUserInformations(userSession, userEcran);
-		session.setAttribute("user", userMaj);
-		return "redirect:/home";
+		
+		//deux cas de figure, changement d'email demandé mais non possible ou cas sans problème
+		if ((userEcran.getEmail()!=null) && (!(userEcran.getEmail().equals(userMaj.getEmail())))  ) {
+			//chagt mail demandé, mais non effectué, il etait donc déja pris
+			session.setAttribute("user", userMaj);
+			
+			session.setAttribute("messageProblemeChangeEmail", userEcran.getEmail());
+			
+			return "modificationUserInformations";
+			
+			
+		}else {
+			session.setAttribute("user", userMaj);
+			return "redirect:/home";
+		}
+		
+		
+		
+
 	}
 	
 	

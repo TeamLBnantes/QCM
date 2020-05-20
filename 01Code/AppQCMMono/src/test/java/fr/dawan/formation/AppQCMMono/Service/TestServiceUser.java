@@ -45,7 +45,7 @@ public class TestServiceUser {
 	@Test
 	public void testCreateUserUserService() {
 		User user = service.searchByEmail("hp@dawan.fr");
-		SubscribeValidator subsVal = service.createUser(user, "123", "hp@dawan.fr");
+		SubscribeValidator subsVal = service.createUser(user);
 		assertEquals("l'utilisateur existe déjà", subsVal.getComment());
 	}
 }

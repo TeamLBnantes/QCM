@@ -52,9 +52,9 @@
 								</tr>
 								<tr>
 									<td>
-										<div id="displayLastName" class="erreurChamp"></div>
+										<div id="displayLastName" class="erreurChamp"></div> 
 									</td>
-								</tr>
+								</tr> 
 								<tr>
 									<td><label for="firstName"><tag:message
 												code="FIRSTNAME" text="traduction manquante!"></tag:message></label>
@@ -89,7 +89,7 @@
 								</tr>
 								<tr>
 									<td>
-										<div id="displayEmail" class="erreurChamp"></div>
+										<div id="displayConfirmEmail" class="erreurChamp"></div>
 									</td>
 								</tr>
 								<tr>

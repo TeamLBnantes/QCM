@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.dawan.QuestionQCM.Beans.MCQ;
+import fr.dawan.QuestionQCM.Beans.MCQpassed;
 import fr.dawan.QuestionQCM.Beans.Multimedia;
 import fr.dawan.QuestionQCM.Beans.QuestionUsed;
 import fr.dawan.QuestionQCM.DTO.MCQPlayableDto;
@@ -26,10 +27,12 @@ public class QCMService {
 	
 	@Autowired
 	private QCMRepository repository;
+	@Autowired
+	private MCQpassedService mcqPassedService;
 	
 	public MCQPlayableDto find(int id) {
 		MCQ mcq = repository.findById(id).orElse(null);
-		
+
 		if (mcq == null) {
 			return null;
 		}
@@ -69,6 +72,16 @@ public class QCMService {
 		System.out.println(questionsId);
 
 		mcqdto.setQuestionsId(questionsId);
+
+		//créer la fiche QCMpassed, et affecter son id dans mcqdto
+		// on crer avec id du qcm et pas de ref au user(on le laisse à null)
+		// en fin de process, l'utilisateur poura doner son login pour enregistrement
+		MCQpassed mcqPassed=new MCQpassed(null, mcq);  //creation de la données MCQpassed
+		int nbQ=mcqPassed.getMcq().getQuestionUseds().size();
+		mcqPassed.setNbQuestionTotal(nbQ);
+		mcqPassed=mcqPassedService.create(mcqPassed);  //enregistrement en bdd pour recup id
+		mcqdto.setIdMCQpassed(mcqPassed.getId());
+		
 
 		return mcqdto;
 	}

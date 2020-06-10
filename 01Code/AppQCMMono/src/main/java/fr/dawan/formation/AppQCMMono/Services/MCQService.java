@@ -149,6 +149,8 @@ public class MCQService {
 		return mcqsPlayable;
 	}
 
+	
+	//lancement du passage du qcm choisi
 	public ObjectPasserMcq initTrackMcq(MCQ mcq, User user) {
 		MCQDAO mcqDao=new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
 		ObjectPasserMcq trackMcq=new ObjectPasserMcq();
@@ -163,11 +165,13 @@ public class MCQService {
 		}
 		trackMcq.setNbQuestionsPassed(0);
 		trackMcq.setNbBonnesReponses(0);
-		GenericDAO<MCQpassed> mcqPassedDao=new GenericDAO<>(Constantes.PERSISTENCE_UNIT_NAME);
-		MCQpassed mcqPassed=new MCQpassed(user, mcq);
-		mcqPassed=mcqPassedDao.saveOrUpdate(mcqPassed);
-		mcqPassedDao.close();
-		trackMcq.setMcqPassed(mcqPassed);
+		// dans mono, je desactive le suivi des qcm passé
+		// pour le moment, seul les qcm passé via webApp seront tracés
+		//GenericDAO<MCQpassed> mcqPassedDao=new GenericDAO<>(Constantes.PERSISTENCE_UNIT_NAME);
+		//MCQpassed mcqPassed=new MCQpassed(user, mcq);
+		//mcqPassed=mcqPassedDao.saveOrUpdate(mcqPassed);
+		//mcqPassedDao.close();
+		//trackMcq.setMcqPassed(mcqPassed);
 		trackMcq.setEtape("beforeMCQ");
 		
 		return trackMcq;

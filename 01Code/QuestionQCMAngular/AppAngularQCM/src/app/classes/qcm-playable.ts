@@ -13,7 +13,7 @@ export class QcmPlayable {
     legende: string;
 };
   questionsId: number[];
-
+  idMCQpassed: number;
   constructor(obj: object) {
     Object.assign(this, obj);
   }

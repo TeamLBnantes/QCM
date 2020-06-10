@@ -16,6 +16,8 @@ public class MCQPlayableDto {
 	private String designerPseudo;
 	private Multimedia multimedia;
 	private List<Integer> questionsId;
+	private int idMCQpassed;
+	
 	public int getId() {
 		return id;
 	}
@@ -70,8 +72,17 @@ public class MCQPlayableDto {
 	public MCQPlayableDto() {
 		super();
 	}
+	
+	
+	public int getIdMCQpassed() {
+		return idMCQpassed;
+	}
+	public void setIdMCQpassed(int idMCQpassed) {
+		this.idMCQpassed = idMCQpassed;
+	}
+	
 	public MCQPlayableDto(int id, String body, String topic, LocalDateTime createDate, LocalDateTime editDate,
-			String designerPseudo, Multimedia multimedia, List<Integer> questionsId) {
+			String designerPseudo, Multimedia multimedia, List<Integer> questionsId, int idMCQpassed) {
 		super();
 		this.id = id;
 		this.body = body;
@@ -81,7 +92,10 @@ public class MCQPlayableDto {
 		this.designerPseudo = designerPseudo;
 		this.multimedia = multimedia;
 		this.questionsId = questionsId;
+		this.idMCQpassed = idMCQpassed;
 	}
+	
+
 	
 	
 	

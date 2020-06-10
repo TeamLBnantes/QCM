@@ -34,6 +34,8 @@ export class QcmPlayComponent implements OnInit {
 
   private subscription: Subscription;
   private subscription2: Subscription;
+  private subscription3: Subscription;
+
   qcm: QcmPlayable;
   idqcm: string;
   lancer = false;
@@ -158,33 +160,47 @@ export class QcmPlayComponent implements OnInit {
     this.subscription2 = this.qcmService.getCorrection(this.idQuestion).subscribe(
       (data: Correction) => {
         this.reponsesAttendus = data;
-
+        //les reponses attendues ne sont pas nécéssairement dans le même ordre que celui propose à l'utilisateur
+        //utilisation d'une map pour ensuite refaire le match
         for (const rep of this.reponsesAttendus.answersCorrectionDto) {
           this.mapRep.set(rep.id, rep);
         }
         this.varAnswersCorrection = [];     // tableau des réponses attendus
-        for (const rep of this.question.answersPlayableDto) {
+        for (const rep of this.question.answersPlayableDto) {            //parcours des rep tel que posées à l'utilisateur
           this.varAnswersCorrection.push(this.mapRep.get(rep.id));
         }
         // le tableau des reponse de l'utilisateur est initié et maj dans la page html
-        this.trueReponseAnswerUser = [];    // tableau comparatif et donc de ercensement des bonnes reponses, init à vide
+        this.trueReponseAnswerUser = [];    // tableau comparatif et donc de recensement des bonnes reponses, init à vide
 
         let i = 0;
-        this.reponsesQCMUser.push(true);
+        this.reponsesQCMUser.push(true);    //par defaut je suppose que la reponse est vrai
         for (const rep of this.varAnswersCorrection) {
-          if (this.reponsesAnswersUser[i]) {
-          } else { this.reponsesAnswersUser[i] = false; }
-          this.trueReponseAnswerUser.push(rep.expectedAnswer == this.reponsesAnswersUser[i]);
-          this.reponsesQCMUser[this.qIndex] = (this.trueReponseAnswerUser[i] && this.reponsesQCMUser[this.qIndex]);
+          if (this.reponsesAnswersUser[i]) {   //si la case à coché à été cochée, alors la rep est à true, sinon, j'entre dans le else
+          } else { this.reponsesAnswersUser[i] = false; }     //et je met à faut. au cas ou la case n'a pas été initialisé, elle sera donc bien à false.
+          this.trueReponseAnswerUser.push(rep.expectedAnswer == this.reponsesAnswersUser[i]);  //je poushe dans le tableau des bonne reponses (de chaque rep proposée)
+          this.reponsesQCMUser[this.qIndex] = (this.trueReponseAnswerUser[i] && this.reponsesQCMUser[this.qIndex]);  //la rep à la question est bonne ssi elle etait deja bonne 
+                                  //et c'est encore vrai pour cette nouvelle reponse. à la premiere rep fausse, elle deviendra donc fausse . (meme si la boucle continuera)
           i++;
         }
         this.chargementOK = true;
+               // la question est donc évaluée, elle vaut         this.reponsesQCMUser[this.qIndex]
+        // il est donc possible d'envoyer l'info au webservice pour stocker le resultat dans question used
+        //  et idem pour ce qui est de QCMpassed (avec user null tjs)
+        // ref de la question :    this.idQuestion     
+        // ref du qcm : this.qcm.id
+        // ref de qcmPassed :  this.qcm.idMCQpassed
+        // si c'est la derniere question, possible de renseigner le champs dans QCMpassed (true pour finalisé)
+        console.log(this.reponsesQCMUser[this.qIndex]); 
+        this.subscription3 =this.qcmService.updateResult(this.idQuestion,this.qcm.idMCQpassed,this.reponsesQCMUser[this.qIndex]).subscribe(
+          );
       }
     );
+
+
     if (this.qIndex == this.qcm.questionsId.length - 1) {
       this.thisIsTheEnd = true;
     }
-
+   
 
   }
   nextQuestion() {
@@ -248,9 +264,9 @@ export class QcmPlayComponent implements OnInit {
       typeMedia: this.question.multimedia.typeMultimedia,
       legende: this.question.multimedia.legende
     };
-    dialogConfig.height = '90%';
-    dialogConfig.width = '90%';
-
+    dialogConfig.height = '100%';
+    dialogConfig.width = '100%';
+    dialogConfig.maxHeight='100%';
     this.dialog.open(PopupmediaComponent, dialogConfig);
   }
   openQcmMedia() {
@@ -265,7 +281,7 @@ export class QcmPlayComponent implements OnInit {
       legende: this.qcm.multimedia.legende
     };
     dialogConfig.height = '90%';
-    dialogConfig.width = '90%';
+    dialogConfig.width = '100%';
 
     this.dialog.open(PopupmediaComponent, dialogConfig);
   }
@@ -291,6 +307,9 @@ export class QcmPlayComponent implements OnInit {
     }
     if (this.subscription2) {
       this.subscription2.unsubscribe();
+    }
+    if (this.subscription3) {
+      this.subscription3.unsubscribe();
     }
   }
 }

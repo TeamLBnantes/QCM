@@ -1,5 +1,7 @@
 package fr.dawan.formation.AppQCMMono.Models;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -12,7 +14,29 @@ public class MCQpassed extends Entitie{
 	private MCQ mcq;
 	private int result;    //entier entre 0 et 100, representant le score en % de bonnes reponses.
 	private boolean finalise;
+	private LocalDateTime date;
+	private int nbQuestionRep;
+	private int nbQuestionTotal;
 	
+	
+	public int getNbQuestionRep() {
+		return nbQuestionRep;
+	}
+	public void setNbQuestionRep(int nbQuestionRep) {
+		this.nbQuestionRep = nbQuestionRep;
+	}
+	public int getNbQuestionTotal() {
+		return nbQuestionTotal;
+	}
+	public void setNbQuestionTotal(int nbQuestionTotal) {
+		this.nbQuestionTotal = nbQuestionTotal;
+	}
+	public LocalDateTime getDate() {
+		return date;
+	}
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+	}
 	public int getResult() {
 		return result;
 	}
@@ -43,7 +67,9 @@ public class MCQpassed extends Entitie{
 		this.user = user;
 		this.mcq = mcq;
 		this.result=0;
+		this.nbQuestionRep=0;
 		this.finalise=false;
+		this.date=LocalDateTime.now();
 	}
 	
 	public MCQpassed() {

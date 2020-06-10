@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Qcm } from '../classes/qcm';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { QcmPlayable } from '../classes/qcm-playable';
 import { Question } from '../classes/question';
@@ -41,4 +41,23 @@ public getQuestion(id: number): Observable<Question> {
 public getCorrection(id: number): Observable<Correction>{
   return this.http.get<Correction>(`${this.URL}/question/${id}/correction`);
 }
+
+
+ // envoi le resultat suite correction d'une question
+
+  public updateResult(idQuestion: number, idQcmUsed: number, correction: boolean) {
+    // TODO
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+       // 'Authorization': this.jwt
+      })
+    };
+    return this.http.post(this.URL+'/updateResult',{"idQuestion": idQuestion, "idQcmUsed": idQcmUsed, "correction": correction},httpOptions);
+
+  }
+
+
+
+
 }

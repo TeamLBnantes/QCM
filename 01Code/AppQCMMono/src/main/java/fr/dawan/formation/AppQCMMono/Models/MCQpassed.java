@@ -17,8 +17,23 @@ public class MCQpassed extends Entitie{
 	private LocalDateTime date;
 	private int nbQuestionRep;
 	private int nbQuestionTotal;
+	private String mailDeclaratifWebApp;
+	private String signatureAutentification;
 	
 	
+	
+	public String getSignatureAutentification() {
+		return signatureAutentification;
+	}
+	public void setSignatureAutentification(String signatureAutentification) {
+		this.signatureAutentification = signatureAutentification;
+	}
+	public String getMailDeclaratifWebApp() {
+		return mailDeclaratifWebApp;
+	}
+	public void setMailDeclaratifWebApp(String mailDeclaratifWebApp) {
+		this.mailDeclaratifWebApp = mailDeclaratifWebApp;
+	}
 	public int getNbQuestionRep() {
 		return nbQuestionRep;
 	}
@@ -74,5 +89,13 @@ public class MCQpassed extends Entitie{
 	
 	public MCQpassed() {
 	}
+	@Override
+	public String toString() {
+		return "MCQpassed [user=" + user + ", mcq=" + mcq + ", result=" + result + ", finalise=" + finalise + ", date="
+				+ date + ", nbQuestionRep=" + nbQuestionRep + ", nbQuestionTotal=" + nbQuestionTotal
+				+ ", mailDeclaratifWebApp=" + mailDeclaratifWebApp + ", signatureAutentification="
+				+ signatureAutentification + "]";
+	}
+	
 	
 }

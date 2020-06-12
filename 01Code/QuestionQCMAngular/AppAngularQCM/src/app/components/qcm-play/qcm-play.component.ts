@@ -19,6 +19,7 @@ import { SignalerService } from 'src/app/service/signaler.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
+
 @Component({
   selector: 'app-qcm-play',
   templateUrl: './qcm-play.component.html',
@@ -35,6 +36,8 @@ export class QcmPlayComponent implements OnInit {
   private subscription: Subscription;
   private subscription2: Subscription;
   private subscription3: Subscription;
+
+
 
   qcm: QcmPlayable;
   idqcm: string;
@@ -75,8 +78,14 @@ export class QcmPlayComponent implements OnInit {
   signalInProgress = false;
   causesSignal = ['Contenu inapproprié', 'Contenu erroné', 'Contenu incompréhensible'];
   chargementOK = false;
-
-
+   
+  mailResultDemande=false;
+  adrEnvoieResultat="";
+  mailDemande=false;
+  bMailResultDemande=true;
+  infosMailConcepteur="";
+  bMailDemande=true; 
+  adrRep="";
 
   ngOnInit(): void {
     this.idqcm = this.route.snapshot.paramMap.get('id');
@@ -250,10 +259,9 @@ export class QcmPlayComponent implements OnInit {
         this.timeMin = Math.floor(this.time / 60);
         this.time = this.time % 60;
       }
-
-
     });
   }
+
   openMedia() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -269,6 +277,7 @@ export class QcmPlayComponent implements OnInit {
     dialogConfig.maxHeight='100%';
     this.dialog.open(PopupmediaComponent, dialogConfig);
   }
+
   openQcmMedia() {
     const dialogConfig = new MatDialogConfig();
 
@@ -299,6 +308,59 @@ export class QcmPlayComponent implements OnInit {
   initSignaler(){
     this.signalInProgress = true;
   }
+
+  openFormResultat(){
+    /* le bouton de class=btnResultat doit etre masqué
+    la variable   mailResultDemande doit passer à true */
+    this.mailResultDemande=true;
+  }
+
+  submitResult(adresse: any){
+    console.log(adresse.value);
+    if (adresse.value != ""){
+      /* appeler webservice de Spring pour envoyer le resultat */
+      this.subscription =this.qcmService.mailResult(this.qcm.idMCQpassed,adresse.value).subscribe(
+        );
+      this.adrEnvoieResultat=adresse.value;
+      this.bMailResultDemande=false;   /* possible envoyer 1 fois, pas deux */
+      this.snackBar.open('Message envoyé', 'OK' ,{
+        duration: 5000,
+      });
+      this.adrRep=adresse.value;   /* en cas de besoin pour formulaire n° 2 */
+      }else{
+        this.snackBar.open('Resultats non envoyés. adresse non valide', 'OK' ,{
+          duration: 5000,
+        });
+    }
+
+  }
+  openFormMail(){
+    /* le bouton de class=btnMail doit etre masqué
+    la variable   mailDemande doit passer à true */
+    this.mailDemande=true;
+  }
+
+  mailToDesigner(sujet: any, corp: any, adrReponse: any) {
+    if ((sujet.value!="")&&(corp.value!="")){
+    /* appeler webservice de Spring pour envoyer le mail */
+    
+    this.subscription2 =this.qcmService.mailToDesigner(this.qcm.idMCQpassed, adrReponse.value, sujet.value, corp.value).subscribe(
+      );
+    this.infosMailConcepteur="Sujet : \n\r"+sujet.value+"\n\r Corp du mail : \n\r"+corp.value+"\n\r vous avez laissé l'adresse : \n\r"+adrReponse.value;
+    console.log(this.infosMailConcepteur);
+    this.bMailDemande=false;   /* possible envoyer 1 fois, pas deux */
+    this.snackBar.open('Message envoyé', 'OK' ,{
+      duration: 5000,
+    });
+    this.adrRep=adrReponse.value;   /* en cas de besoin pour formulaire n° 2 */
+    }else{
+      /* le sujet ou le corp du mail sont vide, je prévient et je ne fait rien */
+      this.snackBar.open('Mail non envoyé. les champs "sujet" et "corp" du mail doivent tous les deux etre renseigné. Merci de completer', 'OK' ,{
+        duration: 5000,
+      });
+    }
+  }
+
 
   ngOnDestroy(): void {
     // eviter les fuites de memoires

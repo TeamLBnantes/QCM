@@ -18,7 +18,34 @@ public class AdminTechniqueAppli extends Entitie{   //juste pour voir, je fabriq
 	private String serveurMailComptePassword;
 	private boolean modeSSL;
 	private static int count=0;
+	private String UrlBaseAppliGestion;
+	private String UrlBaseWebApp;
+
 	
+	public static int getCount() {
+		return count;
+	}
+
+	public static void setCount(int count) {
+		AdminTechniqueAppli.count = count;
+	}
+
+	public String getUrlBaseAppliGestion() {
+		return UrlBaseAppliGestion;
+	}
+
+	public void setUrlBaseAppliGestion(String urlBaseAppliGestion) {
+		UrlBaseAppliGestion = urlBaseAppliGestion;
+	}
+
+	public String getUrlBaseWebApp() {
+		return UrlBaseWebApp;
+	}
+
+	public void setUrlBaseWebApp(String urlBaseWebApp) {
+		UrlBaseWebApp = urlBaseWebApp;
+	}
+
 	public static AdminTechniqueAppli getInstance() {
 		return SingletonHolder.instance;
 	}

@@ -126,3 +126,17 @@ mat-radio-button {
 .fail{
   border: 4px solid #f44336;
 }
+
+.testflex{
+  
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+
+}
+
+.testflex div{
+  
+  text-align: center;
+}
+

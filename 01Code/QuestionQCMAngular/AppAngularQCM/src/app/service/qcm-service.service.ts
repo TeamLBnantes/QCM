@@ -44,8 +44,7 @@ public getCorrection(id: number): Observable<Correction>{
 
 
  // envoi le resultat suite correction d'une question
-
-  public updateResult(idQuestion: number, idQcmUsed: number, correction: boolean) {
+  public updateResult(idQuestion: number, idMCQpassed: number, correction: boolean) {
     // TODO
     const httpOptions = {
       headers: new HttpHeaders({
@@ -53,10 +52,38 @@ public getCorrection(id: number): Observable<Correction>{
        // 'Authorization': this.jwt
       })
     };
-    return this.http.post(this.URL+'/updateResult',{"idQuestion": idQuestion, "idQcmUsed": idQcmUsed, "correction": correction},httpOptions);
-
+    return this.http.post(this.URL+'/updateResult',{"idQuestion": idQuestion, "idMCQpassed": idMCQpassed, "correction": correction},httpOptions);
   }
 
+
+
+
+
+//sur demande de l'utilisateur, demande à Spring d'envoyer le resultat des qcm ref dans idQCMpassed, 
+// à l'adresse mail indiquée
+public mailResult(idMCQpassed: number, mail:string) {
+  // TODO
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+     // 'Authorization': this.jwt
+    })
+  };
+  return this.http.post(this.URL+'/qcm/mailResult',{"idMCQpassed": idMCQpassed, "mail": mail},httpOptions);
+}
+
+//sur demande de l'utilisateur, demande à Spring d'envoyer le resultat des qcm ref dans idQCMpassed, 
+// à l'adresse mail indiquée
+public mailToDesigner(idMCQpassed: number, mail: string, sujet: string, corp: string) {
+  // TODO
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+     // 'Authorization': this.jwt
+    })
+  };
+  return this.http.post(this.URL+'/qcm/mailToDesigner',{"idMCQpassed": idMCQpassed, "mail": mail, "sujet": sujet, "corp":corp},httpOptions);
+}
 
 
 

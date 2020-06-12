@@ -42,12 +42,14 @@
       <ng-template #blockcharged>
         <!-- affichage de la carte contenant la question et les réponses-->
         <div class="card mb-3">
-          <h5 class="card-header">question n° {{questionnumber}} sur {{totalquestion}}</h5>
+          <h5 class="card-header"><strong>n° {{questionnumber}} sur {{totalquestion}}</strong><br> 
+           <i> du QCM : {{qcm.body}}</i> 
+           <div *ngIf="qcm.multimedia.typeMultimedia != 'aucun'">
+              <button class="btn btn-light btn-sm"  (click)=openQcmMedia()>
+                <fa-icon [icon]=rejouerIcone ></fa-icon> {{mediaTypeDisplay}} du qcm </button> <br/>
+            </div>
+          </h5>
           <div class="card-body">
-              <div *ngIf="qcm.multimedia.typeMultimedia != 'aucun'">
-                <button class="btn btn-light btn-sm"  (click)=openQcmMedia()>
-                  <fa-icon [icon]=rejouerIcone ></fa-icon> {{mediaTypeDisplay}} du qcm </button> <br/>
-              </div>
               <div *ngIf="question.multimedia.typeMultimedia != 'aucun'" class="mediablock" >
                 <a  (click)=openMedia()>
                   <fa-icon *ngIf="icone != null" [icon]=icone size="6x" class="mediablockiconeelement"></fa-icon>
@@ -92,13 +94,15 @@
       <ng-template #blockcharged2>
         <!-- affichage de la carte correction-->
         <div class="card mb-3" [ngClass]="{success : reponsesQCMUser[qIndex], fail :!reponsesQCMUser[qIndex] }">
-          <h5 class="card-header">question n° {{questionnumber}} sur {{totalquestion}}</h5>
+            <h5 class="card-header"><strong>n° {{questionnumber}} sur {{totalquestion}}</strong><br> 
+              <i> du QCM : {{qcm.body}}</i> 
+              <div *ngIf="qcm.multimedia.typeMultimedia != 'aucun'">
+                 <button class="btn btn-light btn-sm"  (click)=openQcmMedia()>
+                   <fa-icon [icon]=rejouerIcone ></fa-icon> {{mediaTypeDisplay}} du qcm </button> <br/>
+               </div>
+             </h5>
           <div class="card-body">
-            <div *ngIf="qcm.multimedia.typeMultimedia != 'aucun'">
-              <button class="btn btn-light btn-sm"  (click)=openQcmMedia()>
-                {{mediaTypeDisplay}} du qcm </button> <br/>
-            </div>
-              <div class="mediablock" *ngIf="question.multimedia.typeMultimedia != 'aucun'">
+                          <div class="mediablock" *ngIf="question.multimedia.typeMultimedia != 'aucun'">
                 <a  (click)=openMedia()>
                   <fa-icon *ngIf="icone != null" [icon]=icone size="6x" class="mediablockiconeelement"></fa-icon>
                   <img src="{{vignette}}" class="mediablockelement vignette" />
@@ -153,9 +157,16 @@
 <ng-template #afficherBilan>
 
   <div class="card mb-3">
-    <h1 class="card-header">
-  Fin du QCM !</h1>
-  <div class="card-body">
+      <h5 class="card-header"><strong>Fin du QCM</strong><br> 
+        <i> {{qcm.body}}</i> 
+        <div *ngIf="qcm.multimedia.typeMultimedia != 'aucun'">
+           <button class="btn btn-light btn-sm"  (click)=openQcmMedia()>
+             <fa-icon [icon]=rejouerIcone ></fa-icon> {{mediaTypeDisplay}} du qcm </button> <br/>
+         </div>
+       </h5>
+  <div class="card-body">  
+    Sujet du QCM:
+    <h2> {{qcm.body}}</h2><br />
   Nombre de questions au total:
  <h2> {{totalquestion}}</h2><br />
   Nombre de bonnes réponses :
@@ -166,11 +177,53 @@
   <h2>
   <span *ngIf="timeMin!=null"> {{timeMin}}min et </span>
   {{time}}s
-</h2><br />
+</h2><br />  
 </div>
-<div class="card-footer">
-  <button class="btn btn-primary" [routerLink]="['/qcmList']">retour liste des QCM</button>
-  </div>
+<div class="card-footer ">
+    <div style="float:right; "><button *ngIf="!mailResultDemande" class="btnResult" mat-raised-button (click)="openFormResultat()" style="width: 180px">résultat par mail</button></div>
+    <span *ngIf="mailResultDemande && bMailResultDemande"> <!-- affichage du formulaire pour envoie du Rsesultat dans le span--> 
+      <div class="form-group" style="text-align: left;">
+          <label for="taskInput" >adresse cible de l'envoi de votre resultat: </label>
+          <input id="taskInput" type="text" #adresse value={{adrRep}} class="form-control" placeholder="adresse cible de l'envoi"/>
+          <!-- <p class="alert-danger" *ngIf="message">{{message}}</p> -->
+        </div>
+        <div class="form-group" style="float:right;">
+          <button class="btn btn-primary" (click)="submitResult(adresse)" style="width: 180px">envoyer</button>
+        </div>
+    </span>     <!-- fin affichage du formulaire pour envoie du Rsesultat dans le span-->
+    <span *ngIf="!bMailResultDemande" >
+         <div style="text-align: left;">résultat envoyé à l'adresse {{adrEnvoieResultat}}</div>
+    </span>
+</div>
+<div class="card-footer ">
+    <div style="float:right;"><button *ngIf="!mailDemande" class="btnMail" mat-raised-button (click)="openFormMail()" style="width: 180px">mail au concepteur</button></div>
+    <span *ngIf="mailDemande && bMailDemande"> <!-- affichage du formulaire pour envoie du mail dans le span     sujet: any, corp: any, adrReponse: any --> 
+          <div class="form-group" style="text-align: left;"> 
+              <label>Mail pour le concepteur du QCM : </label>
+              <!-- <label for="taskInput1">sujet du mail : </label> -->
+              <input id="taskInput1" type="text" #sujet class="form-control" placeholder="Sujet du mail" style="width: 100%;"/>
+              <!-- <label for="taskInput2">corp du mail : </label> -->
+              <textarea id="taskInput2"  #corp class="form-control" rows="5" placeholder="Tapez ici le corp du mail"></textarea>
+              <!-- <label for="taskInput3">votre adresse si vous souhaitez un échange : </label> -->
+              <input id="taskInput3" type="text" #adrReponse value={{adrRep}} class="form-control" placeholder="votre adresse pour une reponse éventuelle" style="width: 100%;"/>
+              <!-- <p class="alert-danger" *ngIf="message">{{message}}</p> -->
+            </div>
+            <div class="form-group" style="float:right;">
+              <button class="btn btn-primary" (click)="mailToDesigner(sujet,corp,adrReponse)" style="width: 180px">envoyer</button>
+            </div>
+    
+    </span> <!-- fin affichage du formulaire pour envoie du mail dans le span-->
+    <span *ngIf="!bMailDemande">
+      <div style="text-align: left;"> Mail envoyé au concepteur : </div>
+        <div  style="white-space:pre-line; text-align: left;">{{infosMailConcepteur}}</div> 
+   </span>
+</div>
+<div class="card-footer ">   
+  <!-- <button class="btn btn-primary" [routerLink]="['/qcmList']">retour liste des QCM</button> -->
+  <div><button class="btn btn-primary" [routerLink]="['/qcmList']">retour liste des QCM</button></div>
+</div>
+  
+  
   </div>
 </ng-template>
 
@@ -179,6 +232,7 @@
 <div *ngIf="!signalInProgress">
 <a (click)=initSignaler()> <fa-icon [icon]=signalerIcone [styles]="{'stroke': 'red', 'color': 'red'}" ></fa-icon> Signaler </a>
 </div>
+<br/>
 <div *ngIf="signalInProgress">
   Signaler :
   <mat-radio-group
@@ -192,6 +246,8 @@ Les références du QCM et de la questions seront transmises à un administrateu
   Envoyer
 </button>
 </div>
+
 </div>
 <!-- pour les icones FontAwsome-->
 <script src="https://kit.fontawesome.com/ee94e8f5a2.js" crossorigin="anonymous"></script>
+

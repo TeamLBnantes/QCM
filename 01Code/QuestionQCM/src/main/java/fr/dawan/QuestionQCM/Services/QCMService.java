@@ -79,6 +79,18 @@ public class QCMService {
 		MCQpassed mcqPassed=new MCQpassed(null, mcq);  //creation de la données MCQpassed
 		int nbQ=mcqPassed.getMcq().getQuestionUseds().size();
 		mcqPassed.setNbQuestionTotal(nbQ);
+		//signature du mcqpassed pour authentification eventuelle
+
+		String lettres="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String chaineAlea="";
+		for (int i = 0; i < 10; i++) {
+			int randPicker = (int)(Math.random()*lettres.length());
+			chaineAlea+=lettres.charAt(randPicker);
+		}
+		System.out.println("chaineAlea du mcqPassed="+chaineAlea);
+		
+		
+		mcqPassed.setSignatureAutentification(chaineAlea);
 		mcqPassed=mcqPassedService.create(mcqPassed);  //enregistrement en bdd pour recup id
 		mcqdto.setIdMCQpassed(mcqPassed.getId());
 		

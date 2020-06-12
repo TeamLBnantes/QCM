@@ -14,9 +14,23 @@ public class AdminTechniqueAppli  extends Entitie {
 	private String serveurMailCompte;
 	private String serveurMailComptePassword;
 	private boolean modeSSL;
+	private String UrlBaseAppliGestion;
+	private String UrlBaseWebApp;
 
 	
 
+	public String getUrlBaseAppliGestion() {
+		return UrlBaseAppliGestion;
+	}
+	public void setUrlBaseAppliGestion(String urlBaseAppliGestion) {
+		UrlBaseAppliGestion = urlBaseAppliGestion;
+	}
+	public String getUrlBaseWebApp() {
+		return UrlBaseWebApp;
+	}
+	public void setUrlBaseWebApp(String urlBaseWebApp) {
+		UrlBaseWebApp = urlBaseWebApp;
+	}
 	public AdminTechniqueAppli() {
 		super();
 		// TODO Auto-generated constructor stub

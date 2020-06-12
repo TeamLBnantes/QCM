@@ -50,12 +50,12 @@ public class UpdateResultController {
 		 
 		int idQuestion = object.getInt("idQuestion");
 		System.out.println("idQuestion : "+idQuestion);
-		int idQcmUsed = object.getInt("idQcmUsed");
-		System.out.println("idQcmUsed : "+idQcmUsed);
+		int idMCQpassed = object.getInt("idMCQpassed");
+		System.out.println("idMCQpassed : "+idMCQpassed);
 		boolean correction = object.getBoolean("correction");
 		System.out.println("correction : "+correction);
 		//mise à jour des données de QCMpassed  (qui renvois la ref du QCM, pour pouvoir ensuite acceder à  QUestionUsed
-		int idQcm=mcqPassedService.updateResultatMCQpassed(idQcmUsed, correction);
+		int idQcm=mcqPassedService.updateResultatMCQpassed(idMCQpassed, correction);
         //à present, enregistrement des données de QuestionUsed
 		questionUsedService.updateResultat(idQcm,idQuestion,correction);
 	}

@@ -28,6 +28,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TemplateComponent } from './template/template.component';
 import { FiltreQCMPipe } from './pipes/filtre-qcm.pipe';
 
+
 registerLocaleData(localeFr);
 
 
@@ -48,6 +49,8 @@ registerLocaleData(localeFr);
     TemplateComponent,
 
     FiltreQCMPipe,
+
+
 
   ],
   imports: [
@@ -76,6 +79,6 @@ registerLocaleData(localeFr);
 
   ],
   providers: [{provide: LOCALE_ID, useValue: 'fr'}],
-  bootstrap: [MainComponent]
+  bootstrap: [MainComponent],
 })
 export class AppModule { }

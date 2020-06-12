@@ -165,13 +165,14 @@ public class MCQService {
 		}
 		trackMcq.setNbQuestionsPassed(0);
 		trackMcq.setNbBonnesReponses(0);
-		// dans mono, je desactive le suivi des qcm passé
-		// pour le moment, seul les qcm passé via webApp seront tracés
-		//GenericDAO<MCQpassed> mcqPassedDao=new GenericDAO<>(Constantes.PERSISTENCE_UNIT_NAME);
-		//MCQpassed mcqPassed=new MCQpassed(user, mcq);
-		//mcqPassed=mcqPassedDao.saveOrUpdate(mcqPassed);
-		//mcqPassedDao.close();
-		//trackMcq.setMcqPassed(mcqPassed);
+		//attention, la ref du qcm est stockee dans mcqPassed dans trackMCQ
+		//donc ne pas le sup ou prevoir un autre stockage
+		GenericDAO<MCQpassed> mcqPassedDao=new GenericDAO<>(Constantes.PERSISTENCE_UNIT_NAME);
+		MCQpassed mcqPassed=new MCQpassed(user, mcq);
+		mcqPassed.setMailDeclaratifWebApp("AppGestionQuizIzSkillz");
+		mcqPassed=mcqPassedDao.saveOrUpdate(mcqPassed);
+		mcqPassedDao.close();
+		trackMcq.setMcqPassed(mcqPassed);
 		trackMcq.setEtape("beforeMCQ");
 		
 		return trackMcq;

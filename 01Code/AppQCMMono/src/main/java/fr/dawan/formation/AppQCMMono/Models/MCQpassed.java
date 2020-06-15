@@ -12,7 +12,7 @@ public class MCQpassed extends Entitie{
 	private User user;
 	@ManyToOne
 	private MCQ mcq;
-	private int result;    //entier entre 0 et 100, representant le score en % de bonnes reponses.
+	private int result;    //nb bonne rep
 	private boolean finalise;
 	private LocalDateTime date;
 	private int nbQuestionRep;

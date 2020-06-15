@@ -1,6 +1,10 @@
 package fr.dawan.formation.AppQCMMono.Services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -9,9 +13,14 @@ import org.springframework.stereotype.Service;
 import fr.dawan.formation.AppQCMMono.Models.Answer;
 import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
+import fr.dawan.formation.AppQCMMono.Models.MCQpassed;
 import fr.dawan.formation.AppQCMMono.Models.Multimedia;
 import fr.dawan.formation.AppQCMMono.Models.ObjectFiltresQuestion;
 import fr.dawan.formation.AppQCMMono.Models.Question;
+import fr.dawan.formation.AppQCMMono.Models.QuestionUsed;
+import fr.dawan.formation.AppQCMMono.Models.StatsMCQdto;
+import fr.dawan.formation.AppQCMMono.Models.StatsQuestionDto;
+import fr.dawan.formation.AppQCMMono.Models.StatsQuestionUsedDto;
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Persistence.AnswerDAO;
 import fr.dawan.formation.AppQCMMono.Persistence.Constantes;
@@ -128,6 +137,77 @@ public class QuestionService {
 	}
 
 
+	private StatsQuestionDto StatsQuestion(Question question) {
+		StatsQuestionDto statsQuestionDto=new StatsQuestionDto();
+		
+		
+		
+		statsQuestionDto.setId(question.getId());
+		statsQuestionDto.setBody(question.getBody());
+		statsQuestionDto.setTopic(question.getTopic());   
+		statsQuestionDto.setDesigner(question.getDesigner()); 
+		QuestionDAO questionDao=new QuestionDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		//statsMCQdto.setNbQuestionUsed(mcq.getQuestionUseds().size());
+		List<QuestionUsed> questionsUsed=questionDao.findQuestionUsedbyQuestion(question);
+		Collections.reverse(questionsUsed);   //pour afficher de plus recent au plus ancien		
+		
+		statsQuestionDto.setNbUsedByQcms(questionsUsed.size());
+		
+		List<StatsQuestionUsedDto> questionUsedDtos=new ArrayList<StatsQuestionUsedDto>();    //j'ai mis en direct dedans
+		
+		for (QuestionUsed questionUsed : questionsUsed) {
+			StatsQuestionUsedDto statsQuestionUsedDto=new StatsQuestionUsedDto();
+			statsQuestionUsedDto.setId(questionUsed.getId());
+			statsQuestionUsedDto.setNbAnswered(questionUsed.getNbAnswered());
+			statsQuestionDto.setNbAnswered(statsQuestionDto.getNbAnswered()+statsQuestionUsedDto.getNbAnswered());
+			statsQuestionUsedDto.setNbCorrect(questionUsed.getNbCorrect());
+			statsQuestionDto.setNbCorrect(statsQuestionDto.getNbCorrect()+statsQuestionUsedDto.getNbCorrect());
+			statsQuestionUsedDto.setIdMcq(questionUsed.getMcq().getId());
+			statsQuestionUsedDto.setIdDesignerMcq(questionUsed.getMcq().getDesigner().getId());
+			statsQuestionUsedDto.setMailDesignerMcq(questionUsed.getMcq().getDesigner().getUser().getEmail());
+			statsQuestionUsedDto.setBodyMCQ(questionUsed.getMcq().getBody());
+			statsQuestionUsedDto.setTopicMCQ(questionUsed.getMcq().getTopic());
+			questionUsedDtos.add(statsQuestionUsedDto);
+			
+		}
+		
+		statsQuestionDto.setQuestionUsedDtos(questionUsedDtos);
+		questionDao.close();
+		
+		return statsQuestionDto;
+	}
+	
+	
+	
+	
+	public List<StatsQuestionDto>  StatsQuestions(int idUser) {
+		Set<Question> questions=new HashSet<Question>();
+		if (idUser==0) {//pour les admin, je vais renvoyer tous les stats (donc de tous les qcm)
+			questions=this.findAll();
+		}else {  //et donc sinon, je retourne les qcm de l'utilisateur(designer) connecté
+			UserService userService=new UserService();
+			
+			questions=new HashSet<Question>(this.searchByDesigner(userService.findById(idUser).getDesigner()));
+		}
+		
+		List<StatsQuestionDto> statsQuestionDtos = new ArrayList<StatsQuestionDto>();
+		for (Question question : questions) {
+			statsQuestionDtos.add(this.StatsQuestion(question));
+		}
+		
+		//trier statsMCQdtos, du QCM le plus recemment jouer au plus ancien
+		Collections.sort(statsQuestionDtos, new Comparator<StatsQuestionDto>() {
+		    @Override
+		    public int compare(StatsQuestionDto Q1, StatsQuestionDto Q2) {
+		    	return (Integer.compare(Q1.getId(), Q2.getId()));
+		    }
+		});
+		// a present le premier est le plus vieux, je vais donc inverser
+		//Collections.reverse(statsQuestionDtos);
+		
+		return statsQuestionDtos;
+		
+	}
 
 
 

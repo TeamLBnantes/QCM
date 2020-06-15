@@ -20,7 +20,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!--     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1">  
-    <title>QuizizSkillz MCQList</title>
+    <title>QuizizSkillz MCQList Admin</title>
     <meta name="description" content="">
     <meta name="author" content="templatemo">
     <!-- 
@@ -54,7 +54,7 @@
         </div>   <!-- fin de la div barre navigation du haut -->
         <div class="templatemo-content-container"> <!--div zonne de travail principale  -->
                 
-            <%@ include file='sources/MCQDesignerListe.jsp' %>
+            <%@ include file='sources/MCQDesignerListeAdmin.jsp' %>
        
         </div>  <!-- fin de la div zone de travail principale -->
       </div>  <!-- fin de la div partie gauche de la page -->

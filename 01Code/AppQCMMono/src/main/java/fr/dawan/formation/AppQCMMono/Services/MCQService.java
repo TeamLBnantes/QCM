@@ -2,8 +2,12 @@ package fr.dawan.formation.AppQCMMono.Services;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.apache.catalina.manager.StatusTransformer;
 
 import fr.dawan.formation.AppQCMMono.Enum.Status;
 import fr.dawan.formation.AppQCMMono.Models.Designer;
@@ -14,6 +18,7 @@ import fr.dawan.formation.AppQCMMono.Models.ObjectFiltresMCQ;
 import fr.dawan.formation.AppQCMMono.Models.ObjectPasserMcq;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.QuestionUsed;
+import fr.dawan.formation.AppQCMMono.Models.StatsMCQdto;
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Persistence.Constantes;
 import fr.dawan.formation.AppQCMMono.Persistence.GenericDAO;
@@ -210,8 +215,78 @@ public class MCQService {
 		return mcqsPlayable;
 	}
 
+	// je ne prends en compe que les jeux fait depuis webApp
+	// si aucune question validée, alors je ne prends pas en compte non plus
+	// (d'ailleur il faudra penser à sup ces fiche (attention qd mêm à celle en cours de création)
+	// les fiche qui ne proviennent pas de webapp dans QCMpassed on un champs signatureAuthentification à null
+	// pas de question passée, alors nbQuestionRep=0
+	public StatsMCQdto StatsMcq(MCQ mcq) {
+		
 
+		StatsMCQdto statsMCQdto=new StatsMCQdto();
+		statsMCQdto.setId(mcq.getId());
+		statsMCQdto.setQcmBody(mcq.getBody());
+		statsMCQdto.setTopic(mcq.getTopic());
+		statsMCQdto.setPseudoDesigner(mcq.getDesigner().getUser().getPseudo());
+		
+		MCQDAO mcqDao=new MCQDAO(Constantes.PERSISTENCE_UNIT_NAME);
+		//statsMCQdto.setNbQuestionUsed(mcq.getQuestionUseds().size());
+		statsMCQdto.setNbQuestionUsed(mcqDao.findQuestionUsedbyMcq(mcq).size());
+		List<MCQpassed> mcqsPassed=mcqDao.findMCQpassedForResultByMcq(mcq);
+		statsMCQdto.setQuestionsUsed(mcqDao.findQuestionUsedbyMcq(mcq)); //j'integre la liste des questionUsed de ce QCM dans l'objet stats
+		mcqDao.close();
+		Collections.reverse(mcqsPassed);   //pour afficher de plus recent au plus ancien
+		statsMCQdto.setMcqsPassed(mcqsPassed); //j'integre la liste des mcqPassed dans l'objet statsMCQdto
+		statsMCQdto.setNbPlayeur(mcqsPassed.size());
+		for (MCQpassed mcqPassed : mcqsPassed) {
+			if (mcqPassed.isFinalise()) statsMCQdto.setNbPlayComplete(statsMCQdto.getNbPlayComplete()+1);
+			//pour chaque fiche, je prends le taux de question rep, que je divise par le nbre de fiche total, et que j'ajoute au taux en cours de calcul
+			//de ce fait, à la fin du parcours, j'ai bien la moyenne des taux de parcours
+			statsMCQdto.setTauxDeParcourQuestion(statsMCQdto.getTauxDeParcourQuestion()+(((double)mcqPassed.getNbQuestionRep()/mcqPassed.getNbQuestionTotal())/mcqsPassed.size()));
+			//idem pour le taux de reussite
+			statsMCQdto.setTauxDeReussite(statsMCQdto.getTauxDeReussite()+(((double)mcqPassed.getResult()/mcqPassed.getNbQuestionTotal())/mcqsPassed.size()));
+			//reste à trouver la date la plus récente
+			if (statsMCQdto.getDateLast()==null) {
+				statsMCQdto.setDateLast(mcqPassed.getDate());
+			}else {
+				if (mcqPassed.getDate().isAfter(statsMCQdto.getDateLast())) {
+					statsMCQdto.setDateLast(mcqPassed.getDate());
+				}
+			}
+		
+		}
+		
+		return statsMCQdto;
+	}
+
+
+	public List<StatsMCQdto>  StatsMcqs(int idUser) {
+		Set<MCQ> mcqs=new HashSet<MCQ>();
+		if (idUser==0) {//pour les admin, je vais renvoyer tous les stats (donc de tous les qcm)
+			 mcqs=this.findAll();
+		}else {  //et donc sinon, je retourne les qcm de l'utilisateur(designer) connecté
+			UserService userService=new UserService();
+			
+			mcqs=new HashSet<MCQ>(this.searchByDesigner(userService.findById(idUser).getDesigner()));
+		}
+		
+		List<StatsMCQdto> statsMCQdtos = new ArrayList<StatsMCQdto>();
+		for (MCQ mcq : mcqs) {
+			statsMCQdtos.add(this.StatsMcq(mcq));
+		}
+		
+		//trier statsMCQdtos, du QCM le plus recemment jouer au plus ancien
+		Collections.sort(statsMCQdtos, new Comparator<StatsMCQdto>() {
+		    @Override
+		    public int compare(StatsMCQdto MCQdto1, StatsMCQdto MCQdto2) {
+		    	return (MCQdto1.getDateLast().compareTo(MCQdto2.getDateLast()));
+		    }
+		});
+		// a present le premier est le plus vieux, je vais donc inverser
+		Collections.reverse(statsMCQdtos);
+		
+		return statsMCQdtos;
+		
+	}
 	
-
-
 }

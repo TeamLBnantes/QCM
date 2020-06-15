@@ -9,6 +9,7 @@ import fr.dawan.formation.AppQCMMono.Models.Designer;
 import fr.dawan.formation.AppQCMMono.Models.MCQ;
 import fr.dawan.formation.AppQCMMono.Models.ObjectFiltresQuestion;
 import fr.dawan.formation.AppQCMMono.Models.Question;
+import fr.dawan.formation.AppQCMMono.Models.QuestionUsed;
 import fr.dawan.formation.AppQCMMono.Persistence.Interfaces.DAOQuestionInterface;
 
 public class QuestionDAO extends GenericDAO<Question> implements DAOQuestionInterface{
@@ -216,6 +217,24 @@ public class QuestionDAO extends GenericDAO<Question> implements DAOQuestionInte
 		
 		
 
+	}
+
+	public List<QuestionUsed> findQuestionUsedbyQuestion(Question question) {
+
+		List<QuestionUsed> questionsUsed = new ArrayList<>();
+		String requete = "select q from "  
+				+ QuestionUsed.class.getName() 
+				+ " q where q.question = :question";
+		
+		// JPQL (ou HQL)
+		questionsUsed=super.entityManager
+				.createQuery(requete, QuestionUsed.class)
+				.setParameter("question", question)
+				.getResultList();
+		
+
+		
+		return questionsUsed;
 	}
 			
 

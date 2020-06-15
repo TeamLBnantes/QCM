@@ -222,5 +222,31 @@ public class MCQDAO extends GenericDAO<MCQ> implements DAOMCQInterface {
 					.setParameter("status", status)
 					.getResultList();
 		}
+
+
+		public List<MCQpassed> findMCQpassedForResultByMcq(MCQ mcq) {
+			//je ne retourne donc que les MCQpassed de ce MCQ
+			// je ne prends en compte que les jeux fait depuis webApp
+			// si aucune question validée, alors je ne prends pas en compte non plus
+			// (d'ailleur il faudra penser à sup ces fiche (attention qd mêm à celle en cours de création)
+			// les fiche qui ne proviennent pas de webapp dans QCMpassed on un champs signatureAuthentification à null
+			// pas de question passée, alors nbQuestionRep=0
+			List<MCQpassed> mcqPasseds=new ArrayList<>();
+			try {
+				String requete = "select q from "  
+						+ MCQpassed.class.getName() 
+						+ " q where ( q.mcq= :mcq ) and (q.nbQuestionRep!= '0' ) and (q.signatureAutentification != 'null')";
+					
+				// JPQL (ou HQL)
+				mcqPasseds=super.entityManager
+						.createQuery(requete, MCQpassed.class)
+						.setParameter("mcq", mcq)
+						.getResultList();
+		
+			} catch (Exception e) {
+				System.out.println("exception leve par findMCQpassedByMcq");
+			}
+			return mcqPasseds;
+		}
 	
 }

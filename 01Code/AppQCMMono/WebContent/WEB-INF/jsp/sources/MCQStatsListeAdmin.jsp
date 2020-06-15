@@ -35,156 +35,24 @@
 
 	
 	
-	<div class="container">
-		<c:if test="${newMcq}">
-			<!-- formulaire de création d'un nouveau qcm, afficher uniquemlent si on a cliquer sur le bouton ajouter formulaire -->
-			<!-- Formulaire d'ajout -->
-			<!-- Ajouter required pour la validation des champs -->
-			<form action="ManagementMCQDesigner/createMCQ" method="post">
-				<div class="templatemo-content-widget white-bg">
-					<h2 class="text-uppercase">creation d'un nouveau QCM</h2>
-					<div class="table-responsive">
-						<table
-							class="table table-striped table-bordered templatemo-user-table">
 
-							<tr>
-								<td><b>Sujet du QCM</b></td>
-								<td><textarea name="body" class="form-control"
-										placeholder="presentation QCM" required> ${mcq.body} </textarea></td>
-							</tr>
-							<tr>
-								<td><b>Theme(s)</b></td>
-								<td><input type="text" class="form-control" name="topic"
-									placeholder="theme" value="${mcq.topic}" /></td>
-							</tr>
-							<tr>   
-								<td><b>Statut:</b></td>
-								<td><select class="form-control" name="status" id="status">
-										<c:forEach items="${ enumStatus }" var="status">
-											<option value="${ status }"
-												${ mcq.status == status ? 'selected' : '' }>
-												<tag:message code="${ status.libelle }"
-													text="${status.libelle }" />
-											</option>
-										</c:forEach>
-								</select></td>
-							</tr>
-							<!-- enum du typ emultimedia -->
-							<tr>
-								<td><b>Type Multimedia:</b></td>
-								<td><select class="form-control" name="multimedia.typeMultimedia" id="typeMultimedia">
-										<c:forEach items="${ enumTypeMultimedia }" var="typeMultimedia">
-											<option value="${ typeMultimedia }"
-												${ mcq.multimedia.typeMultimedia == typeMultimedia ? 'selected' : '' }>
-												<tag:message code="${ typeMultimedia.libelle }"
-													text="${typeMultimedia.libelle }" />
-											</option>
-										</c:forEach>
-								</select></td>
-							</tr>
-							<tr>
-								<td><b>cible (jpg) Vignette du contenu
-							multimedia (audio/video)</b></td>
-								<td><input type="text" class="form-control" name="multimedia.adresseVignette"
-									placeholder="adresse image" value="${mcq.multimedia.adresseVignette}" /></td>
-							</tr>
-							<tr>
-								<td><b>cible du contenu multimedia</b></td>
-								<td><input type="text" class="form-control" name="multimedia.adresseCible"
-									placeholder="cible multimedia" value="${mcq.multimedia.adresseCible}" /></td>
-							</tr>
-							<tr>
-								<td><b>legende du contenu multimedia</b></td>
-								<td><input type="text" class="form-control" name="multimedia.legende"
-									placeholder="legende" value="${mcq.multimedia.legende}" /></td>
-							</tr>
-						</table>
-					</div>
-					<!-- </div> -->
-					</table>
-					<br />
-					<button type="submit" class="btn btn-primary " name="action"
-						value="valider">Valider</button>
-				</div>
-			</form>
-
-			<!-- fin formulaire de création du qcm -->
-		</c:if>
-	</div>
-	<div class="container">
-		<c:if test="${!newMcq}">
-		<div>
-			<a href="ManagementMCQDesigner/new">
-				<button type="button" class="templatemo-blue-button" name="action"
-					value="chercher">Creer QCM</button>
-			</a>
-			</div>
-		</c:if>
-	</div>
-
-	<!-- Formulaire d'affichage des QCM -->
-
-	<div class="container">
-		<div class="templatemo-content-widget white-bg">
-		
-
-			<h2 class="text-uppercase">Vos Qcm existants</h2>
-			<div class="table-responsive">
-				<table
-					class="table table-striped table-bordered templatemo-user-table">
-					<thead>
-						<tr>
-							<th class="white-text templatemo-sort-by" width=55%>Intitulé</th>
-							<th class="white-text templatemo-sort-by" width=10%>Statut</th>
-							<th class="white-text templatemo-sort-by" width=20%>Theme</th>
-							<c:if test="${!newMcq}">
-								<th class="white-text templatemo-sort-by" width=15%>Action</th>
-							</c:if>
-					</thead>
-					<c:forEach var="qcm" items="${mcqs}">
-						<tr>
-							<td>${qcm.body}</td>
-							<td>${qcm.status}</td>
-							<td>${qcm.topic}</td>
-							<c:if test="${!newMcq}">
-								<td><a href="ManagementMCQDesigner/${qcm.id}" style="color: #00008B;"><strong>Update</strong></a> / <a href="ManagementMCQDesigner/delete/${qcm.id}" style="color: #FF0000;">Sup</a></td>
-							</c:if>
-						</tr>
-
-					</c:forEach>
-				</table>
-			</div>
-			
-		</div>
-		
-	</div>				
-						<!-- temporaire, lancer les stats -->
-	<c:if test="${!newMcq && !stats}">
-		<div class="container">
-			<a href="ManagementMCQDesigner/statsMcq">
-				<button type="button" class="templatemo-blue-button" name="action"
-					value="chercher">Afficher les stats</button>
-			</a>
-		</div>
-	</c:if>
-	<!-- temporaire, fin lancer les stats -->
-	<!-- affichage des stats ==========================================================================-->
-	<c:if test="${!newMcq && stats}">
 
 <div class="container">
 		<div class="templatemo-content-widget white-bg">
 		
 
-			<h2 class="text-uppercase">les Stats de vos QCM</h2>
+			<h2 class="text-uppercase">les Stats des QCMs</h2>
 			<div class="table-responsive">
 				<table
 					class="table table-striped table-bordered templatemo-user-table">
 					<thead>
-						<tr><th class="white-text templatemo-sort-by" width=5%>detail</th>
-							<th class="white-text templatemo-sort-by" width=35%>Intitulé</th>
-							<th class="white-text templatemo-sort-by" width=10%>nb Q</th>
+						<tr>
+							<th class="white-text templatemo-sort-by" width=5%>id</th>
+							<th class="white-text templatemo-sort-by" width=5%>detail</th>
+							<th class="white-text templatemo-sort-by" width=30%>Intitulé</th>
+							<th class="white-text templatemo-sort-by" width=5%>nb Q</th>
 							<th class="white-text templatemo-sort-by" width=10%>nb play</th>
-							<th class="white-text templatemo-sort-by" width=10%>tx parcours</th>
+							<th class="white-text templatemo-sort-by" width=15%> pseudo designer</th>
 							<th class="white-text templatemo-sort-by" width=10%>nb final</th>
 							<th class="white-text templatemo-sort-by" width=10%>tx Réussite</th>
 							<th class="white-text templatemo-sort-by" width=10%>date Last</th>
@@ -194,6 +62,7 @@
 						<tr>
 						 <!-- fin de la ligne du stat du qcm  -->
 						 <!-- je vais mettre un lien sur la ligne vers affichage des detail dans une fancyBox -->
+						 <td>${statsMCQdto.id}</td>
 						 <td>
 				<a data-fancybox="hello"
 				data-src="#hello${countQCM.count}" href="javascript:;"> détail </a>
@@ -295,8 +164,7 @@
 							<td>${statsMCQdto.qcmBody}</td>
 							<td>${statsMCQdto.nbQuestionUsed}</td>
 							<td>${statsMCQdto.nbPlayeur}</td>
-							<td><fmt:formatNumber type = "number" 
-         pattern = ".## %" value = "${statsMCQdto.tauxDeParcourQuestion}" /></td>
+							<td>${statsMCQdto.pseudoDesigner}</td>
 							<td>${statsMCQdto.nbPlayComplete}</td>
 							<td><fmt:formatNumber type = "number" 
          pattern = ".## %" value = "${statsMCQdto.tauxDeReussite}" /></td>
@@ -325,7 +193,7 @@
 
 
 
-	</c:if>
+
 	<!-- fin affichage des stats========================================================================== -->	
 
 	

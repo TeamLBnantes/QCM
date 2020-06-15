@@ -159,6 +159,20 @@ public class AdminService {
 		
 	}
 
+	public boolean getPasswordAdmin(String password) {
+		// pour le moment, je met le passord admin en claire en base de données
+		//il sera ensuite possible de le crypter (lorsque l'ecran pour le générer sera fait
+		AdminTechniqueAppli donneesAdmin=AdminTechniqueAppli.getInstance();
+	    GenericDAO<AdminTechniqueAppli> adminDAO=new GenericDAO<AdminTechniqueAppli>(Constantes.PERSISTENCE_UNIT_NAME);
+	    donneesAdmin=adminDAO.findById(AdminTechniqueAppli.class, 1);
+	    adminDAO.close();
+		if (donneesAdmin.getAdminPassword().equals(password)) {
+			return true;
+		}else {
+		return false;
+		}
+	}
+
 	
 	
 	

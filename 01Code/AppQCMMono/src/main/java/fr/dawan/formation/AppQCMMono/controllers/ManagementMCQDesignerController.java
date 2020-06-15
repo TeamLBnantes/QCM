@@ -24,6 +24,7 @@ import fr.dawan.formation.AppQCMMono.Models.MCQ;
 import fr.dawan.formation.AppQCMMono.Models.ObjectFiltresQuestion;
 import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Models.QuestionDTO;
+import fr.dawan.formation.AppQCMMono.Models.StatsMCQdto;
 import fr.dawan.formation.AppQCMMono.Models.User;
 import fr.dawan.formation.AppQCMMono.Services.MCQService;
 import fr.dawan.formation.AppQCMMono.Services.QuestionService;
@@ -315,7 +316,39 @@ public class ManagementMCQDesignerController {
 	}	
 
 	
-	
+	@GetMapping(value = { "/statsMcq" })
+	public String statsMCQs(HttpSession session, Model model) {
+
+		User user = (User) session.getAttribute("user");
+
+		MCQService mcqService=new MCQService();
+		
+		List<StatsMCQdto> statsMCQdtos=mcqService.StatsMcqs(user.getId());
+		//pour recup tous les stats (de tout les mcq, passer 0 à la place de user.getId()
+		//servira dans une autre methode pour les administrateurs
+		 
+		
+		
+		for (StatsMCQdto statsMCQdto : statsMCQdtos) {
+			System.out.println(statsMCQdto.toString());
+		}
+		
+		
+		
+		
+        
+		List<MCQ> mcqs=mcqService.searchByDesigner(user.getDesigner());
+
+		SessionServiceDTO ssdto = new SessionServiceDTO();
+		ssdto.isDesignerService(user, model);
+		model.addAttribute("enumStatus", Status.values());
+		model.addAttribute("enumTypeMultimedia", TypeMultimedia.values());
+		model.addAttribute("newMcq", false);
+		model.addAttribute("stats", true);
+		model.addAttribute("mcqs", mcqs);
+		model.addAttribute("statsMCQdtos", statsMCQdtos);
+		return "MCQDesignerListe";
+	}
 
 	
 

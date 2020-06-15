@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 @Entity
 public class User extends Entitie{
 
@@ -22,8 +23,8 @@ public class User extends Entitie{
 	private String password;
 	private LocalDateTime signInDate;
 	private LocalDateTime lastConnectionDate;
-	
-
+	@Transient
+	private boolean admin;
 
 
 	@OneToOne (mappedBy = "user", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)  //car O ou 1 designer
@@ -82,6 +83,21 @@ public class User extends Entitie{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public boolean isAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+	public Set<MCQpassed> getMCQpasseds() {
+		return MCQpasseds;
+	}
+	public void setMCQpasseds(Set<MCQpassed> mCQpasseds) {
+		MCQpasseds = mCQpasseds;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "User [lastName=" + lastName + ", firstName=" + firstName + ", email=" + email + ", pseudo=" + pseudo

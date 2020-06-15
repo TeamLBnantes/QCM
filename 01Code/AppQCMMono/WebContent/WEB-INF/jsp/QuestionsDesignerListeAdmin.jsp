@@ -1,32 +1,20 @@
-<!--MCQDesignerList.jsp  -->
-
+<!-- Page QuestionDesignerListe.jsp  -->
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="tag" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-  
-  <base
+<html>
+<head>
+<meta charset="UTF-8">
+<base
 	href="<%=request.getScheme() + "://"
 			+ request.getServerName() + ":"
 			+ request.getServerPort()
 			+ request.getContextPath() + "/"
 			%>" />
 			
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!--     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">  
-    <title>QuizizSkillz MCQList</title>
-    <meta name="description" content="">
-    <meta name="author" content="templatemo">
-    <!-- 
-    Visual Admin Template
-    https://templatemo.com/tm-455-visual-admin
-    -->
+<!-- mise en forme via bootstrap -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700' rel='stylesheet' type='text/css'>
     <link href="resources/css/font-awesome.min.css" rel="stylesheet">
     <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -34,12 +22,11 @@
          <link rel="shortcut icon" href="resources/images/favicon.ico">
     
     
-
-
-  </head>
-  <body>  
-    <!-- Left column -->
-    <div class="templatemo-flex-row">
+    
+<title>QuizizSkillz Management Question by Designer</title>
+</head>
+<body>
+<div class="templatemo-flex-row">
       <div class="templatemo-sidebar">    <!--div barre de navigation de gauche -->
        
        		<%@ include file='sources/navigateur.jsp' %>
@@ -54,7 +41,7 @@
         </div>   <!-- fin de la div barre navigation du haut -->
         <div class="templatemo-content-container"> <!--div zonne de travail principale  -->
                 
-            <%@ include file='sources/MCQDesignerListe.jsp' %>
+            <%@ include file='sources/QuestionsDesignerListeAdmin.jsp' %>
        
         </div>  <!-- fin de la div zone de travail principale -->
       </div>  <!-- fin de la div partie gauche de la page -->
@@ -62,7 +49,8 @@
     
     <!-- JS -->
     <script type="text/javascript" src="resources/js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
-    <script type="text/javascript" src="resources/js/templatemo-script.js"></script>      <!-- Templatemo Script -->
+    <script type="text/javascript" src="resources/js/templatemo-script.js"></script> 
+    <script src="https://kit.fontawesome.com/ee94e8f5a2.js" crossorigin="anonymous"></script>     <!-- Templatemo Script -->
     <script>
       $(document).ready(function(){
         // Content widget with background image
@@ -71,5 +59,7 @@
         $('img.content-bg-img').hide();        
       });
     </script>
+    
+    <script type="text/javascript" src="resources/js/QuestionsDesignerListe.js"></script>
   </body>
 </html>

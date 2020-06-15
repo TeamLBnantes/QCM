@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.dawan.formation.AppQCMMono.Models.User;
+import fr.dawan.formation.AppQCMMono.Services.AdminService;
 import fr.dawan.formation.AppQCMMono.Services.UserService;
 
 @Controller
@@ -116,4 +117,41 @@ public class LoginController {
 	
 	
 	
+	
+	@GetMapping("/admin")
+	public String adminDesactivate(HttpSession session) {
+		//session.setAttribute("user", null);
+		User user=((User)(session.getAttribute("user")));
+		user.setAdmin(false);
+		session.setAttribute("user", user);
+		return "redirect:/home";
+	}
+	
+	
+	@PostMapping("/admin")
+	public String admin(
+			HttpSession session,
+			User user,
+			@RequestParam(name="password") String password,
+			Model model) {
+		
+		AdminService adminService = new AdminService();
+		System.out.println("mot de passe transmis : "+ password);
+		boolean pwdAdminOK=adminService.getPasswordAdmin(password);
+
+				if (pwdAdminOK) {
+					User user2=((User)(session.getAttribute("user")));
+					user2.setAdmin(true);
+					session.setAttribute("user", user2);
+				}
+			
+//		if (userService.controlLogin(user.getEmail(), user.getPassword())){
+//			user=userService.searchByEmail(user.getEmail());	
+//			
+//			session.setAttribute("admin", true);
+
+		
+	
+		return "redirect:/home";
+	}
 }

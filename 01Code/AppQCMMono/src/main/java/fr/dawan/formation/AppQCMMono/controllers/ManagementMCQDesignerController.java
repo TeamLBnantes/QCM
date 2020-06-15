@@ -328,14 +328,6 @@ public class ManagementMCQDesignerController {
 		//servira dans une autre methode pour les administrateurs
 		 
 		
-		
-		for (StatsMCQdto statsMCQdto : statsMCQdtos) {
-			System.out.println(statsMCQdto.toString());
-		}
-		
-		
-		
-		
         
 		List<MCQ> mcqs=mcqService.searchByDesigner(user.getDesigner());
 

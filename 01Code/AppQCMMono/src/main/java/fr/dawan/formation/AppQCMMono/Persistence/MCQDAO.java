@@ -248,5 +248,23 @@ public class MCQDAO extends GenericDAO<MCQ> implements DAOMCQInterface {
 			}
 			return mcqPasseds;
 		}
-	
+
+
+		public List<MCQpassed> findAllMCQpassedWithResult() {
+			List<MCQpassed> mcqPasseds=new ArrayList<>();
+			try {
+				String requete = "select q from "  
+						+ MCQpassed.class.getName() 
+						+ " q where (q.nbQuestionRep!= '0' ) and (q.signatureAutentification != 'null')";
+					
+				// JPQL (ou HQL)
+				mcqPasseds=super.entityManager
+						.createQuery(requete, MCQpassed.class)
+						.getResultList();
+		
+			} catch (Exception e) {
+				System.out.println("exception leve par findMCQpassedByMcq");
+			}
+			return mcqPasseds;
+		}
 }

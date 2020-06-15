@@ -145,8 +145,36 @@ public class AdminController {
 	}
 	
 	
+//	@GetMapping("/question/stats")
+//	public String questionStats(
+//			HttpSession session, Model model) {
+//		
+//		// on verifie que nous somme bien en mode admin avant d'afficher la page
+//		// si ce n'est pas le cas, on retoure à home
+//		User user=(User)(session.getAttribute("user"));
+//		if (!user.isAdmin()) {
+//			return "redirect:/home";
+//		}
+//		
+//		QuestionService questionService=new QuestionService();
+//		List<StatsQuestionDto> statsQuestiondtos=questionService.StatsQuestions(0);   //avec 0, tout les stats sont renvoyés
+//		
+//
+//		//certain des champs ci dessous ne sont pas utiles, c'est une reprise du controleur non admin
+//		//je prendrais le temps de nettoyer ....
+//		SessionServiceDTO ssdto = new SessionServiceDTO();
+//		ssdto.isDesignerService(user, model);
+//		model.addAttribute("enumStatus", Status.values());
+//		model.addAttribute("enumTypeMultimedia", TypeMultimedia.values());
+//
+//		model.addAttribute("statsQuestiondtos", statsQuestiondtos);
+//		
+//		return "QuestionStatsListeAdmin";
+//
+//	}
+	
 	@GetMapping("/question/stats")
-	public String questionStats(
+	public String questionStatsV2(
 			HttpSession session, Model model) {
 		
 		// on verifie que nous somme bien en mode admin avant d'afficher la page
@@ -157,7 +185,7 @@ public class AdminController {
 		}
 		
 		QuestionService questionService=new QuestionService();
-		List<StatsQuestionDto> statsQuestiondtos=questionService.StatsQuestions(0);   //avec 0, tout les stats sont renvoyés
+		List<StatsQuestionDto> statsQuestiondtos=questionService.StatsQuestionsAll();   //avec 0, tout les stats sont renvoyés
 		
 
 		//certain des champs ci dessous ne sont pas utiles, c'est une reprise du controleur non admin
@@ -172,8 +200,6 @@ public class AdminController {
 		return "QuestionStatsListeAdmin";
 
 	}
-	
-	
 	
 	
 }

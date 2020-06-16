@@ -4,7 +4,7 @@ import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-@Entity
+
 public class StatsQuestionUsedDto extends Entitie{
 
 	private int id;   //id identique à celui de Question used

@@ -278,7 +278,7 @@ public class MCQService {
 		
 		List<StatsMCQdto> statsMCQdtos = new ArrayList<StatsMCQdto>();
 		for (MCQ mcq : mcqs) {
-			statsMCQdtos.add(this.StatsMcq(mcq));
+			statsMCQdtos.add(this.StatsMcq_aVerifier(mcq));
 		}
 		
 		//trier statsMCQdtos, du QCM le plus recemment jouer au plus ancien
@@ -445,8 +445,12 @@ public class MCQService {
 
 		// je met à jour les variable, maintenant que tos les elements sont presents
 		for (StatsMCQdto statsMCQdto : statsMCQdtos) {
-			statsMCQdto.setTauxDeParcourQuestion(statsMCQdto.getTauxDeParcourQuestion()/statsMCQdto.getMcqsPassed().size());
-			statsMCQdto.setTauxDeReussite(statsMCQdto.getTauxDeReussite()/statsMCQdto.getMcqsPassed().size());
+			//je verifie qu'il y a des reponses	avant de diviser par 0. et si pas de reponses, je met à blanc
+			int nbMCQPassed=statsMCQdto.getMcqsPassed().size();
+			if (nbMCQPassed>0) {
+				statsMCQdto.setTauxDeParcourQuestion(statsMCQdto.getTauxDeParcourQuestion()/nbMCQPassed);
+				statsMCQdto.setTauxDeReussite(statsMCQdto.getTauxDeReussite()/nbMCQPassed);
+			}
 		}
 		
 		

@@ -1,1 +1,3 @@
-﻿à écrire ...
+﻿dépot principal de notre projet QuizIzSkills
+les 3 appli sont dans le même dépot (d'ou la création de 3 depots complementaires, pour que chaque appli est le sien pour la suite. en revanche, ces dépot de diffusions ne sont pas mis à jour quotidiennement. ce depot principal est donc celui de référence.)
+

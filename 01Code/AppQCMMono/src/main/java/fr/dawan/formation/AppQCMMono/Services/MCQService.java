@@ -401,14 +401,17 @@ public class MCQService {
 		
 		if (idUser==0) { //mode admin, on prend tout
 			
-		} else { //on ne va prendre que la mcq de la liste de l'utilisateur
-			List<QuestionUsed> aSup2=new ArrayList<>();
+		} else { //on ne va prendre que les QuestionsUsed des mcq de la liste de l'utilisateur
+			List<QuestionUsed> aSup2=new ArrayList<>();    //liste tmp des qUsed à sup
+			// besoin car peu pas sup un elet de la liste que je suis entrain de parcourir
 			for (QuestionUsed questionUsed : questionsUsed) {
 				if (questionUsed.getMcq().getDesigner().getUser().getId()!=idUser) {
 					//ne pointe pas vers un QCM de cet utilisateur, donc je sup
 					aSup2.add(questionUsed);
 				}
 			}
+			// et donc maintenant je parcours la liste des elts à sup et je les supprime dans la liste des 
+			// qUsed à traiter
 			for (QuestionUsed questionUsed : aSup2) {
 				questionsUsed.remove(questionUsed);
 			}

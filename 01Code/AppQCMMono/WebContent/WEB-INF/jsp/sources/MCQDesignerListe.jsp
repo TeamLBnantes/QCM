@@ -221,8 +221,6 @@
 						 <div class="container">
 							<div class="templatemo-content-widget grey-bg">
 								<h2 class="text-uppercase">Stats sur les Questions de ce QCM</h2>
-								Remarque, ces stats prennent en compte les resultats à ces questions, sur l'ensemble des QCM ou 
-								elles sont utilisées (et donc potentiellement pas uniquement celui ci)
 								<div class="table-responsive">
 									<table
 										class="table table-striped table-bordered templatemo-user-table">

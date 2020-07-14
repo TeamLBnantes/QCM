@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { QcmPlayComponent } from './qcm-play.component';
 
+
+
 describe('QcmPlayComponent', () => {
   let component: QcmPlayComponent;
   let fixture: ComponentFixture<QcmPlayComponent>;

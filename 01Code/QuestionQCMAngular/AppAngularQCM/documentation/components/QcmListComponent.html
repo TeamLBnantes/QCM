@@ -1,0 +1,889 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>app-angular-qcm documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">app-angular-qcm documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>QcmListComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/qcm-list/qcm-list.component.ts</code>
+</p>
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>une info sur le composant QCMlist</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+                <div>
+                    <pre class="line-numbers"><code class="language-html">This is a good exampleprocessTarget('yo')&lt;br&gt;</code></pre>
+                </div>
+                <div>
+                    <pre class="line-numbers"><code class="language-html">un autre exempleet don la une ligne qui sera dans la doc</code></pre>
+                </div>
+    </div>
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-qcm-list</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./qcm-list.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./qcm-list.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#charged">charged</a>
+                            </li>
+                            <li>
+                                <a href="#message">message</a>
+                            </li>
+                            <li>
+                                <a href="#qcms$">qcms$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#subscription">subscription</a>
+                            </li>
+                            <li>
+                                <a href="#tableVisuel">tableVisuel</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#getAllQcm">getAllQcm</a>
+                            </li>
+                            <li>
+                                <a href="#initFiltre">initFiltre</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy">ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#refreshList">refreshList</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(qcmService: <a href="../injectables/QcmServiceService.html">QcmServiceService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/qcm-list/qcm-list.component.ts:34</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>qcmService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/QcmServiceService.html" target="_self" >QcmServiceService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllQcm"></a>
+                    <span class="name">
+                        <b>
+                            getAllQcm
+                        </b>
+                        <a href="#getAllQcm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAllQcm()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="52"
+                            class="link-to-prism">src/app/components/qcm-list/qcm-list.component.ts:52</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initFiltre"></a>
+                    <span class="name">
+                        <b>
+                            initFiltre
+                        </b>
+                        <a href="#initFiltre"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initFiltre()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">src/app/components/qcm-list/qcm-list.component.ts:43</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <b>
+                            ngOnDestroy
+                        </b>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="64"
+                            class="link-to-prism">src/app/components/qcm-list/qcm-list.component.ts:64</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="48"
+                            class="link-to-prism">src/app/components/qcm-list/qcm-list.component.ts:48</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="refreshList"></a>
+                    <span class="name">
+                        <b>
+                            refreshList
+                        </b>
+                        <a href="#refreshList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>refreshList(mot: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">src/app/components/qcm-list/qcm-list.component.ts:38</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>mot</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="charged"></a>
+                        <span class="name">
+                            <b>
+                            charged</b>
+                            <a href="#charged"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/qcm-list/qcm-list.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="message"></a>
+                        <span class="name">
+                            <b>
+                            message</b>
+                            <a href="#message"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/qcm-list/qcm-list.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="qcms$"></a>
+                        <span class="name">
+                            <b>
+                            qcms$</b>
+                            <a href="#qcms$"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/Qcm.html" target="_self" >Qcm[]</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/qcm-list/qcm-list.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="subscription"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            subscription</b>
+                            <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Subscription</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/qcm-list/qcm-list.component.ts:33</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="tableVisuel"></a>
+                        <span class="name">
+                            <b>
+                            tableVisuel</b>
+                            <a href="#tableVisuel"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>string[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[&quot;table-default&quot;, &quot;table-secondary&quot;, &quot;table-primary&quot;, &quot;table-success&quot;,&quot;table-info&quot;,&quot;table-danger&quot;,&quot;table-warning&quot;,&quot;table-active&quot;,&quot;table-light&quot;,&quot;table-dark&quot;,]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/qcm-list/qcm-list.component.ts:34</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { Qcm } from &#x27;src/app/classes/qcm&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+import { QcmServiceService } from &#x27;src/app/service/qcm-service.service&#x27;;
+
+/**
+ * une info sur le composant QCMlist
+ * 
+ * @example
+ * This is a good example
+ * processTarget(&#x27;yo&#x27;)
+ * 
+ *&lt;br&gt;
+ * @example
+ * un autre exemple
+ * 
+ * et don la une ligne qui sera dans la doc
+ * 
+ * @param {string} target  The target to process see {@link Todo}
+ * @returns The processed target number
+ * 
+ *  et une autre ligne, apres les autres @
+ */
+@Component({
+  selector: &#x27;app-qcm-list&#x27;,
+  templateUrl: &#x27;./qcm-list.component.html&#x27;,
+  styleUrls: [&#x27;./qcm-list.component.css&#x27;]
+})
+export class QcmListComponent implements OnInit {
+  message &#x3D; &#x27;&#x27;;
+  qcms$: Qcm[];
+  charged: boolean;
+  private subscription: Subscription;
+  tableVisuel: string[]&#x3D;[&quot;table-default&quot;, &quot;table-secondary&quot;, &quot;table-primary&quot;, &quot;table-success&quot;,&quot;table-info&quot;,&quot;table-danger&quot;,&quot;table-warning&quot;,&quot;table-active&quot;,&quot;table-light&quot;,&quot;table-dark&quot;,];
+  constructor(private qcmService: QcmServiceService) {
+   }
+
+   refreshList(mot: string){
+     this.qcms$&#x3D;this.qcms$.slice();
+     console.log(&quot;coucou &quot; + mot)
+     this.message&#x3D;mot
+   }
+   initFiltre(){
+    this.message&#x3D;&quot;&quot;
+    this.qcms$&#x3D;this.qcms$.slice();
+   }
+
+  ngOnInit(): void {
+    this.getAllQcm();
+  }
+
+  getAllQcm() {
+    this.subscription &#x3D; this.qcmService.getAllQcm().subscribe(
+      (data: Qcm[]) &#x3D;&gt; {
+        this.qcms$ &#x3D; data;
+        this.charged &#x3D; true;
+
+      }
+
+    );
+};
+
+
+ngOnDestroy(): void {
+  // eviter les fuites de memoires
+  if (this.subscription) {
+    this.subscription.unsubscribe();
+  }
+}
+
+}
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">
+&lt;div *ngInit gelAllQcm()&gt;&lt;/div&gt;
+
+&lt;!-- &lt;button mat-button class&#x3D;&quot;primary&quot; (click)&#x3D;&quot;getAllQcm()&quot;&gt;Afficher les QCM&lt;/button&gt; &gt;&gt; ICI filtres &lt;&lt; --&gt;
+
+&lt;div class&#x3D;&quot;row&quot;&gt;
+  &lt;div class&#x3D;&quot;col&quot;&gt;
+    &lt;!-- &lt;label for&#x3D;&quot;inputText&quot;&gt;&lt;i&gt;filtre : &lt;/i&gt;&lt;/label&gt; --&gt;
+    &lt;input  id&#x3D;&quot;inputText&quot; type&#x3D;&quot;text&quot; #textElement placeholder&#x3D;&quot;mot à rechercher&quot; value&#x3D;&quot;{{message}}&quot; (keyup.enter)&#x3D;&quot;refreshList(textElement.value)&quot;/&gt;
+    &lt;button mat-button class&#x3D;&quot;primary&quot; (click)&#x3D;&quot;refreshList(textElement.value)&quot;&gt;filtrer&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;button mat-button class&#x3D;&quot;primary&quot; (click)&#x3D;&quot;initFiltre()&quot;&gt;init filtre&lt;/button&gt; 
+&lt;/div&gt;
+
+
+&lt;!--  --&gt;
+  &lt;div *ngIf&#x3D;&quot;!charged; else blockcharged0&quot; class&#x3D;&quot;center&quot;&gt;
+    &lt;mat-progress-spinner mode&#x3D;&quot;indeterminate&quot; color&#x3D;&quot;accent&quot;&gt;&lt;/mat-progress-spinner&gt;
+
+  &lt;/div&gt;
+  &lt;ng-template #blockcharged0&gt;
+
+
+
+&lt;table class&#x3D;&quot;table table-hover&quot;&gt;
+  &lt;thead&gt;
+  &lt;tr class&#x3D;&#x27;table-primary&#x27;&gt;
+    &lt;th scope&#x3D;&quot;col&quot;&gt;Jouer&lt;/th&gt;
+    &lt;th hidden&gt;ID&lt;/th&gt;
+    &lt;th scope&#x3D;&quot;col&quot;&gt;Intitulé&lt;/th&gt;
+    &lt;th hidden&gt;Créé le&lt;/th&gt;
+    &lt;th hidden&gt;Derniere édition&lt;/th&gt;
+    &lt;th scope&#x3D;&quot;col&quot;&gt;Créateur&lt;/th&gt;
+    &lt;th hidden&gt;Nombre de question&lt;/th&gt;
+    &lt;th scope&#x3D;&quot;col&quot;&gt;Thème&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody *ngFor&#x3D;&quot;let qcm of qcms$ | filtreQCM:message; let index&#x3D;index&quot;&gt;
+      &lt;tr [class]&#x3D;&quot;tableVisuel[index % 2]&quot; &gt;
+      &lt;td&gt; &lt;button class&#x3D;&quot;btn btn-secondary&quot; [routerLink]&#x3D;&quot;[&#x27;/play&#x27;, qcm.id]&quot;&gt;Go !
+      &lt;/button&gt;
+      &lt;td hidden&gt;{{qcm.id}}&lt;/td&gt;
+      &lt;td&gt;{{qcm.body}}&lt;/td&gt;
+      &lt;td hidden&gt;{{qcm.createDate}}&lt;/td&gt;
+      &lt;td hidden&gt;{{qcm.editDate}}&lt;/td&gt;
+      &lt;td&gt;{{qcm.designerPseudo}}&lt;/td&gt;
+      &lt;td hidden&gt;{{qcm.nbOfQuestions}}&lt;/td&gt;
+      &lt;td&gt;{{qcm.topic}}&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/ng-template&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./qcm-list.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.logo{
+  height: 30px;
+  }
+  .questionmark{
+    height: 30px;
+    }
+  nav{
+    vertical-align: middle;
+  }
+  </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div *ngInit gelAllQcm()></div><!-- <button mat-button class="primary" (click)="getAllQcm()">Afficher les QCM</button> >> ICI filtres << --><div class="row">  <div class="col">    <!-- <label for="inputText"><i>filtre : </i></label> -->    <input  id="inputText" type="text" #textElement placeholder="mot à rechercher" value="{{message}}" (keyup.enter)="refreshList(textElement.value)"/>    <button mat-button class="primary" (click)="refreshList(textElement.value)">filtrer</button>  </div>  <button mat-button class="primary" (click)="initFiltre()">init filtre</button> </div><!--  -->  <div *ngIf="!charged; else blockcharged0" class="center">    <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>  </div>  <ng-template #blockcharged0><table class="table table-hover">  <thead>  <tr class=\'table-primary\'>    <th scope="col">Jouer</th>    <th hidden>ID</th>    <th scope="col">Intitulé</th>    <th hidden>Créé le</th>    <th hidden>Derniere édition</th>    <th scope="col">Créateur</th>    <th hidden>Nombre de question</th>    <th scope="col">Thème</th>  </tr>  </thead>  <tbody *ngFor="let qcm of qcms$ | filtreQCM:message; let index=index">      <tr [class]="tableVisuel[index % 2]" >      <td> <button class="btn btn-secondary" [routerLink]="[\'/play\', qcm.id]">Go !      </button>      <td hidden>{{qcm.id}}</td>      <td>{{qcm.body}}</td>      <td hidden>{{qcm.createDate}}</td>      <td hidden>{{qcm.editDate}}</td>      <td>{{qcm.designerPseudo}}</td>      <td hidden>{{qcm.nbOfQuestions}}</td>      <td>{{qcm.topic}}</td>      </tr>  </tbody></table></ng-template></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'FancyComponent', 'selector': 'app-fancy'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'MainComponent', 'selector': 'app-main'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PopupmediaComponent', 'selector': 'app-popupmedia'},{'name': 'QcmListComponent', 'selector': 'app-qcm-list'},{'name': 'QcmPlayComponent', 'selector': 'app-qcm-play'},{'name': 'TemplateComponent', 'selector': 'app-template'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'QcmListComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'QcmListComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

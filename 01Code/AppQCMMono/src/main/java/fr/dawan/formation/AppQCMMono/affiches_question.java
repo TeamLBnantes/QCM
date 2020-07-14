@@ -9,7 +9,15 @@ import fr.dawan.formation.AppQCMMono.Models.Question;
 import fr.dawan.formation.AppQCMMono.Persistence.AnswerDAO;
 import fr.dawan.formation.AppQCMMono.Persistence.Constantes;
 import fr.dawan.formation.AppQCMMono.Persistence.GenericDAO;
-
+/**
+ * avant d'aborder les test avec J-unit, en debut de projet
+ * utilisation de cette classe pour tester les methodes déjà ecritent. et c'est tout
+ * 
+ * @deprecated
+ * 
+ * @author laurent.boureau
+ * @version 0.01
+ */
 public class affiches_question {
 
 	public static void main(String[] args) {

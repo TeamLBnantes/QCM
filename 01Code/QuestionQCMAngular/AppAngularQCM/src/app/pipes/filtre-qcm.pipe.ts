@@ -1,6 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Qcm } from 'src/app/classes/qcm';
 
+
+
 @Pipe({
   name: 'filtreQCM'
 })

@@ -19,7 +19,9 @@ import { SignalerService } from 'src/app/service/signaler.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
-
+/**
+ * un peu de doc dans qcm Play.
+ */
 @Component({
   selector: 'app-qcm-play',
   templateUrl: './qcm-play.component.html',

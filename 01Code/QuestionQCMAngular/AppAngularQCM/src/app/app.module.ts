@@ -7,7 +7,6 @@ import { registerLocaleData } from '@angular/common';
 // Import de la locale
 import localeFr from '@angular/common/locales/fr';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
 import { QcmListComponent } from './components/qcm-list/qcm-list.component';
 import { QcmPlayComponent } from './components/qcm-play/qcm-play.component';

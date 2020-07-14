@@ -3,8 +3,14 @@ import { Qcm } from 'src/app/classes/qcm';
 import { Subscription } from 'rxjs';
 import { QcmServiceService } from 'src/app/service/qcm-service.service';
 
-
-
+/**
+ * une info sur le composant QCMlist
+ * 
+ * @example
+ * This is a good example
+ * processTarget('yo')
+ * 
+ */
 @Component({
   selector: 'app-qcm-list',
   templateUrl: './qcm-list.component.html',
